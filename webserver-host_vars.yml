@@ -1,0 +1,10 @@
+# webserver-host_vars.yml
+- name: Administra servidores web
+  hosts: webservers
+  tasks:
+  - name: Instala ou atualiza o php
+    package:
+      name: php
+    when: >
+      webserver_install_php is defined 
+      and webserver_install_php == True

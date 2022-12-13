@@ -1,0 +1,8 @@
+# webserver-distro.yml 
+---
+- name: Administra servidores web
+  hosts: webservers
+
+  tasks:
+  - name: Inclui as tarefas para a distribuição {{ ansible_os_family }} 
+    include_tasks: "{{ ansible_os_family }}.yml"

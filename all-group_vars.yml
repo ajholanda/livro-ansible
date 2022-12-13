@@ -1,0 +1,14 @@
+# all-group_vars.yml 
+- name: Administra todos os hosts
+  hosts: all
+  tasks:
+  - name: Agenda o desligamento dos computadores
+    cron:
+      name: "desliga todo dia 22:30h"
+      minute: "{{ cron.shutdown.minute }}"
+      hour: "{{ cron.shutdown.hour }}"
+      weekday: "{{ cron.shutdown.weekday }}"
+      job: "shutdown -h now"
+    when: >
+      cron is defined 
+      and cron.shutdown is defined

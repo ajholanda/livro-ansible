@@ -1,0 +1,15 @@
+# webserver.yml 
+---
+- name: Administra servidores web
+  hosts: webservers
+
+  tasks:
+  - name: Instala ou atualiza o apache 
+    package:
+      name: apache2
+      state: latest
+  - name: Habitita inicialização e inicializa o apache
+    service:
+      name: apache2
+      enabled: yes
+      state: started

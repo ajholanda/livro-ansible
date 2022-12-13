@@ -1,0 +1,58 @@
+version: '3'
+services:
+#  almalinux-systemd:
+#    build: 
+#      context: ./local/almalinux-systemd
+#      dockerfile: Dockerfile
+
+  ansible:
+    container_name: ansible
+    build: ./ansible
+    tty: true
+    working_dir: "/root/"
+    volumes:
+      - ..:/root/
+
+  web:
+    container_name: web.example.net
+    build: ./hosts/debian
+    tty: true
+    depends_on:
+      - ansible
+    working_dir: "/root/"
+
+  w3:
+    container_name: w3.example.net
+    build: ./hosts/almalinux
+    tty: true
+    depends_on:
+#      - almalinux-systemd
+      - ansible
+    working_dir: "/root/"
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+      - "/run:/run"
+  
+  lab_n00:
+    container_name: lab_n00.example.net
+    build: ./hosts/debian
+    tty: true
+    depends_on:
+      - ansible
+    working_dir: "/root/"
+  
+  lab_n01:
+    container_name: lab_n01.example.net
+    build: ./hosts/debian
+    tty: true
+    depends_on:
+      - ansible
+    working_dir: "/root/"
+
+  lab_n02:
+    container_name: lab_n02.example.net
+    build: ./hosts/debian
+    tty: true
+    depends_on:
+      - ansible
+    working_dir: "/root/"

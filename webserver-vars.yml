@@ -1,0 +1,35 @@
+# webserver-vars.yml
+- name: Administra servidores web
+  hosts: webservers
+  vars:
+    groupname: webdev
+    usernames:
+      - dev0
+      - dev1
+      - dev2
+    user2groups:
+      - name: dev0
+        groups: users,webdev
+      - name: dev1
+        groups: mail,webdev
+      - name: dev2
+        groups: webdev
+
+  tasks:
+  - name: Garante que o grupo {{ groupname }} exista
+    group:
+      name: "{{ groupname }}"
+      state: present
+
+  - name: Cria usuários a partir de uma lista
+    user:
+      name: "{{ item }}"
+      state: present
+    loop: "{{ usernames }}"
+
+  - name: Adiciona usuários aos grupos usando um dicionário
+    user:
+      name: "{{ item.name }}"
+      groups: "{{ item.groups }}"
+      append: yes 
+    loop: "{{ user2groups }}"
