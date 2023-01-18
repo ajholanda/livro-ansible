@@ -13,6 +13,9 @@ RUN sed -ri 's,^#PermitEmptyPasswords no,PermitEmptyPasswords yes,' /etc/ssh/ssh
 # Set the easiest password for root
 RUN echo "root:" | chpasswd -e
 
+# Force non-world-writable permissions for root home
+RUN chmod 755 /root
+
 EXPOSE 22
 
 # Fix sshd error due non-existent /run/sshd
