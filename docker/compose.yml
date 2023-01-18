@@ -1,9 +1,9 @@
 version: '3'
 services:
-#  almalinux-systemd:
-#    build: 
-#      context: ./local/almalinux-systemd
-#      dockerfile: Dockerfile
+  almalinux-systemd:
+    build: 
+      context: ./local/almalinux-systemd
+      dockerfile: Dockerfile
 
   ansible:
     container_name: ansible
@@ -26,7 +26,7 @@ services:
     build: ./hosts/almalinux
     tty: true
     depends_on:
-#      - almalinux-systemd
+      - almalinux-systemd
       - ansible
     working_dir: "/root/"
     volumes:
