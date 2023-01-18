@@ -9,14 +9,14 @@
       - dev2
     user2groups:
       - name: dev0
-        groups: users,webdev
+        groups: "users,{{ groupname }}"
       - name: dev1
-        groups: mail,webdev
+        groups: "mail,{{ groupname }}"
       - name: dev2
-        groups: webdev
+        groups: "{{ groupname }}"
 
   tasks:
-  - name: Garante que o grupo {{ groupname }} exista
+  - name: Garante a existência do grupo {{ groupname }}
     group:
       name: "{{ groupname }}"
       state: present
