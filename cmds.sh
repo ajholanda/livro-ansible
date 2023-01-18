@@ -13,7 +13,7 @@ function RUN {
 ECHO "Executa o ping no host gerenciado w3.example.net"
 RUN "ansible w3.example.net -i hosts.ini -m ping"
 
-ECHO  "Instala o pacote apache2 usando o módulo package"
+ECHO "Instala o pacote apache2 usando o módulo package"
 RUN "ansible web.example.net -i hosts.ini -m package -a \"name=apache2 state=present\""
 
 ECHO "Remove o pacote apache2 nos hosts do grupo webservers"
