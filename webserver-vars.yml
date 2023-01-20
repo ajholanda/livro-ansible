@@ -44,6 +44,6 @@
   # Variáveis
   - name: Cria o diretório {{ apache_confdir }}/sites-enabled
     file:
-      name: “{{ apache_confdir }}/sites-enabled
+      name: “{{ apache_confdir }}/sites-enabled"
       state: directory
     when: apache_confdir is defined
