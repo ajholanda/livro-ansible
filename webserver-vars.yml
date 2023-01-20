@@ -2,6 +2,7 @@
 - name: Administra servidores web
   hosts: webservers
   vars:
+    system_username: www-data
     groupname: webdev
     usernames:
       - dev0
@@ -16,6 +17,12 @@
         groups: "{{ groupname }}"
 
   tasks:
+  tasks:
+  - name: Cria o usuário de sistema {{ system_username }}
+    user:
+      name: "{{ system_username }}"
+    when: system_username is defined
+
   - name: Garante a existência do grupo {{ groupname }}
     group:
       name: "{{ groupname }}"
@@ -33,3 +40,10 @@
       groups: "{{ item.groups }}"
       append: yes 
     loop: "{{ user2groups }}"
+
+  # Variáveis
+  - name: Cria o diretório {{ apache_confdir }}/sites-enabled
+    file:
+      name: “{{ apache_confdir }}/sites-enabled
+      state: directory
+    when: apache_confdir is defined
