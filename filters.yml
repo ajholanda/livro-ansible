@@ -1,0 +1,38 @@
+---
+# filters.yml
+- hosts: labs
+
+  vars:
+    poweroff_minute: 30
+    poweroff_hour: 22
+    poweroff_weekday: '*'
+
+  # mandatory
+  - name: Cria uma entrada na crontab para desligar o computador
+    cron:
+    name: shutdown at
+    weekday: "{{ power_off_weekday }}"
+    hour: "{{ power_off_hour | mandatory }}"
+    minute: "{{ power_off_minute |  mandatory }}"
+    user: root
+    job: "/sbin/shutdown -h now"
+
+  # int (data type)
+  - name: Cria uma entrada na crontab para desligar o computador
+    cron:
+    name: shutdown at
+    weekday: "{{ power_off_weekday | default('*') }}"
+    hour: "{{ power_off_hour | mandatory | int }}"
+    minute: "{{ power_off_minute |  mandatory | int }}"
+    user: root
+    job: "/sbin/shutdown -h now"
+
+# default
+- name: Cria uma entrada na crontab para desligar o computador
+  cron:
+    name: shutdown at
+    weekday: "{{ power_off_weekday | default('*') }}"
+    hour: "{{ power_off_hour | mandatory | int }}"
+    minute: "{{ poweroff_minute |  mandatory | int }}"
+    user: root
+    job: "/sbin/shutdown -h now"
