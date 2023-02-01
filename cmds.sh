@@ -76,5 +76,8 @@ RUN "ansible-playbook webserver-host_vars.yml"
 ECHO "Executa o playbook webserver-role.yml (role webserver) somente em web.example.net"
 RUN "ansible-playbook webserver-role.yml --limit web.example.net"
 
+ECHO "* Filtros"
+RUN "ansible-playbook filters.yml"
+
 ECHO "[DONE]"
 exit 0
