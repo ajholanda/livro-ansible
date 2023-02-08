@@ -1,0 +1,4 @@
+---
+sshserver_allow_groups:
+  - simula
+  - sudo
