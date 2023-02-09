@@ -1,4 +1,5 @@
 ---
 sshserver_allow_groups:
-  - simula
+  - neuron
+  - sat
   - sudo
