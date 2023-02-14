@@ -5,6 +5,7 @@ services:
       context: ./local/almalinux-systemd
       dockerfile: Dockerfile
 
+  # Controller
   ansible:
     container_name: ansible
     build: ./ansible
@@ -13,6 +14,7 @@ services:
     volumes:
       - ..:/root/
 
+  # Servers
   web:
     container_name: web.example.net
     build: ./hosts/debian
@@ -33,6 +35,7 @@ services:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
       - "/run:/run"
   
+  # Desktops
   lab_n00:
     container_name: lab_n00.example.net
     build: ./hosts/debian
@@ -51,6 +54,24 @@ services:
 
   lab_n02:
     container_name: lab_n02.example.net
+    build: ./hosts/debian
+    tty: true
+    depends_on:
+      - ansible
+    working_dir: "/root/"
+
+  # Network Attached Storage
+  nas:
+    container_name: nas.example.net
+    build: ./hosts/debian
+    tty: true
+    depends_on:
+      - ansible
+    working_dir: "/root/"
+  
+  # Workstation
+  simula:
+    container_name: simula.example.net
     build: ./hosts/debian
     tty: true
     depends_on:
