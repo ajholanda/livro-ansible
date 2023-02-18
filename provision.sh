@@ -2,7 +2,11 @@ VAGRANT_HOME="/home/vagrant"
 mkdir -p $VAGRANT_HOME/.ssh
 cp /vagrant/provision/id_ed25519* $VAGRANT_HOME/.ssh
 cp /vagrant/provision/id_ed25519.pub $VAGRANT_HOME/.ssh/authorized_keys
-cp /vagrant/provision/hosts /etc/hosts
 chmod 400 $VAGRANT_HOME/.ssh/id_ed25519*
-chown -R vagrant $VAGRANT_HOME/.ssh/
+cp /vagrant/provision/ssh_config $VAGRANT_HOME/.ssh/config
+chmod 400 $VAGRANT_HOME/.ssh/config
+chown -R vagrant:vagrant $VAGRANT_HOME/.ssh/
+sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+systemctl restart sshd
+
 
