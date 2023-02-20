@@ -8,15 +8,17 @@ ips = {
    'lab01' => "#{PREFIP}.88",
    'lab02' => "#{PREFIP}.128",
    'nas' => "#{PREFIP}.80",
-   'web' => "#{PREFIP}.80",
    'w3' => "#{PREFIP}.88",
+   'web' => "#{PREFIP}.80",
    'windows' => "#{PREFIP}.128"
 }
 
 vms = {
- 'ansible'  => {'memory' => '1024', 'cpus' => 1, 'ip' => "#{ips['ansible']}",  'box' => 'ubuntu/focal64'},
- 'web'   => {'memory' => '512', 'cpus' => 1, 'ip' => "#{ips['web']}", 'box' => 'debian/bullseye64'},
- # 'w3'     => {'memory' => '512', 'cpus' => 1, 'ip' => "#{ips['w3']}", 'box' => 'almalinux/9'}
+  'ansible'  => {'memory' => '512', 'cpus' => 1, 'ip' => "#{ips['ansible']}",  'box' => 'ubuntu/focal64'},
+  'w3'     => {'memory' => '512', 'cpus' => 1, 'ip' => "#{ips['w3']}", 'box' => 'almalinux/9'},
+  'web'   => {'memory' => '512', 'cpus' => 1, 'ip' => "#{ips['web']}", 'box' => 'debian/bullseye64'},
+  #'windows'   => {'memory' => '1024', 'cpus' => 1, 'ip' => "#{ips['windows']}", 'box' => 'gusztavvargadr/windows-10'}
+  #'windows'   => {'memory' => '1024', 'cpus' => 1, 'ip' => "#{ips['windows']}", 'box' => 'gusztavvargadr/windows-server'}
 }
 
 Vagrant.configure('2') do |config|
@@ -34,7 +36,6 @@ Vagrant.configure('2') do |config|
       k.vm.provider 'virtualbox' do |vb|
         vb.memory = conf['memory']
         vb.cpus = conf['cpus']
-        vb.gui = true
       end
 
       k.vm.provider 'libvirt' do |lv|
@@ -43,8 +44,12 @@ Vagrant.configure('2') do |config|
         lv.cputopology :sockets => 1, :cores => conf['cpus'], :threads => 1
       end
       
-      # Common provisioning tasks
-      k.vm.provision "shell", path: "provision.sh"
+      # Common provisioning tasks for Linux boxes
+      if "#{name}" != "windows"
+        k.vm.provision "shell", path: "provision.sh"
+      else
+        k.vm.provision "shell", path: "provision.ps1", privileged: true
+      end
    
       # Specific to Ansible host controller
       if "#{name}" == "ansible"
