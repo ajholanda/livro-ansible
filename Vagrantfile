@@ -4,9 +4,9 @@ PREFIP = "192.168.64"
 # We reuse boxes to not exhaust RAM.
 ips = {
   'ansible' => "#{PREFIP}.8",
-   'lab00' => "#{PREFIP}.80",
-   'lab01' => "#{PREFIP}.88",
-   'lab02' => "#{PREFIP}.128",
+   'lab00' => "#{PREFIP}.64",
+   'lab01' => "#{PREFIP}.64",
+   'lab02' => "#{PREFIP}.64",
    'nas' => "#{PREFIP}.80",
    'w3' => "#{PREFIP}.88",
    'web' => "#{PREFIP}.80",
@@ -15,6 +15,7 @@ ips = {
 
 vms = {
   'ansible'  => {'memory' => '512', 'cpus' => 1, 'ip' => "#{ips['ansible']}",  'box' => 'ubuntu/focal64'},
+  'lab00'  => {'memory' => '512', 'cpus' => 1, 'ip' => "#{ips['lab00']}",  'box' => 'ubuntu/focal64'},  
   'w3'     => {'memory' => '512', 'cpus' => 1, 'ip' => "#{ips['w3']}", 'box' => 'almalinux/9'},
   'web'   => {'memory' => '512', 'cpus' => 1, 'ip' => "#{ips['web']}", 'box' => 'debian/bullseye64'},
   #'windows'   => {'memory' => '1024', 'cpus' => 1, 'ip' => "#{ips['windows']}", 'box' => 'gusztavvargadr/windows-10'}
