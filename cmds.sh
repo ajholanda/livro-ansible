@@ -14,16 +14,16 @@ ECHO "Executa o ping no host gerenciado w3.example.net"
 RUN "ansible w3.example.net -i hosts.ini -m ping"
 
 ECHO "Instala o pacote apache2 usando o módulo package"
-RUN "ansible web.example.net -i hosts.ini -m package -a \"name=apache2 state=present\""
+RUN "ansible web.example.net -i hosts.ini -m package -a \"name=apache2 state=present\" --become"
 
 ECHO "Remove o pacote apache2 nos hosts do grupo webservers"
-RUN "ansible webservers -i hosts.ini -m package -a \"name=apache2 state=absent\""
+RUN "ansible webservers -i hosts.ini -m package -a \"name=apache2 state=absent\" --become"
 
 ECHO "Instala o pacote httpd usando o módulo dnf, ok nas distribuições derivadas da RedHat"
-RUN "ansible w3.example.net -i hosts.ini -m dnf -a "name=httpd""
+RUN "ansible w3.example.net -i hosts.ini -m dnf -a \"name=httpd\" --become"
 
 ECHO "Instalação do pacote apache2 sem a inclusão explícita do arquivo de inventário"
-RUN "ansible web.example.net -m package -a \"name=apache2\""
+RUN "ansible web.example.net -m package -a \"name=apache2\" --become"
 
 ECHO "Lista de parâmetros do arquivo de configuração do ansible"
 RUN "ansible-config list | cat"
