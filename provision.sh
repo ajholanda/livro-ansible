@@ -6,6 +6,9 @@ chmod 400 $VAGRANT_HOME/.ssh/id_ed25519*
 cp /vagrant/provision/ssh_config $VAGRANT_HOME/.ssh/config
 chmod 400 $VAGRANT_HOME/.ssh/config
 chown -R vagrant:vagrant $VAGRANT_HOME/.ssh/
+# Update package sources list
+which apt && apt update
+# Allow password authentication via SSH
 sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
 systemctl restart sshd
 
