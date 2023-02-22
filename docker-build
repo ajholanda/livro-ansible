@@ -1,4 +1,0 @@
- cd docker/local/almalinux-systemd
- docker build --rm -t local/almalinux-systemd
- cd ../../../
-  docker-compose.exe -f ./docker/compose.yml up
