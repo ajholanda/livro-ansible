@@ -95,6 +95,18 @@ function exec_linux_cmds() {
     exec_template_cmds
 }
 
+read -r -d '' HELPMSG <<EOM
+$0 [--all | -c2 | -c3 | -c4 | -c6 | --linux | --windows]
+onde cada opção executa os comandos:
+  --all     todos
+  -c2       do Capítulo 2
+  -c3       do Capítulo 3
+  -c4       do Capítulo 4
+  -c6       do Capítulo 6
+  --linux   para os sistemas Linux
+  --windows para os sistemas Windows
+EOM
+
 case $1 in
     "-c2")
         exec_adhoc_cmds
@@ -108,11 +120,15 @@ case $1 in
     "-c6")
         exec_template_cmds
         ;;
+    "--linux")
+        exec_linux_cmds
+        ;;
     "--windows")
-        echo "not implemented yet"
+        >&2 echo "not implemented yet"
         ;;
     *)
-        exec_linux_cmds
+        >&2 echo "$HELPMSG"
+        exit 1
         ;;
 esac
 
