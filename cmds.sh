@@ -95,7 +95,7 @@ function exec_linux_cmds() {
     exec_template_cmds
 }
 
-read -r -d '' HELPMSG <<EOM
+USAGE=$(cat <<-EOM
 $0 [--all | -c2 | -c3 | -c4 | -c6 | --linux | --windows]
 onde cada opção executa os comandos:
   --all     todos
@@ -106,6 +106,7 @@ onde cada opção executa os comandos:
   --linux   para os sistemas Linux
   --windows para os sistemas Windows
 EOM
+)
 
 case $1 in
     "-c2")
@@ -127,7 +128,7 @@ case $1 in
         >&2 echo "not implemented yet"
         ;;
     *)
-        >&2 echo "$HELPMSG"
+        >&2 echo "$USAGE"
         exit 1
         ;;
 esac
