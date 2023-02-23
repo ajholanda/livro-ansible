@@ -1,11 +1,11 @@
 ---
 # filters.yml
-- hosts: labs
+- hosts: lab
 
   vars:
-    poweroff_minute: 30
-    poweroff_hour: 22
-    poweroff_weekday: '*'
+    power_off_minute: 30
+    power_off_hour: 22
+    power_off_weekday: '*'
     system_groups:
       - audio
       - plugdev
@@ -13,50 +13,51 @@
       - users
       - video
 
+  tasks:
   # mandatory
   - name: Cria uma entrada na crontab para desligar o computador
     cron:
-    name: shutdown at
-    weekday: "{{ power_off_weekday }}"
-    hour: "{{ power_off_hour | mandatory }}"
-    minute: "{{ power_off_minute |  mandatory }}"
-    user: root
-    job: "/sbin/shutdown -h now"
+      name: "shutdown at"
+      weekday: "{{ power_off_weekday }}"
+      hour: "{{ power_off_hour | mandatory }}"
+      minute: "{{ power_off_minute |  mandatory }}"
+      user: root
+      job: "/sbin/shutdown -h now"
 
   # int (data type)
   - name: Cria uma entrada na crontab para desligar o computador
     cron:
-    name: shutdown at
-    weekday: "{{ power_off_weekday }}"
-    hour: "{{ power_off_hour | mandatory | int }}"
-    minute: "{{ power_off_minute |  mandatory | int }}"
-    user: root
-    job: "/sbin/shutdown -h now"
+      name: "shutdown at"
+      weekday: "{{ power_off_weekday }}"
+      hour: "{{ power_off_hour | mandatory | int }}"
+      minute: "{{ power_off_minute |  mandatory | int }}"
+      user: root
+      job: "/sbin/shutdown -h now"
 
-# default
-- name: Cria uma entrada na crontab para desligar o computador
-  cron:
-    name: shutdown at
-    weekday: "{{ power_off_weekday | default('*') }}"
-    hour: "{{ power_off_hour | mandatory | int }}"
-    minute: "{{ poweroff_minute |  mandatory | int }}"
-    user: root
-    job: "/sbin/shutdown -h now"
+  # default
+  - name: Cria uma entrada na crontab para desligar o computador
+    cron:
+      name: "shutdown at"
+      weekday: "{{ power_off_weekday | default('*') }}"
+      hour: "{{ power_off_hour | mandatory | int }}"
+      minute: "{{ power_off_minute |  mandatory | int }}"
+      user: root
+      job: "/sbin/shutdown -h now"
 
-# lower
-- name: Instala ou atualiza o apache
-  package:
-    name: apache2
-    state: latest
-  when: ansible_distribution | lower == “debian”
+  # lower
+  - name: Instala ou atualiza o apache
+    package:
+      name: apache2
+      state: latest
+    when: ansible_distribution | lower == "debian"
 
-# join
-- name: Cria usuário e adiciona em alguns grupos do sistema
-  user:
-    name: ajh
-    comment: "Adriano J. Holanda"
-    shell: /bin/bash
-    createhome: yes
-    home: /home/ajh
-    groups: "{{ system_groups | join(',') }}"
-    append: yes
+  # join
+  - name: Cria usuário e adiciona em alguns grupos do sistema
+    user:
+      name: ajh
+      comment: "Adriano J. Holanda"
+      shell: /bin/bash
+      createhome: yes
+      home: /home/ajh
+      groups: "{{ system_groups | join(',') }}"
+      append: yes
