@@ -95,7 +95,19 @@ function exec_linux_cmds() {
     exec_template_cmds
 }
 
-case $1 in 
+case $1 in
+    "-c2")
+        exec_adhoc_cmds
+        ;;
+    "-c3")
+        exec_playbook_cmds
+        ;;
+    "-c4")
+        exec_vars_cmds
+        ;;
+    "-c6")
+        exec_template_cmds
+        ;;
     "--windows")
         echo "not implemented yet"
         ;;
