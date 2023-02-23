@@ -18,7 +18,7 @@ vms = {
   'lab00'  => {'memory' => '512', 'cpus' => 1, 'ip' => "#{ips['lab00']}",  'box' => 'ubuntu/focal64'},  
   'w3'     => {'memory' => '512', 'cpus' => 1, 'ip' => "#{ips['w3']}", 'box' => 'almalinux/9'},
   'web'   => {'memory' => '512', 'cpus' => 1, 'ip' => "#{ips['web']}", 'box' => 'debian/bullseye64'},
-  'windows'   => {'memory' => '1024', 'cpus' => 1, 'ip' => "#{ips['windows']}", 'box' => 'gusztavvargadr/windows-10'}
+  #'windows'   => {'memory' => '1024', 'cpus' => 1, 'ip' => "#{ips['windows']}", 'box' => 'gusztavvargadr/windows-10'}
 }
 
 Vagrant.configure('2') do |config|
@@ -26,7 +26,7 @@ Vagrant.configure('2') do |config|
   vms.each do |name, conf|   
 
     config.vm.define "#{name}" do |k|
-      k.vm.hostname = "#{name}.#{DOMAIN}"
+      k.vm.hostname = "#{name}" #.#{DOMAIN}"
       k.vm.network 'private_network', ip: "#{conf['ip']}"
       k.vm.box = conf['box']
       k.vm.box_check_update = false
@@ -42,12 +42,7 @@ Vagrant.configure('2') do |config|
         lv.memory = conf['memory']
         lv.cputopology :sockets => 1, :cores => conf['cpus'], :threads => 1
       end
-            
-      # ssh
-      k.ssh.insert_key = false
-      k.ssh.private_key_path = "./provision/id_ed25519"
-      k.ssh.forward_agent = true
-      
+
       # Common provisioning tasks for Linux boxes
       if "#{name}" != "windows"
         k.vm.provision "shell", path: "provision.sh"
