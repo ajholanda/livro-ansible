@@ -1,0 +1,12 @@
+---
+- name: Instala o programa rsync
+  apt: name=rsync
+  tags: rsyncserver
+
+- name: Copia arquivo com usuários e senhas
+  copy:
+    src: rsyncd.secrets
+    dest: /etc/
+    owner: root
+    mode: 0600
+  tags: rsyncserver
