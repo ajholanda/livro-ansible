@@ -1,33 +1,53 @@
 VAGRANT_HOME="/home/vagrant"
 
-# PACKAGE
-# Update package sources list
+# PACKAGEs
+
+## Update package sources list on Debian OS Family
 which apt-get >/dev/null && \
     echo 'APT: Updating the list of packages...'; apt-get update >/dev/null
-# Install ansible on the controller
+
+## Install ansible on the controller
 if [ "$(hostname)" == "ansible" ]; then
     echo "APT: Installing ansible..."
     apt-get install -y ansible >/dev/null
 fi
 
-# SSH
-# Create ssh directory for vagrant user
-mkdir -p $VAGRANT_HOME/.ssh
-# Copy ssh keys
-cp /vagrant/provision/id_ed25519* $VAGRANT_HOME/.ssh
-# Fix the permissions of the keys files
-chmod 400 $VAGRANT_HOME/.ssh/id_ed25519*
-# Write the public key to authorized keys list
-cp /vagrant/provision/id_ed25519.pub $VAGRANT_HOME/.ssh/authorized_keys
-# Copy the ssh client configuration for user vagrant
-cp /vagrant/provision/ssh_config $VAGRANT_HOME/.ssh/config
-# Fix the permission of the ssh client configuration
-chmod 400 $VAGRANT_HOME/.ssh/config
-# Fix the owner of ssh directory for vagrant user
-chown -R vagrant:vagrant $VAGRANT_HOME/.ssh/
+## Install wget on Red Hat OS Family
+which dnf 2>/dev/null && dnf install -y wget
 
-# Allow password authentication via SSH
+# SSH
+
+## Create ssh directory for vagrant user
+install -o vagrant -g vagrant  -m 700 -d $VAGRANT_HOME/.ssh
+
+## Suppress banner during ssh login
+touch $VAGRANT_HOME/.hushlogin
+
+## Download ssh keys
+if [ "$(hostname)" == "ansible" ]; then
+    echo "SSH: Downloading Vagrant insecure key pair..."
+    wget https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub \
+        -O $VAGRANT_HOME/.ssh/id_rsa.pub >/dev/null
+    wget https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant \
+        -O $VAGRANT_HOME/.ssh/id_rsa >/dev/null
+    chmod 400 $VAGRANT_HOME/.ssh/id_rsa
+else
+    echo "SSH: Downloading the Vagrant public key as authorized host..."
+    wget https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub \
+        -O $VAGRANT_HOME/.ssh/authorized_keys >/dev/null
+    chmod 400 $VAGRANT_HOME/.ssh/authorized_keys
+fi
+
+## Write the ssh client configuration for user vagrant
+echo "Host *
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+    PasswordAuthentication yes
+    LogLevel FATAL" > $VAGRANT_HOME/.ssh/config
+chmod 644 $VAGRANT_HOME/.ssh/config
+## Change the ssh directory owner recursively
+chown -R vagrant:vagrant $VAGRANT_HOME/.ssh
+
+## Allow password authentication via SSH
 sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
 systemctl restart sshd
-
-
