@@ -52,11 +52,6 @@ Vagrant.configure('2') do |config|
    
       # Specific to Ansible host controller
       if "#{name}" == "ansible"
-        $script = <<-SCRIPT
-        which apt && apt update && apt install -y ansible
-        SCRIPT
-        k.vm.provision "shell", inline: $script
-   
         # Append the hostnames in /etc/hosts
         ips.each_pair {|hostname, ip| 
           k.vm.provision "shell", inline: "echo \"#{ip} #{hostname}.#{DOMAIN} #{hostname}\" >>/etc/hosts"
