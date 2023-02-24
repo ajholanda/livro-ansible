@@ -25,11 +25,14 @@ Vagrant.configure('2') do |config|
 
   vms.each do |name, conf|   
 
+    config.vm.box_check_update = false
+    # Issue: https://github.com/hashicorp/vagrant/issues/5186
+    config.ssh.insert_key = false
+
     config.vm.define "#{name}" do |k|
       k.vm.hostname = "#{name}" #.#{DOMAIN}"
       k.vm.network 'private_network', ip: "#{conf['ip']}"
       k.vm.box = conf['box']
-      k.vm.box_check_update = false
 
       k.vm.provider 'virtualbox' do |vb|
         vb.memory = conf['memory']
