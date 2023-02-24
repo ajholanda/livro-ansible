@@ -104,6 +104,10 @@ function exec_linux_cmds() {
     exec_crypto_cmds
 }
 
+function exec_windows_cmds() {
+    2>& echo "INFO: Not implemented yet!"
+}
+
 USAGE=$(cat <<-EOM
 $0 [--all | -c2 | -c3 | -c4 | -c6 | --linux | --windows]
 onde cada opção executa os comandos:
@@ -120,6 +124,9 @@ EOM
 )
 
 case $1 in
+    "--all")
+        exec_linux_cmds
+        ;;
     "-c2")
         exec_adhoc_cmds
         ;;
@@ -142,7 +149,7 @@ case $1 in
         exec_linux_cmds
         ;;
     "--windows")
-        >&2 echo "not implemented yet"
+        exec_windows_cmds
         ;;
     *)
         >&2 echo "$USAGE"
