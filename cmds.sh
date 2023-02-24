@@ -78,7 +78,9 @@ function exec_vars_cmds() {
 
     ECHO "Executa o playbook webserver-host_vars.yml"
     RUN 'ansible-playbook webserver-host_vars.yml'
+}
 
+function exec_roles_cmds() {
     ECHO "Executa o playbook webserver-role.yml (role webserver) somente em web.example.net"
     RUN 'ansible-playbook webserver-role.yml --limit web.example.net'
 }
@@ -88,21 +90,30 @@ function exec_template_cmds() {
     RUN "ansible-playbook filters.yml"
 }
 
+function exec_crypto_cmds() {
+    ECHO "Executa o role rsyncserver usando o --vault-id"
+    RUN "ansible-playbook --vault-id vault.txt rsyncservers.yml"
+}
+
 function exec_linux_cmds() {
     exec_adhoc_cmds
     exec_playbook_cmds
     exec_vars_cmds
+    exec_roles_cmds
     exec_template_cmds
+    exec_crypto_cmds
 }
 
 USAGE=$(cat <<-EOM
 $0 [--all | -c2 | -c3 | -c4 | -c6 | --linux | --windows]
 onde cada opção executa os comandos:
   --all     todos
-  -c2       do Capítulo 2
-  -c3       do Capítulo 3
-  -c4       do Capítulo 4
-  -c6       do Capítulo 6
+  -c2       do Capítulo 2 - comandos ad-hoc
+  -c3       do Capítulo 3 - playbook
+  -c4       do Capítulo 4 - variáveis
+  -c5       do Capítulo 5 - roles
+  -c6       do Capítulo 6 - gabarito
+  -c7       do Capítulo 7 - criptografia
   --linux   para os sistemas Linux
   --windows para os sistemas Windows
 EOM
@@ -118,8 +129,14 @@ case $1 in
     "-c4")
         exec_vars_cmds
         ;;
+    "-c5")
+        exec_roles_cmds
+        ;;
     "-c6")
         exec_template_cmds
+        ;;
+    "-c7")
+        exec_crypto_cmds
         ;;
     "--linux")
         exec_linux_cmds
