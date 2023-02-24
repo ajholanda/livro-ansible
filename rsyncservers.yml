@@ -1,0 +1,5 @@
+---
+- name: Administra servidores rsync
+  hosts: rsyncservers
+  roles:
+    - rsyncserver
