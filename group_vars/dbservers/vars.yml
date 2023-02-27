@@ -1,0 +1,7 @@
+---
+# dados não sensíveis
+mariadb_port: 3306
+mariadb_user: dba
+
+# dado sensível
+mariadb_password: "{{ vault_mariadb_password }}"
