@@ -93,6 +93,9 @@ function exec_template_cmds() {
 function exec_crypto_cmds() {
     ECHO "Executa o role rsyncserver usando o --vault-id"
     RUN "ansible-playbook --vault-id vault.txt rsyncservers.yml"
+
+    ECHO "Criptografa um arquivo usando o vault ID prod"
+    RUN "ansible-vault encrypt --vault-id prod@vault-prod.txt sssd/templates/sssd.conf.j2 --encrypt-vault-id prod 2>/dev/null"
 }
 
 function exec_linux_cmds() {
@@ -157,5 +160,5 @@ case $1 in
         ;;
 esac
 
-ECHO "[DONE]"
+ECHO "DONE"
 exit 0
