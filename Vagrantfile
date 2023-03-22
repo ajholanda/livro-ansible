@@ -9,23 +9,23 @@ ips = {
   'lab01' => "#{PREFIP}.64",
   'lab02' => "#{PREFIP}.64",
   'nas' => "#{PREFIP}.80",
-  'simula' => "#{PREFIP}.64",   
+  'simula' => "#{PREFIP}.64",
   'w3' => "#{PREFIP}.88",
   'web' => "#{PREFIP}.80",
-  'win' => "#{PREFIP}.128"
+  'windows' => "#{PREFIP}.128"
 }
 
 vms = {
   'ansible'  => {'memory' => '512', 'cpus' => 1, 'ip' => "#{ips['ansible']}",  'box' => 'ubuntu/focal64'},
-  'simula'  => {'memory' => '512', 'cpus' => 1, 'ip' => "#{ips['simula']}",  'box' => 'ubuntu/focal64'},  
+  'simula'  => {'memory' => '512', 'cpus' => 1, 'ip' => "#{ips['simula']}",  'box' => 'ubuntu/focal64'},
   'w3'     => {'memory' => '512', 'cpus' => 1, 'ip' => "#{ips['w3']}", 'box' => 'almalinux/9'},
   'web'   => {'memory' => '512', 'cpus' => 1, 'ip' => "#{ips['web']}", 'box' => 'debian/bullseye64'},
-  #'win'   => {'memory' => '1024', 'cpus' => 1, 'ip' => "#{ips['win']}", 'box' => 'gusztavvargadr/windows-10'}
+  'windows'   => {'memory' => '1024', 'cpus' => 1, 'ip' => "#{ips['win']}", 'box' => 'gusztavvargadr/windows-10'}
 }
 
 Vagrant.configure('2') do |config|
 
-  vms.each do |name, conf|   
+  vms.each do |name, conf|
 
     config.vm.box_check_update = false
     # Issue: https://github.com/hashicorp/vagrant/issues/5186
@@ -54,17 +54,17 @@ Vagrant.configure('2') do |config|
       else
         k.vm.provision "shell", path: "provision.ps1", privileged: true
       end
-   
+
       # Specific to Ansible host controller
       if "#{name}" == "ansible"
         # Append the hostnames in /etc/hosts
-        ips.each_pair {|hostname, ip| 
+        ips.each_pair {|hostname, ip|
           k.vm.provision "shell", inline: "echo \"#{ip} #{hostname}.#{DOMAIN} #{hostname}\" >>/etc/hosts"
         }
         # Shared Ansible folder with the examples
         k.vm.synced_folder "./", "/home/vagrant/ansible", mount_options: ["dmode=755,fmode=644"]
       end
-    
+
     end
   end
 end
