@@ -16,11 +16,32 @@ ips = {
 }
 
 vms = {
-  'ansible'  => {'memory' => '512', 'cpus' => 1, 'ip' => "#{ips['ansible']}",  'box' => 'ubuntu/focal64'},
-  'simula'  => {'memory' => '512', 'cpus' => 1, 'ip' => "#{ips['simula']}",  'box' => 'ubuntu/focal64'},
-  'w3'     => {'memory' => '512', 'cpus' => 1, 'ip' => "#{ips['w3']}", 'box' => 'almalinux/9'},
-  'web'   => {'memory' => '512', 'cpus' => 1, 'ip' => "#{ips['web']}", 'box' => 'debian/bullseye64'},
-  'windows'   => {'memory' => '1024', 'cpus' => 1, 'ip' => "#{ips['win']}", 'box' => 'gusztavvargadr/windows-10'}
+  'ansible'  => {
+      'memory' => '512',
+      'cpus' => 1, 'ip' => "#{ips['ansible']}",
+      'box' => 'ubuntu/focal64'
+  },
+  'simula'  => {
+      'memory' => '512',
+      'cpus' => 1, 'ip' => "#{ips['simula']}",
+      'box' => 'ubuntu/focal64'
+  },
+  'w3'     => {
+      'memory' => '512',
+      'cpus' => 1, 'ip' => "#{ips['w3']}",
+      'box' => 'almalinux/9'
+  },
+  'web'   => {
+      'memory' => '512',
+      'cpus' => 1,
+      'ip' => "#{ips['web']}",
+      'box' => 'debian/bullseye64'
+  },
+  'windows'   => {
+      'memory' => '2048',
+      'cpus' => 1, 'ip' => "#{ips['windows']}",
+      'box' => 'gusztavvargadr/windows-10'
+  }
 }
 
 Vagrant.configure('2') do |config|
@@ -32,7 +53,7 @@ Vagrant.configure('2') do |config|
     config.ssh.insert_key = false
 
     config.vm.define "#{name}" do |k|
-      k.vm.hostname = "#{name}" #.#{DOMAIN}"
+      k.vm.hostname = "#{name}" #.#{DOMAIN}", don't append the domain
       k.vm.network 'private_network', ip: "#{conf['ip']}"
       k.vm.box = conf['box']
 
@@ -40,6 +61,10 @@ Vagrant.configure('2') do |config|
         vb.memory = conf['memory']
         vb.cpus = conf['cpus']
         vb.customize ["modifyvm", :id, "--cableconnected1", "on"]
+        if "#{name}" == "ansible"
+          # Help see what happens when it is Windows box.
+          vb.gui = true
+        end
       end
 
       k.vm.provider 'libvirt' do |lv|
@@ -52,7 +77,7 @@ Vagrant.configure('2') do |config|
       if "#{name}" != "windows"
         k.vm.provision "shell", path: "provision.sh"
       else
-        k.vm.provision "shell", path: "provision.ps1", privileged: true
+        k.vm.provision "shell", path: "provision.ps1", privileged: true, powershell_elevated_interactive: true
       end
 
       # Specific to Ansible host controller
