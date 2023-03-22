@@ -9,7 +9,7 @@ which apt-get >/dev/null && \
 ## Install ansible on the controller
 if [ "$(hostname)" == "ansible" ]; then
     echo "APT: Installing ansible..."
-    apt-get install -y ansible >/dev/null
+    apt-get install -y ansible sshpass >/dev/null
 fi
 
 ## Install wget on Red Hat OS Family
