@@ -12,15 +12,15 @@ ips = {
   'simula' => "#{PREFIP}.64",   
   'w3' => "#{PREFIP}.88",
   'web' => "#{PREFIP}.80",
-  'windows' => "#{PREFIP}.128"
+  'win' => "#{PREFIP}.128"
 }
 
 vms = {
   'ansible'  => {'memory' => '512', 'cpus' => 1, 'ip' => "#{ips['ansible']}",  'box' => 'ubuntu/focal64'},
-  'simula'  => {'memory' => '512', 'cpus' => 1, 'ip' => "#{ips['lab00']}",  'box' => 'ubuntu/focal64'},  
+  'simula'  => {'memory' => '512', 'cpus' => 1, 'ip' => "#{ips['simula']}",  'box' => 'ubuntu/focal64'},  
   'w3'     => {'memory' => '512', 'cpus' => 1, 'ip' => "#{ips['w3']}", 'box' => 'almalinux/9'},
   'web'   => {'memory' => '512', 'cpus' => 1, 'ip' => "#{ips['web']}", 'box' => 'debian/bullseye64'},
-  #'windows'   => {'memory' => '1024', 'cpus' => 1, 'ip' => "#{ips['windows']}", 'box' => 'gusztavvargadr/windows-10'}
+  #'win'   => {'memory' => '1024', 'cpus' => 1, 'ip' => "#{ips['win']}", 'box' => 'gusztavvargadr/windows-10'}
 }
 
 Vagrant.configure('2') do |config|
