@@ -38,7 +38,7 @@
     user:
       name: "{{ item.name }}"
       groups: "{{ item.groups }}"
-      append: yes 
+      append: yes
     loop: "{{ user2groups }}"
 
   # Variáveis
