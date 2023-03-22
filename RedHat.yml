@@ -1,5 +1,5 @@
   # RedHat.yml
-  - name: Instala ou atualiza o httpd 
+  - name: Instala ou atualiza o httpd
     package:
       name: httpd
       state: latest

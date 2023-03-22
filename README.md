@@ -34,7 +34,7 @@ com exceção da execução do *script* que ser modificada para
 bash ./cmds.sh --windows
 ```
 
-Aviso: O arquivo com a máquina virtual do Windows é muito grande e seu 
-*download* e alguns comandos do Vagrant podem demorar muito dependendo 
+Aviso: O arquivo com a máquina virtual do Windows é muito grande e seu
+*download* e alguns comandos do Vagrant podem demorar muito dependendo
 da configuração de rede e do computador em que as máquinas virtuais estão
 sendo executadas.

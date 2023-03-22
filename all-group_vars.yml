@@ -1,4 +1,4 @@
-# all-group_vars.yml 
+# all-group_vars.yml
 - name: Administra todos os hosts
   hosts: all
   tasks:
@@ -10,5 +10,5 @@
       weekday: "{{ cron.shutdown.weekday }}"
       job: "shutdown -h now"
     when: >
-      cron is defined 
+      cron is defined
       and cron.shutdown is defined
