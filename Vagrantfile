@@ -47,10 +47,11 @@ vms = {
 Vagrant.configure('2') do |config|
 
   vms.each do |name, conf|
-
     config.vm.box_check_update = false
     # Issue: https://github.com/hashicorp/vagrant/issues/5186
     config.ssh.insert_key = false
+    # Increase timeout due Windows box update during boot
+    config.vm.boot_timeout = 600
 
     config.vm.define "#{name}" do |k|
       k.vm.hostname = "#{name}" #.#{DOMAIN}", don't append the domain
@@ -61,8 +62,8 @@ Vagrant.configure('2') do |config|
         vb.memory = conf['memory']
         vb.cpus = conf['cpus']
         vb.customize ["modifyvm", :id, "--cableconnected1", "on"]
-        if "#{name}" == "ansible"
-          # Help see what happens when it is Windows box.
+        if "#{name}" == "windows"
+          # See what's happenning with Windows box.
           vb.gui = true
         end
       end
