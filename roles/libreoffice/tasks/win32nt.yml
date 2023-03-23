@@ -1,5 +1,5 @@
 ---
-- name: Install libreoffice
+- name: Instala libreoffice
   win_chocolatey:
     name: libreoffice
     state: present
