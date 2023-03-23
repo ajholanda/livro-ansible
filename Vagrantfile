@@ -51,7 +51,7 @@ Vagrant.configure('2') do |config|
     # Issue: https://github.com/hashicorp/vagrant/issues/5186
     config.ssh.insert_key = false
     # Increase timeout due Windows box update during boot
-    config.vm.boot_timeout = 600
+    config.vm.boot_timeout = 1200
 
     config.vm.define "#{name}" do |k|
       k.vm.hostname = "#{name}" #.#{DOMAIN}", don't append the domain
@@ -77,8 +77,6 @@ Vagrant.configure('2') do |config|
       # Common provisioning tasks for Linux boxes
       if "#{name}" != "windows"
         k.vm.provision "shell", path: "provision.sh"
-      else
-        k.vm.provision "shell", path: "provision.ps1", privileged: true, powershell_elevated_interactive: true
       end
 
       # Specific to Ansible host controller
