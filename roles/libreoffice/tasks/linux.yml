@@ -1,0 +1,6 @@
+---
+- name: Instala libreoffice
+  package:
+    name: libreoffice
+    state: present
+  tags: libreoffice
