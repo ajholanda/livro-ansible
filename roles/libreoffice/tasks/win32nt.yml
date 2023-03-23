@@ -1,0 +1,6 @@
+---
+- name: Install libreoffice
+  win_chocolatey:
+    name: libreoffice
+    state: present
+  tags: libreoffice
