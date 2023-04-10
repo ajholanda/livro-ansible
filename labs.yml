@@ -4,4 +4,5 @@
 
   roles:
     - libreoffice
+    - netbios
     - power
