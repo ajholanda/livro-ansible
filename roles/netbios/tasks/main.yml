@@ -1,0 +1,9 @@
+---
+- name: Desabilita o protocolo NetBIOS sobre TCP/IP
+  ansible.windows.win_regedit:
+      path: HKLM:\SYSTEM\CurrentControlSet\services\NetBT\Parameters\Interfaces\tcpip*
+      name: NetbiosOptions
+      data: 2
+      type: dword
+  when: ansible_system | lower == "win32nt"
+  tags: netbios
