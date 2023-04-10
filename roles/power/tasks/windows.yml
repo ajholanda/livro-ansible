@@ -1,0 +1,9 @@
+---
+- name: Cria uma Scheduled Task para desligar o computador
+  ansible.windows.win_powershell:
+    script: |
+      $trigger = New-ScheduledTaskTrigger -Daily -At 11:00pm
+      $action = New-ScheduledTaskAction -Execute 'shutdown.exe' -Argument '/s /t 0'
+      Register-ScheduledTask -TaskName "Shutdown at 11 PM" -Trigger $trigger `
+        -Action $action -User "NT AUTHORITY\SYSTEM" -RunLevel Highest
+  tags: power
