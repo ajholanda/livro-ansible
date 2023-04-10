@@ -108,7 +108,15 @@ function exec_linux_cmds() {
 }
 
 function exec_windows_cmds() {
-    2>& echo "INFO: Not implemented yet!"
+    ansible-galaxy collection install ansible.windows
+
+    # win_chocolatey module
+    ECHO "Instala o LibreOffice no sistem Windows"
+    RUN "ansible-playbook labs.yml --tags libreoffice --limit windows"
+
+    # win_powershell module
+    ECHO "Executa um script PowerShell para agendar desligamento"
+    RUN "ansible-playbook labs.yml --tags power --limit windows"
 }
 
 USAGE=$(cat <<-EOM
