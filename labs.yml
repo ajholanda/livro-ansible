@@ -1,0 +1,7 @@
+---
+- name: Administra os laboratórios de informática
+  hosts: labs
+
+  roles:
+    - libreoffice
+    - power
