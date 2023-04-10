@@ -1,0 +1,4 @@
+---
+- name: Inclui tarefas para sistemas {{ ansible_os_family }}
+  include_tasks: "{{ ansible_os_family | lower }}.yml"
+  tags: power
