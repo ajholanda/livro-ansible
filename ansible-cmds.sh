@@ -117,6 +117,10 @@ function exec_windows_cmds() {
     # win_powershell module
     ECHO "Executa um script PowerShell para agendar desligamento"
     RUN "ansible-playbook labs.yml --tags power --limit windows"
+
+    # win_user module
+    ECHO "Gerencia usuários no Windows"
+    RUN "ansible-playbook  labs.yml --tags user --limit windows"
 }
 
 USAGE=$(cat <<-EOM
