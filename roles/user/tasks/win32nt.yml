@@ -1,0 +1,9 @@
+- name: Garante a existência do usuário ajh
+  ansible.windows.win_user:
+    name: ajh
+    password: senh@@jH
+    state: present
+    groups:
+      - Administrators
+      - Users
+  tags: user
