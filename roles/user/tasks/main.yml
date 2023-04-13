@@ -1,0 +1,4 @@
+---
+- name: Inclui tarefas para sistemas {{ ansible_system }}
+  include_tasks: "{{ ansible_system | lower }}.yml"
+  tags: user
