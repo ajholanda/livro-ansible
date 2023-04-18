@@ -1,0 +1,14 @@
+---
+- name: Altera as configurações do servidor ssh
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^{{ item.re }}"
+    line: "{{ item.ln }}"
+    validate: "sshd -t -f %s"
+  with_items:
+    - re: "PasswordAuthentication"
+      ln: "PasswordAuthentication no"
+    - re: "PermitRootLogin"
+      ln: "PermitRootLogin no"
+  notify: restart ssh
+  tags: sshserver
