@@ -123,6 +123,11 @@ function exec_windows_cmds() {
     RUN "ansible-playbook  labs.yml --tags user --limit windows"
 }
 
+function exec_usecases_cmds() {
+    ECHO "Configura servidor(es)"
+    RUN "ansible-playbook servers.yml"
+}
+
 USAGE=$(cat <<-EOM
 $0 [--all | -c2 | -c3 | -c4 | -c6 | --linux | --windows]
 onde cada opção executa os comandos:
@@ -133,6 +138,8 @@ onde cada opção executa os comandos:
   -c5       do Capítulo 5 - roles
   -c6       do Capítulo 6 - gabarito
   -c7       do Capítulo 7 - criptografia
+  -c8       do Capítulo 8 - Windows
+  -c9       do Capítulo 9 - casos de uso
   --linux   para os sistemas Linux
   --windows para os sistemas Windows
 EOM
@@ -159,6 +166,12 @@ case $1 in
         ;;
     "-c7")
         exec_crypto_cmds
+        ;;
+    "-c8")
+        exec_windows_cmds
+        ;;
+    "-c9")
+        exec_usecases_cmds
         ;;
     "--linux")
         exec_linux_cmds
