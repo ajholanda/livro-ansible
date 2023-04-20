@@ -1,0 +1,8 @@
+---
+- name: Cria usuários
+  user:
+    name: "{{ item }}"
+    shell: /bin/bash
+  loop:
+    "{{ ADMINS }}"
+  tags: user
