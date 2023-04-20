@@ -5,6 +5,7 @@
     regexp: "^{{ item.re }}"
     line: "{{ item.ln }}"
     validate: "sshd -t -f %s"
+    backup: yes
   with_items:
     - re: "PasswordAuthentication"
       ln: "PasswordAuthentication no"
