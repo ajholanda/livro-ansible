@@ -1,3 +1,5 @@
+*~
+.bash_history
+.ssh
 .vagrant
 .viminfo
-.bash_history
