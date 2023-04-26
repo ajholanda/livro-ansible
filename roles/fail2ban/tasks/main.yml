@@ -1,0 +1,11 @@
+---
+- name: Instala
+  package: name=fail2ban
+  tags: fail2ban
+
+- name: Inicializa e habilita o serviço
+  service:
+    name: fail2ban
+    enabled: yes
+    state: started
+  tags: fail2ban
