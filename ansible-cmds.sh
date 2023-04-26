@@ -98,15 +98,6 @@ function exec_crypto_cmds() {
     RUN "ansible-vault encrypt --vault-id prod@vault-prod.txt sssd/templates/sssd.conf.j2 --encrypt-vault-id prod 2>/dev/null"
 }
 
-function exec_linux_cmds() {
-    exec_adhoc_cmds
-    exec_playbook_cmds
-    exec_vars_cmds
-    exec_roles_cmds
-    exec_template_cmds
-    exec_crypto_cmds
-}
-
 function exec_windows_cmds() {
     ansible-galaxy collection install ansible.windows
 
@@ -126,6 +117,16 @@ function exec_windows_cmds() {
 function exec_usecases_cmds() {
     ECHO "Configura servidor(es)"
     RUN "ansible-playbook servers.yml"
+}
+
+function exec_linux_cmds() {
+    exec_adhoc_cmds
+    exec_playbook_cmds
+    exec_vars_cmds
+    exec_roles_cmds
+    exec_template_cmds
+    exec_crypto_cmds
+    exec_usecases_cmds
 }
 
 USAGE=$(cat <<-EOM
