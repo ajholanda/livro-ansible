@@ -1,28 +1,4 @@
 ---
-- block:
-    - name: install package for unattended upgrades
-      package: name=unattended-upgrades
-      tags: update
-
-    - name: Install apt-config-auto-update on Debian
-      apt: name=apt-config-auto-update
-      when: ansible_distribution == 'Debian'
-      tags: update
-
-    - name: enable and start unattended-upgrades
-      service:
-        name: unattended-upgrades
-        enabled: true
-        state: started
-      tags: update
-
-    - name: include normal package updates that are off by default
-      lineinfile:
-        path: "{{ cfgfile }}"
-        regexp: '//\s*"origin=Debian,codename=\$\{distro_codename\}-updates";'
-        line: '        "origin=Debian,codename=${distro_codename}-updates";'
-        backrefs: yes
-        backup: yes
-      notify: restart unattended-upgrades
-      tags: update
-  when: ansible_os_family | lower == 'debian'
+- name: Inclui tarefas para {{ ansible_os_family }}
+  include_tasks: "{{ ansible_os_family | lower }}.yml"
+  tags: update
