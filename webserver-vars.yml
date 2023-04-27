@@ -17,7 +17,6 @@
         groups: "{{ groupname }}"
 
   tasks:
-  tasks:
   - name: Cria o usuário de sistema {{ system_username }}
     user:
       name: "{{ system_username }}"
