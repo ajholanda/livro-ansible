@@ -7,4 +7,4 @@
       name: php
     when: >
       webserver_install_php is defined
-      and webserver_install_php == True
+      and webserver_install_php
