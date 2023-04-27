@@ -1,9 +1,9 @@
-- assert: { that: "ansible_os_family | lower == 'debian'" }
+- name: Garante a execução em distros baseada na Debian
+  assert: { that: "ansible_os_family | lower == 'debian'" }
 
 - name: Instala ou atualiza o apache2
   package:
     name: apache2
-    state: latest
 
 - name: Habitita inicialização e inicializa o apache2
   service:

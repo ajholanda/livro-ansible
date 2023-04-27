@@ -2,7 +2,6 @@
   - name: Instala ou atualiza o httpd
     package:
       name: httpd
-      state: latest
   - name: Habitita inicialização e inicializa o httpd
     service:
       name: httpd

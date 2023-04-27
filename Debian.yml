@@ -2,7 +2,6 @@
   - name: Instala ou atualiza o apache2
     package:
       name: apache2
-      state: latest
   - name: Habitita inicialização e inicializa o apache2
     service:
       name: apache2

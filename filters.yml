@@ -48,7 +48,6 @@
   - name: Instala ou atualiza o apache
     package:
       name: apache2
-      state: latest
     when: ansible_distribution | lower == "debian"
 
   # join

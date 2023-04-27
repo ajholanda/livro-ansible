@@ -7,7 +7,6 @@
   - name: Instala ou atualiza o apache
     package:
       name: apache2
-      state: latest
     when: ansible_os_family == "Debian"
 
   - name: Habitita inicialização e inicializa o apache
