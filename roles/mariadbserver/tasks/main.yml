@@ -8,7 +8,7 @@
       - python3-mysqldb
   tags: mariadbserver
 
-- name:
+- name: Adiciona usuário com privilégios administrativos
   mysql_user:
     name: "{{ mariadb_user }}"
     password: "{{ mariadb_password }}"
