@@ -1,0 +1,5 @@
+---
+- name: Inclui o repositório EPEL
+  package: name=epel-release
+  when: ansible_distribution_file_variety | lower == 'redhat'
+  tags: package
