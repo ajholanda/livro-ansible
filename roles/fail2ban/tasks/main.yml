@@ -1,4 +1,11 @@
 ---
+# Precisamos do role package para adicionar o
+# repositório de pacotes extras EPEL para
+# as distribuições derivadas da Red Hat.
+- name: Incluir o role package
+  include_role: name=package
+  tags: fail2ban
+
 - name: Instala
   package: name=fail2ban
   tags: fail2ban
