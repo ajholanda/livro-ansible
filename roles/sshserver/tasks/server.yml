@@ -11,5 +11,5 @@
       ln: "PasswordAuthentication no"
     - re: "PermitRootLogin"
       ln: "PermitRootLogin no"
-  notify: restart ssh
+  notify: restart sshd
   tags: sshserver
