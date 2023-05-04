@@ -1,18 +1,36 @@
 DOMAIN = "example.net"
+# IPs' prefix
 PREFIP = "192.168.64"
-
-# We reuse boxes to not exhaust RAM.
-ips = {
+# Map host type with IP
+TYPE2IP = {
   'ansible' => "#{PREFIP}.8",
-  'db' => "#{PREFIP}.80",
-  'lab00' => "#{PREFIP}.64",
-  'lab01' => "#{PREFIP}.64",
-  'lab02' => "#{PREFIP}.64",
-  'nas' => "#{PREFIP}.80",
-  'simula' => "#{PREFIP}.64",
-  'w3' => "#{PREFIP}.88",
-  'web' => "#{PREFIP}.80",
+  'debian' => "#{PREFIP}.16",
+  'almalinux' => "#{PREFIP}.32",
+  'ubuntu' => "#{PREFIP}.64",
   'windows' => "#{PREFIP}.128"
+}
+# We reuse boxes to not exhaust RAM.
+# TODO. Sync with hosts.ini
+ips = {
+  'ansible' => "#{TYPE2IP['ansible']}",
+  'db' => "#{TYPE2IP['debian']}",
+  # [labs]
+  'lab00' => "#{TYPE2IP['ubuntu']}",
+  'lab01' => "#{TYPE2IP['ubuntu']}",
+  'lab02' => "#{TYPE2IP['ubuntu']}",
+  # [devs]
+  'dmr' => "#{TYPE2IP['ubuntu']}",
+  'ewd' => "#{TYPE2IP['ubuntu']}",
+  'klt' => "#{TYPE2IP['ubuntu']}",
+  # [rsyncservers]
+  'nas' => "#{TYPE2IP['debian']}",
+  # [workstations]
+  'simula' => "#{TYPE2IP['ubuntu']}",
+  # [webservers]
+  'w3' =>  "#{TYPE2IP['almalinux']}",
+  'web' =>  "#{TYPE2IP['debian']}",
+  # [windows]
+  'windows' => "#{TYPE2IP['windows']}"
 }
 
 vms = {
@@ -21,21 +39,21 @@ vms = {
       'cpus' => 1, 'ip' => "#{ips['ansible']}",
       'box' => 'ubuntu/focal64'
   },
-  'simula'  => {
-      'memory' => '512',
-      'cpus' => 1, 'ip' => "#{ips['simula']}",
-      'box' => 'ubuntu/focal64'
-  },
-  'w3'     => {
+  'almalinux'     => {
       'memory' => '512',
       'cpus' => 1, 'ip' => "#{ips['w3']}",
       'box' => 'almalinux/9'
   },
-  'web'   => {
+  'debian'   => {
       'memory' => '512',
       'cpus' => 1,
       'ip' => "#{ips['web']}",
       'box' => 'debian/bullseye64'
+  },
+  'ubuntu'  => {
+      'memory' => '512',
+      'cpus' => 1, 'ip' => "#{ips['simula']}",
+      'box' => 'ubuntu/focal64'
   },
   'windows'   => {
       'memory' => '2048',
