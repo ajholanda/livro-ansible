@@ -1,0 +1,18 @@
+---
+- name: Tarefas comuns para desktops
+  hosts: desktops
+
+  roles:
+    - libreoffice
+    - netbios
+    - user
+
+- name: Desktops de desenvolvedores
+  hosts: devs
+  roles:
+    - vscode
+
+- name: Laboratório de informática
+  hosts: labs
+  roles:
+    - power
