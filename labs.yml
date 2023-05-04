@@ -1,4 +1,5 @@
 ---
+# TODO: Revisar este playbook. Comparar com labs.yml
 - name: Administra os laboratórios de informática
   hosts: labs
 
