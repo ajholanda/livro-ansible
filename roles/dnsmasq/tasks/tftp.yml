@@ -9,11 +9,9 @@
   tags: dnsmasq
 
 - name: Adiciona a configuração do servidor TFTP
-  blockinfile:
-    path: /etc/dnsmasq.conf
-    insertafter: 'EOF'
-    marker: "# {mark} ANSIBLE MANAGED BLOCK FOR dnsmasq.tftp"
-    block: |
+  copy:
+    dest: /etc/dnsmasq.d/tftp.conf
+    content: |
       dhcp-boot={{ dnsmasq_tftp_dhcp_boot }}
       enable-tftp
       tftp-root={{ dnsmasq_tftp_root }}
