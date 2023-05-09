@@ -18,5 +18,9 @@
       tftp-no-blocksize
       # Only files owned by dnsmasq will be trasmitted
       tftp-secure
-  notify: restart dnsmasq
+    owner: dnsmasq
+    group: nogroup
+  tags: dnsmasq
+
+ notify: restart dnsmasq
   tags: dnsmasq
