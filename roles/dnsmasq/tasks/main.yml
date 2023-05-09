@@ -1,0 +1,15 @@
+---
+- name: Instala dnsmasq
+  package: name=dnsmasq
+  tags: dnsmasq
+
+- name: Copia o arquivo de configuração
+  template:
+    src: dnsmasq.conf.j2
+    dest: /etc/dnsmasq.conf
+  notify: restart dnsmasq
+  tags: dnsmasq
+
+- name: Inclui tarefas do subsistema DHCP
+  include_tasks: dhcp.yml
+  tags: dnsmasq
