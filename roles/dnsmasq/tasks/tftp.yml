@@ -1,0 +1,24 @@
+---
+- name: Garante a existência do diretório raiz do servidor TFTP
+  file:
+    path: "{{ dnsmasq_tftp_root }}"
+    state: directory
+    owner: dnsmasq
+    group: nogroup
+    recurse: true
+  tags: dnsmasq
+
+- name: Adiciona a configuração do servidor TFTP
+  blockinfile:
+    path: /etc/dnsmasq.conf
+    insertafter: 'EOF'
+    marker: "# {mark} ANSIBLE MANAGED BLOCK FOR dnsmasq.tftp"
+    block: |
+      dhcp-boot={{ dnsmasq_tftp_dhcp_boot }}
+      enable-tftp
+      tftp-root={{ dnsmasq_tftp_root }}
+      tftp-no-blocksize
+      # Only files owned by dnsmasq will be trasmitted
+      tftp-secure
+  notify: restart dnsmasq
+  tags: dnsmasq
