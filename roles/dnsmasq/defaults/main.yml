@@ -1,3 +1,0 @@
----
-dnsmasq_tftp_root: "/srv/tftp"
-dnsmasq_tftp_dhcp_boot: "pxelinux.0"
