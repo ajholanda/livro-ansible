@@ -18,10 +18,8 @@ ips = {
   'lab00' => "#{TYPE2IP['ubuntu']}",
   'lab01' => "#{TYPE2IP['ubuntu']}",
   'lab02' => "#{TYPE2IP['ubuntu']}",
-  # [devs]
-  'dmr' => "#{TYPE2IP['ubuntu']}",
-  'ewd' => "#{TYPE2IP['ubuntu']}",
-  'klt' => "#{TYPE2IP['ubuntu']}",
+  # [infotech]
+  'inf0' => "#{TYPE2IP['ubuntu']}",
   # [rsyncservers]
   'nas' => "#{TYPE2IP['debian']}",
   # [workstations]
@@ -30,7 +28,8 @@ ips = {
   'w3' =>  "#{TYPE2IP['almalinux']}",
   'web' =>  "#{TYPE2IP['debian']}",
   # [windows]
-  'windows' => "#{TYPE2IP['windows']}"
+  # [office]
+  'off0' => "#{TYPE2IP['windows']}"
 }
 
 vms = {
