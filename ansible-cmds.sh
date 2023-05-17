@@ -117,6 +117,12 @@ function exec_windows_cmds() {
 function exec_usecases_cmds() {
     ECHO "Configura servidor(es)"
     RUN "ansible-playbook servers.yml"
+
+    ECHO "Ansible Galaxy"
+    RUN "ansible-galaxy role install --roles-path ./roles ajholanda.googlechrome"
+    RUN "ansible-galaxy role install --roles-path ./roles ajholanda.vscode"
+    ECHO "Gerenciamento de computadores (desktops)"
+    RUN "ansible-playbook desktops.yml"
 }
 
 function exec_linux_cmds() {
