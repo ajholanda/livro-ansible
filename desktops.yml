@@ -3,6 +3,8 @@
   hosts: desktops
 
   roles:
+    - role: ajholanda.googlechrome
+      tags: googlechrome
     - libreoffice
     - netbios
     - user
@@ -10,7 +12,8 @@
 - name: Desktops de desenvolvedores
   hosts: devs
   roles:
-    - vscode
+    - role: ajholanda.vscode
+      tags: vscode
 
 - name: Laboratório de informática
   hosts: labs
