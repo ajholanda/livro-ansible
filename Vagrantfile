@@ -15,11 +15,11 @@ ips = {
   'ansible' => "#{TYPE2IP['ansible']}",
   'db' => "#{TYPE2IP['debian']}",
   # [labs]
-  'lab00' => "#{TYPE2IP['ubuntu']}",
   'lab01' => "#{TYPE2IP['ubuntu']}",
   'lab02' => "#{TYPE2IP['ubuntu']}",
+  'lab03' => "#{TYPE2IP['ubuntu']}",
   # [infotech]
-  'inf0' => "#{TYPE2IP['ubuntu']}",
+  'inf1' => "#{TYPE2IP['ubuntu']}",
   # [rsyncservers]
   'nas' => "#{TYPE2IP['debian']}",
   # [workstations]
@@ -29,7 +29,7 @@ ips = {
   'web' =>  "#{TYPE2IP['debian']}",
   # [windows]
   # [office]
-  'off0' => "#{TYPE2IP['windows']}"
+  'off1' => "#{TYPE2IP['windows']}"
 }
 
 vms = {
