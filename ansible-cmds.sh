@@ -99,7 +99,8 @@ function exec_crypto_cmds() {
 }
 
 function exec_windows_cmds() {
-    ansible-galaxy collection install ansible.windows
+    ECHO "Instala os módulos para o Windows"
+    RUN "ansible-galaxy collection install ansible.windows"
 
     # win_chocolatey module
     ECHO "Instala o LibreOffice no sistem Windows"
@@ -121,8 +122,18 @@ function exec_usecases_cmds() {
     ECHO "Ansible Galaxy"
     RUN "ansible-galaxy role install --roles-path ./roles ajholanda.googlechrome"
     RUN "ansible-galaxy role install --roles-path ./roles ajholanda.vscode"
+
     ECHO "Gerenciamento de computadores (desktops)"
+    ECHO "Instala os programas nos hosts do grupo desktops"
     RUN "ansible-playbook desktops.yml"
+    ECHO "Instala os programas nos hosts do grupo labs"
+    RUN "ansible-playbook desktops.yml --limit lab"
+    ECHO "Instala o VS Code no host alice"
+    RUN "ansible-playbook desktops.yml --limit inf1.example.net --tags vscode"
+    ECHO "Remove o Google Chrome do host pedro"
+    RUN "ansible-playbook desktops.yml --limit off1.example.net --tags googlechrome --extra-vars 'package_install=absent'"
+    ECHO "Atualiza todos os programas do grupo desktops"
+    RUN "ansible-playbook desktops.yml --extra-vars 'package_install=latest'"
 }
 
 function exec_linux_cmds() {
@@ -146,7 +157,7 @@ onde cada opção executa os comandos:
   -c6       do Capítulo 6 - gabarito
   -c7       do Capítulo 7 - criptografia
   -c8       do Capítulo 8 - Windows
-  -c9       do Capítulo 9 - casos de uso
+  -c10      do Capítulo 10 - casos de uso
   --linux   para os sistemas Linux
   --windows para os sistemas Windows
 EOM
@@ -177,7 +188,7 @@ case $1 in
     "-c8")
         exec_windows_cmds
         ;;
-    "-c9")
+    "-c10")
         exec_usecases_cmds
         ;;
     "--linux")
