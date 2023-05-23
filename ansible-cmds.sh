@@ -140,6 +140,11 @@ function exec_usecases_cmds() {
 	RUN "ansible-playbook desktops.yml --limit off1.example.net --tags googlechrome --extra-vars 'package_install=absent'"
 	ECHO "Atualiza todos os programas do grupo desktops"
 	RUN "ansible-playbook desktops.yml --extra-vars 'package_install=latest'"
+
+	ECHO "Atualiza o Windows usando o Windows Update"
+	RUN "ansible desktops -m ansible.windows.win_updates"
+	ECHO "Atualiza o Windows usando o Windows Update, reinicializa o sistema quando necessário."
+	RUN "ansible desktops -m ansible.windows.win_updates -a 'reboot=true'"
 }
 
 function exec_linux_cmds() {
