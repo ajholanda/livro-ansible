@@ -35,28 +35,28 @@ ips = {
 vms = {
   'ansible'  => {
       'memory' => '512',
-      'cpus' => 1, 'ip' => "#{ips['ansible']}",
+      'cpus' => 1, 'ip' => "#{TYPE2IP['ansible']}",
       'box' => 'ubuntu/focal64'
   },
   'almalinux'     => {
       'memory' => '512',
-      'cpus' => 1, 'ip' => "#{ips['w3']}",
+      'cpus' => 1, 'ip' => "#{TYPE2IP['w3']}",
       'box' => 'almalinux/9'
   },
   'debian'   => {
       'memory' => '512',
       'cpus' => 1,
-      'ip' => "#{ips['web']}",
+      'ip' => "#{TYPE2IP['web']}",
       'box' => 'debian/bullseye64'
   },
   'ubuntu'  => {
       'memory' => '512',
-      'cpus' => 1, 'ip' => "#{ips['simula']}",
+      'cpus' => 1, 'ip' => "#{TYPE2IP['simula']}",
       'box' => 'ubuntu/focal64'
   },
   'windows'   => {
       'memory' => '2048',
-      'cpus' => 1, 'ip' => "#{ips['windows']}",
+      'cpus' => 1, 'ip' => "#{TYPE2IP['windows']}",
       'box' => 'gusztavvargadr/windows-10'
   }
 }
