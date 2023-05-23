@@ -17,6 +17,6 @@
       tags: vscode
 
 - name: Laboratório de informática
-  hosts: labs
+  hosts: lab
   roles:
     - power
