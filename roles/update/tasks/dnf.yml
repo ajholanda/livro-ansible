@@ -1,0 +1,11 @@
+---
+- name: Instala o pacote dnf-automatic
+  package: name=dnf-automatic
+  tags: update
+
+- name: Habilita e inicializa o serviço dnf-automatic
+  service:
+    name: dnf-automatic
+    enabled: true
+    state: started
+  tags: update
