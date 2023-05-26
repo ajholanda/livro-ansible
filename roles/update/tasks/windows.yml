@@ -1,0 +1,7 @@
+---
+- name: Atualiza o Windows e seus recursos
+  win_updates:
+    reboot: true
+  tags:
+    - never
+    - win_updates
