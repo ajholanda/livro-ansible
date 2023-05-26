@@ -145,7 +145,7 @@ function exec_usecases_cmds() {
 	ECHO "Força uma atualização no Windows usando o Windows Update (com reboots)"
 	RUN "ansible-playbook desktops.yml --tags win_updates"
 	ECHO "Atualiza os programas que foram instalados no Windows usando o módulo win_chocolatey do Ansible."
-	RUN "ansible desktops -m win_chocolatey -a 'state=latest'"
+	RUN "ansible-playbook desktops.yml --tags win_chocolatey --limit windows -e 'package_state=latest'"
 }
 
 function exec_linux_cmds() {
