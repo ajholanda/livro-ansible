@@ -1,4 +1,14 @@
 ---
-- name: Inclui tarefas para {{ ansible_os_family }}
-  include_tasks: "{{ ansible_os_family | lower }}.yml"
+- name: Inclui tarefas para o gerenciador de pacotes
+  include_tasks: "{{ ansible_pkg_mgr }}.yml"
+  when: |
+    ansible_pkg_mgr is defined
+    and (ansible_pkg_mgr == "apt"
+    or ansible_pkg_mgr == "dnf")
   tags: update
+
+- name: Inclui tarefas para o sistema Windows
+  include_tasks: windows.yml
+  when: ansible_os_family|lower == "windows"
+  tags: 
+    - win_updates
