@@ -13,10 +13,11 @@ function RUN {
 function galaxy() {
 	ECHO "Instala os módulos para o Windows"
 	RUN "ansible-galaxy collection install ansible.windows"
+	RUN "ansible-galaxy collection install chocolatey.chocolatey"
 
 	ECHO "Instala os roles ajholanda.* usando o Ansible Galaxy"
-	RUN "ansible-galaxy role install --roles-path ./roles ajholanda.googlechrome"
-	RUN "ansible-galaxy role install --roles-path ./roles ajholanda.vscode"
+	RUN "ansible-galaxy role install --force --roles-path ./roles ajholanda.googlechrome"
+	RUN "ansible-galaxy role install --force --roles-path ./roles ajholanda.vscode"
 }
 
 function exec_adhoc_cmds() {
@@ -141,10 +142,10 @@ function exec_usecases_cmds() {
 	ECHO "Atualiza todos os programas do grupo desktops"
 	RUN "ansible-playbook desktops.yml --extra-vars 'package_install=latest'"
 
-	ECHO "Atualiza o Windows usando o Windows Update"
-	RUN "ansible desktops -m ansible.windows.win_updates"
-	ECHO "Atualiza o Windows usando o Windows Update, reinicializa o sistema quando necessário."
-	RUN "ansible desktops -m ansible.windows.win_updates -a 'reboot=true'"
+	ECHO "Força uma atualização no Windows usando o Windows Update (com reboots)"
+	RUN "ansible-playbook desktops.yml --tags win_updates"
+	ECHO "Atualiza os programas que foram instalados no Windows usando o módulo win_chocolatey do Ansible."
+	RUN "ansible desktops -m win_chocolatey -a 'state=latest'"
 }
 
 function exec_linux_cmds() {
@@ -159,7 +160,7 @@ function exec_linux_cmds() {
 
 USAGE=$(
 	cat <<-EOM
-		$0 [--all | -c2 | -c3 | -c4 | -c6 | --linux | --windows]
+		$0 [--all | -c[2..10] | --galaxy | --linux | --windows]
 		onde cada opção executa os comandos:
 		  --all     todos
 		  -c2       do Capítulo 2 - comandos ad-hoc
@@ -169,7 +170,9 @@ USAGE=$(
 		  -c6       do Capítulo 6 - gabarito
 		  -c7       do Capítulo 7 - criptografia
 		  -c8       do Capítulo 8 - Windows
+		  -c9       do Capítulo 9 - recursos adicionais
 		  -c10      do Capítulo 10 - casos de uso
+		  --galaxy  de atualização dos roles do Ansible do Ansible Galaxy
 		  --linux   para os sistemas Linux
 		  --windows para os sistemas Windows
 	EOM
@@ -202,6 +205,9 @@ case $1 in
 	;;
 "-c10")
 	exec_usecases_cmds
+	;;
+"--galaxy")
+	galaxy
 	;;
 "--linux")
 	exec_linux_cmds
