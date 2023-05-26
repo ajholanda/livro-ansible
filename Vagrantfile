@@ -6,7 +6,7 @@ TYPE2IP = {
   'ansible' => "#{PREFIP}.8",
   'debian' => "#{PREFIP}.16",
   'almalinux' => "#{PREFIP}.32",
-  'ubuntu' => "#{PREFIP}.64",
+  'ansible' => "#{PREFIP}.64",
   'windows' => "#{PREFIP}.128"
 }
 # We reuse boxes to not exhaust RAM.
@@ -15,15 +15,15 @@ ips = {
   'ansible' => "#{TYPE2IP['ansible']}",
   'db' => "#{TYPE2IP['debian']}",
   # [labs]
-  'lab01' => "#{TYPE2IP['ubuntu']}",
-  'lab02' => "#{TYPE2IP['ubuntu']}",
-  'lab03' => "#{TYPE2IP['ubuntu']}",
+  'lab01' => "#{TYPE2IP['ansible']}",
+  'lab02' => "#{TYPE2IP['ansible']}",
+  'lab03' => "#{TYPE2IP['ansible']}",
   # [infotech]
-  'inf1' => "#{TYPE2IP['ubuntu']}",
+  'inf1' => "#{TYPE2IP['ansible']}",
   # [rsyncservers]
   'nas' => "#{TYPE2IP['debian']}",
   # [workstations]
-  'simula' => "#{TYPE2IP['ubuntu']}",
+  'simula' => "#{TYPE2IP['ansible']}",
   # [webservers]
   'w3' =>  "#{TYPE2IP['almalinux']}",
   'web' =>  "#{TYPE2IP['debian']}",
@@ -36,7 +36,7 @@ vms = {
   'ansible'  => {
       'memory' => '512',
       'cpus' => 1, 'ip' => "#{TYPE2IP['ansible']}",
-      'box' => 'ubuntu/focal64'
+      'box' => 'ubuntu/jammy64'
   },
   'almalinux'     => {
       'memory' => '512',
@@ -48,11 +48,6 @@ vms = {
       'cpus' => 1,
       'ip' => "#{TYPE2IP['web']}",
       'box' => 'debian/bullseye64'
-  },
-  'ubuntu'  => {
-      'memory' => '512',
-      'cpus' => 1, 'ip' => "#{TYPE2IP['simula']}",
-      'box' => 'ubuntu/focal64'
   },
   'windows'   => {
       'memory' => '2048',
