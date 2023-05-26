@@ -1,6 +1,6 @@
 ---
-- name: Instala libreoffice
+- name: Gerenacia o libreoffice [{{ libreoffice_state }}]
   package:
     name: libreoffice
-    state: present
+    state: "{{ libreoffice_state }}"
   tags: libreoffice

@@ -1,4 +1,4 @@
 ---
 - name: Include {{ ansible_system }} tasks
   include_tasks: "{{ ansible_system }}.yml"
-  tags: libreoffice
+  tags: libreoffice, win_chocolatey
