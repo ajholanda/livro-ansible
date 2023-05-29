@@ -72,6 +72,17 @@ function exec_playbook_cmds() {
 	ECHO "Executa o playbook webserver.yml"
 	RUN 'ansible-playbook webserver.yml'
 
+	# Tags
+	ECHO "Seleciona etiqueta no playbook webserver.yml"
+	RUN 'ansible-playbook webserver.yml --tags webserver_package'
+
+	ECHO "Exclui etiqueta no playbook webserver.yml"
+	RUN 'ansible-playbook webserver.yml --skip-tags webserver_service'
+
+	ECHO "Seleciona várias etiquetas no playbook webserver.yml"
+	RUN 'ansible-playbook webserver.yml --tags webserver_package,webserver_service'
+
+	# When
 	ECHO "Executa o playbook webserver-Debian.yml"
 	RUN 'ansible-playbook webserver-Debian.yml'
 
@@ -81,7 +92,7 @@ function exec_playbook_cmds() {
 
 function exec_vars_cmds() {
 	ECHO "Lista as variáveis mágicas do sistema no host web.exemplo"
-	RUN 'ansible -m setup web.exemplo'
+	RUN 'ansible -m setup web.example.net'
 
 	ECHO "Executa o playbook webserver-vars.yml"
 	RUN 'ansible-playbook webserver-vars.yml'
