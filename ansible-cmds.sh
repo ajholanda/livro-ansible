@@ -82,6 +82,25 @@ function exec_playbook_cmds() {
 	ECHO "Seleciona várias etiquetas no playbook webserver.yml"
 	RUN 'ansible-playbook webserver.yml --tags webserver_package,webserver_service'
 
+	# Tags always, never
+	ECHO "Etiqueta never"
+	RUN 'ansible-playbook tags.yml'
+
+	ECHO "Ignora etiqueta never"
+	RUN 'ansible-playbook tags.yml --skip-tags always'
+
+	ECHO "Seleciona tarefa marcada com never"
+	RUN 'ansible-playbook tags.yml --tags never'
+
+	ECHO "Outra forma de selecionar tarefa marcada com never"
+	RUN 'ansible-playbook tags.yml --tags debug'
+
+	ECHO "Executa tarefas que tenham pelo menos uma etiqueta"
+	RUN 'ansible-playbook tags.yml --tags tagged'
+
+	ECHO "Executa tarefas que não tenham etiquetas"
+	RUN 'ansible-playbook tags.yml --tags untagged'
+
 	# When
 	ECHO "Executa o playbook webserver-Debian.yml"
 	RUN 'ansible-playbook webserver-Debian.yml'
