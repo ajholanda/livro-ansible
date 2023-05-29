@@ -4,11 +4,16 @@
   hosts: webservers
 
   tasks:
-  - name: Instala ou atualiza o apache
+  - name: Instala o apache
     package:
       name: apache2
+    tags: webserver, webserver_install
+
   - name: Habitita inicialização e inicializa o apache
     service:
       name: apache2
       enabled: yes
       state: started
+    tags:
+      - webserver
+      - webserver_started
