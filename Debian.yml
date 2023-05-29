@@ -1,7 +1,8 @@
   # Debian.yml
-  - name: Instala ou atualiza o apache2
+  - name: Instala o apache2
     package:
       name: apache2
+
   - name: Habitita inicialização e inicializa o apache2
     service:
       name: apache2
