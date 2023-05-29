@@ -37,10 +37,15 @@ com exceção da execução do *script* que ser modificada para
 bash ./ansible-cmds.sh --windows
 ```
 
-Aviso: O arquivo com a máquina virtual do Windows é muito grande e seu
+Avisos:
+- O arquivo com a máquina virtual do Windows é muito grande e seu
 *download* e alguns comandos do Vagrant podem demorar muito dependendo
 da configuração de rede e do computador em que as máquinas virtuais estão
 sendo executadas.
+- Os ambientes do Vagrant foram testados. Porém, erros relacionados a
+conflitos relacionados aos estados e configurações das máquinas virtuais
+podem ocorrer. A maior parte dos erros é bem relatada em páginas de
+grupos de discussão.
 
 ## Contributions
 
