@@ -3,10 +3,9 @@ DOMAIN = "example.net"
 PREFIP = "192.168.64"
 # Map host type with IP
 TYPE2IP = {
-  'ansible' => "#{PREFIP}.8",
+  'ansible' => "#{PREFIP}.8", # ubuntu
   'debian' => "#{PREFIP}.16",
   'almalinux' => "#{PREFIP}.32",
-  'ansible' => "#{PREFIP}.64",
   'windows' => "#{PREFIP}.128"
 }
 # We reuse boxes to not exhaust RAM.
@@ -40,13 +39,13 @@ vms = {
   },
   'almalinux'     => {
       'memory' => '512',
-      'cpus' => 1, 'ip' => "#{TYPE2IP['w3']}",
+      'cpus' => 1, 'ip' => "#{TYPE2IP['almalinux']}",
       'box' => 'almalinux/9'
   },
   'debian'   => {
       'memory' => '512',
       'cpus' => 1,
-      'ip' => "#{TYPE2IP['web']}",
+      'ip' => "#{TYPE2IP['debian']}",
       'box' => 'debian/bullseye64'
   },
   'windows'   => {
