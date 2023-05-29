@@ -7,7 +7,7 @@
   - name: Instala o apache
     package:
       name: apache2
-    tags: webserver, webserver_install
+    tags: webserver, webserver_package
 
   - name: Habitita inicialização e inicializa o apache
     service:
@@ -16,4 +16,4 @@
       state: started
     tags:
       - webserver
-      - webserver_started
+      - webserver_service
