@@ -1,0 +1,17 @@
+---
+- hosts: web.example.net
+
+  tasks:
+  - name: Etiqueta always
+    debug:
+      msg: "Sempre executa"
+    tags: always
+
+  - name: Etiqueta never
+    debug:
+      msg: "Nunca executa"
+    tags: never, debug
+
+  - name: Sem etiqueta
+    debug:
+      msg: "Tarefa sem etiqueta"
