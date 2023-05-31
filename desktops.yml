@@ -15,6 +15,11 @@
   roles:
     - role: ajholanda.vscode
       tags: vscode
+  
+- hosts: infotech
+  roles:
+    - role: ajholanda.x2goclient
+      tags: x2goclient
 
 - name: Laboratório de informática
   hosts: lab
