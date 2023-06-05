@@ -118,6 +118,9 @@ function exec_vars_cmds() {
 
 	ECHO "Executa o playbook webserver-host_vars.yml"
 	RUN 'ansible-playbook webserver-host_vars.yml'
+
+	ECHO "Usa register para armazenar o status de um arquivo"
+	RUN 'ansible-playbook register.yml'
 }
 
 function exec_roles_cmds() {
@@ -164,6 +167,10 @@ function exec_resources() {
 
 	ECHO "Remove o cliente X2Go nos hosts pertencentes ao grupo de TI (infotech) "
 	RUN "ansible-playbook desktops.yml --tags x2goclient --limit infotech --extra-vars \"package_state=absent\""
+
+	ECHO "Instala os módulos para o Windows"
+	RUN "ansible-galaxy collection install ansible.windows"
+	RUN "ansible-galaxy collection install chocolatey.chocolatey"
 }
 
 # Casos de uso
