@@ -7,7 +7,7 @@ function ECHO {
 function RUN {
 	echo $1
 	eval $1 && test 1 -eq 1
-	sleep 2
+	sleep 3
 }
 
 function galaxy() {
@@ -38,7 +38,7 @@ function exec_adhoc_cmds() {
 	RUN 'ansible web.example.net -m package -a name=apache2'
 
 	ECHO "Lista de parâmetros do arquivo de configuração do ansible"
-	RUN "ansible-config list | cat"
+	RUN "ansible-config list | cat | head -32"
 
 	ECHO "Instala o programa git nos hosts do grupo lab:"
 	RUN 'ansible lab -m package -a name=git'
@@ -62,10 +62,10 @@ function exec_adhoc_cmds() {
 	RUN 'ansible lab -m file -a "path=/etc/shadow owner=root group=shadow mode=0640"'
 
 	ECHO "Remove o arquivo /tmp/texput.log de todos os hosts"
-	RUN 'ansible all -m file -a "path=/tmp/texput.log state=absent"'
+	RUN 'ansible devs -m file -a "path=/tmp/texput.log state=absent"'
 
 	ECHO "Lista usauário que autenticaram em todos os hosts"
-	RUN 'ansible all -m shell -a last'
+	RUN 'ansible servers -m shell -a last | head -16'
 }
 
 function exec_playbook_cmds() {
