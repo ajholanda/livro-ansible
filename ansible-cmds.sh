@@ -121,7 +121,7 @@ function exec_vars_cmds() {
 
 	# Playbook variables
 	ECHO "Executa o playbook webserver-vars.yml"
-	RUN 'ansible-playbook webserver-vars.yml'
+	RUN 'ansible-playbook --extra-vars "groupname=webdev" webserver-vars.yml'
 
 	# Host variables
 	ECHO "Executa o playbook webserver-host_vars.yml"
