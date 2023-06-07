@@ -3,7 +3,7 @@
   hosts: webservers
   vars:
     system_username: www-data
-    groupname: webdev
+#    groupname: webdev # Set using --extra-vars
     usernames:
       - dev0
       - dev1
