@@ -36,7 +36,7 @@ function exec_adhoc_cmds() {
 	RUN 'ansible webservers -i hosts.ini -m package -a "name=apache2 state=absent" --become'
 
 	# TODO: find and evaluate this command in the manuscript
-	ECHO "Instala o pacote httpd usando o módulo dnf, ok nas distribuições derivadas da RedHat"
+	ECHO "+Instala o pacote httpd usando o módulo dnf, ok nas distribuições derivadas da RedHat"
 	RUN 'ansible w3.example.net -i hosts.ini -m dnf -a name=httpd --become'
 
 	ECHO "Instalação do pacote apache2 sem a inclusão explícita do arquivo de inventário"
@@ -85,7 +85,7 @@ function exec_playbook_cmds() {
 	RUN 'ansible-playbook webserver.yml --skip-tags webserver_service'
 
 	ECHO "Seleciona várias etiquetas no playbook webserver.yml"
-	RUN 'ansible-playbook webserver.yml --tags webserver_package,webserver_service'
+	RUN 'ansible-playbook webserver.yml --tags "webserver_package,webserver_service"'
 
 	# Tags always, never
 	ECHO "Etiqueta never"
