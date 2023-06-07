@@ -1,0 +1,6 @@
+# group_vars/lab.yml
+cron:
+  shutdown:
+    minute: "30"
+    hour: "22"
+    weekday: "*"
