@@ -138,8 +138,13 @@ function exec_roles_cmds() {
 }
 
 function exec_template_cmds() {
-	ECHO "* Filtros"
-	RUN "ansible-playbook filters.yml"
+	ECHO "# Filtros"
+	RUN 'ansible-playbook filters.yml'
+
+	ECHO "# Gabaritos"
+	ECHO "## Controle de fluxo"
+	ECHO "Copia o arquivo de configuração do ssh modificado nas workstations (for)"
+	RUN 'ansible-playbook workstations.yml --tags sshserver'
 }
 
 function exec_crypto_cmds() {
