@@ -1,5 +1,0 @@
----
-- name: Administra servidores de banco de dados
-  hosts: dbservers
-  roles:
-    - mariadbserver
