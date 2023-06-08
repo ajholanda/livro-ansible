@@ -3,3 +3,5 @@ sshserver_allow_groups:
   - neuron
   - sat
   - sudo
+  # Added due vagrant user
+  - vagrant
