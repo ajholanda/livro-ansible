@@ -1,0 +1,8 @@
+---
+- hosts: workstations
+
+  roles:
+    - fail2ban
+    - sshserver
+    - sudo
+    - update
