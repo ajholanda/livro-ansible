@@ -138,27 +138,25 @@ function exec_roles_cmds() {
 }
 
 function exec_template_cmds() {
-	ECHO "# Gabaritos"
-	ECHO ""
-	ECHO "## Filtros"
+	# Gabaritos
+	## Filtros
 	RUN 'ansible-playbook filters.yml'
 
-	ECHO "## Controle de fluxo"
+	## Controle de fluxo
 	ECHO "Copia o arquivo de configuração do ssh modificado nas workstations (for)"
 	RUN 'ansible-playbook workstations.yml --tags sshserver'
 }
 
 function exec_crypto_cmds() {
-	ECHO "# Criptografia"
-	ECHO ""
-	ECHO "## Criptografia de arquivos"
+	# Criptografia
+	## Criptografia de arquivos
 	ECHO "Executa o role rsyncserver usando o --vault-id"
 	RUN "ansible-playbook servers.yml --vault-id vault.txt --limit rsyncservers --tags rsyncserver"
 
 	ECHO "Criptografa um arquivo usando o vault ID prod"
 	RUN "ansible-vault encrypt --vault-id prod@vault-prod.txt sssd/templates/sssd.conf.j2 --encrypt-vault-id prod 2>/dev/null"
 
-	ECHO "## Criptografia de variáveis"
+	## Criptografia de variáveis
 	ECHO "Ajusta senha para um usuário do MariaDB a partir de um vault"
 	RUN 'ansible-playbook servers.yml --limit dbservers --tags mariadbserver'
 }
