@@ -1,6 +1,15 @@
 ---
-- hosts: servers
+- name: Administra servidores de banco de dados
+  hosts: dbservers
+  roles:
+    - mariadbserver
 
+- name: Administra servidores rsync
+  hosts: rsyncservers
+  roles:
+    - rsyncserver
+
+- hosts: servers
   roles:
     - fail2ban
     - sshserver
