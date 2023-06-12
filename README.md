@@ -46,14 +46,13 @@ sendo executadas.
 com as máquinas virtuais durante o carregamento (`vagrant up`)
 ainda podem ocorrer. A maior parte dos problemas é bem relatada em páginas de
 grupos de discussão. Em último caso, a reconstrução das máquinas 
-
-
 virtuais pode solucionar a maior parte dos problemas:
 
 ```
-
+vagrant halt
+vagrant destroy
+vagrant up
 ```
-
 
 ## Contributions
 
