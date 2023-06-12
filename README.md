@@ -42,10 +42,18 @@ Avisos:
 *download* e alguns comandos do Vagrant podem demorar muito dependendo
 da configuração de rede e do computador em que as máquinas virtuais estão
 sendo executadas.
-- Os ambientes do Vagrant foram testados. Porém, erros relacionados a
-conflitos relacionados aos estados e configurações das máquinas virtuais
-podem ocorrer. A maior parte dos erros é bem relatada em páginas de
-grupos de discussão.
+- Os ambientes do Vagrant foram testados. Porém, problemas
+com as máquinas virtuais durante o carregamento (`vagrant up`)
+ainda podem ocorrer. A maior parte dos problemas é bem relatada em páginas de
+grupos de discussão. Em último caso, a reconstrução das máquinas 
+
+
+virtuais pode solucionar a maior parte dos problemas:
+
+```
+
+```
+
 
 ## Contributions
 
