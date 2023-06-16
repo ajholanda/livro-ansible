@@ -1,4 +1,0 @@
----
-# This playbook is loaded when "{{ ansible_system }}.yml" does not exist
-# for an arbitrary role. This reduces the number of empty playbooks
-# when only one system (windows or linux) is the target.
