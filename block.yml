@@ -1,0 +1,32 @@
+---
+- hosts: webservers
+  tasks:
+    - name: Realiza backup dos arquivos web
+      block:
+        - name: Gera o arquivo compactado
+          archive:
+            path: /var/www
+            dest: /tmp/www.tgz
+
+        - name: Garante que o diretório de backup exista em nas.example.net
+          file:
+            path: /backup
+            state: directory
+          delegate_to: nas.example.net
+
+        - name: Copia o arquivo de backup
+          shell: "scp  /tmp/www.tgz nas.example.net:/backup/{{ ansible_hostname }}-www.tgz"
+
+      rescue:
+        - name: Envia email para o root comunicando que houve erro
+          mail:
+            subject: 'Backup dos arquivos web falhou'
+          delegate_to: localhost
+
+      always:
+        - name: Apaga o arquivo compactado do backup
+          file:
+            path: /tmp/www.tgz
+            state: absent
+          when: 1==2
+      tags: backup
