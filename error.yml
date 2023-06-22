@@ -1,0 +1,10 @@
+---
+- hosts: webservers
+  tasks:
+    - name: Comete erro
+      shell: /bin/false
+      ignore_errors: true
+
+    - name: Tenta dizer a verdade
+      shell: /bin/true
+
