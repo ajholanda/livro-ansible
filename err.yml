@@ -1,6 +1,10 @@
 ---
-- hosts: webservers
+- hosts: localhost
   tasks:
+    - name: Tentando dar um ping
+      pong:
+      tags: err0
+
     - name: Comete erro
       shell: /bin/false
       ignore_errors: true
