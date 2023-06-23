@@ -1,14 +1,20 @@
 ---
 - hosts: localhost
   tasks:
-    - name: Tentando dar um ping
-      pong:
-      tags: err0
+    - name: Erro de sintaxe
+      debug: msg="Em aberto'
+      ignore_errors: true
+
+        #    - name: Tentando dar um ping
+        #      pong:
+        #      ignore_errors: true
+        #      tags: err0
 
     - name: Comete erro
-      shell: /bin/false
-      ignore_errors: true
+      shell: /bin/false 
+      tags: err1
 
     - name: Tenta dizer a verdade
       shell: /bin/true
+      ignore_errors: true
 

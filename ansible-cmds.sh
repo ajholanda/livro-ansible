@@ -105,6 +105,10 @@ function exec_playbook_cmds() {
 
 	ECHO "Executa tarefas que não tenham etiquetas"
 	RUN 'ansible-playbook tags.yml --tags untagged'
+
+	# Erro
+	ECHO "Erro de sintaxe"
+	RUN 'ansible-playbook err.yml --tags err1'
 }
 
 function exec_vars_cmds() {
