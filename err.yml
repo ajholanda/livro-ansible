@@ -1,20 +1,49 @@
 ---
 - hosts: localhost
+  vars:
+    myvar: "My Variable"
+
   tasks:
-    - name: Erro de sintaxe
-      debug: msg="Em aberto'
-      ignore_errors: true
+  # - name: Tarefa
+  #   debug: msg="Texto em aberto'
 
-        #    - name: Tentando dar um ping
-        #      pong:
-        #      ignore_errors: true
-        #      tags: err0
+  # - name: Tarefa
+  #   debug: msg="{{ myvar }"
 
-    - name: Comete erro
-      shell: /bin/false 
-      tags: err1
+  # - name: Tarefa
+  # debug: msg="Texto ok"
 
-    - name: Tenta dizer a verdade
-      shell: /bin/true
-      ignore_errors: true
+  # - name: Tentando dar um ping
+  #   pong:
 
+  # - name: Copia o arquivo de inventário
+  #   copy:
+  #     path: hosts.ini
+  #     dest: /etc/ansible/hosts
+
+  - name: Comete erro
+    command: /bin/false
+    tags: err0
+
+  - name: Tenta listar arquivo que não existe
+    command: ls /tmp/fooo.txt
+    tags: err1
+
+  - name: Ignora o erro
+    command: /bin/false
+    ignore_errors: true
+    tags: err2
+
+  - name: Não interpreta false como erro
+    command: /bin/false
+    register: status
+    failed_when: status.rc != 1
+    tags: err3
+  
+  - name: Arquivo não deve existir
+    command: ls /tmp/passwd
+    register: status
+    failed_when: 
+      - status.rc != 0
+      - '"No such" not in status.stderr'
+    tags: err4
