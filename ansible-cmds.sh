@@ -107,8 +107,13 @@ function exec_playbook_cmds() {
 	RUN 'ansible-playbook tags.yml --tags untagged'
 
 	# Erros
-	ECHO "Executa /bin/false para forçar um retorno de erro"
+	ECHO "ERROS"
 	RUN 'ansible-playbook err.yml --tags err0'
+	RUN 'ansible-playbook err.yml --tags err1'
+	RUN 'ansible-playbook err.yml --tags err2'
+	RUN 'ansible-playbook err.yml --tags err3'
+	RUN 'ansible-playbook err.yml --tags err4'
+	RUN 'ansible-playbook err.yml --tags err5'
 }
 
 function exec_vars_cmds() {
