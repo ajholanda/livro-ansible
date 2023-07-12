@@ -55,3 +55,19 @@
       status.rc != 0
       or "100% packet loss" in status.stdout
     tags: err5
+
+- hosts: lab
+  any_errors_fatal: true
+  tasks:
+    - name: Usa any_errors_fatal
+      block:
+        - name: Primeira tarefa
+          debug: msg="Executa em todos os hosts"
+
+        - name: Segunda tarefa falha somente em lab01
+          command: /bin/false
+          when: inventory_hostname == "lab01.example.net"
+
+        - name: Terceira tarefa
+          debug: msg="Nunca é executada"
+      tags: err6
