@@ -114,6 +114,9 @@ function exec_playbook_cmds() {
 	RUN 'ansible-playbook err.yml --tags err3'
 	RUN 'ansible-playbook err.yml --tags err4'
 	RUN 'ansible-playbook err.yml --tags err5'
+
+	ECHO "Verifica o comportamento de any_errors_fatal"
+	RUN 'ansible-playbook err.yml --tags err6'
 }
 
 function exec_vars_cmds() {
