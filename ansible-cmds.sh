@@ -117,6 +117,9 @@ function exec_playbook_cmds() {
 
 	ECHO "Verifica o comportamento de any_errors_fatal"
 	RUN 'ansible-playbook err.yml --tags err6'
+
+	ECHO "Verifica o comportamento de max_fail_percentage"
+	RUN 'ansible-playbook err.yml --tags err7'
 }
 
 function exec_vars_cmds() {
