@@ -39,11 +39,11 @@
     register: status
     failed_when: status.rc != 1
     tags: err3
-  
+
   - name: Arquivo não deve existir
     command: ls /tmp/passwd
     register: status
-    failed_when: 
+    failed_when:
       - status.rc != 0
       - '"No such" not in status.stderr'
     tags: err4
@@ -71,3 +71,38 @@
         - name: Terceira tarefa
           debug: msg="Nunca é executada"
       tags: err6
+
+- hosts: webservers
+  max_fail_percentage: 40
+  tasks:
+    - name: Atualiza o SO (apt full-upgrade)
+      apt: upgrade=full
+      tags: err7
+
+    - name: Aviso
+      debug: msg="Pelo menos 60% dos hosts foram atualizados"
+      tags: err7
+
+- hosts: webservers
+#  force_handlers: true
+  tasks:
+  - name: Força execução dos manipuladores
+    block:
+      - name: Habilita o módulo userdir
+        command: a2enmod userdir
+
+      - name: Copia a configuração do módulo userdir
+        copy:
+          src: files/userdir.conf
+          dest: /etc/apache2/mods-available/userdir.conf
+        notify:
+          - restart apache2
+
+      - name: Provoca falha
+        command: /bin/false
+    tags: err8
+    when: ansible_os_family|lower == "debian"
+
+  handlers:
+  - name: restart apache2
+    service: name=apache2 state=restarted
