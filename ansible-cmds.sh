@@ -120,6 +120,9 @@ function exec_playbook_cmds() {
 
 	ECHO "Verifica o comportamento de max_fail_percentage"
 	RUN 'ansible-playbook err.yml --tags err7'
+
+	ECHO "Verifica o comportamento de force_handlers"
+	RUN 'ansible-playbook err.yml --tags err8'
 }
 
 function exec_vars_cmds() {
