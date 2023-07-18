@@ -84,12 +84,14 @@
       tags: err7
 
 - hosts: webservers
-#  force_handlers: true
+  force_handlers: true
   tasks:
   - name: Força execução dos manipuladores
     block:
       - name: Habilita o módulo userdir
-        command: a2enmod userdir
+        command: a2enmod -q userdir
+        register: status
+        changed_when: '"Enabling" in status.stdout'
 
       - name: Copia a configuração do módulo userdir
         copy:
@@ -98,7 +100,7 @@
         notify:
           - restart apache2
 
-      - name: Provoca falha
+      - name: Provoca falha na tarefa 3
         command: /bin/false
     tags: err8
     when: ansible_os_family|lower == "debian"
