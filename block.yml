@@ -1,0 +1,34 @@
+---
+# Execute `ansible-playbook server.yml --tags mariadbserver` first.
+- hosts: dbservers
+  tasks:
+    - name: Faz backup dos bancos de dados
+      block:
+        - name: Backup
+          command: sh -c 'mariadb-dump --all-databases > /tmp/datadump.sql'
+        
+        - name: Garante que o diretório de backup exista no NAS
+          file:
+            path: /backup
+            state: directory
+            owner: vagrant
+          delegate_to: w3.example.net
+
+        - name: Copy
+          command: scp /tmp/datadump.sql w3.example.net:/backup/
+          become: true
+          become_user: vagrant
+      rescue:
+        - name: Falha
+          debug: 
+            msg: "Falha no backup"
+      always:
+        - name: Apage o arquivo de backup
+          file:
+            path: /tmp/datadump.sql
+            state: absent
+      tags: backup
+      become: true
+      become_user: root
+
+
