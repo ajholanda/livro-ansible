@@ -88,15 +88,15 @@ Vagrant.configure('2') do |config|
       # Common provisioning tasks for Linux boxes
       if "#{name}" != "windows"
         k.vm.provision "shell", path: "provision.sh"
-      end
-
-      # Specific to Ansible host controller
-      if "#{name}" == "ansible"
         # Append the hostnames in /etc/hosts
         ips.each_pair {|hostname, ip|
           k.vm.provision "shell", inline: "echo \"#{ip} #{hostname}.#{DOMAIN} #{hostname}\" >>/etc/hosts"
         }
-        # Shared Ansible folder with the examples
+      end
+
+      # Specific to Ansible host controller
+      if "#{name}" == "ansible"
+        # Share Ansible examples folder
         k.vm.synced_folder "./", "/home/vagrant/ansible", mount_options: ["dmode=755,fmode=644"]
       end
 
