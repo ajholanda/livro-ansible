@@ -24,19 +24,21 @@ install -o vagrant -g vagrant  -m 700 -d $VAGRANT_HOME/.ssh
 touch $VAGRANT_HOME/.hushlogin
 
 ## Download ssh keys
-if [ "$(hostname)" == "ansible" ]; then
-    echo "SSH: Downloading Vagrant insecure key pair..."
-    wget https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub \
-        -O $VAGRANT_HOME/.ssh/id_rsa.pub >/dev/null
-    wget https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant \
-        -O $VAGRANT_HOME/.ssh/id_rsa >/dev/null
-    chmod 400 $VAGRANT_HOME/.ssh/id_rsa
-else
-    echo "SSH: Downloading the Vagrant public key as authorized host..."
-    wget https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub \
-        -O $VAGRANT_HOME/.ssh/authorized_keys >/dev/null
-    chmod 400 $VAGRANT_HOME/.ssh/authorized_keys
-fi
+# Keys are copied to all hosts. This allows connections from any hosts.
+# Not only the controller. Sometimes we need to copy file from one controlled
+# host to another.
+echo "SSH: Downloading Vagrant insecure key pair..."
+wget https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub \
+      -O $VAGRANT_HOME/.ssh/id_rsa.pub >/dev/null
+wget https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant \
+      -O $VAGRANT_HOME/.ssh/id_rsa >/dev/null
+chmod 400 $VAGRANT_HOME/.ssh/id_rsa
+
+# Authorized key
+echo "SSH: Downloading the Vagrant public key as authorized host..."
+wget https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub \
+      -O $VAGRANT_HOME/.ssh/authorized_keys >/dev/null
+chmod 400 $VAGRANT_HOME/.ssh/authorized_keys
 
 ## Write the ssh client configuration for user vagrant
 echo "Host *
