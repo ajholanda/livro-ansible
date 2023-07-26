@@ -22,7 +22,7 @@
           become_user: "{{ backup_user }}"
 
       rescue:
-        - name: Informa sobre o erro durante o backup
+        - name: Informa que houve erro durante o backup
           debug: 
             msg: "Falha no backup"
 
