@@ -1,0 +1,21 @@
+---
+- hosts: localhost
+  connection: local
+
+  vars:
+    pkgmgr: "apt"
+
+  tasks:
+
+#    - name: Fato não disponível durante a inclusão do playbook
+#      import_tasks: "{{ ansible_distribution }}.yml"
+
+    - name: Valor da variável está disponível na fase de análise
+      import_tasks: "tasks/{{ pkgmgr }}_clean.yml"
+
+#    - name: Importa tarefas com laço
+#      import_tasks: tasks/task.yml
+#      loop:
+#        - 1
+#        - 2
+#        - 3
