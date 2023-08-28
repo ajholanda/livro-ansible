@@ -123,6 +123,10 @@ function exec_playbook_cmds() {
 
 	ECHO "Verifica o comportamento de force_handlers"
 	RUN 'ansible-playbook err.yml --tags err8'
+
+	# import_tasks
+	ECHO 'Executa tarefas que usam import_tasks'
+	RUN 'ansible-playbook import_tasks.yml'
 }
 
 function exec_vars_cmds() {
