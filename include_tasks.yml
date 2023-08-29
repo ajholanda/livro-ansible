@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  connection: local
+
+  tasks:
+    - name: Inclui o arquivo task.yml
+      include_tasks: tasks/task.yml
+      loop:
+        - 1
+        - 2
+        - 3
+      tags: tasks
