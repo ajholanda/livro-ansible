@@ -127,6 +127,10 @@ function exec_playbook_cmds() {
 	# import_tasks
 	ECHO 'Executa tarefas que usam import_tasks'
 	RUN 'ansible-playbook import_tasks.yml'
+
+	# include_tasks
+	ECHO 'Executa tarefas que usam include_tasks'
+	RUN 'ansible-playbook include_tasks.yml'
 }
 
 function exec_vars_cmds() {
