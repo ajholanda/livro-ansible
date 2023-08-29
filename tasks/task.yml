@@ -1,3 +1,4 @@
 ---
 - name: Imprime número da tarefa
   debug: msg="task {{ item }}"
+  tags: tasks, tasks_task
