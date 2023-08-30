@@ -3,7 +3,7 @@
     package:
       name: httpd
 
-  - name: Habitita inicialização e inicializa o httpd
+  - name: Habilita inicialização e inicializa o httpd
     service:
       name: httpd
       enabled: yes
