@@ -9,7 +9,7 @@
       name: apache2
     when: ansible_os_family == "Debian"
 
-  - name: Habitita inicialização e inicializa o apache
+  - name: Habilita inicialização e inicializa o apache
     service:
       name: apache2
       enabled: yes
