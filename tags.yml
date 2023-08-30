@@ -16,3 +16,4 @@
   - name: Sem etiqueta
     debug:
       msg: "Tarefa sem etiqueta"
+
