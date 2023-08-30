@@ -106,6 +106,15 @@ function exec_playbook_cmds() {
 	ECHO "Executa tarefas que não tenham etiquetas"
 	RUN 'ansible-playbook tags.yml --tags untagged'
 
+	ECHO "Lista as etiquetas disponíveis em tags.yml"
+	RUN 'ansible-playbook tags.yml --list-tags'
+
+	ECHO "Lista as tarefas disponíveis em tags.yml"
+	RUN 'ansible-playbook tags.yml --list-tasks'
+
+	ECHO "Lista as tarefas disponíveis em tags.yml filtrando por etiquetas"
+	RUN 'ansible-playbook tags.yml --list-tasks --tags debug,untagged'
+
 	# Erros
 	ECHO "ERROS"
 	RUN 'ansible-playbook err.yml --tags err0'
