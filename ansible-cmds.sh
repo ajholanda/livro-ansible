@@ -77,6 +77,9 @@ function exec_playbook_cmds() {
 	ECHO "Executa o playbook webserver.yml"
 	RUN 'ansible-playbook webserver.yml'
 
+	ECHO "Lista as tarefas do playbook webserver.yml"
+	RUN 'ansible-playbook webserver.yml --list-tasks'
+
 	# Tags
 	ECHO "Seleciona etiqueta no playbook webserver.yml"
 	RUN 'ansible-playbook webserver.yml --tags webserver_package'
