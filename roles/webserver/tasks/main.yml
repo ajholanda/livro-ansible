@@ -5,7 +5,7 @@
   package:
     name: apache2
 
-- name: Habilita inicialização e inicializa o apache2
+- name: Habilita e inicializa o apache2
   service:
     name: apache2
     enabled: yes

@@ -9,7 +9,7 @@
       name: apache2
     tags: webserver, webserver_package
 
-  - name: Habilita inicialização e inicializa o apache
+  - name: Habilita e inicializa o apache
     service:
       name: apache2
       enabled: yes
