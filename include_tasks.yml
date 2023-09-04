@@ -10,3 +10,14 @@
         - 2
         - 3
       tags: tasks
+
+- name: Aciona um manipulador definido em outro arquivo
+  hosts: web.example.net
+  handlers:
+    - name: restart apache
+      include_tasks: tasks/restart_apache.yml
+
+  tasks:
+    - name: Aciona o manipulador
+      command: "true"
+      notify: restart apache
