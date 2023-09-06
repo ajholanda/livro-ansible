@@ -152,6 +152,10 @@ function exec_playbook_cmds() {
 
 	ECHO 'Limitação de include_tasks para listar etiquetas dos arquivos incluídos'
 	RUN 'ansible-playbook include_tasks.yml --list-tags'
+
+	# Plays
+	ECHO 'Lista os plays do playbook plays.yml'
+	RUN 'ansible-playbook plays.yml --list-tasks'
 }
 
 function exec_vars_cmds() {
