@@ -1,0 +1,8 @@
+---
+- name: Converge
+  hosts: localhost
+  gather_facts: true
+  tasks:
+    - name: Test webserver role 
+      include_role:
+        name: "webserver"
