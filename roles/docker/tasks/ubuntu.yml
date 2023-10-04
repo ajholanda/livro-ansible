@@ -1,0 +1,43 @@
+---
+- name: Desinstala os pacotes não oficiais
+  apt:
+    pkg:
+      - docker.io
+      - docker-compose
+      - docker-doc
+      - podman-docker
+  state: absent
+  tags: docker
+
+- name: Instala dependências
+  apt:
+    pkg:
+      - ca-certificates
+      - curl
+      - gnupg
+  tags: docker
+
+- name: Adiciona a chave GPG oficial
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    keyring: /etc/apt/keyrings/docker.gpg
+  tags: docker
+
+- name: Adiciona o repositório oficial
+  shell: >
+    echo \
+    "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+    "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  tags: docker
+
+- name: Instala os pacotes oficiais
+  apt:
+    pkg:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+    update_cache: true
+  tags: docker
