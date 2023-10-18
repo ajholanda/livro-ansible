@@ -1,7 +1,5 @@
 ---
-- hosts: localhost
-  connection: local
+- hosts: cloud
 
   roles:
     - docker
-
