@@ -7,7 +7,6 @@
       - docker-doc
       - podman-docker
     state: absent
-  when: docker_state == 'present'
   tags: docker
 
 - name: Instala dependências
@@ -16,38 +15,33 @@
       - ca-certificates
       - curl
       - gnupg
-  when: docker_state == 'present'
   tags: docker
 
 - name: Adiciona a chave GPG oficial
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
     keyring: /etc/apt/keyrings/docker.gpg
-    state: docker_state
   tags: docker
 
 - name: Adiciona o repositório oficial
   apt_repository:
     repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
-    state: docker_state
   tags: docker
 
 - name: Instala os pacotes oficiais
   apt:
+    update_cache: true
     pkg:
       - docker-ce
       - docker-ce-cli
       - containerd.io
       - docker-buildx-plugin
       - docker-compose-plugin
-    update_cache: true
-    state: docker_state
   tags: docker
 
 - name: Cria o grupo docker
   group:
     name: docker
-    state: docker_state
   tags: docker
 
 - name: Adiciona o usuário atual no grupo docker
@@ -55,5 +49,4 @@
     name: "{{ lookup('ansible.builtin.env', 'USER') }}"
     groups: docker
     append: true
-  when: docker_state == 'present'
   tags: docker
