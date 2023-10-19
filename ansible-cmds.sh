@@ -267,6 +267,10 @@ function exec_usecases_cmds() {
 	RUN "ansible-playbook desktops.yml --tags win_updates"
 	ECHO "Atualiza os programas que foram instalados no Windows usando o módulo win_chocolatey do Ansible."
 	RUN "ansible-playbook desktops.yml --tags win_chocolatey --limit windows -e 'package_state=latest'"
+
+	# CONTAINER (Docker)
+	ECHO "Instala o Docker nos hosts do grupo cloud"
+	RUN "ansible-playbook docker.yml"
 }
 
 function exec_linux_cmds() {
