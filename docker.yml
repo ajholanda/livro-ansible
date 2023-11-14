@@ -9,5 +9,7 @@
       vars:
         docker_php_apache_port: 8080
         docker_php_apache_volume: /home/docker/php_apache
+      tags: docker_php_apache
+
 
 
