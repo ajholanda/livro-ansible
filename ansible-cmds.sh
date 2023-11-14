@@ -270,7 +270,10 @@ function exec_usecases_cmds() {
 
 	# CONTAINER (Docker)
 	ECHO "Instala o Docker nos hosts do grupo cloud"
-	RUN "ansible-playbook docker.yml"
+	RUN "ansible-playbook docker.yml --tags docker"
+	ECHO "Instala o PHP+Apache no contêiner dos hosts do grupo cloud"
+	RUN "ansible-playbook docker.yml --tags docker_php_apache"
+}
 }
 
 function exec_linux_cmds() {
