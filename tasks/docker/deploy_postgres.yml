@@ -1,0 +1,29 @@
+---
+- name: Garante que a imagem Docker com o PostgreSQL esteja presente
+  docker_image:
+    name: "postgres:latest"
+    source: pull
+  tags: docker_postgres
+
+- name: Cria o diretório raiz do PostgreSQL
+  file:
+    path: "{{ docker_postgres_volume }}"
+    state: directory
+  tags: docker_postgres
+
+- name: Garante  a execução do contêiner Docker com o PostgreSQL
+  docker_container:
+    name: "postgres"
+    image: "postgres:latest"
+    state: started
+    ports:
+      - "{{ docker_postgres_port }}:5432"
+    volumes:
+      - "{{ docker_postgres_volume }}:/var/lib/postgresql/data"
+    env:
+      POSTGRES_USER: "{{ docker_postgres_user | default('postgres') }}"
+      POSTGRES_PASSWORD: "{{ docker_postgres_password | mandatory }}"
+      POSTGRES_DB: "{{ docker_postgres_db | default('postgres') }}"
+      POSTGRES_INITDB_ARGS: "{{ docker_postgres_initdb_args | default('') }}"
+      PGDATA: "{{ docker_pgdata | default('/var/lib/postgresql/data') }}"
+  tags: docker_postgres
