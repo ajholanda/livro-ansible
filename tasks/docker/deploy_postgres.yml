@@ -25,5 +25,5 @@
       POSTGRES_PASSWORD: "{{ docker_postgres_password | mandatory }}"
       POSTGRES_DB: "{{ docker_postgres_db | default('postgres') }}"
       POSTGRES_INITDB_ARGS: "{{ docker_postgres_initdb_args | default('') }}"
-      PGDATA: "{{ docker_pgdata | default('/var/lib/postgresql/data') }}"
+      PGDATA: "/var/lib/postgresql/data"
   tags: docker_postgres
