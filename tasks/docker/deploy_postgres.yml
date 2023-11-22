@@ -7,11 +7,11 @@
 
 - name: Cria o diretório raiz do PostgreSQL
   file:
-    path: "{{ docker_postgres_volume }}"
+    path: "{{ docker_postgres_volume | mandatory }}"
     state: directory
   tags: docker_postgres
 
-- name: Garante  a execução do contêiner Docker com o PostgreSQL
+- name: Garante a execução do contêiner Docker com o PostgreSQL
   docker_container:
     name: "postgres"
     image: "postgres:latest"
