@@ -273,6 +273,8 @@ function exec_usecases_cmds() {
 	RUN "ansible-playbook docker.yml --tags docker"
 	ECHO "Instala o PHP+Apache no contêiner dos hosts do grupo cloud"
 	RUN "ansible-playbook docker.yml --tags docker_php_apache"
+	ECHO "Instala o PostgreSQL no contêiner dos hosts do grupo cloud"
+	RUN "ansible-playbook docker.yml --tags docker_postgres"
 }
 
 function exec_linux_cmds() {
