@@ -1,0 +1,23 @@
+---
+- name: Garante que a imagem com o PHP e Apache esteja presente
+  docker_image:
+    name: "php:apache"
+    source: pull
+  tags: docker_php_apache
+
+- name: Garante que o diretório de armazenamento de dados exista
+  file:
+    path: "{{ docker_php_apache_volume | mandatory }}"
+    state: directory
+  tags: docker_php_apache
+
+- name: Garante que o contêiner PHP esteja em execução
+  docker_container:
+    name: "php_apache"
+    image: "php:apache"
+    state: started
+    ports:
+      - "{{ docker_php_apache_port | mandatory }}:80"
+    volumes:
+      - "{{ docker_php_apache_volume | mandatory }}:/var/www/html"
+  tags: docker_php_apache

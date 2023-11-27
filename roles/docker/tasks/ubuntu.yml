@@ -1,0 +1,52 @@
+---
+- name: Desinstala os pacotes não oficiais
+  apt:
+    pkg:
+      - docker.io
+      - docker-compose
+      - docker-doc
+      - podman-docker
+    state: absent
+  tags: docker
+
+- name: Instala dependências
+  apt:
+    pkg:
+      - ca-certificates
+      - curl
+      - gnupg
+  tags: docker
+
+- name: Adiciona a chave GPG oficial
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    keyring: /etc/apt/keyrings/docker.gpg
+  tags: docker
+
+- name: Adiciona o repositório oficial
+  apt_repository:
+    repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+  tags: docker
+
+- name: Instala os pacotes oficiais
+  apt:
+    update_cache: true
+    pkg:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+  tags: docker
+
+- name: Cria o grupo docker
+  group:
+    name: docker
+  tags: docker
+
+- name: Adiciona o usuário atual no grupo docker
+  user:
+    name: "{{ lookup('ansible.builtin.env', 'USER') }}"
+    groups: docker
+    append: true
+  tags: docker

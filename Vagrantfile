@@ -12,6 +12,9 @@ TYPE2IP = {
 # TODO. Sync with hosts.ini
 ips = {
   'ansible' => "#{TYPE2IP['ansible']}",
+  # [cloud] -> used to install Docker
+  'cloud' => "#{TYPE2IP['ansible']}",
+  # [dbservers]
   'db' => "#{TYPE2IP['debian']}",
   # [labs]
   'lab01' => "#{TYPE2IP['ansible']}",

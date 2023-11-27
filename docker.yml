@@ -1,0 +1,19 @@
+---
+- hosts: cloud
+
+  roles:
+    - docker
+
+  tasks:
+    - include_tasks: tasks/docker/deploy_php_apache.yml
+      vars:
+        docker_php_apache_port: 8080
+        docker_php_apache_volume: /home/docker/php_apache
+      tags: docker_php_apache
+
+    - include_tasks: tasks/docker/deploy_postgres.yml
+      vars:
+        docker_postgres_port: 54321
+        docker_postgres_volume: /home/docker/postgres
+        docker_postgres_password: secret
+      tags: docker_postgres
