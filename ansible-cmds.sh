@@ -213,7 +213,8 @@ function exec_crypto_cmds() {
 }
 
 # Ansible Galaxy
-function exec_galaxy() {
+function exec_testdev() {
+	# Ansible Galaxy
 	ECHO "Faz download do role ajholanda.x2goclient"
 	RUN "ansible-galaxy role install --roles-path ./roles ajholanda.x2goclient"
 
@@ -335,7 +336,7 @@ case $1 in
 	exec_crypto_cmds
 	;;
 "-c8")
-	exec_galaxy
+	exec_testdev
 	;;
 "-c9")
 	exec_windows_cmds
