@@ -213,7 +213,8 @@ function exec_crypto_cmds() {
 }
 
 # Ansible Galaxy
-function exec_galaxy() {
+function exec_testdev_cmds() {
+	# Ansible Galaxy
 	ECHO "Faz download do role ajholanda.x2goclient"
 	RUN "ansible-galaxy role install --roles-path ./roles ajholanda.x2goclient"
 
@@ -226,6 +227,11 @@ function exec_galaxy() {
 	ECHO "Instala os módulos para o Windows"
 	RUN "ansible-galaxy collection install ansible.windows"
 	RUN "ansible-galaxy collection install chocolatey.chocolatey"
+
+	# Plugins
+	## Filtro
+	ECHO "Executa e exemplo que mostra o uso do plugin filtro"
+	RUN "ansible-playbook plugins.yml --tags filter_plugins"
 }
 
 function exec_windows_cmds() {
