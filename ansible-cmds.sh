@@ -212,9 +212,6 @@ function exec_crypto_cmds() {
 	RUN 'ansible-playbook servers.yml --limit dbservers --tags mariadbserver'
 }
 
-# Ansible Galaxy
-function exec_testdev() {
-	# Ansible Galaxy
 function exec_testdev_cmds() {
 	# Ansible Galaxy
 	ECHO "Faz download do role ajholanda.x2goclient"
