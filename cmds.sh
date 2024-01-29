@@ -2,10 +2,17 @@
 
 DEBUG=0
 
+# Load functions from chapters.
+for f in {01..12}; do
+	. /lib/c${f}.sh
+done
+
+# Helper function to print on stderr.
 function ECHO {
 	echo >&2 "INFO [$1]"
 }
 
+# Helper function to execute commands.
 function RUN {
 	echo $1
 	if [ $DEBUG -eq 1 ]; then
