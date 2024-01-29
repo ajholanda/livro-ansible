@@ -23,18 +23,16 @@ vagrant ssh ansible
 ```
 cd ansible/
 ```
-- Executar o *script* que executa os comandos:
+- Executar o *script* sem argumentos para mostrar as opções:
 ```
-bash ./ansible-cmds.sh
+bash ./cmds.sh
 ```
 
 Se quiser testar também para *hosts* com sistema Windows, descomente
 a linha com as configurações da máquina virtual com o sistema Windows
-no arquivo [Vagrantfile](Vagrantfile), repetindo os procedimentos anteriores
-com exceção da execução do *script* que ser modificada para
-
+no arquivo [Vagrantfile](Vagrantfile) e execute:
 ```
-bash ./ansible-cmds.sh --windows
+bash ./cmds.sh c11       # capitulo 11
 ```
 
 Avisos:
