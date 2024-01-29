@@ -4,3 +4,4 @@
 .vagrant
 .viminfo
 roles/ajholanda.*
+*/__pycache__/*
