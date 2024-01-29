@@ -598,7 +598,7 @@ function exec_testdev_cmds() {
 	# Plugins
 	## Filtro
 	ECHO "Executa e exemplo que mostra o uso do plugin filtro"
-	RUN "ansible-playbook plugins.yml --tags filter_plugins"
+	RUN "ansible-playbook plugin.yml"
 }
 
 function exec_windows_cmds() {
