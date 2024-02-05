@@ -85,7 +85,65 @@ def run_module():
         spec=dict(type='str', required=True),
         path=dict(type='str', required=True),
         type=dict(type='str', required=True),
-        options=dict(type='str', required=False, default='defaults')
-        dump=dict(type='int', required=False, default=0)
+        options=dict(type='str', required=False, default='defaults'),
+        dump=dict(type='int', required=False, default=0),
         passno=dict(type='int', required=False, default=0)
     )
+
+    # The result dict in the object must be filled,
+    # we primarily care about changed and state
+    # changed is if this module effectively modified the target
+    # state will include any data that you want your module to pass back
+    # for consumption, for example, in a subsequent task.
+    result = dict(
+        changed=False,
+    )
+
+    # The AnsibleModule object will be our abstraction working with Ansible
+    # this includes instantiation, a couple of common attr would be the
+    # args/params passed to the execution, as well as if the module
+    # supports check mode.
+    module = AnsibleModule(
+        argument_spec=module_args,
+        supports_check_mode=True
+    )
+
+    with open("/etc/fstab", "a+") as file:
+        # Mount specification exists?
+        spec_exists = False
+        spec = module.params['spec']
+        for line in file:
+            fields = line.split()
+            if fields[0] == spec:
+                spec_exists = True
+                break
+
+        if not spec_exists:
+            path = module.params['path']
+            type = module.params['type']
+            opts = module.params['options']
+            dump = module.params['dump']
+            passno = module.params['passno']
+
+            if opts is None:
+                opts = 'defaults'
+            if dump is None:
+                dump = '0'
+            if passno is None:
+                passno = '0'
+
+            entry = f'{spec} {path} {type} {opts} {dump} {passno}\n'
+            # Only change if the execution is not in check mode.
+            if not module.check_mode:
+                file.write(entry)
+                result['changed'] = True
+
+    module.exit_json(**result)
+
+
+def main():
+    run_module()
+
+
+if __name__ == '__main__':
+    main()
