@@ -60,20 +60,27 @@ EXAMPLES = r'''
     type: nfs
 
 - name: Create an entry for root partition.
-  spec: /dev/sda1
-  path: /
-  type: ext4
-  dump: 1
-  passno: 1
+  fstab:
+    spec: /dev/sda1
+    path: /
+    type: ext4
+    dump: 1
+    passno: 1
 
 - name: Add an entry for the CD-ROM device.
-  spec: /dev/sr0
-  path: /media/cdrom0
-  type: 'udf,iso9660'
-  options: 'user,noauto'
+  fstab:
+    spec: /dev/sr0
+    path: /media/cdrom0
+    type: 'udf,iso9660'
+    options: 'user,noauto'
 '''
 
 RETURN = r'''
+msg:
+    description: Provide a descriptive message using some parameters.
+    type: str
+    returned: always
+    sample: '/dev/sda1 on / type ext4 (rw,relatime,discard,errors=remount-ro)'
 '''
 
 from ansible.module_utils.basic import AnsibleModule
@@ -112,19 +119,21 @@ def run_module():
         # Mount specification exists?
         spec_exists = False
         spec = module.params['spec']
+        path = module.params['path']
+        type = module.params['type']
+        opts = module.params['options']
+        dump = module.params['dump']
+        passno = module.params['passno']
+
+        # Check if spec already exists in /etc/fstab.
         for line in file:
             fields = line.split()
             if fields[0] == spec:
                 spec_exists = True
                 break
 
+        # If spec does not exist, add the entry.
         if not spec_exists:
-            path = module.params['path']
-            type = module.params['type']
-            opts = module.params['options']
-            dump = module.params['dump']
-            passno = module.params['passno']
-
             if opts is None:
                 opts = 'defaults'
             if dump is None:
@@ -132,12 +141,14 @@ def run_module():
             if passno is None:
                 passno = '0'
 
+            result['changed'] = True
+
             entry = f'{spec} {path} {type} {opts} {dump} {passno}\n'
             # Only change if the execution is not in check mode.
             if not module.check_mode:
                 file.write(entry)
-                result['changed'] = True
 
+    result['msg'] = f'{spec} on {path} type {type} ({opts})'
     module.exit_json(**result)
 
 
