@@ -14,3 +14,7 @@
       spec: '192.168.64.16:/home'
       path: /home/nfs
       type: nfs
+      options: 'rsize=8192,wsize=65536,timeo=14,intr'
+    register: results
+
+  - debug: var=results
