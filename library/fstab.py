@@ -4,6 +4,8 @@
 # GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 __metaclass__ = type
 
+import os
+
 DOCUMENTATION = r'''
 ---
 module: fstab
@@ -86,7 +88,7 @@ msg:
 from ansible.module_utils.basic import AnsibleModule
 
 
-def run_module():
+def main():
     # Parameters
     module_args = dict(
         spec=dict(type='str', required=True),
@@ -115,16 +117,28 @@ def run_module():
         supports_check_mode=True
     )
 
-    with open("/etc/fstab", "a+") as file:
+    spec = module.params['spec']
+    path = module.params['path']
+    type = module.params['type']
+    opts = module.params['options']
+    if opts is None:
+        opts = 'defaults'
+    dump = module.params['dump']
+    if dump is None:
+        dump = '0'
+    passno = module.params['passno']
+    if passno is None:
+        passno = '0'
+
+    fname = '/etc/fstab'
+    if not os.path.exists(fname):
+        module.fail_json(msg="%s not found" % (fname))
+    if not os.access(fname, os.R_OK):
+        module.fail_json(msg="%s not readable" % (fname))
+
+    with open(fname, "r+") as file:
         # Mount specification exists?
         spec_exists = False
-        spec = module.params['spec']
-        path = module.params['path']
-        type = module.params['type']
-        opts = module.params['options']
-        dump = module.params['dump']
-        passno = module.params['passno']
-
         # Check if spec already exists in /etc/fstab.
         for line in file:
             fields = line.split()
@@ -134,26 +148,14 @@ def run_module():
 
         # If spec does not exist, add the entry.
         if not spec_exists:
-            if opts is None:
-                opts = 'defaults'
-            if dump is None:
-                dump = '0'
-            if passno is None:
-                passno = '0'
-
             result['changed'] = True
-
-            entry = f'{spec} {path} {type} {opts} {dump} {passno}\n'
             # Only change if the execution is not in check mode.
             if not module.check_mode:
+                entry = f'{spec} {path} {type} {opts} {dump} {passno}\n'
                 file.write(entry)
 
     result['msg'] = f'{spec} on {path} type {type} ({opts})'
     module.exit_json(**result)
-
-
-def main():
-    run_module()
 
 
 if __name__ == '__main__':
