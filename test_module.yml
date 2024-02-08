@@ -15,6 +15,6 @@
       path: /home/nfs
       type: nfs
       options: 'rsize=8192,wsize=65536,timeo=14,intr'
-    register: results
+    register: result
 
-  - debug: var=results
+  - debug: var=result
