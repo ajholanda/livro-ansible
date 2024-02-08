@@ -141,6 +141,9 @@ def main():
         spec_exists = False
         # Check if spec already exists in /etc/fstab.
         for line in file:
+            # Ignore comments.
+            if line[0] == '#':
+                continue
             fields = line.split()
             if fields[0] == spec:
                 spec_exists = True
