@@ -4,8 +4,6 @@
 # GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 __metaclass__ = type
 
-import os
-
 DOCUMENTATION = r'''
 ---
 module: fstab
@@ -85,6 +83,7 @@ msg:
     sample: '/dev/sda1 on / type ext4 (rw,relatime,discard,errors=remount-ro)'
 '''
 
+import os
 from ansible.module_utils.basic import AnsibleModule
 
 
