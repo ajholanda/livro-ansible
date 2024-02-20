@@ -1,8 +1,6 @@
-#!/usr/bin/python
-
 # Copyright: (c) 2024, Adriano J. Holanda <ajholanda@example.net>
 # GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
-__metaclass__ = type
+
 
 DOCUMENTATION = r'''
 ---
