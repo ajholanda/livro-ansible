@@ -88,7 +88,7 @@ import os
 from ansible.module_utils.basic import AnsibleModule
 
 
-def main():
+def run_module():
     # Parameters
     module_args = dict(
         spec=dict(type='str', required=True),
@@ -162,4 +162,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    run_module()
