@@ -125,10 +125,10 @@ def run_module():
         opts = 'defaults'
     dump = module.params['dump']
     if dump is None:
-        dump = '0'
+        dump = 0
     passno = module.params['passno']
     if passno is None:
-        passno = '0'
+        passno = 0
 
     fname = '/etc/fstab'
     if not os.path.exists(fname):
@@ -136,21 +136,21 @@ def run_module():
     if not os.access(fname, os.R_OK):
         module.fail_json(msg="%s not readable" % (fname))
 
-    with open(fname, "r+") as file:
+    with open(fname, "r+") as file: #1
         # Mount specification exists?
         spec_exists = False
         # Check if spec already exists in /etc/fstab.
-        for line in file:
+        for line in file: #2
             # Ignore comments.
-            if line[0] == '#':
+            if line[0] == '#': #3
                 continue
-            fields = line.split()
-            if fields[0] == spec:
+            fields = line.split() #4
+            if fields[0] == spec: #5
                 spec_exists = True
                 break
 
         # If spec does not exist, add the entry.
-        if not spec_exists:
+        if not spec_exists: #6
             result['changed'] = True
             # Only change if the execution is not in check mode.
             if not module.check_mode:
