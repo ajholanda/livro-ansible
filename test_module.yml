@@ -4,17 +4,18 @@
   gather_facts: false
 
   tasks:
-  - name: Garante que o caminho para montagem exista.
+  - name: 1. Garante que o caminho para montagem exista.
     file:
       path: /home/nfs
       state: directory
 
-  - name: Adiciona entrada em /etc/fstab.
+  - name: 2. Adiciona entrada em /etc/fstab.
     fstab:
       spec: '192.168.64.16:/home'
       path: /home/nfs
       type: nfs
       options: 'rsize=8192,wsize=65536,timeo=14,intr'
-    register: result
+    register: results
 
-  - debug: var=result
+  - name: 3. Imprime as informações do módulo fstab.
+    debug: var=results
