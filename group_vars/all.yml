@@ -2,7 +2,7 @@
 # - O arquivo all.yml contém variáveis que são acessíveis por todos
 #   grupos.
 # - É sugerido criar variáveis aqui com parcimônia.
-# - A variáveis podem ser escritas com letras maiúsculas
-#   para diferenciá-las das variáveis que pertencem a algum
-#   grupo em particular.
-ADMINS:  ['ajh', 'dmr', 'ewd', 'klt']
+# - O prefixo "global_" foi adicionado para indicar o escopo.
+# - A convenção para nomes de variáveis pode ser encontrada em:
+# https://ansible.readthedocs.io/projects/lint/rules/var-naming/#settings
+global_admins:  ['ajh', 'dmr', 'ewd', 'klt']

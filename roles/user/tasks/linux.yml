@@ -4,5 +4,5 @@
     name: "{{ item }}"
     shell: /bin/bash
   loop:
-    "{{ ADMINS }}"
+    "{{ global_admins }}"
   tags: user
