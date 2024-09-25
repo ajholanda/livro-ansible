@@ -49,7 +49,7 @@ vms = {
       'memory' => '512',
       'cpus' => 1,
       'ip' => "#{TYPE2IP['debian']}",
-      'box' => 'debian/bullseye64'
+      'box' => 'debian/bookworm64'
   },
   'windows'   => {
       'memory' => '2048',
