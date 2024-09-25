@@ -1,13 +1,20 @@
 
-pkgs=(ansible ansible-lint python3-pip sshpass yamllint)
+pkgs=(ansible pipx python3-pip sshpass)
 for pkg in "${pkgs[@]}"
 do
     echo "APT: Installing ${pkg}..."
-    apt-get install -y ${pkg} >/dev/null
+    DEBIAN_FRONTEND=noninteractive apt-get install -y ${pkg} >/dev/null
 done
 
-echo "PIP: Installing molecule..."
-sudo -u vagrant pip install molecule >/dev/null
+pkgs=(ansible-lint molecule yamllint)
+for pkg in "${pkgs[@]}"
+do
+	echo "PIPx: Installing ${pkg}..."
+	sudo -u vagrant pipx install ${pkg} >/dev/null
+done
+
+# Add programs installed by pipx in the PATH.
+sudo -u vagrant pipx ensurepath
 
 echo "DONE"
 
