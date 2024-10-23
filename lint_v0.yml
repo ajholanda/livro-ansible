@@ -5,12 +5,13 @@
   connection: local
 
   tasks:
-    - command: df -h # Retorna a informação de uso dos discos.
+    - name: Retorna a informação de uso dos discos.
+      ansible.buitin.command: df -h
       register: disk_usage
 
     - name: imprime as informações de uso dos discos.
       debug:
-       var: disk_usage.stdout
+        var: disk_usage.stdout
 
     - name: Cria diretórios.
       ansible.builtin.file:
