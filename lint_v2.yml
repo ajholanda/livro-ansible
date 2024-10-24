@@ -1,24 +1,27 @@
+---
 # lint_v1.yml
 
 - name: Informações dos discos e criação de diretórios.
   hosts: localhost
-  gather_facts: no
+  gather_facts: false
   connection: local
 
   tasks:
     - name: Retorna a informação de uso dos discos.
       ansible.builtin.command: df -h
       register: disk_usage
+      changed_when: false
 
-    - name: imprime as informações de uso dos discos.
-      debug:
+    - name: Imprime as informações de uso dos discos.
+      ansible.builtin.debug:
         var: disk_usage.stdout
 
     - name: Cria diretórios.
       ansible.builtin.file:
         path: "~/ansible/{{ item }}"
         state: directory
+        mode: '0755'
       with_items:
-      - 'files'
-      - 'roles'
-      - 'tasks'
+        - 'files'
+        - 'roles'
+        - 'tasks'
