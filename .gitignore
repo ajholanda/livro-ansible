@@ -1,4 +1,5 @@
 *~
+*.swp
 ansible
 .bash_history
 .ssh
