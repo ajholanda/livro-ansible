@@ -13,3 +13,8 @@ RUN "ansible-lint lint_v2.yml"
 
 ECHO "Lista todas as regras do ansible-lint."
 RUN "ansible-lint --list-rules --verbose"
+
+# Debugger
+ECHO "Executa um comando do Ansible com o depurador habilitado pela variável de ambiente."
+RUN "ANSIBLE_ENABLE_TASK_DEBUGGER=true ansible-playbook err.yml"
+
