@@ -1,0 +1,23 @@
+---
+- name: Playbook para demonstrar o uso do depurador
+  hosts: localhost
+  gather_facts: no
+  vars:
+    file_path: "/tm/debugger.log"  # Caminho do arquivo incorreto.
+  debugger: on_failed
+
+  tasks:
+    - name: Levanta informações sobre o arquivo
+      ansible.builtin.stat:
+        path: "{{ file_path }}"
+      register: file_check
+
+    - name: Imprime o status do arquivo
+      ansible.builtin.debug:
+        msg: "File exists: {{ file_check.stat.exists }}"
+
+    - name: Cria o arquivo se ele não existir
+      ansible.builtin.file:
+        path: "{{ file_path }}"
+        state: touch
+      when: not file_check.stat.exists
