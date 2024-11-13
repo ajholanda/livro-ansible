@@ -18,3 +18,5 @@ RUN "ansible-lint --list-rules --verbose"
 ECHO "Executa um comando do Ansible com o depurador habilitado pela variável de ambiente."
 RUN "ANSIBLE_ENABLE_TASK_DEBUGGER=true ansible-playbook err.yml"
 
+ECHO "Abre um sessão de depuração após a falha no playbook."
+RUN "ansible-playbook debugger.yml"
