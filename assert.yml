@@ -1,0 +1,59 @@
+---
+- name: Playbook para demonstrar o uso de asserções
+  hosts: localhost
+  gather_facts: true
+  vars:
+    txt_pass: "segredo"
+    ok_pass: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          62623837663331373531343536386435613965343335366331613163636663303833613930613739
+          6361623035623639343162363536626432376633613536390a396636613864373633323533343462
+          34633961666432343234336233623634306132353334656462393039653764383061613530323231
+          6634353135303130310a393336663838343239343238326666646438653730336563303935336435
+          3366
+
+  tasks:
+    - name: Testa se senha está criptografada
+      tags: crypto
+      block:
+        - ansible.builtin.assert:
+            that: ok_pass is vault_encrypted
+            fail_msg: "A senha deve estar criptografada!"
+            success_msg: "Senha ok!"
+
+        - ansible.builtin.assert:
+            that: txt_pass is vault_encrypted
+            fail_msg: "A senha deve estar criptografada!"
+            success_msg: "Senha ok!"
+
+        - ansible.builtin.debug:
+            msg: "Interrompida a execução! Não chega aqui"
+
+    - name: Testa se senha está criptografada
+      tags: blender
+      block:
+        - ansible.builtin.assert: 
+            that: ansible_facts['memtotal_mb'] >= 4096 
+            fail_msg: "A quantidade de memória não atende aos requisitos mínimos!"
+
+        - name: Instala o Blender
+          package: name=blender
+
+- hosts: webservers
+  gather_facts: true
+
+  tasks:
+    - name: Testa se o apache está executando
+      tags: apache
+      block:
+        - name: Checa se o apache está executando
+          ansible.builtin.shell: |
+            systemctl is-active apache2 || systemctl is-active httpd
+          register: ret
+          ignore_errors: yes  # Evita falha no playbook quando o apache está parado.  
+
+        - ansible.builtin.assert:
+            that: ret.stdout == "active"
+            msg: "Apache não está sendo executado!"
+            quiet: true
+ 
