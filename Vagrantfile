@@ -51,11 +51,11 @@ vms = {
       'ip' => "#{TYPE2IP['debian']}",
       'box' => 'debian/bookworm64'
   },
-  'windows'   => {
-      'memory' => '2048',
-      'cpus' => 1, 'ip' => "#{TYPE2IP['windows']}",
-      'box' => 'gusztavvargadr/windows-10'
-  }
+#  'windows'   => {
+#      'memory' => '2048',
+#      'cpus' => 1, 'ip' => "#{TYPE2IP['windows']}",
+#      'box' => 'gusztavvargadr/windows-10'
+#  }
 }
 
 Vagrant.configure('2') do |config|
