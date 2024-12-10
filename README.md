@@ -58,16 +58,20 @@ vagrant up
 
 As informações complementares são aquelas que podem ser encontradas facilmente
 usando um sistema de busca e possuem grande variabilidade relacionada ao sistema
-operacional, distribuição Linux ou método de instalação.
+operacional ou distribuição Linux.
 
 ### Instalação
 
-- [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html).
+Os *links* dos guias de instalação dos programas usados no livro são listados a seguir:
 
-- [ansible-lint](https://ansible.readthedocs.io/projects/lint/installing/#installing-the-latest-version).
+- [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html);
+
+- [ansible-lint](https://ansible.readthedocs.io/projects/lint/installing/#installing-the-latest-version);
+
+- [Ansible Molecule](https://ansible.readthedocs.io/projects/molecule/installation/);
 
 - [yamllint](https://yamllint.readthedocs.io/en/stable/quickstart.html#installing-yamllint).
 
-## Contributions
+## Contribuição
 
-Any contribution is welcome by opening an [issue](https://github.com/ajholanda/ansible-automacao-ti/issues) or sending a [pull request](https://github.com/ajholanda/ansible-automacao-ti/pulls).
+Qualquer contribuição é bem-vinda. Basta abrir uma [solicitação de correção](https://github.com/ajholanda/ansible-automacao-ti/issues) ou enviar a [correção](https://github.com/ajholanda/ansible-automacao-ti/pulls).
