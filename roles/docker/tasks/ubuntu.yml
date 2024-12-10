@@ -50,3 +50,11 @@
     groups: docker
     append: true
   tags: docker
+
+- name: Habilita e inicia o serviço docker
+  service:
+    name: docker
+    enabled: true
+    started: true
+  tags: docker
+
