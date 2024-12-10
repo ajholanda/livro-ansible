@@ -16,6 +16,8 @@ done
 # Add programs installed by pipx in the PATH.
 sudo -u vagrant pipx ensurepath
 
+sudo -u vagrant pip install molecule-plugins[docker]
+
 echo "DONE"
 
 exit 0
