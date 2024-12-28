@@ -1,6 +1,6 @@
 DOMAIN = "example.net"
 # IPs' prefix
-PREFIP = "192.168.64"
+PREFIP = "192.168.56"
 # Map host type with IP
 TYPE2IP = {
   'ansible' => "#{PREFIP}.8", # ubuntu
