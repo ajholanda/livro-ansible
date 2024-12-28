@@ -55,6 +55,6 @@
   service:
     name: docker
     enabled: true
-    started: true
+    state: started
   tags: docker
 
