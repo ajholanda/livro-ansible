@@ -3,6 +3,7 @@
 
 - name: Instala ou atualiza o apache2
   package:
+    update_cache: true
     name: apache2
 
 - name: Habilita e inicializa o apache2
