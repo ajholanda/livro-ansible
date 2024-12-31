@@ -3,7 +3,7 @@ driver:
   name: docker
 platforms:
   - name: instance-debian
-    image: debian/latest
+    image: debian:latest
     privileged: true
     pre_built_image: true
 provisioner:
