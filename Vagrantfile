@@ -36,7 +36,7 @@ ips = {
 
 vms = {
   'ansible'  => {
-      'memory' => '512',
+      'memory' => '2048',
       'cpus' => 1, 'ip' => "#{TYPE2IP['ansible']}",
       'box' => 'ubuntu/jammy64'
   },
