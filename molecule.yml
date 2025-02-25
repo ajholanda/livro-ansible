@@ -1,0 +1,18 @@
+---
+- hosts: localhost
+  connection: local
+
+  roles:
+    - docker
+
+  tasks:
+    - name: Instala Ansible Molecule e alguns plugins
+      pip:
+        name:
+          - molecule
+          - molecule-plugins[docker]
+      register: molecule_install
+
+    - debug:
+        msg: "Talvez você tenha que fazer logout e login para usar o Molecule"
+      when: molecule_install.changed
