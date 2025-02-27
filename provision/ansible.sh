@@ -1,5 +1,5 @@
 
-pkgs=(ansible ansible-lint python3-pip sshpass yamllint)
+pkgs=(ansible ansible-lint python3-pip sshpass tree yamllint)
 for pkg in "${pkgs[@]}"
 do
     echo "APT: Installing ${pkg}..."
