@@ -6,7 +6,24 @@
     - docker
 
   tasks:
-    - name: Instala Ansible Molecule e alguns plugins
+    - name: Instala as dependências
+      apt:
+        pkg:
+          - python3-pip
+          - libssl-dev
+      when: ansible_os_family == 'Debian'
+
+    - name: Instala as dependências
+      dnf:
+        name:
+          - gcc
+          - python3-pip
+          - python3-devel
+          - openssl-devel
+          - python3-libselinux
+      when: ansible_os_family == 'RedHat'
+
+    - name: Instala o Ansible Molecule e alguns plugins
       pip:
         name:
           - molecule
