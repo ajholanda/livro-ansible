@@ -7,3 +7,5 @@ RUN "ansible-playbook assert.yml --tags blender"
 ECHO "Asserções para testar vários requisitos."
 RUN "ansible-playbook assert.yml --tags reqts"
 
+ECHO "Instala o Molecule, suas dependências, o driver docker e o Docker"
+RUN ansible-playbook molecule.yml
