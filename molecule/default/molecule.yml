@@ -1,18 +1,26 @@
 ---
+dependency:
+  name: galaxy
+  options:
+    requirements-file: requirements.yml
+
 driver:
   name: docker
+
 platforms:
   - name: instance-debian
     image: debian:latest
-    privileged: true
     pre_built_image: true
+
 provisioner:
   name: ansible
   log: true
   env:
-    ANSIBLE_ROLES_PATH: "../../roles"
     ANSIBLE_CONFIG: "../../ansible.cfg"
-  lint:
-    name: ansible-lint
+    ANSIBLE_ROLES_PATH: "../../roles"
+
 verifier:
-  name: ansible
+  name: testinfra
+  directory: tests/
+  options:
+    verbose: true
