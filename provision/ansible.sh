@@ -1,10 +1,11 @@
 
-pkgs=(ansible ansible-lint python3-pip sshpass tree yamllint)
-for pkg in "${pkgs[@]}"
-do
-    echo "APT: Installing ${pkg}..."
-    DEBIAN_FRONTEND=noninteractive apt-get install -y ${pkg} >/dev/null
-done
+apt_pkgs="python3-pip sshpass tree"
+echo "APT: Installing ${apt_pkgs}..."
+DEBIAN_FRONTEND=noninteractive apt-get install -y ${apt_pkgs} >/dev/null
+
+py_pkgs="ansible ansible-lint yamllint"
+echo "PIP: Installing ${py_pkgs}..."
+pip install $py_pkgs
 
 echo "DONE"
 
