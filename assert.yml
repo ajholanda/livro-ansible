@@ -32,8 +32,8 @@
     - name: Testa se senha está criptografada
       tags: blender
       block:
-        - ansible.builtin.assert: 
-            that: ansible_facts['memtotal_mb'] >= 4096 
+        - ansible.builtin.assert:
+            that: ansible_facts['memtotal_mb'] >= 4096
             fail_msg: "A quantidade de memória não atende aos requisitos mínimos!"
 
         - name: Instala o Blender
@@ -46,7 +46,7 @@
             that:
               - ansible_distribution == "Ubuntu"
               - ansible_userspace_bits == "64"
-              - ansible_facts['memtotal_mb'] >= 4096 
+              - ansible_facts['memtotal_mb'] >= 4096
               - ansible_processor_vcpus >= 4
             msg: >
               O computador não atende a um ou mais requisitos:
@@ -70,12 +70,11 @@
           ansible.builtin.shell: |
             systemctl is-active apache2 || systemctl is-active httpd
           register: ret
-          ignore_errors: yes  # Evita falha no playbook quando o apache está parado.  
+          ignore_errors: yes  # Evita falha no playbook quando o apache está parado.
 
         - ansible.builtin.assert:
-            that: 
+            that:
               - ret.stdout == "active"
               - service('apache2').is_running
             msg: "Apache não está sendo executado!"
             quiet: true
- 

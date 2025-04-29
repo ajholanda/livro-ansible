@@ -3,6 +3,6 @@
   hosts: all
   gather_facts: true
   tasks:
-    - name: Test webserver role 
-      include_role:
-        name: "webserver"
+    - name: Testa o role webserver
+      ansible.builtin.include_role:
+        name: webserver
