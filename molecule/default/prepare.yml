@@ -1,0 +1,8 @@
+---
+- name: Prepara o sistema para o teste
+  hosts: all
+
+  tasks:
+    - name: Instala os pacotes necessários para o teste
+      package:
+        name: curl
