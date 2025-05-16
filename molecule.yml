@@ -23,11 +23,12 @@
           - python3-libselinux
       when: ansible_os_family == 'RedHat'
 
-    - name: Instala o Ansible Molecule e alguns plugins
+    - name: Instala o Ansible Molecule, o plugin Docker e o Testinfra
       pip:
         name:
           - molecule
           - molecule-plugins[docker]
+          - pytest-testinfra
       register: molecule_install
 
     - debug:
