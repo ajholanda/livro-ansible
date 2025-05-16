@@ -1,0 +1,36 @@
+name: Testa o role webserver
+
+on:
+  push:
+    paths:
+      - '**.yml'
+      - '**.yaml'
+      - 'roles/**'
+      - '.github/workflows/**'
+  pull_request:
+
+jobs:
+  test-role:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixa o código
+        uses: actions/checkout@v4
+
+      - name: Python setup
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Instala Ansible, Molecule, Docker driver e Testinfra
+        run: |
+          python -m pip install --upgrade pip
+          pip install ansible molecule[docker] docker ansible-lint
+
+      - name: Lint Role
+        run: |
+          ansible-lint .
+
+      - name: Executa os testes do Molecule
+        run: |
+          molecule test
