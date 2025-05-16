@@ -102,7 +102,7 @@ Vagrant.configure('2') do |config|
         # Install additional programs
         k.vm.provision "shell", path: "provision/ansible.sh"
         # Share Ansible examples folder
-        k.vm.synced_folder "./", "/home/vagrant/ansible", mount_options: ["dmode=755,fmode=644"]
+        k.vm.synced_folder "./", "/home/vagrant/livro", mount_options: ["dmode=755,fmode=644"]
       end
 
     end

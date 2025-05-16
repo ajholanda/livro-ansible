@@ -21,7 +21,7 @@ vagrant ssh ansible
 ```
 - Entrar no diretório com os exemplos:
 ```
-cd ansible/
+cd livro/
 ```
 - Executar o *script* sem argumentos para mostrar as opções:
 ```
