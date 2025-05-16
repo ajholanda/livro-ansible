@@ -11,6 +11,9 @@ platforms:
   - name: instance-debian
     image: debian:latest
     pre_built_image: true
+  - name: instance-ubuntu
+    image: ubuntu:latest
+    pre_built_image: true
 
 provisioner:
   name: ansible
