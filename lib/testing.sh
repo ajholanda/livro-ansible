@@ -10,5 +10,26 @@ RUN "ansible-playbook assert.yml --tags reqts"
 ECHO "Instala o Molecule, suas dependências, o driver docker e o Docker"
 RUN "ansible-playbook molecule.yml"
 
-ECHO "Cria um ambiente (Docker) de testes Molecule padrão"
+ECHO "Configura um ambiente (Docker) de testes Molecule padrão"
 RUN "molecule init scenario --driver-name docker"
+
+ECHO "Cria o cenário office usando o driver padrão"
+RUN "molecule init scenario office"
+
+ECHO "Cria o ambiente para o cenário padrão"
+RUN "molecule create"
+
+ECHO "Executa a preparação (prepare.yml)"
+RUN "molecule prepare"
+
+ECHO "Executa o teste (converge.yml)"
+RUN "molecule converge"
+
+ECHO "Executa o verificador (verifier)"
+RUN "molecule verify"
+
+ECHO "Realiza o ciclo de vida completo de teste"
+RUN "molecule test"
+
+ECHO "Realiza o teste no cenário office"
+RUN  "molecule test -s office"
