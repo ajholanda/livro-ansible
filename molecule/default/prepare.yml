@@ -5,4 +5,5 @@
   tasks:
     - name: Instala os pacotes necessários para o teste
       package:
+        update_cache: true
         name: curl
