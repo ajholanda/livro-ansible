@@ -39,6 +39,12 @@ jobs:
         run: |
           ansible-lint .
 
+      - name: Inicializa o Docker
+        run: |
+          service docker start
+          docker info
+          docker version
+
       - name: Executa os testes do Molecule
         run: |
           molecule --debug test
