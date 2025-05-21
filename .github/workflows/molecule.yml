@@ -5,8 +5,9 @@ on:
     paths:
       - '**.yml'
       - '**.yaml'
-      - 'roles/**'
       - '.github/workflows/**'
+      - 'molecule/**'
+      - 'roles/**'
   pull_request:
 
 jobs:
