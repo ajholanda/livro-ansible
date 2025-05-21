@@ -29,7 +29,7 @@ jobs:
       - name: Instala Ansible, Molecule, driver Docker e Testinfra
         run: |
           python -m pip install --upgrade pip
-          pip install ansible molecule molecule-plugins[docker] docker ansible-lint pytest-testinfra
+          pip install ansible molecule molecule-plugins[docker] ansible-lint pytest-testinfra
 
       - name: Verifica a sintaxe
         run: |
