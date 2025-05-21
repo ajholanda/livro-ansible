@@ -34,4 +34,4 @@ jobs:
 
       - name: Executa os testes do Molecule
         run: |
-          molecule --debug test
+          molecule test
