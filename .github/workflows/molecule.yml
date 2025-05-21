@@ -14,11 +14,6 @@ jobs:
   test-role:
     runs-on: ubuntu-latest
 
-    services:
-      docker:
-        image: docker:dind
-        options: --privileged
-
     steps:
       - name: Baixa o código
         uses: actions/checkout@v4
