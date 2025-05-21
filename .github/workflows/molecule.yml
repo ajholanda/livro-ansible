@@ -13,6 +13,11 @@ jobs:
   test-role:
     runs-on: ubuntu-latest
 
+    services:
+      docker:
+        image: docker:dind
+        options: --privileged
+
     steps:
       - name: Baixa o código
         uses: actions/checkout@v4
@@ -20,7 +25,7 @@ jobs:
       - name: Configura o Python
         uses: actions/setup-python@v5
 
-      - name: Instala o Docker
+      - name: Instala o Docker Buildx
         uses: docker/setup-buildx-action@v2
 
       - name: Instala Ansible, Molecule, driver Docker e Testinfra
