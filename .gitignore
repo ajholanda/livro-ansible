@@ -7,5 +7,6 @@ ansible
 .viminfo
 roles/ajholanda.*
 */__pycache__/*
+*.log
 *.pyc
 venv
