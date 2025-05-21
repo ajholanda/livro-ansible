@@ -41,7 +41,7 @@ jobs:
 
       - name: Inicializa o Docker
         run: |
-          service docker start
+          sudo service docker start
           docker info
           docker version
 
