@@ -29,5 +29,4 @@ jobs:
           pip install ansible molecule-plugins[docker] ansible-lint pytest-testinfra
 
       - name: Executa os testes com o Molecule
-        run: |
-          molecule test
+        run: molecule test
