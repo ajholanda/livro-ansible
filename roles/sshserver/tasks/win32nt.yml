@@ -1,6 +1,6 @@
 ---
-- name: Copy script with SSH firewall rule
-  win_copy:
+- name: Copia o script de verificação do firewall SSH para o sistema
+  ansible.windows.win_copy:
     dest: "C:\\Windows\\Ensure-SSHFirewallRule.ps1"
     content: |
       # Verifica se a regra do firewall SSH está presente.
@@ -14,7 +14,7 @@
       }
   tags: sshserver
 
-- name: Setup SSH firewall rule script to execute at startup
+- name: Configura a regra do firewall SSH para ser executada na inicialização do sistema
   ansible.windows.win_powershell:
     script: |
       $action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-ExecutionPolicy Bypass -File C:\\Windows\\Ensure-SSHFirewallRule.ps1"
