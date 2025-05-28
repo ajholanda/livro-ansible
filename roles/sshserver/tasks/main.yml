@@ -1,6 +1,12 @@
 ---
-- name: Garante a execução em sistemas Linux apenas
-  ansible.builtin.assert: { that: "ansible_system == 'Linux'" }
+- name: Carrega tarefas do sistema {{ ansible_system }}
+  include_tasks:
+    file: "{{ item }}"
+  with_first_found:
+    - files:
+      - "{{ ansible_system | lower }}.yml"
+      skip: true
+  tags: sshserver
 
 - name: Inclui tarefas do arquivo server.yml
   include_tasks: server.yml
