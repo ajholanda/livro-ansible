@@ -9,6 +9,7 @@
     - netbios
     - update
     - user
+    - sshserver
 
 - name: Desktops de desenvolvedores
   hosts: devs
