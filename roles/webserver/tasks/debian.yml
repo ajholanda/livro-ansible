@@ -1,0 +1,27 @@
+---
+- name: Instala ou atualiza o apache2
+  package:
+    update_cache: true
+    name: apache2
+  tags: webserver
+
+- name: Habilita e inicializa o apache2
+  service:
+    name: apache2
+    enabled: yes
+    state: started
+  tags: webserver
+
+- name: Copia a página teste
+  copy:
+    src: index.html
+    dest: /var/www/html/
+  tags: webserver
+
+- name: Copia o arquivo de configuração
+  template:
+    src: 000-default.conf.j2
+    dest: /etc/apache2/sites-available/000-default.conf
+  notify:
+    - restart apache2
+  tags: webserver
