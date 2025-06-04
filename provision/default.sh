@@ -10,8 +10,8 @@ which apt-get &>/dev/null \
 
 ## Install wget and the Vagrant dependencies on Red Hat OS Family
 which dnf &>/dev/null \
-    && echo 'DNF: Installing wget and Vagrant dependencies...'; \
-    dnf install -y wget kernel-devel kernel-headers gcc \
+    && echo 'DNF: Installing wget and Vagrant dependencies...' \
+    && dnf install -y wget kernel-devel-$(uname -r) kernel-headers-$(uname -r) gcc \
                   make perl elfutils-libelf-devel
 
 # SSH
