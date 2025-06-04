@@ -1,5 +1,5 @@
 
-apt_pkgs="python3-pip sshpass tree"
+apt_pkgs="make python3-pip sshpass tree virtualenv"
 echo "APT: Installing ${apt_pkgs}..."
 DEBIAN_FRONTEND=noninteractive apt-get install -y ${apt_pkgs} >/dev/null
 

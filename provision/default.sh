@@ -3,14 +3,15 @@ VAGRANT_HOME="/home/vagrant"
 # PACKAGEs
 
 ## Update package sources list on Debian OS Family
-which apt-get &>/dev/null && \
-    echo 'APT: Updating the list of packages...'; \
-    DEBIAN_FRONTEND=noninteractive apt-get update >/dev/null
+which apt-get &>/dev/null \
+      && echo 'APT: Updating the list of packages...' \
+      && DEBIAN_FRONTEND=noninteractive apt-get update \
+      && apt-get -y install build-essentials dkms zstd
 
 ## Install wget and the Vagrant dependencies on Red Hat OS Family
 which dnf &>/dev/null \
-    && echo 'DNF: Installing wget and Vagrant dependencies...'; \
-    dnf install -y wget kernel-devel kernel-headers gcc \
+    && echo 'DNF: Installing wget and Vagrant dependencies...' \
+    && dnf install -y wget kernel-devel-$(uname -r) kernel-headers-$(uname -r) gcc \
                   make perl elfutils-libelf-devel
 
 # SSH
