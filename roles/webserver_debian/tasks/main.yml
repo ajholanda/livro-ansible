@@ -1,5 +1,5 @@
 ---
-- name: Instala ou atualiza o apache2
+- name: Instala o apache2
   package:
     update_cache: true
     name: apache2
@@ -19,4 +19,11 @@
   template:
     src: site.conf.j2
     dest: /etc/apache2/sites-available/site.conf
+  notify: restart apache2
+
+- name: Habilita a configuração do site via link simbólico
+  file:
+    src: /etc/apache2/sites-available/site.conf
+    dest: /etc/apache2/sites-enabled/site.conf
+    state: link
   notify: restart apache2
