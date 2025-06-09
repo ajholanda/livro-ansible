@@ -1,4 +1,3 @@
-# webserver-distro.yml
 ---
 - name: Administra servidores web
   hosts: webservers
