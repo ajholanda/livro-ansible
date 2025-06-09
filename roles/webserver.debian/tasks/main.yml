@@ -1,6 +1,4 @@
-- name: Garante a execução em distros baseada na Debian
-  assert: { that: "ansible_os_family | lower == 'debian'" }
-
+---
 - name: Instala ou atualiza o apache2
   package:
     update_cache: true
