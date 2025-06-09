@@ -17,7 +17,6 @@
 
 - name: Copia o arquivo de configuração
   template:
-    src: 000-default.conf.j2
-    dest: /etc/apache2/sites-available/000-default.conf
-  notify:
-    - restart apache2
+    src: site.conf.j2
+    dest: /etc/apache2/sites-available/site.conf
+  notify: restart apache2
