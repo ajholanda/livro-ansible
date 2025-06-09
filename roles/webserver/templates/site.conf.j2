@@ -1,0 +1,9 @@
+# {{ ansible_managed }}
+<VirtualHost *:{{ webserver_http_port }}>
+   ServerAdmin webmaster@localhost
+   ServerName example.net
+   ServerAlias www.example.net
+   DocumentRoot {{ webserver_document_root }}
+   ErrorLog ${APACHE_LOG_DIR}/error.log
+   CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
