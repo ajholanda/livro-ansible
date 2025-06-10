@@ -1,9 +1,7 @@
 # {{ ansible_managed }}
-# webserver/templates/000-default.conf.j2
-<VirtualHost *:{{ webserver_port }}>
+<VirtualHost *:{{ webserver_debian_port }}>
    ServerAdmin webmaster@localhost
-   ServerName example.net
-   ServerAlias www.example.net
+   ServerName {{ inventory_hostname }}
    DocumentRoot /var/www/html
    ErrorLog /var/log/apache2/error.log
    CustomLog /var/log/apache2/access.log combined
