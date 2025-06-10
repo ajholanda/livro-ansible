@@ -32,4 +32,4 @@
     src: /etc/apache2/sites-available/site.conf
     dest: /etc/apache2/sites-enabled/site.conf
     state: link
-  notify: restart apache2
+  notify: Restart apache2
