@@ -1,9 +1,46 @@
 ---
-- name: Carrega as tarefas para sistemas da família {{ ansible_os_family }}
-  include_tasks:
-    file: "{{ item }}"
-  with_first_found:
-    - files:
-      - "{{ ansible_os_family | lower }}.yml"
-      skip: true
+- name: Carrega variáveis da família do sistema operacional
+  ansible.builtin.include_vars:
+    file: "{{ role_path }}/vars/{{ ansible_os_family | lower }}.yml"
+  tags: webserver
+
+- name: Instala ou atualiza o Apache
+  ansible.builtin.package:
+    update_cache: true
+    name: "{{ webserver_package }}"
+  tags: webserver
+
+- name: Habilita e inicializa o Apache
+  ansible.builtin.service:
+    name: "{{ webserver_service }}"
+    enabled: true
+    state: started
+  tags: webserver
+
+- name: Copia a página teste
+  ansible.builtin.copy:
+    src: index.html
+    dest: "{{ webserver_document_root }}/index.html"
+    owner: "{{ webserver_user }}"
+    group: "{{ webserver_group }}"
+    mode: "0644"
+  tags: webserver
+
+- name: Copia o arquivo de configuração
+  ansible.builtin.template:
+    src: site.conf.j2
+    dest: "{{ webserver_confdir | mandatory }}/site.conf"
+    owner: "{{ webserver_user }}"
+    group: "{{ webserver_group }}"
+    mode: "0644"
+  notify: Restart apache
+  tags: webserver
+
+- name: Habilita o site padrão via link simbólico (família Debian)
+  ansible.builtin.file:
+    src: "{{ webserver_confdir | mandatory }}/site.conf"
+    dest: "/etc/apache2/sites-enabled/site.conf"
+    state: link
+  notify: Restart apache
+  when: ansible_os_family == 'Debian'
   tags: webserver
