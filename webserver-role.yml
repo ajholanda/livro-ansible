@@ -1,4 +1,3 @@
-# webserver-role.yml
 ---
 - name: Administra servidores web
   hosts: webservers
