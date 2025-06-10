@@ -1,5 +1,5 @@
-# webserver/handlers/main.yml
-- name: restart apache2
-  service:
+---
+- name: Restart apache2
+  ansible.builtin.service:
     name: apache2
     state: restarted
