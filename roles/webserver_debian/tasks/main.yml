@@ -13,13 +13,19 @@
 - name: Copia a página teste
   ansible.builtin.copy:
     src: index.html
+    owner: www-data
+    group: www-data
+    mode: "0644"
     dest: /var/www/html/
 
 - name: Copia o arquivo de configuração
   ansible.builtin.template:
     src: site.conf.j2
     dest: /etc/apache2/sites-available/site.conf
-  notify: restart apache2
+    owner: www-data
+    group: www-data
+    mode: "0644"
+  notify: Restart apache2
 
 - name: Habilita a configuração do site via link simbólico
   ansible.builtin.file:
