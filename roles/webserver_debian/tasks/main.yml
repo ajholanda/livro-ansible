@@ -27,7 +27,7 @@
     mode: "0644"
   notify: Restart apache2
 
-- name: Habilita a configuração do site via link simbólico
+- name: Ativa a configuração do site via link simbólico
   ansible.builtin.file:
     src: /etc/apache2/sites-available/site.conf
     dest: /etc/apache2/sites-enabled/site.conf
