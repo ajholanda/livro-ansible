@@ -1,5 +1,8 @@
 # Variáveis
-function exec_vars_cmds() {
+function c04() {
+	echo "Capítulo 4 - Variáveis"
+	echo "========================================"
+
 	# Special variables and When
 	ECHO "Executa o playbook webserver-Debian.yml"
 	RUN 'ansible-playbook webserver-Debian.yml'
