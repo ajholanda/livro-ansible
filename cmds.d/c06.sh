@@ -1,7 +1,9 @@
-# Gabarito
-function exec_template_cmds() {
-	# Gabaritos
+function c06() {
+	echo "Capítulo 6 - Gabarito (template)"
+	echo "========================================="
+
 	## Filtros
+	ECHO "Executa o playbook filters.yml para demonstrar o uso de filtros"
 	RUN 'ansible-playbook filters.yml'
 
 	## Controle de fluxo
