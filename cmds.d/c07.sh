@@ -1,6 +1,7 @@
-# Criptografia
-function exec_crypto_cmds() {
-	# Criptografia
+function c07() {
+	echo "Capítulo 7 - Criptografia"
+	echo "========================================="
+
 	## Criptografia de arquivos
 	ECHO "Executa o role rsyncserver usando o --vault-id"
 	RUN "ansible-playbook servers.yml --vault-id vault.txt --limit rsyncservers --tags rsyncserver"
@@ -12,5 +13,3 @@ function exec_crypto_cmds() {
 	ECHO "Ajusta senha para um usuário do MariaDB a partir de um vault"
 	RUN 'ansible-playbook servers.yml --limit dbservers --tags mariadbserver'
 }
-
-
