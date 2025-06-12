@@ -1,5 +1,8 @@
 # Playbook
-function exec_playbook_cmds() {
+function c03() {
+	echo "Capítulo 3 - Playbook"
+	echo "========================================"
+
 	ECHO "Executa o playbook webserver.yml"
 	RUN 'ansible-playbook webserver.yml'
 
@@ -47,7 +50,7 @@ function exec_playbook_cmds() {
 	ECHO "Lista as tarefas disponíveis em tags.yml filtrando por etiquetas"
 	RUN 'ansible-playbook tags.yml --list-tasks --tags debug,untagged'
 
-	# Erros
+	# Errors
 	ECHO "ERROS"
 	RUN 'ansible-playbook err.yml --tags err0'
 	RUN 'ansible-playbook err.yml --tags err1'
