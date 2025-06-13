@@ -36,7 +36,7 @@
   notify: Restart apache
   tags: webserver
 
-- name: Habilita o site padrão via link simbólico (família Debian)
+- name: Ativa o site padrão via link simbólico (família Debian)
   ansible.builtin.file:
     src: "{{ webserver_confdir | mandatory }}/site.conf"
     dest: "/etc/apache2/sites-enabled/site.conf"
