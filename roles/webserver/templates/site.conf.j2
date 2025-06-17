@@ -3,6 +3,6 @@
    ServerAdmin webmaster@localhost
    ServerName {{ inventory_hostname }}
    DocumentRoot {{ webserver_document_root }}
-   ErrorLog {{ webserver_logdir }}/error.log
-   CustomLog {{ webserver_logdir }}/access.log combined
+   ErrorLog {{ webserver_logdir | mandatory }}/error.log
+   CustomLog {{ webserver_logdir | mandatory }}/access.log combined
 </VirtualHost>
