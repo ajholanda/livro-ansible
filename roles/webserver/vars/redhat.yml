@@ -1,7 +1,7 @@
 ---
-webserver_confdir: '/etc/httpd/conf.d'
+webserver_confdir: /etc/httpd/conf.d
 webserver_group: apache
-webserver_logdir: '/var/log/httpd'
+webserver_logdir: /var/log/httpd
 webserver_package: httpd
 webserver_service: httpd
 webserver_user: apache
