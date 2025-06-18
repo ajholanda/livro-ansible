@@ -9,7 +9,8 @@ Para criar o ambiente de execução devemos:
 
 - Instalar o [Virtual Box](https://www.virtualbox.org/);
 - Instalar o [Vagrant](https://www.vagrantup.com/);
-- Executar o Vagrant dentro do diretório contendo os exemplos:
+- Clonar este [repostório](https://github.com/ajholanda/livro-ansible.git);
+- Executar o Vagrant usando o terminal dentro do repositório local:
 
 ```
 vagrant up
