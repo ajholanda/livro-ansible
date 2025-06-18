@@ -75,6 +75,10 @@ Os *links* dos guias de instalação dos programas usados no livro são listados
 
 - [yamllint](https://yamllint.readthedocs.io/en/stable/quickstart.html#installing-yamllint).
 
+### Boas práticas
+
+- Recomendações de [boas práticas para o Ansible](https://redhat-cop.github.io/automation-good-practices/).
+
 ## Contribuição
 
 Qualquer contribuição é bem-vinda. Basta abrir uma [solicitação de correção](https://github.com/ajholanda/ansible-automacao-ti/issues) ou enviar a [correção](https://github.com/ajholanda/ansible-automacao-ti/pulls).
