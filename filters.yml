@@ -1,6 +1,6 @@
 ---
-# filters.yml
-- hosts: lab
+- name: Exemplo de uso de filtros
+  hosts: lab
 
   vars:
     power_off_minute: 30
