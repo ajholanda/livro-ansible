@@ -4,19 +4,19 @@
   hosts: webservers
 
   tasks:
-  - name: Instala o apache
-    package:
-      name: apache2
-    tags: webserver, webserver_package
+    - name: Instala o apache
+      ansible.builtin.package:
+        name: apache2
+      tags: webserver, webserver_package
 
-  - name: Habilita e inicializa o apache
-    service:
-      name: apache2
-      enabled: yes
-      state: started
-    tags:
-      - webserver
-      - webserver_service
+    - name: Habilita e inicializa o apache
+      ansible.builtin.service:
+        name: apache2
+        enabled: true
+        state: started
+      tags:
+        - webserver
+        - webserver_service
 
   - name: Copia o arquivo de configuração
     copy:

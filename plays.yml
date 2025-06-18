@@ -3,10 +3,13 @@
   hosts: localhost
   tasks:
     - name: Executa tarefa do play 1
-      debug: msg="Tarefa do play 1"
+      ansible.builtin.debug:
+        msg: "Tarefa do play 1"
 
 # Play 2
-- hosts: web.example.net
+- name: Play 2
+  hosts: web.example.net
   tasks:
     - name: Executa tarefa do play 2
-      debug: msg="Tarefa do play 2"
+      ansible.builtin.debug:
+        msg: "Tarefa do play 2"
