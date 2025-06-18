@@ -33,7 +33,7 @@ Se quiser testar também para *hosts* com sistema Windows, descomente
 a linha com as configurações da máquina virtual com o sistema Windows
 no arquivo [Vagrantfile](Vagrantfile) e execute:
 ```
-bash ./cmds.sh c11       # capitulo 11
+bash ./cmds.sh c12       # capitulo 12
 ```
 
 Avisos:
