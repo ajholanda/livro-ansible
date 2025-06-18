@@ -9,7 +9,8 @@
   roles:
     - rsyncserver
 
-- hosts: servers
+- name: Carrega roles comuns para servidores
+  hosts: servers
   roles:
     - fail2ban
     - sshserver
