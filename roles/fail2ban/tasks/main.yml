@@ -34,5 +34,5 @@
       findtime = 350
       bantime = 600
     marker: "# {mark} ANSIBLE MANAGED BLOCK fail2ban.sshd"
-  notify: restart fail2ban
+  notify: Restart fail2ban
   tags: fail2ban
