@@ -1,6 +1,6 @@
 ---
 - name: Cria usuários
-  user:
+  ansible.builtin.user:
     name: "{{ item }}"
     shell: /bin/bash
   loop:

@@ -3,26 +3,30 @@
 # repositório de pacotes extras EPEL para
 # as distribuições derivadas da Red Hat.
 - name: Incluir o role package
-  include_role: name=package
+  ansible.builtin.include_role:
+    name: package
   tags: fail2ban
 
 - name: Instala
-  package: name=fail2ban
+  ansible.builtin.package:
+    name: fail2ban
   tags: fail2ban
 
 - name: Inicializa e habilita o serviço
-  service:
+  ansible.builtin.service:
     name: fail2ban
-    enabled: yes
+    enabled: true
     state: started
   tags: fail2ban
 
 - name: Personaliza a configuração do jail sshd
-  blockinfile:
+  ansible.builtin.blockinfile:
     path: /etc/fail2ban/jail.local
-    backup: yes
-    create: yes
-    mode: 0644
+    backup: true
+    create: true
+    owner: root
+    group: root
+    mode: "0644"
     block: |
       [sshd]
       enabled = true

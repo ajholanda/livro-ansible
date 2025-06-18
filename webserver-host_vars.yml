@@ -3,7 +3,7 @@
   hosts: webservers
   tasks:
   - name: Instala ou atualiza o php
-    package:
+    ansible.builtin.package:
       name: php
     when: >
       webserver_install_php is defined

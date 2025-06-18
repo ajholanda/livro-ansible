@@ -17,32 +17,37 @@
         groups: "{{ groupname }}"
 
   tasks:
-  - name: Cria o usuário de sistema {{ system_username }}
-    user:
-      name: "{{ system_username }}"
-    when: system_username is defined
+    - name: Cria o usuário de sistema {{ system_username }}
+      ansible.builtin.user:
+        name: "{{ system_username }}"
+      when: system_username is defined
 
-  - name: Garante a existência do grupo {{ groupname }}
-    group:
-      name: "{{ groupname }}"
-      state: present
+    - name: Garante a existência do grupo {{ groupname }}
+      ansible.builtin.group:
+        name: "{{ groupname }}"
+        state: present
 
-  - name: Cria usuários a partir de uma lista
-    user:
-      name: "{{ item }}"
-      state: present
-    loop: "{{ usernames }}"
+    - name: Cria usuários a partir de uma lista
+      ansible.builtin.user:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ usernames }}"
 
-  - name: Adiciona usuários aos grupos usando um dicionário
-    user:
-      name: "{{ item.name }}"
-      groups: "{{ item.groups }}"
-      append: yes
-    loop: "{{ user2groups }}"
+    - name: Adiciona usuários aos grupos usando um dicionário
+      ansible.builtin.user:
+        name: "{{ item.name }}"
+        groups: "{{ item.groups }}"
+        append: true
+      loop: "{{ user2groups }}"
 
-  # Variáveis
-  - name: Cria o diretório {{ apache_confdir }}/sites-enabled
-    file:
-      name: “{{ apache_confdir }}/sites-enabled"
-      state: directory
-    when: apache_confdir is defined
+    # Variáveis
+    - name: Cria o diretório de sites ativos na família Debian
+      ansible.builtin.file:
+        name: “{{ apache_confdir }}/sites-enabled"
+        state: directory
+        owner: www-data
+        group: www-data
+        mode: '0755'
+      when: >
+        apache_confdir is defined
+        and ansible_os_family == "Debian"

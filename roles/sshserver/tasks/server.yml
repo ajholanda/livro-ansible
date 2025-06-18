@@ -1,11 +1,11 @@
 ---
 - name: Altera as configurações do servidor ssh
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: /etc/ssh/sshd_config
     regexp: "^{{ item.re }}"
     line: "{{ item.ln }}"
     validate: "sshd -t -f %s"
-    backup: yes
+    backup: true
   with_items:
     - re: "PasswordAuthentication"
       ln: "PasswordAuthentication no"

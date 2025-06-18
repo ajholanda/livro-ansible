@@ -1,4 +1,4 @@
 ---
-- name: Include {{ ansible_system }} tasks
-  include_tasks: "{{ ansible_system }}.yml"
+- name: Carrega tarefas para sistemas {{ ansible_system }}
+  ansible.builtin.include_tasks: "{{ ansible_system | lower }}.yml"
   tags: libreoffice, win_chocolatey

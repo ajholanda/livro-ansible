@@ -1,18 +1,21 @@
 ---
-- hosts: web.example.net
+- name: Verifica a existência de um arquivo de certificados
+  hosts: web.example.net
 
   tasks:
-  - name: Captura o status do arquivo de certificados
-    stat:
-      path: /etc/ssl/certs/ca-certificates.crt
-    register: stat_register
+    - name: Captura o status do arquivo de certificados
+      ansible.builtin.stat:
+        path: /etc/ssl/certs/ca-certificates.crt
+      register: stat_register
 
-  - name: Imprime o conteúdo do registro
-    debug: var=stat_register
+    - name: Imprime o conteúdo do registro
+      ansible.builtin.debug:
+        var: stat_register
 
-  - name: Gera uma variável booleana sobre a existência do arquivo
-    set_fact:
-      file_exists: "{{ stat_register.stat.exists | bool }}"
+    - name: Gera uma variável booleana sobre a existência do arquivo
+      ansible.builtin.set_fact:
+        file_exists: "{{ stat_register.stat.exists | bool }}"
 
-  - name: Imprime o conteúdo da variável file_exists
-    debug: var=file_exists
+    - name: Imprime o conteúdo da variável file_exists
+      ansible.builtin.debug:
+        var: file_exists

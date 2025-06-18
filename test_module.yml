@@ -1,21 +1,26 @@
 ---
-- hosts: localhost
+- name: Testa o módulo fstab
+  hosts: localhost
   connection: local
   gather_facts: false
 
   tasks:
-  - name: 1. Garante que o caminho para montagem exista.
-    file:
-      path: /home/nfs
-      state: directory
+    - name: 1. Garante que o caminho para montagem exista.
+      ansible.builtin.file:
+        path: /home/nfs
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
 
-  - name: 2. Adiciona entrada em /etc/fstab.
-    fstab:
-      spec: '192.168.64.16:/home'
-      path: /home/nfs
-      type: nfs
-      options: 'rsize=8192,wsize=65536,timeo=14,intr'
-    register: results
+    - name: 2. Adiciona entrada em /etc/fstab.
+      fstab:
+        spec: '192.168.64.16:/home'
+        path: /home/nfs
+        type: nfs
+        options: 'rsize=8192,wsize=65536,timeo=14,intr'
+      register: results
 
-  - name: 3. Imprime as informações do módulo fstab.
-    debug: var=results
+    - name: 3. Imprime as informações do módulo fstab.
+      ansible.builtin.debug:
+        var: results

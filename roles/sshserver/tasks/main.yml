@@ -1,19 +1,19 @@
 ---
 - name: Carrega tarefas do sistema {{ ansible_system }}
-  include_tasks:
+  ansible.builtin.include_tasks:
     file: "{{ item }}"
   with_first_found:
     - files:
-      - "{{ ansible_system | lower }}.yml"
+        - "{{ ansible_system | lower }}.yml"
       skip: true
   tags: sshserver
 
 - name: Inclui tarefas do arquivo server.yml
-  include_tasks: server.yml
+  ansible.builtin.include_tasks: server.yml
   when: inventory_hostname in groups['servers']
   tags: sshserver
 
 - name: Inclui tarefas do arquivo workstation.yml
-  include_tasks: workstation.yml
+  ansible.builtin.include_tasks: workstation.yml
   when: inventory_hostname in groups['workstations']
   tags: sshserver

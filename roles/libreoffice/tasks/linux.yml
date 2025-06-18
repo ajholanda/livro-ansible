@@ -1,6 +1,6 @@
 ---
 - name: Gerenacia o libreoffice [{{ libreoffice_state }}]
-  package:
+  ansible.builtin.package:
     name: libreoffice
     state: "{{ libreoffice_state }}"
   tags: libreoffice

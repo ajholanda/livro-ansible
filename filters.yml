@@ -14,49 +14,49 @@
       - video
 
   tasks:
-  # mandatory
-  - name: Cria uma entrada na crontab para desligar o computador
-    cron:
-      name: "shutdown at"
-      weekday: "{{ power_off_weekday }}"
-      hour: "{{ power_off_hour | mandatory }}"
-      minute: "{{ power_off_minute |  mandatory }}"
-      user: root
-      job: "/sbin/shutdown -h now"
+    # mandatory
+    - name: Cria uma entrada na crontab para desligar o computador
+      ansible.builtin.cron:
+        name: "shutdown at"
+        weekday: "{{ power_off_weekday }}"
+        hour: "{{ power_off_hour | mandatory }}"
+        minute: "{{ power_off_minute | mandatory }}"
+        user: root
+        job: "/sbin/shutdown -h now"
 
-  # int (data type)
-  - name: Cria uma entrada na crontab para desligar o computador
-    cron:
-      name: "shutdown at"
-      weekday: "{{ power_off_weekday }}"
-      hour: "{{ power_off_hour | mandatory | int }}"
-      minute: "{{ power_off_minute |  mandatory | int }}"
-      user: root
-      job: "/sbin/shutdown -h now"
+    # int (data type)
+    - name: Cria uma entrada na crontab para desligar o computador
+      ansible.builtin.cron:
+        name: "shutdown at"
+        weekday: "{{ power_off_weekday }}"
+        hour: "{{ power_off_hour | mandatory | int }}"
+        minute: "{{ power_off_minute | mandatory | int }}"
+        user: root
+        job: "/sbin/shutdown -h now"
 
-  # default
-  - name: Cria uma entrada na crontab para desligar o computador
-    cron:
-      name: "shutdown at"
-      weekday: "{{ power_off_weekday | default('*') }}"
-      hour: "{{ power_off_hour | mandatory | int }}"
-      minute: "{{ power_off_minute |  mandatory | int }}"
-      user: root
-      job: "/sbin/shutdown -h now"
+    # default
+    - name: Cria uma entrada na crontab para desligar o computador
+      ansible.builtin.cron:
+        name: "shutdown at"
+        weekday: "{{ power_off_weekday | default('*') }}"
+        hour: "{{ power_off_hour | mandatory | int }}"
+        minute: "{{ power_off_minute | mandatory | int }}"
+        user: root
+        job: "/sbin/shutdown -h now"
 
-  # lower
-  - name: Instala ou atualiza o apache
-    package:
-      name: apache2
-    when: ansible_distribution | lower == "debian"
+    # lower
+    - name: Instala ou atualiza o apache
+      ansible.builtin.package:
+        name: apache2
+      when: ansible_distribution | lower == "debian"
 
-  # join
-  - name: Cria usuário e adiciona em alguns grupos do sistema
-    user:
-      name: ajh
-      comment: "Adriano J. Holanda"
-      shell: /bin/bash
-      createhome: yes
-      home: /home/ajh
-      groups: "{{ system_groups | join(',') }}"
-      append: yes
+    # join
+    - name: Cria usuário e adiciona em alguns grupos do sistema
+      ansible.builtin.user:
+        name: ajh
+        comment: "Adriano J. Holanda"
+        shell: /bin/bash
+        createhome: true
+        home: /home/ajh
+        groups: "{{ system_groups | join(',') }}"
+        append: true

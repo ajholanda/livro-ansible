@@ -1,10 +1,11 @@
 ---
 - name: Instala o pacote dnf-automatic
-  package: name=dnf-automatic
+  ansible.builtin.package:
+    name: dnf-automatic
   tags: update
 
 - name: Habilita e inicializa o serviço dnf-automatic
-  service:
+  ansible.builtin.service:
     name: dnf-automatic
     enabled: true
     state: started

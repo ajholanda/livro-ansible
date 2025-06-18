@@ -1,10 +1,11 @@
 ---
-- hosts: localhost
+- name: Inclui um arquivo de tarefas
+  hosts: localhost
   connection: local
 
   tasks:
     - name: Inclui o arquivo task.yml
-      include_tasks: tasks/task.yml
+      ansible.builtin.include_tasks: tasks/task.yml
       loop:
         - 1
         - 2
@@ -14,10 +15,10 @@
 - name: Aciona um manipulador definido em outro arquivo
   hosts: web.example.net
   handlers:
-    - name: restart apache
-      include_tasks: tasks/restart_apache.yml
+    - name: Restart apache
+      ansible.builtin.include_tasks: tasks/restart_apache.yml
 
   tasks:
     - name: Aciona o manipulador
-      command: "true"
-      notify: restart apache
+      ansible.builtin.command: "true"
+      notify: Restart apache

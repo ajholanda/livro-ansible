@@ -1,10 +1,10 @@
 ---
 - name: Instala o httpd
-  package:
+  ansible.builtin.package:
     name: httpd
 
 - name: Habilita e inicializa o httpd
-  service:
+  ansible.builtin.service:
     name: httpd
-    enabled: yes
+    enabled: true
     state: started

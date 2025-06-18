@@ -1,12 +1,16 @@
 ---
-- name: Instala/atualiza
-  package: name=sssd
+- name: Instala o SSSD
+  ansible.builtin.package:
+    name: sssd
 
 - name: Copia o arquivo de configuração
-  template:
+  ansible.builtin.template:
     src: sssd.conf.j2
     dest: /etc/sssd/sssd.conf
     mode: "0600"
 
 - name: Habilita e reinicializa o serviço
-  service: name=sssd enabled=yes state=restarted
+  ansible.builtin.service:
+    name: sssd
+    enabled: true
+    state: restarted

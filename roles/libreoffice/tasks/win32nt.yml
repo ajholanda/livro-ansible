@@ -1,6 +1,6 @@
 ---
 - name: Gerencia o LibreOffice [{{  libreoffice_state }}]
-  win_chocolatey:
+  chocolatey.chocolatey.win_chocolatey:
     name: libreoffice
     state: "{{ libreoffice_state }}"
   tags: libreoffice, win_chocolatey

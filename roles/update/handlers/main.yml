@@ -1,6 +1,10 @@
 ---
-- name: restart unattended-upgrades
-  service: name=unattended-upgrades state=restarted
+- name: Restart unattended-upgrades
+  ansible.builtin.service:
+    name: unattended-upgrades
+    state: restarted
 
-- name: restart dnf-automatic
-  service: name=dnf-automatic state=restarted
+- name: Restart dnf-automatic
+  ansible.builtin.service:
+    name: dnf-automatic
+    state: restarted

@@ -1,6 +1,6 @@
 ---
 - name: Inclui tarefas para o gerenciador de pacotes
-  include_tasks: "{{ ansible_pkg_mgr }}.yml"
+  ansible.builtin.include_tasks: "{{ ansible_pkg_mgr }}.yml"
   when: |
     ansible_pkg_mgr is defined
     and (ansible_pkg_mgr == "apt"
@@ -8,7 +8,7 @@
   tags: update
 
 - name: Inclui tarefas para o sistema Windows
-  include_tasks: windows.yml
+  ansible.builtin.include_tasks: windows.yml
   when: ansible_os_family|lower == "windows"
-  tags: 
+  tags:
     - win_updates

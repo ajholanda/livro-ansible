@@ -1,9 +1,12 @@
 ---
 - name: Elimina a requisição de senha
-  copy:
+  ansible.builtin.copy:
     dest: "/etc/sudoers.d/{{ item }}"
     content: "{{ item }} ALL=(ALL) NOPASSWD:ALL"
     validate: 'visudo -cf %s'
+    owner: root
+    group: root
+    mode: "0440"
   loop: ['aft', 'ajh', 'dcs', 'epb', 'mtm', 'tbc']
   when: ansible_system == "Linux"
   tags: sudo
