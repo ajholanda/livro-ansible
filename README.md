@@ -57,9 +57,11 @@ vagrant up
 
 ## Informações complementares
 
-As informações complementares são aquelas que podem ser encontradas facilmente
-usando um sistema de busca e possuem grande variabilidade relacionada ao sistema
-operacional ou distribuição Linux.
+As informações complementares ampliam o conteúdo apresentado no livro,
+mas não foram incluídas diretamente em seu texto, por serem
+facilmente encontradas por meio de sistemas de busca ou
+apresentarem grande variabilidade conforme o sistema operacional
+ou a distribuição Linux utilizada.
 
 ### Instalação
 
