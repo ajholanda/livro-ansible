@@ -18,17 +18,20 @@
         - webserver
         - webserver_service
 
-  - name: Copia o arquivo de configuração
-    copy:
-      src: files/000-default.conf
-      dest: /etc/apache2/sites-available/000-default.conf
-    notify:
-      - restart apache2
-    when: ansible_os_family|lower == "debian"
-    tags: webserver, webserver_copy
+    - name: Copia o arquivo de configuração
+      ansible.builtin.copy:
+        src: files/000-default.conf
+        dest: /etc/apache2/sites-available/000-default.conf
+        owner: www-data
+        group: www-data
+        mode: '0644'
+      notify:
+        - Restart apache2
+      when: ansible_os_family | lower == "debian"
+      tags: webserver, webserver_copy
 
   handlers:
-  - name: restart apache2
-    service:
-      name: apache2
-      state: restarted
+    - name: Restart apache2
+      ansible.builtin.service:
+        name: apache2
+        state: restarted
