@@ -11,21 +11,20 @@ function c02 {
     ECHO "Remove o pacote apache2 nos hosts do grupo webservers"
     RUN 'ansible webservers -i hosts.ini -m package -a "name=apache2 state=absent" --become'
 
-    # TODO: find and evaluate this command in the manuscript
-    ECHO "+Instala o pacote httpd usando o módulo dnf, ok nas distribuições derivadas da RedHat"
-    RUN 'ansible w3.example.net -i hosts.ini -m dnf -a name=httpd --become'
-
     ECHO "Instalação do pacote apache2 sem a inclusão explícita do arquivo de inventário"
     RUN 'ansible web.example.net -m package -a name=apache2'
 
     ECHO "Lista de parâmetros do arquivo de configuração do ansible"
-    RUN "ansible-config list | cat | head -32"
+    RUN "ansible-config list"
 
-    ECHO "Instala o programa git nos hosts do grupo lab:"
+    ECHO "Instala o programa git nos hosts do grupo lab"
     RUN 'ansible lab -m package -a name=git'
 
     ECHO "Copia o arquivo /etc/resolv.conf do controlador para os hosts pertencentes ao grupo lab"
     RUN 'ansible lab -m copy -a "src=/etc/resolv.conf dest=/etc/"'
+
+    ECHO "Copia files/site.conf para /etc/apache2/sites-available em web.example.net"
+    RUN "ansible web.example.net -m copy -a \"src=files/site.conf dest=/etc/apache2/sites-available\""
 
     ECHO "Pega o arquivo /var/log/apache2/access.log de web.example.net"
     RUN 'ansible web.example.net -m fetch -a "src=/var/log/apache2/access.log dest=/tmp/"'
