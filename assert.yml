@@ -60,27 +60,3 @@
               2) Arquitetura de 64 bits.
               3) Ter pelo menos 4GB de memória RAM.
               4) Ter pelo menos 4 CPUs virtuais (threads).
- 
-- hosts: webservers
-  gather_facts: true
-  vars:
-    srv:
-      Debian: apache2
-      RedHat: httpd
-
-  tasks:
-    - name: Testa algumas condições para o apache
-      tags: apache
-      block:
-        - name: Checa se o apache está executando
-          ansible.builtin.shell: |
-            systemctl is-active apache2 || systemctl is-active httpd
-          register: ret
-          ignore_errors: yes  # Evita falha no playbook quando o apache está parado.
-
-        - ansible.builtin.assert:
-            that:
-              - ret.stdout == "active"
-              - service('apache2').is_running
-            msg: "Apache não está sendo executado!"
-            quiet: true
