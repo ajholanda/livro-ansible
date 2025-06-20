@@ -16,33 +16,39 @@
     - name: Testa se senha está criptografada
       tags: crypto
       block:
-        - ansible.builtin.assert:
+        - name: Verifica se a senha está criptografada
+          ansible.builtin.assert:
             that: ok_pass is vault_encrypted
             fail_msg: "A senha deve estar criptografada!"
             success_msg: "Senha ok!"
 
-        - ansible.builtin.assert:
+        - name: Verifica se a senha está em texto simples
+          ansible.builtin.assert:
             that: txt_pass is vault_encrypted
             fail_msg: "A senha deve estar criptografada!"
             success_msg: "Senha ok!"
 
-        - ansible.builtin.debug:
+        - name: Imprime o aviso de interrupção da execução
+          ansible.builtin.debug:
             msg: "Interrompida a execução! Não chega aqui"
 
-    - name: Testa se senha está criptografada
+    - name: Testa os requisitos do Blender
       tags: blender
       block:
-        - ansible.builtin.assert:
+        - name: Verifica se a quantidade de memória é suficiente
+          ansible.builtin.assert:
             that: ansible_facts['memtotal_mb'] >= 4096
             fail_msg: "A quantidade de memória não atende aos requisitos mínimos!"
 
         - name: Instala o Blender
-          package: name=blender
+          ansible.builtin.package:
+            name: blender
 
     - name: Testa vários requisitos
       tags: reqts
       block:
-        - ansible.builtin.assert:
+        - name: Verifica se o computador atende aos requisitos
+          ansible.builtin.assert:
             that:
               - ansible_distribution == "Ubuntu"
               - ansible_userspace_bits == "64"

@@ -1,6 +1,6 @@
 ---
 - name: Desinstala os pacotes não oficiais
-  apt:
+  ansible.builtin.apt:
     pkg:
       - docker.io
       - docker-compose
@@ -10,7 +10,7 @@
   tags: docker
 
 - name: Instala dependências
-  apt:
+  ansible.builtin.apt:
     pkg:
       - ca-certificates
       - curl
@@ -18,18 +18,18 @@
   tags: docker
 
 - name: Adiciona a chave GPG oficial
-  apt_key:
+  ansible.builtin.apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
     keyring: /etc/apt/keyrings/docker.gpg
   tags: docker
 
 - name: Adiciona o repositório oficial
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
   tags: docker
 
 - name: Instala os pacotes oficiais
-  apt:
+  ansible.builtin.apt:
     update_cache: true
     pkg:
       - docker-ce
@@ -40,21 +40,20 @@
   tags: docker
 
 - name: Cria o grupo docker
-  group:
+  ansible.builtin.group:
     name: docker
   tags: docker
 
 - name: Adiciona o usuário atual no grupo docker
-  user:
+  ansible.builtin.user:
     name: "{{ lookup('ansible.builtin.env', 'USER') }}"
     groups: docker
     append: true
   tags: docker
 
 - name: Habilita e inicia o serviço docker
-  service:
+  ansible.builtin.service:
     name: docker
     enabled: true
     state: started
   tags: docker
-

@@ -1,5 +1,5 @@
 ---
 - name: Inclui tarefas para a distribuição {{ ansible_distribution }}
-  include_tasks: "{{ ansible_distribution|lower }}.yml"
+  ansible.builtin.include_tasks: "{{ ansible_distribution | lower }}.yml"
   tags: docker
-  when: ansible_distribution|lower == 'ubuntu'
+  when: ansible_distribution | lower == 'ubuntu'

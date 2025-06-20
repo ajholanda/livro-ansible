@@ -7,14 +7,14 @@
 
   tasks:
     - name: Instala as dependências
-      apt:
+      ansible.builtin.apt:
         pkg:
           - python3-pip
           - libssl-dev
       when: ansible_os_family == 'Debian'
 
     - name: Instala as dependências
-      dnf:
+      ansible.builtin.dnf:
         name:
           - gcc
           - python3-pip
@@ -24,7 +24,7 @@
       when: ansible_os_family == 'RedHat'
 
     - name: Instala o Ansible Molecule, o plugin Docker e o Testinfra
-      pip:
+      ansible.builtin.pip:
         name:
           - molecule
           - molecule-plugins[docker]

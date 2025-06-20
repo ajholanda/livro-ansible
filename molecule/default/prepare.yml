@@ -4,6 +4,6 @@
 
   tasks:
     - name: Instala os pacotes necessários para o teste
-      package:
+      ansible.builtin.package:
         update_cache: true
         name: curl
