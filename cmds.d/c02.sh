@@ -35,6 +35,9 @@ function c02 {
     ECHO "Executa o comando stat no arquivo w3.example.net:/etc/passwd"
     RUN "ansible w3.example.net -m stat -a \"path=/etc/passwd\""
 
+    ECHO "Cria o link simbólico que habilita no Apache o site configurado em /etc/sites-available/site.conf em web.example.net"
+    RUN "ansible web.example.net -m file -a \"src=/etc/apache2/sites-available/site.conf dest=/etc/apache2/sites-enabled/site.conf state=link\""
+
     ECHO "Cria o diretório /home/nfs, se não existir, nos hosts do grupo lab"
     RUN 'ansible lab -m file -a "path=/home/nfs state=directory"'
 
@@ -45,5 +48,5 @@ function c02 {
     RUN 'ansible devs -m file -a "path=/tmp/texput.log state=absent"'
 
     ECHO "Lista usauário que autenticaram em todos os hosts"
-    RUN 'ansible servers -m shell -a last | head -16'
+    RUN 'ansible servers -m shell -a last'
 }
