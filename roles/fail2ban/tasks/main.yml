@@ -7,7 +7,7 @@
     name: package
   tags: fail2ban
 
-- name: Instala
+- name: Instala o Fail2ban
   ansible.builtin.package:
     name: fail2ban
   tags: fail2ban
