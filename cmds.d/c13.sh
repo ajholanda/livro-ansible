@@ -32,4 +32,3 @@ function c13() {
 	ECHO "Instala o PostgreSQL no contêiner dos hosts do grupo cloud"
 	RUN "ansible-playbook docker.yml --tags docker_postgres"
 }
-

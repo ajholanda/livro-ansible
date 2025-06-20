@@ -20,8 +20,8 @@
 
     - name: Copia o arquivo de configuração
       ansible.builtin.copy:
-        src: files/000-default.conf
-        dest: /etc/apache2/sites-available/000-default.conf
+        src: files/site.conf
+        dest: /etc/apache2/sites-available/site.conf
         owner: www-data
         group: www-data
         mode: '0644'

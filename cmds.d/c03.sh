@@ -12,6 +12,10 @@ function c03() {
 	ECHO "Inicia a execução do playbook webserver.yml a partir da segunda tarefa"
 	RUN 'ansible-playbook webserver.yml --start-at-task "Habilita e inicializa o apache"'
 
+	# Plays
+	ECHO 'Lista os plays do playbook plays.yml'
+	RUN 'ansible-playbook plays.yml --list-tasks'
+
 	# Tags
 	ECHO "Seleciona etiqueta no playbook webserver.yml"
 	RUN 'ansible-playbook webserver.yml --tags webserver_package'
@@ -82,9 +86,7 @@ function c03() {
 	ECHO 'Limitação de include_tasks para listar etiquetas dos arquivos incluídos'
 	RUN 'ansible-playbook include_tasks.yml --list-tags'
 
-	# Plays
-	ECHO 'Lista os plays do playbook plays.yml'
-	RUN 'ansible-playbook plays.yml --list-tasks'
+	ECHO 'Limitação de include_tasks de começar em tarefa de playbook incluído'
+	RUN "ansible-playbook include_tasks.yml --start-at-task \"Imprime o número da tarefa\""
 }
-
 

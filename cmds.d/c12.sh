@@ -16,5 +16,3 @@ function c12() {
 	ECHO "Gerencia usuários no Windows"
 	RUN "ansible-playbook  desktops.yml --tags user --limit windows"
 }
-
-

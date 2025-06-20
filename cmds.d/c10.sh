@@ -12,7 +12,7 @@ function c10() {
     RUN "ansible-lint -c lint-config.yml lint_v1.yml"
 
     ECHO "Verifica a sintaxe do arquivo lint_v2.yml."
-    RUN "ansible-lint lint_v2.yml"
+    RUN "ansible-lint lint_v2.yml (omitido no livro)"
 
     ECHO "Lista todas as regras do ansible-lint."
     RUN "ansible-lint --list-rules --verbose"
@@ -24,4 +24,3 @@ function c10() {
     ECHO "Abre um sessão de depuração após a falha no playbook."
     RUN "ansible-playbook debugger.yml"
 }
-
