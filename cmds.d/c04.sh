@@ -22,9 +22,10 @@ function c04() {
 	ECHO "Executa o playbook webserver-host_vars.yml"
 	RUN 'ansible-playbook webserver-host_vars.yml'
 
+	ECHO "Executa o playbook all-group_vars.yml"
+	RUN 'ansible-playbook all-group_vars.yml'
+
 	# Register
-	ECHO "Usa register para armazenar o status de um arquivo"
+	ECHO "Usa register para armazenar o status de um arquivo (omitido no livro)"
 	RUN 'ansible-playbook register.yml'
 }
-
-
