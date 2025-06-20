@@ -30,8 +30,9 @@
           - molecule
           - molecule-plugins[docker]
           - pytest-testinfra
-      register: molecule_install
+      notify: Logout warning
 
-    - debug:
+  handlers:
+    - name: Logout warning
+      ansible.builtin.debug:
         msg: "Talvez você tenha que fazer logout e login para usar o Molecule"
-      when: molecule_install.changed
