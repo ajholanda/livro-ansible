@@ -25,6 +25,19 @@ function c04() {
 	ECHO "Executa o playbook all-group_vars.yml"
 	RUN 'ansible-playbook all-group_vars.yml'
 
+	# loop_control
+	ECHO "Mostra o conflito com laços internos de estruturas ou arquivos incorporados"
+	RUN 'ansible-playbook loop.yml --tags conflito'
+
+	ECHO "Mostra a resolução de colisão com laços internos pelo uso de loop_control"
+	RUN 'ansible-playbook loop.yml --tags controle'
+
+	ECHO "Uso de loop_control com lista de dicionários"
+	RUN 'ansible-playbook loop.yml --tags users'
+
+	ECHO "Como extrair o índice de cada elemento de um laço instrumentalizado com loop_control"
+	RUN 'ansible-playbook loop.yml --tags index'
+
 	# Register
 	ECHO "Usa register para armazenar o status de um arquivo (omitido no livro)"
 	RUN 'ansible-playbook register.yml'
