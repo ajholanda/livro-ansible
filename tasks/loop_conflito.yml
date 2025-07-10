@@ -1,0 +1,8 @@
+---
+- name: Mostra o conflito com o laço de repetição externo
+  ansible.builtin.debug:
+    msg: "{{ item }}"
+  loop:
+    - "Entra em colisão"
+    - "com o laço externo."
+  tags: conflito

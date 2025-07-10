@@ -1,0 +1,40 @@
+---
+- name: Demonstração do uso de loop_control
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: Inclui tarefas de arquivos
+      ansible.builtin.include_tasks:
+        file: "{{ item }}"
+      loop:
+        - tasks/loop_conflito.yml
+        - tasks/loop_controle.yml
+      tags: conflito, controle
+
+    - name: Lista de dicionários
+      ansible.builtin.debug:
+        msg: "Usuário nome={{ u_item.user }} uid={{ u_item.uid }}"
+      loop:
+        - user: ajh
+          uid: 1001
+        - user: dcs
+          uid: 1002
+        - user: tbc
+          uid: 1003
+      loop_control:
+        loop_var: u_item
+      tags: users
+
+    - name: Índice do elemento do laço
+      ansible.builtin.debug:
+        msg: "Índice {{ idx }}: {{ u_item }}"
+      loop:
+        - ajh
+        - dcs
+        - tbc
+      loop_control:
+        loop_var: u_item
+        index_var: idx
+      tags: index

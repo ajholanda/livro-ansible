@@ -1,0 +1,10 @@
+---
+- name: Mostra a resolução da colisão com o laço de repetição externo
+  ansible.builtin.debug:
+    msg: "{{ debug_item }}"
+  loop:
+    - "O conflito foi resolvido"
+    - "com o uso de loop_control."
+  loop_control:
+    loop_var: debug_item
+  tags: controle
