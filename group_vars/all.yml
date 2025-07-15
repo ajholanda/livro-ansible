@@ -5,4 +5,4 @@
 # - O prefixo "global_" foi adicionado para indicar o escopo.
 # - A convenção para nomes de variáveis pode ser encontrada em:
 # https://ansible.readthedocs.io/projects/lint/rules/var-naming/#settings
-global_admins:  ['ajh', 'dmr', 'ewd', 'klt']
+global_admins: ['ajh', 'dmr', 'ewd', 'klt']
