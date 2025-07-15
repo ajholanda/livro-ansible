@@ -9,7 +9,7 @@
       when: ansible_os_family == "Debian"
 
     - name: Habilita e inicializa o apache
-      service:
+      ansible.builtin.service:
         name: apache2
         enabled: true
         state: started
