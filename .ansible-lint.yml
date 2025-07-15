@@ -1,0 +1,5 @@
+skip_list:
+  - ignore-errors
+  - no-changed-when
+  - risky-file-permission
+  - var-naming
