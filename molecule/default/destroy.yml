@@ -9,7 +9,7 @@
     # is that during deletion, for some reason vagrant user is
     # used to wipe the directorycreated.
     - name: Fix Ansible temporary directory ownership
-      shell: chown -R vagrant:vagrant /home/vagrant/.ansible/
+      ansible.builtin.command: chown -R vagrant:vagrant /home/vagrant/.ansible/
       when: lookup('env', 'USER') == 'vagrant'
 
     - name: Populate instance config
