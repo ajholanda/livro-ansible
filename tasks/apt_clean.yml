@@ -1,6 +1,6 @@
 ---
 - name: Remove pacotes do cache e dependências que não são mais usadas
-  apt:
+  ansible.builtin.apt:
     autoclean: true
     autoremove: true
   tags: apt_clean
