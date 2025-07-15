@@ -1,5 +1,6 @@
 ---
-- hosts: workstations
+- name: Administra as estações de trabalho
+  hosts: workstations
 
   roles:
     - fail2ban
