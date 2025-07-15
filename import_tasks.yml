@@ -1,5 +1,6 @@
 ---
-- hosts: localhost
+- name: Uso de import_tasks
+  hosts: localhost
   connection: local
 
   vars:
@@ -11,7 +12,7 @@
 #      import_tasks: "{{ ansible_distribution }}.yml"
 
     - name: Valor da variável está disponível na fase de análise
-      import_tasks: "tasks/{{ pkgmgr }}_clean.yml"
+      ansible.builtin.import_tasks: "tasks/{{ pkgmgr }}_clean.yml"
 
 #    - name: Importa tarefas com laço
 #      import_tasks: tasks/task.yml
