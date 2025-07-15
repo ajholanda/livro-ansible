@@ -1,110 +1,123 @@
 ---
-- hosts: localhost
+- name: Erros
+  hosts: localhost
   vars:
     myvar: "My Variable"
 
   tasks:
-  # - name: Tarefa
-  #   debug: msg="Texto em aberto'
+    # - name: Tarefa
+    #   debug: msg="Texto em aberto'
 
-  # - name: Tarefa
-  #   debug: msg="{{ myvar }"
+    # - name: Tarefa
+    #   debug: msg="{{ myvar }"
 
-  # - name: Tarefa
-  # debug: msg="Texto ok"
+    # - name: Tarefa
+    # debug: msg="Texto ok"
 
-  # - name: Tentando dar um ping
-  #   pong:
+    # - name: Tentando dar um ping
+    #   pong:
 
-  # - name: Copia o arquivo de inventário
-  #   copy:
-  #     path: hosts.ini
-  #     dest: /etc/ansible/hosts
+    # - name: Copia o arquivo de inventário
+    #   copy:
+    #     path: hosts.ini
+    #     dest: /etc/ansible/hosts
 
-  - name: Comete erro
-    command: /bin/false
-    tags: err0
+    - name: Comete erro
+      ansible.builtin.command: /bin/false
+      tags: err0
 
-  - name: Tenta listar arquivo que não existe
-    command: ls /tmp/fooo.txt
-    tags: err1
+    - name: Tenta listar arquivo que não existe
+      ansible.builtin.command: ls /tmp/fooo.txt
+      tags: err1
 
-  - name: Ignora o erro
-    command: /bin/false
-    ignore_errors: true
-    tags: err2
+    - name: Ignora o erro
+      ansible.builtin.command: /bin/false
+      ignore_errors: true
+      tags: err2
 
-  - name: Não interpreta false como erro
-    command: /bin/false
-    register: status
-    failed_when: status.rc != 1
-    tags: err3
+    - name: Não interpreta false como erro
+      ansible.builtin.command: /bin/false
+      register: status
+      failed_when: status.rc != 1
+      tags: err3
 
-  - name: Arquivo não deve existir
-    command: ls /tmp/passwd
-    register: status
-    failed_when:
-      - status.rc != 0
-      - '"No such" not in status.stderr'
-    tags: err4
+    - name: Arquivo não deve existir
+      ansible.builtin.command: ls /tmp/passwd
+      register: status
+      failed_when:
+        - status.rc != 0
+        - '"No such" not in status.stderr'
+      tags: err4
 
-  - name: Checa conectividade
-    command: ping -c 1 web.example.net
-    register: status
-    failed_when: >
-      status.rc != 0
-      or "100% packet loss" in status.stdout
-    tags: err5
+    - name: Checa conectividade
+      ansible.builtin.command: ping -c 1 web.example.net
+      register: status
+      failed_when: >
+        status.rc != 0
+        or "100% packet loss" in status.stdout
+      tags: err5
 
-- hosts: lab
+- name: Ativa any_errors_fatal
+  hosts: lab
   any_errors_fatal: true
   tasks:
     - name: Usa any_errors_fatal
+      tags: err6
       block:
         - name: Primeira tarefa
-          debug: msg="Executa em todos os hosts"
+          ansible.builtin.debug:
+            msg: "Executa em todos os hosts"
 
         - name: Segunda tarefa falha somente em lab01
-          command: /bin/false
+          ansible.builtin.command: /bin/false
           when: inventory_hostname == "lab01.example.net"
 
         - name: Terceira tarefa
-          debug: msg="Nunca é executada"
-      tags: err6
+          ansible.builtin.debug:
+            msg: "Nunca é executada"
 
-- hosts: webservers
+- name: Atualiza o SO aceitando falhas
+  hosts: webservers
   max_fail_percentage: 40
   tasks:
     - name: Atualiza o SO (apt full-upgrade)
-      apt: upgrade=full
+      ansible.builtin.apt:
+        upgrade: full
       tags: err7
 
     - name: Aviso
-      debug: msg="Pelo menos 60% dos hosts foram atualizados"
+      ansible.builtin.debug:
+        msg: "Pelo menos 60% dos hosts foram atualizados"
       tags: err7
 
-- hosts: webservers
+- name: Executa manipuladores
+  hosts: webservers
   force_handlers: true
   tasks:
-  - name: Força execução dos manipuladores
-    block:
-      - name: Habilita o módulo userdir
-        command: a2enmod -q userdir
-        register: status
-        changed_when: '"Enabling" in status.stdout'
+    - name: Força execução dos manipuladores
+      tags: err8
+      when: ansible_os_family | lower == "debian"
+      block:
+        - name: Habilita o módulo userdir
+          ansible.builtin.command: a2enmod -q userdir
+          register: status
+          changed_when: '"Enabling" in status.stdout'
 
-      - name: Copia a configuração do módulo userdir
-        copy:
-          src: files/userdir.conf
-          dest: /etc/apache2/mods-available/userdir.conf
-        notify:
-          - restart apache2
+        - name: Copia a configuração do módulo userdir
+          ansible.builtin.copy:
+            src: files/userdir.conf
+            dest: /etc/apache2/mods-available/userdir.conf
+            owner: root
+            group: root
+            mode: '0755'
+          notify:
+            - Restart apache2
 
-      - name: Provoca falha na tarefa 3
-        command: /bin/false
-    tags: err8
-    when: ansible_os_family|lower == "debian"
+        - name: Provoca falha na tarefa 3
+          ansible.builtin.command: /bin/false
 
   handlers:
-  - name: restart apache2
-    service: name=apache2 state=restarted
+    - name: Restart apache2
+      ansible.builtin.service:
+        name: apache2
+        state: restarted
