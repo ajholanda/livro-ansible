@@ -6,12 +6,12 @@
   tasks:
     - name: Etiqueta always
       ansible.builtin.debug:
-        msg: "Sempre executa"
+        msg: "Executa (quase) sempre"
       tags: always
 
     - name: Etiqueta never
       ansible.builtin.debug:
-        msg: "Nunca executa"
+        msg: "Executa (quase) nunca"
       tags: never, debug
 
     - name: Sem etiqueta
