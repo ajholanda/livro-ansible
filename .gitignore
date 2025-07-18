@@ -9,4 +9,5 @@ roles/ajholanda.*
 */__pycache__/*
 *.log
 *.pyc
+tmp
 venv
