@@ -1,0 +1,9 @@
+---
+- name: Administra servidores web com php
+  hosts: webservers
+  roles:
+    - php
+  tags:
+    - php
+    - import_role
+    - include_role
