@@ -1,0 +1,22 @@
+---
+- name: Carrega o role webserver estaticamente
+  ansible.builtin.import_role:
+    name: webserver
+  tags:
+    - php
+    - import_role
+
+- name: Carrega o role webserver dinamicamente
+  ansible.builtin.include_role:
+    name: webserver
+  tags:
+    - php
+    - include_role
+
+- name: Instala o php
+  ansible.builtin.package:
+    name: php
+  tags:
+    - php
+    - import_role
+    - include_role
