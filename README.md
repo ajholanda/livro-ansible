@@ -73,6 +73,8 @@ Os *links* dos guias de instalação dos programas usados no livro são listados
 
 - [Ansible Molecule](https://ansible.readthedocs.io/projects/molecule/installation/);
 
+- [Chocolatey](https://chocolatey.org/install) (Windows);
+
 - [yamllint](https://yamllint.readthedocs.io/en/stable/quickstart.html#installing-yamllint).
 
 ### Boas práticas
