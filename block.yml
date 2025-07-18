@@ -25,6 +25,7 @@
           ansible.builtin.command: scp /tmp/datadump.sql nas.example.net:/backup/
           become: true
           become_user: "{{ backup_user }}"
+
       rescue:
         - name: Informa que houve erro durante o backup
           ansible.builtin.debug:
