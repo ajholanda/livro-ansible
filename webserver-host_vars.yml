@@ -2,7 +2,7 @@
 - name: Administra servidores web
   hosts: webservers
   tasks:
-    - name: Instala ou atualiza o php
+    - name: Instala o php
       ansible.builtin.package:
         name: php
       when: >

@@ -45,7 +45,7 @@
         job: "/sbin/shutdown -h now"
 
     # lower
-    - name: Instala ou atualiza o apache
+    - name: Instala o apache
       ansible.builtin.package:
         name: apache2
       when: ansible_distribution | lower == "debian"

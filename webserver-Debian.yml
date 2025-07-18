@@ -3,7 +3,7 @@
   hosts: webservers
 
   tasks:
-    - name: Instala ou atualiza o apache
+    - name: Instala o apache
       ansible.builtin.package:
         name: apache2
       when: ansible_os_family == "Debian"
