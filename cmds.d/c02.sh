@@ -48,5 +48,5 @@ function c02 {
     RUN 'ansible devs -m file -a "path=/tmp/texput.log state=absent"'
 
     ECHO "Lista usauário que autenticaram em todos os hosts"
-    RUN 'ansible servers -m shell -a last'
+    RUN 'ansible servers -m command -a last'
 }
