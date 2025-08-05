@@ -3,17 +3,19 @@ function c03() {
 	echo "Capítulo 3 - Playbook"
 	echo "========================================"
 
+	make webserver-0.yml
+
 	ECHO "Executa o playbook webserver.yml"
-	RUN 'ansible-playbook webserver.yml'
+	RUN 'ansible-playbook webserver-0.yml'
 
 	ECHO "Lista as tarefas do playbook webserver.yml"
-	RUN 'ansible-playbook webserver.yml --list-tasks'
+	RUN 'ansible-playbook webserver-0.yml --list-tasks'
 
 	ECHO "Lista os hosts do playbook webserver.yml"
-	RUN 'ansible-playbook webserver.yml --list-hosts'
+	RUN 'ansible-playbook webserver-0.yml --list-hosts'
 
 	ECHO "Inicia a execução do playbook webserver.yml a partir da segunda tarefa"
-	RUN 'ansible-playbook webserver.yml --start-at-task "Habilita e inicializa o apache"'
+	RUN 'ansible-playbook webserver-0.yml --start-at-task "Habilita e inicializa o apache"'
 
 	# Plays
 	ECHO 'Lista os plays do playbook plays.yml'
