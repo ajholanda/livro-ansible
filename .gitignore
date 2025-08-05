@@ -1,14 +1,15 @@
 *~
 *.swp
-ansible
+.ansible
 .bash_history
 .ssh
 .vagrant
 .viminfo
-roles/ajholanda.*
 */__pycache__/*
 *.log
 *.pyc
+ansible
+roles/ajholanda.*
 tmp
 venv
 webserver-0.yml
