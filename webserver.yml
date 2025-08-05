@@ -1,4 +1,3 @@
-# webserver.yml
 ---
 - name: Administra servidores web
   hosts: webservers
