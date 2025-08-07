@@ -85,13 +85,14 @@ function c03() {
 	ECHO 'Executa tarefas que usam include_tasks'
 	RUN 'ansible-playbook include_tasks.yml'
 
+	make include_tasks-0.yml
 	ECHO 'Limitação de include_tasks para listar tarefas dos arquivos incluídos'
-	RUN 'ansible-playbook include_tasks.yml --list-tasks'
+	RUN 'ansible-playbook include_tasks-0.yml --list-tasks'
 
 	ECHO 'Limitação de include_tasks para listar etiquetas dos arquivos incluídos'
-	RUN 'ansible-playbook include_tasks.yml --list-tags'
+	RUN 'ansible-playbook include_tasks-0.yml --list-tags'
 
 	ECHO 'Limitação de include_tasks de começar em tarefa de playbook incluído'
-	RUN "ansible-playbook include_tasks.yml --start-at-task \"Imprime o número da tarefa\""
+	RUN "ansible-playbook include_tasks-0.yml --start-at-task \"Imprime o número da tarefa\""
 }
 
