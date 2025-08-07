@@ -1,11 +1,11 @@
 ---
-- name: Garante que a imagem com o PHP e Apache esteja presente  # 1.
+- name: Garante que a imagem com o PHP e Apache esteja presente
   community.docker.docker_image:
     name: "php:apache"
     source: pull
   tags: docker_php_apache
 
-- name: Garante que o diretório de armazenamento de dados exista  # 2.
+- name: Garante que o diretório de armazenamento de dados exista
   ansible.builtin.file:
     path: "{{ docker_php_apache_volume | mandatory }}"
     state: directory
@@ -14,7 +14,7 @@
     mode: '0755'
   tags: docker_php_apache
 
-- name: Garante que o contêiner PHP esteja em execução  # 3.
+- name: Garante que o contêiner PHP esteja em execução
   community.docker.docker_container:
     name: "php_apache"
     image: "php:apache"
