@@ -8,5 +8,9 @@ webserver-0.yml: webserver.yml
 	head -18 $< | grep -v "tags\|- webserver" > $@ 
 TRASH += webserver-0.yml
 
+include_tasks-0.yml: include_tasks.yml
+	head -13 $< > $@
+TRASH += include_tasks-0.yml
+
 clean:
 	$(RM) $(TRASH)
