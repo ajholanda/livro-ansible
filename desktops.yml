@@ -18,7 +18,7 @@
       tags: vscode
 
 - name: Desktops da TI
-  hosts: infotech
+  hosts: ti
   roles:
     - role: ajholanda.x2goclient
       tags: x2goclient

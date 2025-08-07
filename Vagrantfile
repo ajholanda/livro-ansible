@@ -20,8 +20,8 @@ ips = {
   'lab01' => "#{TYPE2IP['ansible']}",
   'lab02' => "#{TYPE2IP['ansible']}",
   'lab03' => "#{TYPE2IP['ansible']}",
-  # [infotech]
-  'inf1' => "#{TYPE2IP['ansible']}",
+  # [ti]
+  'ti1' => "#{TYPE2IP['ansible']}",
   # [rsyncservers]
   'nas' => "#{TYPE2IP['debian']}",
   # [workstations]
