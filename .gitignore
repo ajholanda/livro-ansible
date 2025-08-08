@@ -1,13 +1,14 @@
-*~
-*.swp
 .ansible
 .bash_history
 .ssh
 .vagrant
 .viminfo
+*~
 */__pycache__/*
 *.log
+*.pem
 *.pyc
+*.swp
 ansible
 roles/ajholanda.*
 tmp
