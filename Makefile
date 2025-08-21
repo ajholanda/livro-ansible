@@ -17,9 +17,6 @@ ansible: $(VENV_DIR)
 collections: ansible
 	$(GALAXY) collection install -r requirements.yml
 
-azure: $(VENV_DIR)
-	$(PIP) install -r requirements-azure.txt
-
 # Alvo principal para configurar o virtualenv no .bashrc
 setup-bashrc:
 	@echo "Verificando se o virtualenv já está configurado no .bashrc..."
@@ -47,4 +44,4 @@ TRASH += include_tasks-0.yml
 clean:
 	$(RM) $(TRASH)
 
-.PHONY: all ansible azure collections lint setup-bashrc
+.PHONY: all ansible collections lint setup-bashrc
