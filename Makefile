@@ -17,6 +17,9 @@ ansible: $(VENV_DIR)
 collections: ansible
 	$(GALAXY) collection install -r requirements.yml
 
+docker:
+	ansible-playbook docker.yml --tags docker
+
 # Alvo principal para configurar o virtualenv no .bashrc
 setup-bashrc:
 	@echo "Verificando se o virtualenv já está configurado no .bashrc..."
