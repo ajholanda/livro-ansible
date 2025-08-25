@@ -17,8 +17,18 @@ ansible: $(VENV_DIR)
 collections: ansible
 	$(GALAXY) collection install -r requirements.yml
 
-azure: $(VENV_DIR)
-	$(PIP) install -r requirements-azure.txt
+/usr/bin/docker:
+	ansible-playbook docker.yml --tags docker
+
+/etc/ansible/inventory.py: inventory.py /etc/ansible
+	install $^
+TRASH += /etc/ansible/inventory.py
+
+/etc/ansible:
+	sudo mkdir -p $@ && sudo chown $(USER) $@
+
+aws:
+	ansible-galaxy collection install amazon.aws
 
 # Alvo principal para configurar o virtualenv no .bashrc
 setup-bashrc:
@@ -47,4 +57,4 @@ TRASH += include_tasks-0.yml
 clean:
 	$(RM) $(TRASH)
 
-.PHONY: all ansible azure collections lint setup-bashrc
+.PHONY: all aws ansible collections docker lint setup-bashrc
