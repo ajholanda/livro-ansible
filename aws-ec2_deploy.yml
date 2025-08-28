@@ -1,0 +1,9 @@
+---
+- name: Implantação do servidor web Apache
+  hosts: development
+  remote_user: ubuntu
+  become: true
+  tasks:
+    - name: Carrega o role do servidor web
+      include_role:
+        name: webserver
