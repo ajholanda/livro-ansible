@@ -29,8 +29,8 @@ TRASH += /etc/ansible/inventory.py
 	sudo mkdir -p $@ && sudo chown $(USER) $@
 
 aws:
-	ansible-galaxy collection install amazon.aws
-	pip install awscli boto3 botocore
+	$(GALAXY) collection install amazon.aws
+	$(PIP) install awscli boto3 botocore
 
 # Alvo principal para configurar o virtualenv no .bashrc
 setup-bashrc:
