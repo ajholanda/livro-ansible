@@ -114,6 +114,6 @@
           Project: web-ec2
       register: ec2_info
 
-    - name: Display instance information
+    - name: Exibe as informações da instância EC2
       ansible.builtin.debug:
         var: ec2_info
