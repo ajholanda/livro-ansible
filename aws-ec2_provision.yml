@@ -50,11 +50,32 @@
           Name: "{{ subnet_name }}"
       register: subnet
 
+    - name: Extrai informação sobre a tabela de roteamento principal
+      amazon.aws.ec2_vpc_route_table_info:
+        profile: default
+        region: "{{ region }}"
+        filters:
+          vpc-id: "{{ vpc.vpc.id }}"
+          "association.main": "true"
+      register: main_rt_info
+
+    - name: Adiciona uma rota para o gateway de internet na tabela de roteamento
+      amazon.aws.ec2_vpc_route_table:
+        profile: default
+        vpc_id: "{{ vpc.vpc.id }}"
+        route_table_id: "{{ main_rt_info.route_tables[0].id }}"
+        region: "{{ region }}"
+        subnets:
+          - "{{ subnet.subnet.id }}"
+        routes:
+          - dest: "0.0.0.0/0"
+            gateway_id: "{{ igw.gateway_id }}"
+        state: present
+
     - name: Cria um novo grupo de segurança com regras para SSH e HTTP
       amazon.aws.ec2_security_group:
         name: "{{ aws_security_group }}"
-        aws_access_key: "{{ aws_access_key_id }}"
-        aws_secret_key: "{{ aws_secret_access_key }}"
+        profile: default
         description: 'Security Group with SSH and HTTP rules'
         vpc_id: "{{ vpc.vpc.id }}"
         region: "{{ region }}"
@@ -111,8 +132,7 @@
 
     - name: Cria uma nova instância EC2
       amazon.aws.ec2_instance:
-        aws_access_key: "{{ aws_access_key_id }}"
-        aws_secret_key: "{{ aws_secret_access_key }}"
+        profile: default
         name: "{{ key_name }}-instance"
         instance_type: "{{ instance_type }}"
         image_id: "{{ ami_id }}"
