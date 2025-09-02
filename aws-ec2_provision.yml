@@ -95,41 +95,6 @@
             cidr_ip: 0.0.0.0/0
             rule_desc: allow all on port 22
 
-    - name: Cria um gateway de internet e anexa à VPC
-      amazon.aws.ec2_vpc_igw:
-        aws_access_key: "{{ aws_access_key_id }}"
-        aws_secret_key: "{{ aws_secret_access_key }}"
-        vpc_id: "{{ vpc.vpc.id }}"
-        region: "{{ region }}"
-        state: present
-        tags:
-          Name: "web-igw"
-      register: igw
-
-    - name: Extrai informação sobre a tabela de roteamento principal
-      amazon.aws.ec2_vpc_route_table_info:
-        aws_access_key: "{{ aws_access_key_id }}"
-        aws_secret_key: "{{ aws_secret_access_key }}"
-        region: "{{ region }}"
-        filters:
-          vpc-id: "{{ vpc.vpc.id }}"
-          "association.main": "true"
-      register: main_rt_info
-
-    - name: Adiciona uma rota para o gateway de internet na tabela de roteamento
-      amazon.aws.ec2_vpc_route_table:
-        aws_access_key: "{{ aws_access_key_id }}"
-        aws_secret_key: "{{ aws_secret_access_key }}"
-        vpc_id: "{{ vpc.vpc.id }}"
-        route_table_id: "{{ main_rt_info.route_tables[0].id }}"
-        region: "{{ region }}"
-        subnets:
-          - "{{ subnet.subnet.id }}"
-        routes:
-          - dest: "0.0.0.0/0"
-            gateway_id: "{{ igw.gateway_id }}"
-        state: present
-
     - name: Cria uma nova instância EC2
       amazon.aws.ec2_instance:
         profile: default
