@@ -3,10 +3,11 @@ BASHRC_FILE = $(HOME)/.bashrc
 VENV_SOURCE_LINE = [ -d "$(VENV_DIR)" ] && source "$(VENV_DIR)/bin/activate"
 PIP := $(VENV_DIR)/bin/pip
 GALAXY := $(VENV_DIR)/bin/ansible-galaxy
+PLAYBOOK := $(VENV_DIR)/bin/ansible-playbook
 
 TRASH := *~
 
-all: ansible collections setup-bashrc
+all: ansible aws collections setup-bashrc
 
 $(VENV_DIR):
 	python3 -m venv $@
@@ -18,7 +19,7 @@ collections: ansible
 	$(GALAXY) collection install -r requirements.yml
 
 /usr/bin/docker:
-	ansible-playbook docker.yml --tags docker
+	$(PLAYBOOK) docker.yml --tags docker
 
 /etc/ansible/inventory.py: inventory.py /etc/ansible
 	install $^
