@@ -27,6 +27,16 @@
         state: present
       register: vpc
 
+    - name: Cria um gateway de internet e anexa à VPC
+      amazon.aws.ec2_vpc_igw:
+        profile: default
+        vpc_id: "{{ vpc.vpc.id }}"
+        region: "{{ region }}"
+        state: present
+        tags:
+          Name: "web-igw"
+      register: igw
+
     - name: Cria uma sub-rede pública na VPC
       amazon.aws.ec2_vpc_subnet:
         vpc_id: "{{ vpc.vpc.id }}"
