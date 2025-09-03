@@ -3,8 +3,8 @@ regions:
   - us-east-2
 filters:
   instance-state-name: running
-  "tag:Environment": development
-  "tag:Project": web-ec2 
+  tag:Environment: development
+  tag:Project: web
 keyed_groups:
   - key: tags.Environment
     separator: ""
