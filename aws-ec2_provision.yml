@@ -111,7 +111,7 @@
         tags:
           Name: "{{ key_name }}-instance"
           Environment: development
-          Project: web-ec2
+          Project: web
       register: ec2_info
 
     - name: Exibe as informações da instância EC2
