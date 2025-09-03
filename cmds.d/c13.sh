@@ -1,6 +1,6 @@
 function c13() {
-		echo "Capítulo 13 - Casos de uso"
-		ECHO "========================================="
+	echo "Capítulo 13 - Casos de uso"
+	ECHO "========================================="
 
 	setup_galaxy
 
