@@ -1,6 +1,6 @@
 ---
 - name: Implantação do servidor web Apache
-  hosts: development
+  hosts: web_development
   remote_user: ubuntu
   become: true
   tasks:
