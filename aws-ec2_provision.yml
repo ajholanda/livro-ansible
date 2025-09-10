@@ -1,0 +1,119 @@
+---
+- name: AWS EC2
+  hosts: localhost
+  connection: local
+  become: false
+  gather_facts: false
+
+  vars:
+    region: us-east-2
+    instance_type: t3.micro
+    ami_id: ami-0cfde0ea8edd312d4  # Id para o Ubuntu 24.04
+    key_name: web-dev
+    aws_security_group: web-sg
+    vpc_name: web-vpc
+    vpc_cidr_block: "10.0.0.0/16"
+    subnet_cidr_block: "10.0.1.0/24"
+    subnet_az: us-east-2a
+    subnet_name: web-public
+
+  tasks:
+    - name: Cria uma VPC (Virtual Private Cloud)
+      amazon.aws.ec2_vpc_net:
+        name: "{{ vpc_name }}"
+        profile: default
+        cidr_block: "{{ vpc_cidr_block }}"
+        region: "{{ region }}"
+        state: present
+      register: vpc
+
+    - name: Cria um gateway de internet e anexa à VPC
+      amazon.aws.ec2_vpc_igw:
+        profile: default
+        vpc_id: "{{ vpc.vpc.id }}"
+        region: "{{ region }}"
+        state: present
+        tags:
+          Name: "web-igw"
+      register: igw
+
+    - name: Cria uma sub-rede pública na VPC
+      amazon.aws.ec2_vpc_subnet:
+        vpc_id: "{{ vpc.vpc.id }}"
+        profile: default
+        cidr: "{{ subnet_cidr_block }}"
+        az: "{{ subnet_az }}"
+        region: "{{ region }}"
+        map_public: true
+        state: present
+        tags:
+          Name: "{{ subnet_name }}"
+      register: subnet
+
+    - name: Extrai informação sobre a tabela de roteamento principal
+      amazon.aws.ec2_vpc_route_table_info:
+        profile: default
+        region: "{{ region }}"
+        filters:
+          vpc-id: "{{ vpc.vpc.id }}"
+          "association.main": "true"
+      register: main_rt_info
+
+    - name: Adiciona uma rota para o gateway de internet na tabela de roteamento
+      amazon.aws.ec2_vpc_route_table:
+        profile: default
+        vpc_id: "{{ vpc.vpc.id }}"
+        route_table_id: "{{ main_rt_info.route_tables[0].id }}"
+        region: "{{ region }}"
+        subnets:
+          - "{{ subnet.subnet.id }}"
+        routes:
+          - dest: "0.0.0.0/0"
+            gateway_id: "{{ igw.gateway_id }}"
+        state: present
+
+    - name: Cria um novo grupo de segurança com regras para SSH e HTTP
+      amazon.aws.ec2_security_group:
+        name: "{{ aws_security_group }}"
+        profile: default
+        description: 'Security Group with SSH and HTTP rules'
+        vpc_id: "{{ vpc.vpc.id }}"
+        region: "{{ region }}"
+        tags:
+          Name: "{{ aws_security_group }}"
+          Environment: development
+          AnsibleManaged: true
+        rules:
+          - proto: tcp
+            ports:
+              - 80
+            cidr_ip: 0.0.0.0/0
+            rule_desc: allow all on port 80
+          - proto: tcp
+            ports:
+              - 22
+            cidr_ip: 0.0.0.0/0
+            rule_desc: allow all on port 22
+
+    - name: Cria uma nova instância EC2
+      amazon.aws.ec2_instance:
+        profile: default
+        name: "{{ key_name }}-instance"
+        instance_type: "{{ instance_type }}"
+        image_id: "{{ ami_id }}"
+        region: "{{ region }}"
+        key_name: "{{ key_name }}"
+        vpc_subnet_id: "{{ subnet.subnet.id }}"
+        network_interfaces:
+          - assign_public_ip: true
+            groups:
+              - "{{ aws_security_group }}"
+        tags:
+          Name: "{{ key_name }}-instance"
+          Environment: development
+          Project: web
+      register: ec2_info
+
+    - name: Exibe as informações da instância EC2
+      ansible.builtin.debug:
+        var: ec2_info

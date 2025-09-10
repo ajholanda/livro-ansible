@@ -3,10 +3,11 @@ BASHRC_FILE = $(HOME)/.bashrc
 VENV_SOURCE_LINE = [ -d "$(VENV_DIR)" ] && source "$(VENV_DIR)/bin/activate"
 PIP := $(VENV_DIR)/bin/pip
 GALAXY := $(VENV_DIR)/bin/ansible-galaxy
+PLAYBOOK := $(VENV_DIR)/bin/ansible-playbook
 
 TRASH := *~
 
-all: ansible collections setup-bashrc
+all: ansible aws collections setup-bashrc
 
 $(VENV_DIR):
 	python3 -m venv $@
@@ -17,8 +18,19 @@ ansible: $(VENV_DIR)
 collections: ansible
 	$(GALAXY) collection install -r requirements.yml
 
-docker:
-	ansible-playbook docker.yml --tags docker
+/usr/bin/docker:
+	$(PLAYBOOK) docker.yml --tags docker
+
+/etc/ansible/inventory.py: inventory.py /etc/ansible
+	install $^
+TRASH += /etc/ansible/inventory.py
+
+/etc/ansible:
+	sudo mkdir -p $@ && sudo chown $(USER) $@
+
+aws:
+	$(GALAXY) collection install amazon.aws
+	$(PIP) install awscli boto3 botocore
 
 # Alvo principal para configurar o virtualenv no .bashrc
 setup-bashrc:
@@ -47,4 +59,4 @@ TRASH += include_tasks-0.yml
 clean:
 	$(RM) $(TRASH)
 
-.PHONY: all ansible collections lint setup-bashrc
+.PHONY: all ansible aws collections lint setup-bashrc

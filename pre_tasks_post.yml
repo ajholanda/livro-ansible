@@ -1,0 +1,39 @@
+---
+- name: Instala pacotes comuns de administração em servidores
+  hosts: servers
+  gather_facts: true
+  serial: 2
+  ignore_unreachable: true
+
+  pre_tasks:
+    - name: Atualiza o sistema (família Debian)
+      ansible.builtin.apt:
+        update_cache: true
+        upgrade: dist
+      when: ansible_os_family == 'Debian'
+
+  tasks:
+    - name: Instala pacotes comuns de administração
+      ansible.builtin.package:
+        name:
+          - acl
+          - expect
+          - git
+          - iotop
+          - lshw
+          - net-tools
+          - smartmontools
+          - sshpass
+          - strace
+          - sudo
+          - tcpdump
+          - tmux
+          - wget
+          - whois
+
+  post_tasks:
+    - name: Exclui pacote do cache e dependências que não são mais necessárias (família Debian)
+      ansible.builtin.apt:
+        autoclean: true
+        autoremove: true
+      when: ansible_os_family == 'Debian'
