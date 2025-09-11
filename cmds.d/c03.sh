@@ -24,6 +24,8 @@ function c03() {
 	RUN 'ansible-playbook plays.yml --list-tasks'
 
 	# Tags
+	ECHO "ETIQUETAS (TAGS)"
+
 	ECHO "Seleciona etiqueta no playbook webserver.yml"
 	RUN 'ansible-playbook webserver.yml --tags webserver_package'
 
@@ -60,6 +62,12 @@ function c03() {
 
 	ECHO "Lista as tarefas disponíveis em tags.yml filtrando por etiquetas"
 	RUN 'ansible-playbook tags.yml --list-tasks --tags debug,untagged'
+
+	# Manipuladores (handlers)
+	ECHO "HANDLERS"
+
+	ECHO "Exemplo de uso da chave listen para agrupar manipuladores"
+	RUN 'ansible-playbook listen.yml'
 
 	# Errors
 	ECHO "ERROS"
