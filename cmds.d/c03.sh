@@ -71,6 +71,7 @@ function c03() {
 
 	# Errors
 	ECHO "ERROS"
+
 	RUN 'ansible-playbook err.yml --tags err0'
 	RUN 'ansible-playbook err.yml --tags err1'
 	RUN 'ansible-playbook err.yml --tags err2'
@@ -88,6 +89,8 @@ function c03() {
 	RUN 'ansible-playbook err.yml --tags err8'
 
 	# import_tasks
+	ECHO "CARREGAMENTO DAS TAREFAS"
+
 	ECHO 'Executa tarefas que usam import_tasks'
 	RUN 'ansible-playbook import_tasks.yml'
 
