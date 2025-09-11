@@ -8,7 +8,7 @@ MOLECULE := $(VENV_DIR)/bin/molecule
 
 TRASH := *~
 
-all: ansible aws collections setup-bashrc
+all: ansible aws collections setup-bashrc molecule
 
 $(VENV_DIR):
 	python3 -m venv $@
