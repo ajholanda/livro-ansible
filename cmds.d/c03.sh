@@ -18,6 +18,8 @@ function c03() {
 	RUN 'ansible-playbook webserver-0.yml --start-at-task "Habilita e inicializa o apache"'
 
 	# Plays
+	ECHO "PLAYS"
+
 	ECHO 'Lista os plays do playbook plays.yml'
 	RUN 'ansible-playbook plays.yml --list-tasks'
 
