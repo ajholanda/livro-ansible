@@ -107,5 +107,11 @@ function c03() {
 
 	ECHO 'Limitação de include_tasks de começar em tarefa de playbook incluído'
 	RUN "ansible-playbook include_tasks-0.yml --start-at-task \"Imprime o número da tarefa\""
+
+	# pre_tasks, post_tasks
+	ECHO "FLUXO DE EXECUÇÃO DAS TAREFAS"
+
+	ECHO "Exemplo de pre_tasks e post_tasks"
+	RUN "ansible-playbook pre_tasks_post.yml"
 }
 
