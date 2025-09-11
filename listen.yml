@@ -1,0 +1,25 @@
+---
+- name: Gerenciamento de aplicação web
+  hosts: web.example.net
+
+  tasks:
+    - name: Instala o Redis
+      package:
+        name: redis
+
+    - name: Reinicia os serviços da aplicação web
+      ansible.builtin.command: echo "Reiniciando os serviços da aplicação web"
+      notify: "restart webapp services"
+
+  handlers:
+    - name: Restart redis
+      service:
+        name: redis
+        state: restarted
+      listen: "restart webapp services"
+
+    - name: Restart apache
+      service:
+        name: apache2
+        state: restarted
+      listen: "restart webapp services"      
