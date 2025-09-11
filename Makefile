@@ -4,6 +4,7 @@ VENV_SOURCE_LINE = [ -d "$(VENV_DIR)" ] && source "$(VENV_DIR)/bin/activate"
 PIP := $(VENV_DIR)/bin/pip
 GALAXY := $(VENV_DIR)/bin/ansible-galaxy
 PLAYBOOK := $(VENV_DIR)/bin/ansible-playbook
+MOLECULE := $(VENV_DIR)/bin/molecule
 
 TRASH := *~
 
