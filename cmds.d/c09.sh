@@ -3,6 +3,9 @@ function c09() {
 	echo "========================================="
 
 	# Ansible Galaxy
+	ECHO "Pesquisa pelo role ajholanda.x2goclient no Ansible Galaxy"
+	RUN "ansible-galaxy search x2go"
+
 	ECHO "Faz download do role ajholanda.x2goclient"
 	RUN "ansible-galaxy role install --roles-path ./roles ajholanda.x2goclient"
 
