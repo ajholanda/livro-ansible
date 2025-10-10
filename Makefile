@@ -49,7 +49,7 @@ setup-bashrc:
 	@echo "Configuração do .bashrc verificada."
 
 lint:
-	find . -name \*.yml -exec ansible-lint {} \; 
+	ansible-lint -v -c .ansible-lint.prod.yml
 
 # Gera o playbook do primeiro exemplo de webserver.yml.
 webserver-0.yml: webserver.yml
