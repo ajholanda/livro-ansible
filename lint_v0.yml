@@ -15,7 +15,7 @@
       ansible.builtin.file:
       path: "~/ansible/{{ item }}"   # Errado.
       state: directory     # Errado.
-      with_items:
+      loop:
       - 'files'
       - 'roles'
       - 'tasks'

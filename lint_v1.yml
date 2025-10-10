@@ -15,7 +15,7 @@
       ansible.builtin.file:
         path: "~/ansible/{{ item }}"
         state: directory
-      with_items:
+      loop:
       - 'files'
       - 'roles'
       - 'tasks'

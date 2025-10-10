@@ -20,7 +20,7 @@
         path: "~/ansible/{{ item }}"
         state: directory
         mode: '0755'
-      with_items:
+      loop:
         - 'files'
         - 'roles'
         - 'tasks'
