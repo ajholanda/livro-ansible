@@ -1,7 +1,6 @@
 ---
 - name: Instala o Ansible Molecule e o plugin Docker
   hosts: localhost
-  connection: local
 
   roles:
     - docker
