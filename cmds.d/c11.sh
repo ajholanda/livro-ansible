@@ -37,4 +37,7 @@ function c11 {
 
     ECHO "Realiza o teste no cenário office"
     RUN  "molecule test -s office"
+
+    ECHO "Realiza os testes apenas nas instâncias do grupo ubuntu"
+    RUN "molecule test -- --limit ubuntu"
 }
