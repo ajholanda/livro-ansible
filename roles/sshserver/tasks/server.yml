@@ -6,7 +6,7 @@
     line: "{{ item.ln }}"
     validate: "sshd -t -f %s"
     backup: true
-  with_items:
+  loop:
     - re: "PasswordAuthentication"
       ln: "PasswordAuthentication no"
     - re: "PermitRootLogin"
