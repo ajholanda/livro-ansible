@@ -15,12 +15,14 @@ function c13() {
 	ECHO "Instala o VS Code no host alice"
 	RUN "ansible-playbook desktops.yml --limit inf1.example.net --tags vscode"
 	ECHO "Remove o Google Chrome do host pedro"
-	RUN "ansible-playbook desktops.yml --limit off1.example.net --tags googlechrome --extra-vars 'package_state=absent'"
+	RUN "ansible-playbook desktops.yml --limit ti1.example.net --tags googlechrome --extra-vars 'package_state=absent'"
 	ECHO "Atualiza todos os programas do grupo desktops"
 	RUN "ansible-playbook desktops.yml --extra-vars 'package_state=latest'"
 
-	ECHO "Força uma atualização no Windows usando o Windows Update (com reboots)"
-	RUN "ansible-playbook desktops.yml --tags win_updates"
+	## Inserido como exemplo, pois a máquina virtual a atualização
+	## é excessivamente lenta.
+	# ECHO "Força uma atualização no Windows usando o Windows Update (com reboots)"
+	# RUN "ansible-playbook desktops.yml --tags win_updates"
 	ECHO "Atualiza os programas que foram instalados no Windows usando o módulo win_chocolatey do Ansible."
 	RUN "ansible-playbook desktops.yml --tags win_chocolatey --limit windows -e 'package_state=latest'"
 
