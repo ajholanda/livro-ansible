@@ -37,10 +37,13 @@ function RUN {
 function setup_galaxy {
 	echo "Instala coleções do Ansible Galaxy"
 	echo "========================================="
-	ansible-galaxy collection install ansible.windows
-	ansible-galaxy collection install chocolatey.chocolatey
-	ansible-galaxy collection install community.general
-	ansible-galaxy collection install community.windows
+	run "ansible-galaxy collection install ansible.windows"
+	run "ansible-galaxy collection install chocolatey.chocolatey"
+	run "ansible-galaxy collection install community.general"
+	run "ansible-galaxy collection install community.windows"
+	run "ansible-galaxy role install ajholanda.googlechrome --roles-path $ROLES_PATH"
+	run "ansible-galaxy role install ajholanda.vscode --roles-path $ROLES_PATH"
+	run "ansible-galaxy role install ajholanda.x2goclient --roles-path $ROLES_PATH"
 }
 
 function usage {
