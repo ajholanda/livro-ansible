@@ -54,6 +54,13 @@ vagrant halt
 vagrant destroy
 vagrant up
 ```
+## *Roles* provenientes do Ansible Galaxy
+
+Os *roles* provenientes do Ansible Galaxy citados no livro são listados a seguir:
+
+- [ajholanda.googlechrome](https://galaxy.ansible.com/ui/standalone/roles/ajholanda/googlechrome/) [[Github](https://github.com/ajholanda/ansible_role_googlechrome)]
+- [ajholanda.vscode](https://galaxy.ansible.com/ui/standalone/roles/ajholanda/vscode/) [[Github](https://github.com/ajholanda/ansible_role_vscode)]
+- [ajholanda.x2goclient](https://galaxy.ansible.com/ui/standalone/roles/ajholanda/x2goclient/) [[Github](https://github.com/ajholanda/ansible_role_x2goclient)]
 
 ## Informações complementares
 
