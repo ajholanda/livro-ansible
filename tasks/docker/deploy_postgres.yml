@@ -11,7 +11,7 @@
     state: directory
     owner: root
     group: docker
-    mode: '0755'
+    mode: '0775'
   tags: docker_postgres
 
 - name: Garante a execução do contêiner Docker com o PostgreSQL  # 3.

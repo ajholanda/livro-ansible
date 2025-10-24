@@ -10,8 +10,8 @@
     path: "{{ docker_php_apache_volume | mandatory }}"
     state: directory
     owner: root
-    group: root
-    mode: '0755'
+    group: docker
+    mode: '0775'
   tags: docker_php_apache
 
 - name: Garante que o contêiner PHP esteja em execução
