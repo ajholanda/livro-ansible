@@ -7,6 +7,8 @@ DEBUG=1
 # Dry run only print the commands on the screen.
 DRY_RUN=0
 
+ROLES_PATH="$BASEDIR/roles"
+
 # Helper function to print on stderr.
 function ECHO {
 	echo >&2 "INFO [$1]"
