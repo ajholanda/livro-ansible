@@ -16,7 +16,7 @@ ips = {
   'cloud' => "#{TYPE2IP['ansible']}",
   # [dbservers]
   'db' => "#{TYPE2IP['debian']}",
-  # [labs]
+  # [lab]
   'lab01' => "#{TYPE2IP['ansible']}",
   'lab02' => "#{TYPE2IP['ansible']}",
   'lab03' => "#{TYPE2IP['ansible']}",
