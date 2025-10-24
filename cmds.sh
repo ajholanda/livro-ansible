@@ -14,7 +14,12 @@ function ECHO {
 	echo >&2 "INFO [$1]"
 }
 
-# Helper function to execute commands.
+# Helper functions to execute commands.
+function run {
+	echo $1
+	eval $1 && test 1 -eq 1
+}
+
 function RUN {
 	echo $1
 
