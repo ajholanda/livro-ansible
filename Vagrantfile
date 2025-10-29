@@ -41,7 +41,7 @@ vms = {
       'box' => 'ubuntu/jammy64'
   },
   'almalinux'     => {
-      'memory' => '1024',
+      'memory' => '2048',
       'cpus' => 1, 'ip' => "#{TYPE2IP['almalinux']}",
       'box' => 'almalinux/9'
   },
