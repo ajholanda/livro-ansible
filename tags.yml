@@ -1,19 +1,19 @@
 ---
-- name: Exemplo de uso de etiquetas no Ansible
+- name: Exemplo de uso de tags no Ansible
   hosts: localhost
   connection: local
 
   tasks:
-    - name: Etiqueta always
+    - name: Tag always
       ansible.builtin.debug:
         msg: "Executa (quase) sempre"
       tags: always
 
-    - name: Etiqueta never
+    - name: Tag never
       ansible.builtin.debug:
         msg: "Executa (quase) nunca"
       tags: never, debug
 
-    - name: Sem etiqueta
+    - name: Sem tag
       ansible.builtin.debug:
-        msg: "Tarefa sem etiqueta"
+        msg: "Tarefa sem tag"
