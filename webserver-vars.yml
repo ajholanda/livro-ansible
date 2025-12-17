@@ -5,15 +5,15 @@
     system_username: www-data
 #    groupname: webdev # Set using --extra-vars
     usernames:
-      - dev0
-      - dev1
-      - dev2
+      - dcs
+      - mtm
+      - tbc
     user2groups:
-      - name: dev0
+      - name: dcs
         groups: "users,{{ groupname }}"
-      - name: dev1
+      - name: mtm
         groups: "mail,{{ groupname }}"
-      - name: dev2
+      - name: tbc
         groups: "{{ groupname }}"
 
   tasks:
