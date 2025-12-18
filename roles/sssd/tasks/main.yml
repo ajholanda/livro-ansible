@@ -7,6 +7,8 @@
   ansible.builtin.template:
     src: sssd.conf.j2
     dest: /etc/sssd/sssd.conf
+    owner: root
+    group: root
     mode: "0600"
 
 - name: Habilita e reinicializa o serviço
