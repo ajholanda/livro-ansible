@@ -1,5 +1,5 @@
 ---
-- name: Testa os plugin filtro
+- name: Testa o plugin filtro
   hosts: localhost
   gather_facts: false
 
