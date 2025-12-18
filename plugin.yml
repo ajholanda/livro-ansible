@@ -10,3 +10,7 @@
     - name: Imprime o nome no nível inferior de {{ fqdn }}
       ansible.builtin.debug:
         msg: "{{ fqdn | hostname_short }}"
+
+    - name: Assegura que o filtro fqdn funciona adequadamente
+      ansible.builtin.assert:
+        that: fqdn | hostname_short == "ansible"
