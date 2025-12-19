@@ -1,10 +1,12 @@
 ---
 - name: Inclui tarefas para o gerenciador de pacotes
-  ansible.builtin.include_tasks: "{{ ansible_pkg_mgr }}.yml"
-  when: |
-    ansible_pkg_mgr is defined
-    and (ansible_pkg_mgr == "apt"
-    or ansible_pkg_mgr == "dnf")
+  ansible.builtin.include_tasks:
+    file: "{{ item }}"
+  with_first_found:
+    - files:
+      - "{{ ansible_pkg_mgr }}.yml"
+      skip: true
+  when: ansible_pkg_mgr is defined
   tags: update
 
 - name: Inclui tarefas para o sistema Windows
