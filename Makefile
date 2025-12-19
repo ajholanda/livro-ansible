@@ -20,7 +20,7 @@ collections: ansible
 	$(GALAXY) collection install -r requirements.yml
 
 /usr/bin/docker:
-	$(PLAYBOOK) docker.yml --tags docker
+	$(PLAYBOOK) containers.yml --tags docker
 
 $(MOLECULE): /usr/bin/docker
 	$(PIP) install -r requirements.txt
