@@ -28,11 +28,11 @@ function c13() {
 
 	# CONTAINER (Docker)
 	ECHO "Instala o Docker nos hosts do grupo cloud"
-	RUN "ansible-playbook docker.yml --tags docker"
+	RUN "ansible-playbook containers.yml --tags docker"
 	ECHO "Instala o PHP+Apache no contêiner dos hosts do grupo cloud"
-	RUN "ansible-playbook docker.yml --tags docker_php_apache"
+	RUN "ansible-playbook containers.yml --tags docker_php_apache"
 	ECHO "Instala o PostgreSQL no contêiner dos hosts do grupo cloud"
-	RUN "ansible-playbook docker.yml --tags docker_postgres"
+	RUN "ansible-playbook containers.yml --tags docker_postgres"
 
 	# CLOUD (AWS)
 	make aws
