@@ -8,7 +8,7 @@
         name: apache2
       tags: webserver, webserver_package
 
-    - name: Habilita e inicializa o apache
+    - name: Habilita e inicia o apache
       ansible.builtin.service:
         name: apache2
         enabled: true

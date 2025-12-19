@@ -15,7 +15,7 @@ function c03() {
 	RUN 'ansible-playbook webserver-0.yml --list-hosts'
 
 	ECHO "Inicia a execução do playbook webserver.yml a partir da segunda tarefa"
-	RUN 'ansible-playbook webserver-0.yml --start-at-task "Habilita e inicializa o apache"'
+	RUN 'ansible-playbook webserver-0.yml --start-at-task "Habilita e inicia o apache"'
 
 	# Plays
 	ECHO "PLAYS"
