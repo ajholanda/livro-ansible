@@ -3,7 +3,7 @@
   ansible.builtin.package:
     name: httpd
 
-- name: Habilita e inicializa o httpd
+- name: Habilita e inicia o httpd
   ansible.builtin.service:
     name: httpd
     enabled: true

@@ -4,7 +4,7 @@
     update_cache: true
     name: apache2
 
-- name: Habilita e inicializa o apache2
+- name: Habilita e inicia o apache2
   ansible.builtin.service:
     name: apache2
     enabled: true

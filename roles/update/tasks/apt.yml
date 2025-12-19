@@ -4,7 +4,7 @@
     name: unattended-upgrades
   tags: update
 
-- name: Habilita e inicializa o serviço unattended-upgrades
+- name: Habilita e inicia o serviço unattended-upgrades
   ansible.builtin.service:
     name: unattended-upgrades
     enabled: true

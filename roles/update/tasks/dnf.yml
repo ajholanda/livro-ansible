@@ -4,7 +4,7 @@
     name: dnf-automatic
   tags: update
 
-- name: Habilita e inicializa o serviço dnf-automatic
+- name: Habilita e inicia o serviço dnf-automatic
   ansible.builtin.service:
     name: dnf-automatic
     enabled: true

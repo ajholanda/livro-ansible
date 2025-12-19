@@ -10,7 +10,7 @@
     name: "{{ webserver_package }}"
   tags: webserver
 
-- name: Habilita e inicializa o Apache
+- name: Habilita e inicia o Apache
   ansible.builtin.service:
     name: "{{ webserver_service }}"
     enabled: true

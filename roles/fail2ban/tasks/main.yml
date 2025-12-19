@@ -12,7 +12,7 @@
     name: fail2ban
   tags: fail2ban
 
-- name: Inicializa e habilita o serviço
+- name: Habilita e inicia o serviço
   ansible.builtin.service:
     name: fail2ban
     enabled: true
