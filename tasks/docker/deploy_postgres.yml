@@ -1,11 +1,11 @@
 ---
-- name: Garante que a imagem Docker com o PostgreSQL esteja presente  # 1.
+- name: Garante que a imagem Docker com o PostgreSQL esteja presente
   community.docker.docker_image:
     name: "postgres:latest"
     source: pull
   tags: docker_postgres
 
-- name: Cria o diretório raiz do PostgreSQL  # 2.
+- name: Cria o diretório raiz do PostgreSQL
   ansible.builtin.file:
     path: "{{ docker_postgres_volume | mandatory }}"
     state: directory
@@ -14,7 +14,7 @@
     mode: '0775'
   tags: docker_postgres
 
-- name: Garante a execução do contêiner Docker com o PostgreSQL  # 3.
+- name: Garante a execução do contêiner Docker com o PostgreSQL
   community.docker.docker_container:
     name: "postgres"
     image: "postgres:latest"
