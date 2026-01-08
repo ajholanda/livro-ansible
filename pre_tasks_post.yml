@@ -32,7 +32,7 @@
           - whois
 
   post_tasks:
-    - name: Exclui pacote do cache e dependências que não são mais necessárias (família Debian)
+    - name: Exclui cache de pacotes e dependências que não são mais necessárias (família Debian)
       ansible.builtin.apt:
         autoclean: true
         autoremove: true
