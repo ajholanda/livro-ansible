@@ -1,5 +1,7 @@
-
-class FilterModule(object):
+"""
+This file defines an Ansible filter that shortens hostnames.
+"""
+class FilterModule:
     """Filter class"""
     def filters(self):
         """Map filter names to functions."""
