@@ -84,9 +84,13 @@ Os *links* dos guias de instalação dos programas usados no livro são listados
 
 - [yamllint](https://yamllint.readthedocs.io/en/stable/quickstart.html#installing-yamllint).
 
+### Autenticação
+
+- Guia de manipulação de chaves públicas para autenticação SSH sem senha. [[English](https://help.ubuntu.com/community/SSH/OpenSSH/Keys)]
+
 ### Boas práticas
 
-- Recomendações de [boas práticas para o Ansible](https://redhat-cop.github.io/automation-good-practices/).
+- Recomendações de boas práticas para o Ansible.[[English](https://redhat-cop.github.io/automation-good-practices/)]
 
 ## Contribuição
 
