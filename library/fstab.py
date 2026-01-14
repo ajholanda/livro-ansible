@@ -1,3 +1,4 @@
+
 # Copyright: (c) 2024, Adriano J. Holanda <ajholanda@example.net>
 # GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
@@ -136,21 +137,24 @@ def run_module():
     if not os.access(fname, os.R_OK):
         module.fail_json(msg="%s not readable" % (fname))
 
-    with open(fname, "r+") as file: #1
+    # 1. Open /etc/fstab file.
+    with open(fname, "r+") as file:
         # Mount specification exists?
         spec_exists = False
-        # Check if spec already exists in /etc/fstab.
-        for line in file: #2
-            # Ignore comments.
-            if line[0] == '#': #3
+        # 2. Read each line of the file.
+        for line in file:
+            # 3. Ignore comments.
+            if line[0] == '#':
                 continue
-            fields = line.split() #4
-            if fields[0] == spec: #5
+            # 4. Split line into fields.
+            fields = line.split()
+            # 5. Check if spec already exists in /etc/fstab.
+            if fields[0] == spec:
                 spec_exists = True
                 break
 
-        # If spec does not exist, add the entry.
-        if not spec_exists: #6
+        # 6. If spec does not exist, add the entry.
+        if not spec_exists:
             result['changed'] = True
             # Only change if the execution is not in check mode.
             if not module.check_mode:
