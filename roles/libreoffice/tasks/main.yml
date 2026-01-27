@@ -6,4 +6,4 @@
     - files:
       - "{{ ansible_system | lower }}.yml"
       skip: true
-  tags: libreoffice, win_chocolatey
+  tags: libreoffice
