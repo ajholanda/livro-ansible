@@ -4,3 +4,9 @@ cron:
     minute: "30"
     hour: "22"
     weekday: "*"
+
+power_shutdown_hour: '22'
+power_shutdown_minute: '30'
+power_monitor_timeout: '10'
+power_suspend_timeout: '30'
+
