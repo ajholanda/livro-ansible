@@ -1,0 +1,24 @@
+---
+- name: Copia o arquivo de serviço do desligamento (systemd)
+  ansible.builtin.copy:
+    dest: /etc/systemd/system/shutdown.service
+    content: |
+      [Unit]
+      Description=Desligamento automático
+
+      [Service]
+      Type=oneshot
+      ExecStart=/usr/sbin/shutdown -h now
+    owner: root
+    group: root
+    mode: '0640'
+  tags: power
+
+- name: Copia o arquivo de temporização do desligamento (systemd)
+  ansible.builtin.template:
+    src: shutdown.timer.j2
+    dest: /etc/systemd/system/shutdown.timer
+    owner: root
+    group: root
+    mode: '0640'
+  tags: power
