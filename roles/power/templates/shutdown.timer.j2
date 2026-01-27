@@ -1,0 +1,10 @@
+# {{ ansible_managed }}
+[Unit]
+Description=Desligamento diário
+
+[Timer]
+OnCalendar=*-*-* {{ power_shutdown_hour | int }}:{{ power_shutdown_minute | int }}
+Persistent=true
+
+[Install]
+WantedBy=timers.target
