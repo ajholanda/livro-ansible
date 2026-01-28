@@ -1,4 +1,10 @@
 ---
-- name: Inclui tarefas para a família {{ ansible_os_family }}
-  ansible.builtin.include_tasks: "{{ ansible_os_family | lower }}.yml"
+- name: Inclui tarefas para o sistema {{ ansible_system }}
+  ansible.builtin.include_tasks:
+    file: "{{ item }}"
+  with_first_found:
+    - files:
+      - "{{ ansible_system | lower }}.yml"
+      skip: true
+  when: inventory_hostname in groups['lab']
   tags: power
