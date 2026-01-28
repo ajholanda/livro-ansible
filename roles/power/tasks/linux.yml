@@ -22,3 +22,16 @@
     group: root
     mode: '0640'
   tags: power
+
+- name: Configura logind-systemd para suspensão do sistema
+  ansible.builtin.lineinfile:
+    path: /etc/systemd/logind.conf
+    regexp: "{{ lnx_item.re }}"
+    line: "{{ lnx_item.ln }}"
+  loop:
+    - { re: '^IdleAction=', ln: 'IdleAction=suspend' }
+    - { re: '^IdleActionSec=', ln: 'IdleActionSec={{ power_suspend_timeout }}' }
+  loop_control:
+    loop_var: lnx_item
+  notify: Restart systemd-logind
+  tags: power
