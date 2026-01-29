@@ -4,6 +4,7 @@
 
   roles:
     - fail2ban
+    - remotedesktop
     - sshserver
     - sudo
     - update
