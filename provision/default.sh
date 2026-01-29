@@ -10,9 +10,11 @@ which apt-get &>/dev/null \
 
 ## Install wget and the Vagrant dependencies on Red Hat OS Family
 which dnf &>/dev/null \
-    && echo 'DNF: Installing wget and Vagrant dependencies...' \
-    && dnf install -y wget kernel-devel-$(uname -r) kernel-headers-$(uname -r) \
-                  bzip2 elfutils-libelf-devel gcc make perl
+    && echo 'DNF: Installing EPEL, CRB and dependencies...' \
+    && dnf install -y epel-release \
+    && dnf config-manager --set-enabled crb \
+    && dnf install -y wget bzip2 elfutils-libelf-devel gcc make perl \
+    && dnf install kernel-devel-$(uname -r) kernel-headers-$(uname -r)
 
 # SSH
 ## Create ssh directory for vagrant user
