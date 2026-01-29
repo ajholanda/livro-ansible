@@ -1,12 +1,13 @@
 ---
 - name: Tarefas comuns para desktops
   hosts: desktops
-
   roles:
     - role: ajholanda.googlechrome
       tags: googlechrome
     - libreoffice
     - netbios
+    - role: remotedesktop
+      when: "'ti' not in group_names"
     - update
     - user
     - sshserver
