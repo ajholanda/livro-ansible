@@ -30,7 +30,7 @@ function c13() {
 	ECHO "Instala o PostgreSQL no contêiner dos hosts do grupo cloud"
 	RUN "ansible-playbook containers.yml --tags docker_postgres"
 
-	# CLOUD (AWS)
+	## CLOUD (AWS)
 	make aws
 	ECHO "Provisiona uma instância EC2 na AWS"
 	RUN "ansible-playbook aws-ec2_provision.yml"
