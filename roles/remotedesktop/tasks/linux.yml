@@ -1,0 +1,12 @@
+---
+- name: Instala o X2Go Server
+  ansible.builtin.package:
+    name: x2goserver
+  tags: remotedesktop
+
+- name: Habilita e inicia o x2goserver
+  ansible.builtin.service:
+    name: x2goserver
+    enabled: true
+    state: started
+  tags: remotedesktop
