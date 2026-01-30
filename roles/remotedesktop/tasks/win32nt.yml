@@ -1,0 +1,33 @@
+---
+- name: Habilita RDP no Registro (Desativar fDenyTSConnections)
+  ansible.windows.win_regedit:
+    path: "HKLM:\System\CurrentControlSet\Control\Terminal Server"
+    name: fDenyTSConnections
+    data: 0
+    type: dword
+    state: present
+  tags: remotedesktop
+
+- name: Habilita regra de Firewall para RDP
+  ansible.windows.win_firewall_rule:
+    name: "Remote Desktop"
+    group: "Remote Desktop"
+    enabled: true
+    state: present
+  tags: remotedesktop
+
+- name: Habilita e inicia o Terminal Services
+  ansible.windows.win_service:
+    name: TermService
+    start_mode: auto
+    state: started
+  tags: remotedesktop
+
+- name: Exige autenticação no nível da rede (NLA)
+  ansible.windows.win_regedit:
+    path: "HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp"
+    name: UserAuthentication
+    data: 1
+    type: dword
+    state: present
+  tags: remotedesktop
