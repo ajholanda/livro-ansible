@@ -1,4 +1,9 @@
 ---
-- name: Inclui tarefas para sistemas {{ ansible_system }}
-  ansible.builtin.include_tasks: "{{ ansible_system | lower }}.yml"
+- name: Inclui tarefas para o sistema {{ ansible_system }}
+  include_tasks:
+    file: "{{ item }}"
+  with_first_found:
+    - files:
+      - "{{ ansible_system | lower }}.yml"
+      skip: true
   tags: user

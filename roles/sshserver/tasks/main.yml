@@ -1,5 +1,5 @@
 ---
-- name: Carrega tarefas do sistema {{ ansible_system }}
+- name: Inclui tarefas para o sistema {{ ansible_system }}
   ansible.builtin.include_tasks:
     file: "{{ item }}"
   with_first_found:
