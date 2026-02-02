@@ -20,3 +20,13 @@
         docker_postgres_volume: /home/docker/postgres
         docker_postgres_password: secret
       tags: docker_postgres
+
+- name: Implantação do Apache no contêiner AWS EC2
+  hosts: web_development
+  remote_user: ubuntu
+  become: true
+  tasks:
+    - name: Inclui o role webserver
+      include_role:
+        name: webserver
+      tags: aws_ec2
