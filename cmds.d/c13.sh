@@ -35,5 +35,5 @@ function c13() {
 	ECHO "Provisiona uma instância EC2 na AWS"
 	RUN "ansible-playbook aws-ec2_provision.yml"
 	ECHO "Executa as tarefas do role webserver na instância EC2"
-	RUN "ansible-playbook aws-ec2_deploy.yml -i aws-inventory.aws_ec2.yml --private-key ~/.aws/web-dev.pem"
+	RUN "ansible-playbook containers.yml -i aws-inventory.aws_ec2.yml --private-key ~/.aws/web-dev.pem --tags aws_ec2"
 }
