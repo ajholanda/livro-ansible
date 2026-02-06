@@ -3,4 +3,10 @@
   ansible.builtin.user:
     name: "{{ item }}"
     shell: /bin/bash
+    groups: sudo
+    append: true
+  loop: "{{ user_admins }}"
+  when: user_admin is defined
+  tags: user
+
   tags: user
