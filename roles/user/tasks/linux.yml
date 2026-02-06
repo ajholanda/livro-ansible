@@ -1,5 +1,5 @@
 ---
-- name: Cria usuários
+- name: Cria os usuários administradores
   ansible.builtin.user:
     name: "{{ item }}"
     shell: /bin/bash
