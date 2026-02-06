@@ -3,6 +3,4 @@
   ansible.builtin.user:
     name: "{{ item }}"
     shell: /bin/bash
-  loop:
-    "{{ global_admins }}"
   tags: user
