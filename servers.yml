@@ -12,7 +12,7 @@
   roles:
     - mariadbserver
 
-- name: Administra servidores rsync
-  hosts: rsyncservers
+- name: Administra servidores web
+  hosts: webservers
   roles:
-    - rsyncserver
+    - webserver
