@@ -2,7 +2,7 @@
 # - O arquivo all.yml contém variáveis que são acessíveis por todos
 #   grupos.
 # - É sugerido criar variáveis aqui com parcimônia.
-# - O prefixo "global_" foi adicionado para indicar o escopo.
+# - O prefixo "nome-do-role_" ajuda a indicar o escopo de uso.
 # - A convenção para nomes de variáveis pode ser encontrada em:
 # https://ansible.readthedocs.io/projects/lint/rules/var-naming/#settings
 global_admins: ['ajh', 'dmr', 'ewd', 'klt']
