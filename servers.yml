@@ -1,4 +1,12 @@
 ---
+- name: Carrega roles comuns para servidores
+  hosts: servers
+  roles:
+    - fail2ban
+    - sshserver
+    - update
+    - user
+
 - name: Administra servidores de banco de dados
   hosts: dbservers
   roles:
@@ -8,11 +16,3 @@
   hosts: rsyncservers
   roles:
     - rsyncserver
-
-- name: Carrega roles comuns para servidores
-  hosts: servers
-  roles:
-    - fail2ban
-    - sshserver
-    - sudo
-    - update
