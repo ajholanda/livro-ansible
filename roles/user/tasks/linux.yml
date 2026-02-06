@@ -9,4 +9,14 @@
   when: user_admin is defined
   tags: user
 
+- name: Elimina a solicitação de senha pelo sudo
+  ansible.builtin.copy:
+    dest: "/etc/sudoers.d/{{ item }}"
+    content: "{{ item }} ALL=(ALL) NOPASSWD:ALL"
+    validate: 'visudo -cf %s'
+    owner: root
+    group: root
+    mode: "0440"
+  loop: "{{ user_admins }}"
+  when: user_admin is defined
   tags: user
