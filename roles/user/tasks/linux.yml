@@ -1,7 +1,8 @@
 ---
 - name: Cria os usuários administradores
   ansible.builtin.user:
-    name: "{{ item }}"
+    name: "{{ item.name }}"
+    password: "{{ item.passwd }}"
     shell: /bin/bash
     groups: sudo
     append: true
