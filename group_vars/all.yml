@@ -5,4 +5,10 @@
 # - O prefixo "nome-do-role_" ajuda a indicar o escopo de uso.
 # - A convenção para nomes de variáveis pode ser encontrada em:
 # https://ansible.readthedocs.io/projects/lint/rules/var-naming/#settings
-user_admins: ['ajh', 'dmr', 'ewd', 'klt']
+user_admins:
+  - name: 'ajh'
+    passwd: '$5$do1BCDR49g3wADS6$pb.XDsdLZ.wd8pRNxus...'
+  - name: 'dmr'
+    passwd: '$5$mpYswnxDTM8rOc6s$icf0s8a3gYduYhNGX2i...'
+  - name: 'ewd'
+    passwd: '$5$sYjJPQBbVwmc1o2i$c.8zqBNBzJjk5/4eovB...'
