@@ -2,6 +2,7 @@ ansible
 ansible-lint
 molecule
 molecule-plugins[docker]
+passlib
 pylint
 pytest-testinfra
 yamllint
