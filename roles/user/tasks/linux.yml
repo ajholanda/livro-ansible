@@ -7,7 +7,16 @@
     groups: "{{ 'wheel' if ansible_os_family == 'RedHat' else 'sudo' }}"
     append: true
   loop: "{{ user_admins }}"
-  when: user_admin is defined
+  when: user_admins is defined
+  tags: user
+
+- name: Copia a chave pública
+  ansible.posix.authorized_key:
+    user: "{{ item.name }}"
+    state: present
+    key: "{{ lookup('file', 'files/{{ item.name }}.pub') }}"
+  loop: "{{ user_admins }}"
+  when: user_admins is defined
   tags: user
 
 - name: Elimina a solicitação de senha pelo sudo
