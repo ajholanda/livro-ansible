@@ -4,7 +4,7 @@
     name: "{{ item.name }}"
     password: "{{ item.passwd }}"
     shell: /bin/bash
-    groups: sudo
+    groups: "{{ 'wheel' if ansible_os_family == 'RedHat' else 'sudo' }}"
     append: true
   loop: "{{ user_admins }}"
   when: user_admin is defined
