@@ -8,6 +8,6 @@ if [ $# -ne 1 ]; then
 	exit 1
 fi
 
-ansible all -i localhost, -m debug -a "msg={{ '$1' | password_hash('sha512') }}"
+ansible localhost -m debug -a "msg={{ '$1' | password_hash('sha512') }}"
 
 exit 0
