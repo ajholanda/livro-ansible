@@ -1,0 +1,13 @@
+---
+devtools_packages:
+  - g++
+  - gcc
+  - cmake
+  - java
+  - golang
+  - make
+  - ninja-build
+  - python3-pip
+  - R
+  - rust
+  - virtualenv
