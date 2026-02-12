@@ -1,0 +1,27 @@
+---
+- name: Verifica a existência da placa NVIDIA
+  ansible.builtin.command: lspci
+  register: nvidia_lspci
+  changed_when: false
+  when: ansible_distribution == "Ubuntu"
+  tags: nvidia
+
+- name: Instala os drivers e bibliotecas
+  when:
+    - ansible_distribution == "Ubuntu"
+    - "'nvidia' in nvidia_lspci.stdout | lower"
+  tags: nvidia
+  block:
+    - name: Instala o pacote de gerenciamento de drivers
+      ansible.builtin.package:
+        name: ubuntu-drivers-common
+    
+    - name: Instala os drivers NVIDIA
+      ansible.builtin.command: ubuntu-drivers autoinstall
+
+    - name: Instala ferramentas NVIDIA e o toolkit CUDA
+      ansible.builtin.package:
+        name:
+          - nvidia-cuda-toolkit
+          - nvidia-settings
+          - nvtop
