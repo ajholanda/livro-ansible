@@ -1,0 +1,12 @@
+---
+devtools_packages:
+  - build-essential  # Inclui make, gcc, etc.
+  - cmake
+  - default-jdk
+  - g++
+  - golang-go
+  - ninja-build  
+  - python3-pip
+  - r-base
+  - rustc
+  - virtualenv
