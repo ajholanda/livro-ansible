@@ -4,7 +4,14 @@
 
   roles:
     - fail2ban
+    - devtools
+    - role: ajholanda.googlechrome
+      tags: googlechrome
+    - libreoffice
+    - nvidia
     - remotedesktop
     - sshserver
-    - sudo
     - update
+    - user
+    - role: ajholanda.vscode
+      tags: vscode
