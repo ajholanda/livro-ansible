@@ -1,0 +1,15 @@
+---
+- name: Carrega variáveis da família do sistema operacional
+  ansible.builtin.include_vars:
+    file: "{{ item }}"
+  with_first_found:
+    - files:
+      - "{{ ansible_os_family }}.yml"
+      skip: true
+  tags: devtools
+
+- name: Instalar pacotes de desenvolvimento
+  ansible.builtin.package:
+    name: "{{ devtools_packages }}"
+  when: devtools_packages is defined
+  tags: devtools
