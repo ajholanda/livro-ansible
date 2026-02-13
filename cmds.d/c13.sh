@@ -21,6 +21,10 @@ function c13() {
 	# ECHO "Força uma atualização no Windows usando o Windows Update (com reboots)"
 	# RUN "ansible-playbook desktops.yml --tags win_updates"
 
+    # WORKSTATIONS
+    ECHO "Configura estações de trabalho"
+	RUN "ansible-playbook workstations.yml"
+
 	# CONTAINERS
     ## Docker
 	ECHO "Instala o Docker nos hosts do grupo cloud"

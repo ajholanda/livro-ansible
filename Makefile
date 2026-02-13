@@ -53,7 +53,7 @@ lint:
 
 # Gera o playbook do primeiro exemplo de webserver.yml.
 webserver-0.yml: webserver.yml
-	head -18 $< | grep -v "tags\|- webserver" > $@ 
+	head -18 $< | grep -v "tags\|- webserver" > $@
 TRASH += webserver-0.yml
 
 include_tasks-0.yml: include_tasks.yml
