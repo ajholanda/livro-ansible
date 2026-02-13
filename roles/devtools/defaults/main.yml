@@ -1,0 +1,10 @@
+---
+devtools_packages:
+  - build_tools
+  - c_compiler
+  - cpp_compiler
+  - go_lang
+  - java_sdk
+  - python_tools
+  - r_lang
+  - rust_lang
