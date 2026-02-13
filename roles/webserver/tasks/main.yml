@@ -1,11 +1,14 @@
 ---
 - name: Carrega variáveis da família do sistema operacional
-  ansible.builtin.include_vars:
-    file: "{{ item }}"
-  with_first_found:
-    - files:
-      - "{{ ansible_os_family }}.yml"
-      skip: true
+  ansible.builtin.include_vars: "{{ lookup('first_found', params) }}"
+  vars:
+    params:
+      files:
+        - "{{ ansible_distribution }}.yml"
+        - "{{ ansible_os_family }}.yml"
+        - "default.yml"
+      paths:
+        - vars
   tags: webserver
 
 - name: Instala o Apache
