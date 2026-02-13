@@ -1,13 +1,22 @@
 ---
-devtools_packages:
-  - build-essential  # Inclui make, gcc, etc.
-  - clang
-  - cmake
-  - default-jdk
-  - g++
-  - golang-go
-  - ninja-build  
-  - python3-pip
-  - r-base
-  - rustc
-  - virtualenv
+devtools_packages_map:
+  build_tools:
+    - build-essential
+    - cmake
+    - ninja-build
+  c_compiler:
+    - gcc
+    - clang
+  cpp_compiler:
+    - g++
+  go_lang:
+    - golang-go
+  java_sdk:
+    - default-jdk
+  python_tools:
+    - python3-pip
+    - virtualenv
+  r_lang:
+    - r-base
+  rust_lang:
+    - rustc
