@@ -1,6 +1,7 @@
 ---
 devtools_packages:
   - build-essential  # Inclui make, gcc, etc.
+  - clang
   - cmake
   - default-jdk
   - g++

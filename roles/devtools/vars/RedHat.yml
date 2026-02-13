@@ -1,8 +1,9 @@
 ---
 devtools_packages:
-  - g++
-  - gcc
+  - clang
   - cmake
+  - gcc
+  - gcc-c++
   - java
   - golang
   - make
