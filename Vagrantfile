@@ -54,7 +54,7 @@ vms = {
   'windows'   => {
       'memory' => '2048',
       'cpus' => 1, 'ip' => "#{TYPE2IP['windows']}",
-      'box' => 'gusztavvargadr/windows-11'
+      'box' => 'bento/win11'
   }
 }
 
