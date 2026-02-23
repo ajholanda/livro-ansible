@@ -19,10 +19,10 @@ ansible: $(VENV_DIR)
 collections: ansible
 	$(GALAXY) collection install -r requirements.yml
 
-/usr/bin/docker:
+docker:
 	$(PLAYBOOK) containers.yml --tags docker
 
-$(MOLECULE): /usr/bin/docker
+$(MOLECULE): docker
 	$(PIP) install -r requirements.txt
 
 /etc/ansible/inventory.py: inventory.py /etc/ansible
