@@ -66,4 +66,4 @@ TRASH += include_tasks-0.yml
 clean:
 	$(RM) $(TRASH)
 
-.PHONY: all ansible aws collections lint setup-bashrc
+.PHONY: all ansible aws collections docker lint setup-bashrc versions
