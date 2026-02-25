@@ -27,6 +27,6 @@
   become: true
   tasks:
     - name: Inclui o role webserver
-      include_role:
+      ansible.builtin.include_role:
         name: webserver
       tags: aws_ec2
