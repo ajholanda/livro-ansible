@@ -6,11 +6,11 @@
     - name: Instala o apache
       ansible.builtin.package:
         name: apache2
-      when: ansible_os_family == "Debian"
+      when: ansible_facts['os_family'] == "Debian"
 
     - name: Habilita e inicia o apache
       ansible.builtin.service:
         name: apache2
         enabled: true
         state: started
-      when: ansible_os_family == "Debian"
+      when: ansible_facts['os_family'] == "Debian"

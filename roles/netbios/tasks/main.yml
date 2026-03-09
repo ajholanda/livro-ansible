@@ -5,5 +5,5 @@
       name: NetbiosOptions
       data: 2
       type: dword
-  when: ansible_system | lower == "win32nt"
+  when: ansible_facts['system'] | lower == "win32nt"
   tags: netbios

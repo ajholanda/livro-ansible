@@ -96,7 +96,7 @@
   tasks:
     - name: Força execução dos manipuladores
       tags: err8
-      when: ansible_os_family | lower == "debian"
+      when: ansible_facts['os_family'] | lower == "debian"
       block:
         - name: Habilita o módulo userdir
           ansible.builtin.command: a2enmod -q userdir

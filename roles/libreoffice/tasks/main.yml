@@ -1,9 +1,9 @@
 ---
-- name: Inclui tarefas para o sistema {{ ansible_system }}
+- name: Inclui tarefas para o sistema {{ ansible_facts['system'] }}
   ansible.builtin.include_tasks:
     file: "{{ item }}"
   with_first_found:
     - files:
-      - "{{ ansible_system | lower }}.yml"
+      - "{{ ansible_facts['system'] | lower }}.yml"
       skip: true
   tags: libreoffice

@@ -50,7 +50,7 @@
         - name: Verifica se o computador atende aos requisitos
           ansible.builtin.assert:
             that:
-              - ansible_distribution == "Ubuntu"
+              - ansible_facts['distribution'] == "Ubuntu"
               - ansible_userspace_bits == "64"
               - ansible_facts['memtotal_mb'] >= 4096
               - ansible_processor_vcpus >= 4

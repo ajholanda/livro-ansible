@@ -8,5 +8,5 @@
     group: root
     mode: "0440"
   loop: ['aft', 'ajh', 'dcs', 'epb', 'mtm', 'tbc']
-  when: ansible_system == "Linux"
+  when: ansible_facts['system'] == "Linux"
   tags: sudo

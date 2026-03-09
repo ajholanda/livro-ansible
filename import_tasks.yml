@@ -9,7 +9,7 @@
   tasks:
 
 #    - name: Fato não disponível durante a inclusão do playbook
-#      import_tasks: "{{ ansible_distribution }}.yml"
+#      import_tasks: "{{ ansible_facts['distribution'] }}.yml"
 
     - name: Valor da variável está disponível na fase de análise
       ansible.builtin.import_tasks: "tasks/{{ pkgmgr }}_clean.yml"

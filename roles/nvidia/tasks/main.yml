@@ -3,12 +3,12 @@
   ansible.builtin.command: lspci
   register: nvidia_lspci
   changed_when: false
-  when: ansible_distribution == "Ubuntu"
+  when: ansible_facts['distribution'] == "Ubuntu"
   tags: nvidia
 
 - name: Instala os drivers e bibliotecas
   when:
-    - ansible_distribution == "Ubuntu"
+    - ansible_facts['distribution'] == "Ubuntu"
     - "'nvidia' in nvidia_lspci.stdout | lower"
   tags: nvidia
   block:

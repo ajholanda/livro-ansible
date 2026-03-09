@@ -48,7 +48,7 @@
     - name: Instala o apache
       ansible.builtin.package:
         name: apache2
-      when: ansible_distribution | lower == "debian"
+      when: ansible_facts['distribution'] | lower == "debian"
 
     # join
     - name: Cria usuário e adiciona em alguns grupos do sistema
