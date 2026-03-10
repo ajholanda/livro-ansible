@@ -8,3 +8,7 @@
       when: >
         webserver_install_php is defined
         and webserver_install_php
+
+    - name: Exibe o conteúdo de hostvars['w3.example.net']['webserver_port']
+      ansible.builtin.debug:
+        msg: "{{ hostvars['w3.example.net']['webserver_port'] }}"
