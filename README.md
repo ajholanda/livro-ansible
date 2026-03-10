@@ -12,26 +12,26 @@ Para criar o ambiente de execução devemos:
 - Clonar este [repostório](https://github.com/ajholanda/livro-ansible.git);
 - Executar o Vagrant usando o terminal dentro do repositório local:
 
-```
+```bash
 vagrant up
 ```
 
 - Conectar no *host* controlador (senha=vagrant):
 
-```
+```bash
 vagrant ssh ansible
 ```
 
 - Entrar no diretório do projeto e executar o comando para instalação dos programas e criação do ambiente virtual Python:
 
-```
+```bash
 cd livro/
 make
 ```
 
 - Após a instalação dos programas e configuração do ambiente virtual Python, sair do ambiente e entrar novamente para carregar o ambiente virtual:
 
-```
+```bash
 exit
 vagrant ssh ansible
 cd livro/
@@ -39,7 +39,7 @@ cd livro/
 
 - Executar o *script* sem argumentos para mostrar as opções:
 
-```
+```bash
 bash ./cmds.sh
 ```
 
@@ -50,7 +50,7 @@ no arquivo [Vagrantfile](Vagrantfile) e execute:
 bash ./cmds.sh c12       # capitulo 12
 ```
 
-Avisos:
+⚠️ **Avisos:**
 
 - O arquivo com a máquina virtual do Windows é muito grande e seu
 *download* e alguns comandos do Vagrant podem demorar muito dependendo
@@ -124,6 +124,6 @@ Os *links* dos guias de instalação dos programas usados no livro são listados
 
 - Recomendações de boas práticas para o Ansible.[[English](https://redhat-cop.github.io/automation-good-practices/)]
 
-## Contribuição
+## 🤝 Contribuição
 
 Qualquer contribuição é bem-vinda. Basta abrir uma [solicitação de correção](https://github.com/ajholanda/ansible-automacao-ti/issues) ou enviar a [correção](https://github.com/ajholanda/ansible-automacao-ti/pulls).
