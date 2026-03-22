@@ -9,12 +9,12 @@ driver:
 
 platforms:
   - name: instance-debian
-    image: debian:latest
+    image: debian:12
     pre_built_image: true
     groups:
       - debian
   - name: instance-ubuntu
-    image: ubuntu:latest
+    image: ubuntu:24.04
     pre_built_image: true
     groups:
       - ubuntu

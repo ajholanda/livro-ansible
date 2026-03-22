@@ -1,7 +1,7 @@
 ---
 - name: Garante que a imagem Docker com o PostgreSQL esteja presente
   community.docker.docker_image:
-    name: "postgres:latest"
+    name: "{{ docker_postgres_image | default('postgres:16') }}"
     source: pull
   tags: docker_postgres
 
@@ -17,7 +17,7 @@
 - name: Garante a execução do contêiner Docker com o PostgreSQL
   community.docker.docker_container:
     name: "postgres"
-    image: "postgres:latest"
+    image: "{{ docker_postgres_image | default('postgres:16') }}"
     state: started
     ports:
       - "{{ docker_postgres_port | default(5432) }}:5432"

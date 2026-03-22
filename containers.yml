@@ -18,7 +18,7 @@
       vars:
         docker_postgres_port: 54321
         docker_postgres_volume: /home/docker/postgres
-        docker_postgres_password: secret
+        docker_postgres_password: "{{ vault_docker_postgres_password | mandatory }}"
       tags: docker_postgres
 
 - name: Implantação do Apache no contêiner AWS EC2

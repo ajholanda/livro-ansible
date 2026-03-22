@@ -1,7 +1,7 @@
 - name: Garante a existência do usuário ajh
   ansible.windows.win_user:
     name: ajh
-    password: senh@@jH
+    password: "{{ user_ajh_password | mandatory }}"
     state: present
     groups:
       - Administrators
@@ -11,6 +11,6 @@
 - name: Habilita o usuário Administrador
   ansible.windows.win_user:
     name: Administrador
-    password: senh@@dm1n
+    password: "{{ user_administrator_password | mandatory }}"
     account_disabled: false
   tags: user
