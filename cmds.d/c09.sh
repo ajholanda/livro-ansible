@@ -13,7 +13,7 @@ function c09() {
 	RUN "ansible-playbook desktops.yml --tags x2goclient --limit ti"
 
 	ECHO "Remove o cliente X2Go nos hosts pertencentes ao grupo de TI (ti) "
-	RUN "ansible-playbook desktops.yml --tags x2goclient --limit ti --extra-vars \"package_state=absent\""
+	RUN "ansible-playbook desktops.yml --tags x2goclient --limit ti --extra-vars \"x2goclient_state=absent\""
 
 	ECHO "Instala os módulos para o Windows"
 	RUN "ansible-galaxy collection install ansible.windows"
