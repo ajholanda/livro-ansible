@@ -7,7 +7,7 @@
     fqdn: 'simula.example.net'
 
   tasks:
-    - name: Imprime o nome no nível inferior de {{ fqdn }}
+    - name: Imprime o nome curto extraído de {{ fqdn }}
       ansible.builtin.debug:
         msg: "{{ fqdn | hostname_short }}"
 
