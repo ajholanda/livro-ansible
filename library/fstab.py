@@ -55,13 +55,13 @@ author:
 '''
 
 EXAMPLES = r'''
-- name: Add a NFS entry to fstab.
+- name: Add a NFS entry to fstab
   fstab:
     spec: '192.168.64.16:/home'
     path: /home
     type: nfs
 
-- name: Create an entry for root partition.
+- name: Create an entry for root partition
   fstab:
     spec: /dev/sda1
     path: /
@@ -69,7 +69,7 @@ EXAMPLES = r'''
     dump: 1
     passno: 1
 
-- name: Add an entry for the CD-ROM device.
+- name: Add an entry for the CD-ROM device
   fstab:
     spec: /dev/sr0
     path: /media/cdrom0
