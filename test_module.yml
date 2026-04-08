@@ -17,8 +17,8 @@
         path: /home/nfs
         type: nfs
         options: 'rsize=8192,wsize=65536,timeo=14,intr'
-      register: results
+      register: result
 
     - name: Imprime as informações do módulo fstab
       ansible.builtin.debug:
-        var: results
+        var: result
