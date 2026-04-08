@@ -4,7 +4,7 @@
   gather_facts: false
 
   vars:
-    fqdn: 'ansible.example.net'
+    fqdn: 'simula.example.net'
 
   tasks:
     - name: Imprime o nome no nível inferior de {{ fqdn }}
