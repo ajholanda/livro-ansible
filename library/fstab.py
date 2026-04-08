@@ -90,6 +90,11 @@ from ansible.module_utils.basic import AnsibleModule
 
 
 def run_module():
+    """
+    Write a mount point entry to /etc/fstab,
+    preventing duplicate entries.
+    """
+
     # Parameters
     module_args = dict(
         spec=dict(type='str', required=True),
