@@ -15,7 +15,7 @@
       ansible.builtin.debug:
         var: disk_usage.stdout
 
-    - name: Cria diretórios.
+    - name: Cria diretórios
       ansible.builtin.file:
         path: "~/ansible/{{ item }}"
         state: directory
