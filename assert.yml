@@ -13,7 +13,7 @@
           3366
 
   tasks:
-    - name: Testa se senha está criptografada
+    - name: Teste de criptografia das senhas
       tags: crypto
       block:
         - name: Verifica se a senha está criptografada
