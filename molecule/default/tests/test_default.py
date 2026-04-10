@@ -13,7 +13,7 @@ def test_apache_running_and_enabled(host):
     assert service.is_enabled
 
 def test_apache_listening(host):
-    """Verifica se o apache ouve na porta 80"""
+    """Verifica se o apache escuta na porta 80"""
     socket = host.socket("tcp://0.0.0.0:80")
     assert socket.is_listening
 
