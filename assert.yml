@@ -22,7 +22,7 @@
             fail_msg: "A senha deve estar criptografada!"
             success_msg: "Senha ok!"
 
-        - name: Verifica se a senha está em texto simples
+        - name: Verifica se a senha está em texto puro
           ansible.builtin.assert:
             that: txt_pass is vault_encrypted
             fail_msg: "A senha deve estar criptografada!"
