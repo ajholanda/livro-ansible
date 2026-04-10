@@ -6,14 +6,14 @@
     - docker
 
   tasks:
-    - name: Instala as dependências
+    - name: Instala as dependências para a família Debian
       ansible.builtin.apt:
         pkg:
           - python3-pip
           - libssl-dev
       when: ansible_facts['os_family'] == 'Debian'
 
-    - name: Instala as dependências
+    - name: Instala as dependências para a família RedHat
       ansible.builtin.dnf:
         name:
           - gcc
