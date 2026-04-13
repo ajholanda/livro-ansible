@@ -28,5 +28,5 @@
     group: root
     mode: "0440"
   loop: "{{ user_admins }}"
-  when: user_admin is defined
+  when: user_admins is defined
   tags: user
