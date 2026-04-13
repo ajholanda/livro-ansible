@@ -141,6 +141,8 @@ def run_module():
         module.fail_json(msg="%s not found" % (fname))
     if not os.access(fname, os.R_OK):
         module.fail_json(msg="%s not readable" % (fname))
+    if not os.access(fname, os.W_OK):
+        module.fail_json(msg="%s not writable" % (fname))
 
     # 1. Open /etc/fstab file.
     with open(fname, "r+") as file:
@@ -148,11 +150,14 @@ def run_module():
         spec_exists = False
         # 2. Read each line of the file.
         for line in file:
-            # 3. Ignore comments.
-            if line[0] == '#':
+            # 3. Ignore comments and blank lines.
+            stripped = line.strip()
+            if not stripped or stripped.startswith('#'):
                 continue
             # 4. Split line into fields.
-            fields = line.split()
+            fields = stripped.split()
+            if not fields:
+                continue
             # 5. Check if spec already exists in /etc/fstab.
             if fields[0] == spec:
                 spec_exists = True
