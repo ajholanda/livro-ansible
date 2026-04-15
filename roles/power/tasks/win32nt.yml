@@ -20,7 +20,7 @@
 
 - name: Ativar suspensão do sistema
   ansible.windows.win_command: >
-    powercfg /change standby-timeout-ac {{ power_suspend_timeout }}
+    powercfg /change standby-timeout-ac {{ power_suspend_timeout // 60 }}
 
 - name: Desativar hibernação
   ansible.windows.win_command: >
