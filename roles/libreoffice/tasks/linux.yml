@@ -1,5 +1,5 @@
 ---
-- name: Gerencia o libreoffice [{{ libreoffice_state }}]
+- name: Gerencia o libreoffice (Linux)
   ansible.builtin.package:
     name: libreoffice
     state: "{{ libreoffice_state | default('present') }}"
