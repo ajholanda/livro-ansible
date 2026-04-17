@@ -18,9 +18,10 @@
   tags: docker
 
 - name: Adiciona a chave GPG oficial
-  ansible.builtin.apt_key:
+  ansible.builtin.get_url:
     url: https://download.docker.com/linux/ubuntu/gpg
-    keyring: /etc/apt/keyrings/docker.gpg
+    dest: /etc/apt/keyrings/docker.gpg
+    mode: "0644"
   tags: docker
 
 - name: Adiciona o repositório oficial
