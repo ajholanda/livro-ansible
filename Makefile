@@ -52,7 +52,7 @@ lint:
 	ansible-lint -v -c .ansible-lint.prod.yml
 
 versions:
-	sh scripts/versions.sh
+	sh scripts/print_versions.sh
 
 # Gera o playbook do primeiro exemplo de webserver.yml.
 webserver-0.yml: webserver.yml
