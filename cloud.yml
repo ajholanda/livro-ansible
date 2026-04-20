@@ -1,0 +1,10 @@
+---
+- name: Configuração do Apache na instância EC2
+  hosts: web_development
+  remote_user: ubuntu
+  become: true
+  tasks:
+    - name: Inclui o role webserver
+      ansible.builtin.include_role:
+        name: webserver
+      tags: webserver
