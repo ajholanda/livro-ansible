@@ -34,9 +34,9 @@ function c11 {
     ECHO "Realiza o ciclo de vida completo de teste"
     RUN "molecule test"
 
-    ECHO "Realiza o teste no cenário office"
-    RUN  "molecule test -s office"
-
     ECHO "Realiza os testes apenas nas instâncias do grupo ubuntu"
     RUN "molecule test -- --limit ubuntu"
+
+    ECHO "Realiza o teste no cenário office"
+    RUN  "molecule test -s office"
 }
