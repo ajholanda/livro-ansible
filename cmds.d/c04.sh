@@ -16,6 +16,9 @@ function c04() {
 	ECHO "Lista as variáveis mágicas do sistema no host web.exemplo"
 	RUN 'ansible -m setup web.example.net'
 
+	ECHO "Lista plugins de cache disponíveis"
+	RUN 'ansible-doc -t cache-l'
+
 	# Playbook variables
 	ECHO "Executa o playbook webserver-vars.yml"
 	RUN 'ansible-playbook --extra-vars "groupname=webdev" webserver-vars.yml'
