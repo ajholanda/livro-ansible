@@ -17,19 +17,16 @@
       - gnupg
   tags: docker
 
-- name: Adiciona a chave GPG oficial
-  ansible.builtin.get_url:
-    url: https://download.docker.com/linux/ubuntu/gpg
-    dest: /etc/apt/keyrings/docker.gpg
-    mode: "0644"
-  tags: docker
-
-- name: Adiciona o repositório oficial
-  ansible.builtin.apt_repository:
-    repo: >
-      deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg]
-      https://download.docker.com/linux/ubuntu
-      {{ ansible_facts['distribution_release'] }} stable
+- name: Adiciona o repositório Docker
+  ansible.builtin.deb822_repository:
+    name: docker
+    types: deb
+    uris: https://download.docker.com/linux/ubuntu
+    suites: "{{ ansible_facts['distribution_release'] }}"
+    components: stable
+    architectures: amd64
+    signed_by: https://download.docker.com/linux/ubuntu/gpg
+    state: present
   tags: docker
 
 - name: Instala os pacotes oficiais
