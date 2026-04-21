@@ -10,7 +10,9 @@
 *.pem
 *.pyc
 *.swp
+Ansible.txt
 ansible
+include_tasks-0.yml
 roles/ajholanda.*
 tmp
 venv
