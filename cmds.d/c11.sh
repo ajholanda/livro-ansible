@@ -11,7 +11,7 @@ function c11 {
     RUN "ansible-playbook assert.yml --tags reqts"
 
     ECHO "Instala o Molecule, suas dependências, o driver docker e o Docker"
-    RUN "ansible-playbook molecule.yml"
+    RUN "ansible-playbook molecule-setup.yml"
 
     ECHO "Configura um ambiente (Docker) de testes Molecule padrão"
     RUN "molecule init scenario --driver-name docker"
