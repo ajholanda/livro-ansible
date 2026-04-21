@@ -62,20 +62,28 @@ function c03() {
 	ECHO "Lista as tarefas disponíveis em tags.yml filtrando por etiquetas"
 	RUN 'ansible-playbook tags.yml --list-tasks --tags debug,untagged'
 
-	# Manipuladores (handlers)
-	ECHO "HANDLERS"
+	ECHO_SUB "MANIPULADORES (HANDLERS)"
 
 	ECHO "Exemplo de uso da chave listen para agrupar manipuladores"
 	RUN 'ansible-playbook listen.yml'
 
-	# Errors
-	ECHO "ERROS"
-
+	ECHO_SUB "ERROS"
+	ECHO "Força ocorrência de erro"
 	RUN 'ansible-playbook err.yml --tags err0'
+
+	ECHO "Tenta listar arquivo que não existe"
 	RUN 'ansible-playbook err.yml --tags err1'
+
+	ECHO "Ignora o erro"
 	RUN 'ansible-playbook err.yml --tags err2'
+
+	ECHO "Não interpreta false como erro"
 	RUN 'ansible-playbook err.yml --tags err3'
+
+	ECHO "Arquivo não deve existir para o playbook ser bem-sucedido"
 	RUN 'ansible-playbook err.yml --tags err4'
+
+	ECHO "Ativa any_errors_fatal para o playbook"
 	RUN 'ansible-playbook err.yml --tags err5'
 
 	ECHO "Verifica o comportamento de any_errors_fatal"
