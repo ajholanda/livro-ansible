@@ -8,10 +8,23 @@ DEBUG=1
 DRY_RUN=0
 
 ROLES_PATH="$BASEDIR/roles"
+HBAR="========================================================================"
 
 # Helper function to print on stderr.
 function ECHO {
 	echo >&2 "INFO [$1]"
+}
+
+function ECHO_CHAPTER {
+	echo""
+	echo >&2 $HBAR
+	echo >&2 "Capítulo $1 - $2"
+	echo >&2 $HBAR
+	echo ""
+}
+
+function ECHO_SUB {
+	echo >&2 "======== [$1] ========"
 }
 
 # Helper functions to execute commands.
