@@ -38,23 +38,23 @@ vms = {
   'ansible'  => {
       'memory' => '1024',
       'cpus' => 1, 'ip' => "#{TYPE2IP['ansible']}",
-      'box' => 'ubuntu/jammy64'
+      'box' => 'ubuntu/jammy64', 'ssh_port' => 2220
   },
   'almalinux'     => {
       'memory' => '2048',
       'cpus' => 1, 'ip' => "#{TYPE2IP['almalinux']}",
-      'box' => 'almalinux/9'
+      'box' => 'almalinux/9', 'ssh_port' => 2221
   },
   'debian'   => {
       'memory' => '512',
       'cpus' => 1,
       'ip' => "#{TYPE2IP['debian']}",
-      'box' => 'debian/bookworm64'
+      'box' => 'debian/bookworm64', 'ssh_port' => 2222
   },
   'windows'   => {
       'memory' => '2048',
       'cpus' => 1, 'ip' => "#{TYPE2IP['windows']}",
-      'box' => 'bento/win11'
+      'box' => 'bento/win11', 'ssh_port' => 2223
   }
 }
 
@@ -70,6 +70,7 @@ Vagrant.configure('2') do |config|
     config.vm.define "#{name}" do |k|
       k.vm.hostname = "#{name}" #.#{DOMAIN}", don't append the domain
       k.vm.network 'private_network', ip: "#{conf['ip']}"
+      k.vm.network 'forwarded_port', guest: 22, host: conf['ssh_port'], id: 'ssh'
       k.vm.box = conf['box']
 
       k.vm.provider 'virtualbox' do |vb|
