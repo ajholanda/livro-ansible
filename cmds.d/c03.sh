@@ -95,13 +95,15 @@ function c03() {
 	ECHO "Verifica o comportamento de force_handlers"
 	RUN 'ansible-playbook err.yml --tags err8'
 
-	# import_tasks
-	ECHO "CARREGAMENTO DAS TAREFAS"
+	ECHO_SUB "BLOCOS DE TAREFAS"
+	run 'ansible-playbook server.yml --tags mariadbserver'
+	RUN 'ansible-playbook block.yml'
+
+	ECHO_SUB "CARREGAMENTO DAS TAREFAS"
 
 	ECHO 'Executa tarefas que usam import_tasks'
 	RUN 'ansible-playbook import_tasks.yml'
 
-	# include_tasks
 	ECHO 'Executa tarefas que usam include_tasks'
 	RUN 'ansible-playbook include_tasks.yml'
 
@@ -116,9 +118,8 @@ function c03() {
 	RUN "ansible-playbook include_tasks-0.yml --start-at-task \"Imprime o número da tarefa\""
 
 	# pre_tasks, post_tasks
-	ECHO "FLUXO DE EXECUÇÃO DAS TAREFAS"
+	ECHO_SUB "FLUXO DE EXECUÇÃO DAS TAREFAS"
 
 	ECHO "Exemplo de pre_tasks e post_tasks"
 	RUN "ansible-playbook pre_tasks_post.yml"
 }
-
