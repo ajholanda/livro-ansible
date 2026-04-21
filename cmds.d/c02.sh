@@ -35,11 +35,11 @@ function c02 {
     ECHO "Executa o comando stat no arquivo w3.example.net:/etc/passwd"
     RUN "ansible w3.example.net -m stat -a \"path=/etc/passwd\""
 
-    ECHO "Cria o link simbólico que habilita no Apache o site configurado em /etc/sites-available/site.conf em web.example.net"
-    RUN "ansible web.example.net -m file -a \"src=/etc/apache2/sites-available/site.conf dest=/etc/apache2/sites-enabled/site.conf state=link\""
-
     ECHO "Cria o diretório /home/nfs, se não existir, nos hosts do grupo lab"
     RUN 'ansible lab -m file -a "path=/home/nfs state=directory"'
+
+    ECHO "Cria o link simbólico que habilita no Apache o site configurado em /etc/sites-available/site.conf em web.example.net"
+    RUN "ansible web.example.net -m file -a \"src=/etc/apache2/sites-available/site.conf dest=/etc/apache2/sites-enabled/site.conf state=link\""
 
     ECHO "Altera as permissões do arquivo /etc/shadow nos hosts do grupo lab"
     RUN 'ansible lab -m file -a "path=/etc/shadow owner=root group=shadow mode=0640"'
