@@ -18,10 +18,6 @@ function c09() {
 	RUN "ansible-galaxy collection install ansible.windows"
 	RUN "ansible-galaxy collection install chocolatey.chocolatey"
 
-	ECHO "Instala os roles ajholanda.* usando o Ansible Galaxy (usado nos próximos capítulos)"
-	RUN "ansible-galaxy role install --force --roles-path ./roles ajholanda.googlechrome"
-	RUN "ansible-galaxy role install --force --roles-path ./roles ajholanda.vscode"
-
 	ECHO "Instala as coleções e roles usando requirements.yml"
 	RUN "ansible-galaxy install -r requirements.yml --force"
 }
