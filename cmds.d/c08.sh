@@ -1,13 +1,11 @@
 function c08() {
-	echo "Capítulo 8 - Desenvolvimento de plugins e módulos"
-	echo "========================================="
+	ECHO_CHAPTER "8" "Desenvolvimento de plugins e módulos"
 
-	# Plugins
-	## Filtro
-	ECHO "Executa e exemplo que mostra o uso do plugin filtro"
+	ECHO_SUB "Plugins - Exemplo de plugin de filtro"
+	ECHO "Executa o exemplo que mostra o uso do plugin filtro"
 	RUN "ansible-playbook plugin.yml"
 
-	## Módulos
+	ECHO_SUB "Módulos"
 	ECHO "Testa o módulo fstab."
 	RUN "ansible-playbook test_module.yml"
 }

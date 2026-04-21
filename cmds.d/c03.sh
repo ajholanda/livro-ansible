@@ -1,7 +1,6 @@
 # Playbook
 function c03() {
-	echo "Capítulo 3 - Playbook"
-	echo "========================================"
+	ECHO_CHAPTER "3" "Playbook"
 
 	make webserver-0.yml
 
@@ -18,13 +17,13 @@ function c03() {
 	RUN 'ansible-playbook webserver-0.yml --start-at-task "Habilita e inicia o apache"'
 
 	# Plays
-	ECHO "PLAYS"
+	ECHO_SUB "PLAYS"
 
 	ECHO 'Lista os plays do playbook plays.yml'
 	RUN 'ansible-playbook plays.yml --list-tasks'
 
 	# Tags
-	ECHO "ETIQUETAS (TAGS)"
+	ECHO_SUB "ETIQUETAS (TAGS)"
 
 	ECHO "Seleciona etiqueta no playbook webserver.yml"
 	RUN 'ansible-playbook webserver.yml --tags webserver_package'

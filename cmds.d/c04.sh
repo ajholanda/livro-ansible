@@ -1,7 +1,9 @@
 # Variáveis
 function c04() {
-	echo "Capítulo 4 - Variáveis"
-	echo "========================================"
+	ECHO_CHAPTER "4" "Variáveis"
+
+	ECHO "Lista plugins de conexão disponíveis"
+	RUN 'ansible-doc -t connection -l'
 
 	# Special variables and When
 	ECHO "Executa o playbook webserver-Debian.yml"

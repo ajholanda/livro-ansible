@@ -1,6 +1,5 @@
 function c09() {
-	echo "Capítulo 9 - Ansible Galaxy"
-	echo "========================================="
+	ECHO_CHAPTER "9" "Ansible Galaxy"
 
 	# Ansible Galaxy
 	ECHO "Pesquisa pelo role ajholanda.x2goclient no Ansible Galaxy"
