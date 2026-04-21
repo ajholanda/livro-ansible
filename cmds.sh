@@ -10,8 +10,9 @@ DRY_RUN=0
 ROLES_PATH="$BASEDIR/roles"
 HBAR="========================================================================"
 
-# Helper function to print on stderr.
+# Helper functions to print on stderr.
 function ECHO {
+	echo ""
 	echo >&2 "INFO [$1]"
 }
 
