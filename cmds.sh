@@ -111,8 +111,8 @@ if [ $# -gt 0 ]; then
 fi
 
 # Load all the functions that execute commands from book chapters.
-for file in `ls -r $BASEDIR/cmds.d`; do
-       source $BASEDIR/cmds.d/${file}
+for file in `ls -r $BASEDIR/cmds.d/*.sh`; do
+       source ${file}
 done
 
 # Execute commands from each chapter passed as argument.
