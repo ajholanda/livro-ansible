@@ -13,4 +13,4 @@
 
     - name: Assegura que o filtro fqdn funciona adequadamente
       ansible.builtin.assert:
-        that: fqdn | hostname_short == "ansible"
+        that: fqdn | hostname_short == "simula"
