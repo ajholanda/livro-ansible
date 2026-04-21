@@ -1,6 +1,8 @@
 function c11 {
-    echo "Capítulo 11 - Testes"
-    echo "========================================="
+    # Instala o Docker para os testes com o Molecule
+    run 'make docker'
+
+    ECHO_CHAPTER "11" "Testes"
 
     ECHO "Asserção para assegurar o uso de criptografia nas senhas"
     RUN "ansible-playbook assert.yml --tags crypto"
