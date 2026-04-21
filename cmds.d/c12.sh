@@ -1,6 +1,5 @@
 function c12() {
-	echo "Capítulo 12 - Windows"
-	echo "========================================="
+	ECHO_CHAPTER "12" "Windows"
 
 	setup_galaxy
 
