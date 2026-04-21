@@ -14,7 +14,7 @@ function c11 {
     RUN "ansible-playbook molecule-setup.yml"
 
     ECHO "Configura um ambiente (Docker) de testes Molecule padrão"
-    RUN "molecule init scenario --driver-name docker"
+    RUN "molecule init scenario"
 
     ECHO "Cria o cenário office usando o driver padrão"
     RUN "molecule init scenario office"
