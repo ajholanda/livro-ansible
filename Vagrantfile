@@ -52,9 +52,9 @@ vms = {
       'box' => 'debian/bookworm64', 'ssh_port' => 2222
   },
   'windows'   => {
-      'memory' => '2048',
+      'memory' => '4096',
       'cpus' => 1, 'ip' => "#{TYPE2IP['windows']}",
-      'box' => 'bento/win11', 'ssh_port' => 2223
+      'box' => 'gusztavvargadr/windows-11', 'ssh_port' => 2223
   }
 }
 
