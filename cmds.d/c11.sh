@@ -1,7 +1,4 @@
 function c11 {
-    # Instala o Docker para os testes com o Molecule
-    run 'make docker'
-
     ECHO_CHAPTER "11" "Testes"
 
     ECHO "Asserção para assegurar o uso de criptografia nas senhas"
