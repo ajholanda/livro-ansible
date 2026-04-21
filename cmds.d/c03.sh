@@ -35,10 +35,10 @@ function c03() {
 	RUN 'ansible-playbook webserver.yml --tags "webserver_package,webserver_service"'
 
 	# Tags always, never
-	ECHO "Etiqueta never"
+	ECHO "Etiquetas always e never"
 	RUN 'ansible-playbook tags.yml'
 
-	ECHO "Ignora etiqueta never"
+	ECHO "Ignora etiqueta always"
 	RUN 'ansible-playbook tags.yml --skip-tags always'
 
 	ECHO "Seleciona tarefa marcada com never"
@@ -50,7 +50,7 @@ function c03() {
 	ECHO "Executa tarefas que tenham pelo menos uma etiqueta"
 	RUN 'ansible-playbook tags.yml --tags tagged'
 
-	ECHO "Executa tarefas que não tenham etiquetas"
+	ECHO "Executa tarefas que não etiquetadas"
 	RUN 'ansible-playbook tags.yml --tags untagged'
 
 	ECHO "Lista as etiquetas disponíveis em tags.yml"
