@@ -2,20 +2,21 @@
 - name: Desinstala os pacotes não oficiais
   ansible.builtin.apt:
     pkg:
-      - apt-transport-https
-      - ca-certificates
-      - curl
-      - gnupg
-      - software-properties-common
+      - docker.io
+      - docker-compose
+      - docker-doc
+      - podman-docker
     state: absent
   tags: docker
 
 - name: Instala dependências
   ansible.builtin.apt:
     pkg:
+      - apt-transport-https
       - ca-certificates
       - curl
       - gnupg
+      - software-properties-common
   tags: docker
 
 - name: Adiciona o repositório Docker
