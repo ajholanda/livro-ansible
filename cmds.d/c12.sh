@@ -7,7 +7,7 @@ function c12() {
 	ECHO "Instala o LibreOffice no sistem Windows"
 	RUN "ansible-playbook desktops.yml --tags libreoffice --limit windows"
 
-	# Serve somente como um exemplo de comando, pois não há nenhuma
+	# Serve apenas como um exemplo de comando, pois não há nenhuma
 	# máquina Windows no grupo lab.
 	# win_powershell module
 	#ECHO "Executa um script PowerShell para agendar desligamento"
