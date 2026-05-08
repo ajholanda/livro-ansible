@@ -36,6 +36,9 @@ aws:
 	$(GALAXY) collection install amazon.aws
 	$(PIP) install awscli boto3 botocore
 
+awx:
+	ansible-playbook awx-setup.yml
+
 # Alvo principal para configurar o virtualenv no .bashrc
 setup-bashrc:
 	@echo "Verificando se o virtualenv já está configurado no .bashrc..."
