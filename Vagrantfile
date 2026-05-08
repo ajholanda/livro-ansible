@@ -55,12 +55,15 @@ vms = {
       'memory' => '512',
       'cpus' => 1,
       'ip' => "#{TYPE2IP['debian']}",
-      'box' => 'debian/bookworm64', 'ssh_port' => 2222
+      'box' => 'debian/bookworm64',
+      'ssh_port' => 2222
   },
   'windows'   => {
       'memory' => '4096',
-      'cpus' => 1, 'ip' => "#{TYPE2IP['windows']}",
-      'box' => 'gusztavvargadr/windows-11', 'ssh_port' => 2223
+      'cpus' => 1,
+      'ip' => "#{TYPE2IP['windows']}",
+      'box' => 'gusztavvargadr/windows-11',
+      'ssh_port' => 2223
   }
 }
 
