@@ -109,6 +109,8 @@ Vagrant.configure('2') do |config|
 
       # Specific to Ansible host controller
       if "#{name}" == "ansible"
+        # Expose AWX (kubectl port-forward) ao host
+        k.vm.network 'forwarded_port', guest: 8080, host: 8080, id: 'awx'
         # Install additional programs
         k.vm.provision "shell", path: "provision/ansible.sh"
         # Share Ansible examples folder
