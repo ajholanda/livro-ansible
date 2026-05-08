@@ -36,9 +36,13 @@ ips = {
 
 vms = {
   'ansible'  => {
-      'memory' => '1024',
-      'cpus' => 1, 'ip' => "#{TYPE2IP['ansible']}",
-      'box' => 'ubuntu/jammy64', 'ssh_port' => 2220
+      # Altere para 8192 MB para instalar o AWX.
+      'memory' => '8192',
+      # Altere para 4 CPUs para instalar o AWX.
+      'cpus' => 4,
+      'ip' => "#{TYPE2IP['ansible']}",
+      'box' => 'ubuntu/jammy64',
+      'ssh_port' => 2220
   },
   'almalinux'     => {
       'memory' => '2048',
