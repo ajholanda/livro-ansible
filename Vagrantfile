@@ -45,9 +45,11 @@ vms = {
       'ssh_port' => 2220
   },
   'almalinux'     => {
-      'memory' => '2048',
-      'cpus' => 1, 'ip' => "#{TYPE2IP['almalinux']}",
-      'box' => 'almalinux/9', 'ssh_port' => 2221
+      'memory' => '1560',
+      'cpus' => 1,
+      'ip' => "#{TYPE2IP['almalinux']}",
+      'box' => 'almalinux/9',
+      'ssh_port' => 2221
   },
   'debian'   => {
       'memory' => '512',
