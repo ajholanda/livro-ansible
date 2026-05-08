@@ -1,0 +1,272 @@
+---
+# =============================================================================
+# Playbook: Instalação do AWX com Minikube e AWX Operator
+# Testado em: Ubuntu 22.04 / 24.04
+# Requisitos: 2+ CPUs, 4+ GB RAM, acesso sudo
+# Acesso: HTTP via NodePort do Minikube (http://<minikube-ip>:<nodeport>)
+#         a partir do próprio host (vagrant box).
+# Uso: ansible-playbook awx-setup.yml
+#
+# IMPORTANTE: O AWX é um sistema complexo que pode consumir muitos recursos,
+# especialmente durante a instalação e inicialização.
+# O minikube é o componente que consome mais recurso.
+# - A quantidade de memória ideal para a VM é 8 GB.
+# - O número de CPUs recomendado para a VM é 4.
+# - Se os recursos forem insuficientes, a instalação pode falhar ou o AWX pode não iniciar corretamente.
+# - A memória do sistema host deve ser suficiente para suportar a VM com os recursos alocados.
+#   Quantidade mínima recomendada para o host é 16 GB.
+# - Altere o arquivo Vagrantfile para ajustar os recursos da VM (memória e CPUs) conforme necessário
+#   antes de executar este playbook. Depois de ajustar, recarregue a VM com 'vagrant reload ansible'.
+#   As quantidades recomendadas já estão comentadas no Vagrantfile.
+# =============================================================================
+
+- name: Instalação do AWX
+  hosts: localhost
+  connection: local
+  become: false
+  vars:
+    awx_namespace: awx
+    awx_operator_version: "2.19.1"
+    awx_instance_name: awx-instance
+    awx_nodeport: 30395
+    minikube_cpus: 4
+    minikube_memory: 6144
+    kustomization_dir: "/tmp/awx-install"
+
+  tasks:
+
+    # -------------------------------------------------------------------------
+    # 0. Pré-requisitos de hardware
+    # -------------------------------------------------------------------------
+
+    - name: Verifica vCPUs e memória disponíveis
+      ansible.builtin.assert:
+        that:
+          - ansible_processor_vcpus | int >= minikube_cpus | int
+          - ansible_memtotal_mb | int >= minikube_memory | int
+        fail_msg: >-
+          Recursos insuficientes para o Minikube:
+          vCPUs disponíveis = {{ ansible_processor_vcpus }} (necessário {{ minikube_cpus }}),
+          memória disponível = {{ ansible_memtotal_mb }} MB (necessário {{ minikube_memory }} MB).
+          Aumente os recursos da VM (Vagrantfile) ou ajuste
+          'minikube_cpus' e 'minikube_memory' no playbook.
+          Destrua e recrie a VM com 'vagrant destroy ansible -f' e 'vagrant up ansible'.
+        success_msg: >-
+          Recursos OK: {{ ansible_processor_vcpus }} vCPUs, {{ ansible_memtotal_mb }} MB de RAM.
+
+    # -------------------------------------------------------------------------
+    # 1. Dependências do sistema
+    # -------------------------------------------------------------------------
+
+    - name: Instala as dependências do sistema
+      become: true
+      ansible.builtin.apt:
+        name:
+          - curl
+          - conntrack
+          - python3-pip
+        state: present
+        update_cache: true
+
+    # -------------------------------------------------------------------------
+    # 2. Docker
+    # -------------------------------------------------------------------------
+
+    - name: Verifica se o Docker está instalado
+      ansible.builtin.command: docker --version
+      register: docker_check
+      ignore_errors: true
+      changed_when: false
+
+    - name: Instala o Docker via role docker
+      become: true
+      ansible.builtin.import_role:
+        name: docker
+      when: docker_check.rc != 0
+      tags: docker
+
+    # -------------------------------------------------------------------------
+    # 3. kubectl
+    # -------------------------------------------------------------------------
+
+    - name: Verifica se o kubectl está instalado
+      ansible.builtin.command: kubectl version --client
+      register: kubectl_check
+      ignore_errors: true
+      changed_when: false
+
+    - name: Instala o kubectl
+      become: true
+      ansible.builtin.shell: |
+        curl -LO "https://dl.k8s.io/release/$(curl -sL https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+        install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+        rm -f kubectl
+      when: kubectl_check.rc != 0
+
+    # -------------------------------------------------------------------------
+    # 4. Minikube
+    # -------------------------------------------------------------------------
+
+    - name: Verifica se o Minikube está instalado
+      ansible.builtin.command: minikube version
+      register: minikube_check
+      ignore_errors: true
+      changed_when: false
+
+    - name: Instala o Minikube
+      become: true
+      ansible.builtin.shell: |
+        curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+        install -o root -g root -m 0755 minikube-linux-amd64 /usr/local/bin/minikube
+        rm minikube-linux-amd64
+      when: minikube_check.rc != 0
+
+    - name: Verifica se o Minikube está rodando
+      ansible.builtin.command: sg docker -c 'minikube status'
+      register: minikube_status
+      ignore_errors: true
+      changed_when: false
+
+    - name: Inicia o Minikube
+      ansible.builtin.command: >
+        sg docker -c 'minikube start
+        --cpus={{ minikube_cpus }}
+        --memory={{ minikube_memory }}
+        --vm-driver=docker
+        --addons=ingress'
+      when: "'Running' not in minikube_status.stdout"
+
+    # -------------------------------------------------------------------------
+    # 5. Namespace AWX
+    # -------------------------------------------------------------------------
+
+    - name: Cria o namespace {{ awx_namespace }}
+      ansible.builtin.command: kubectl create namespace {{ awx_namespace }}
+      register: ns_result
+      failed_when:
+        - ns_result.rc != 0
+        - "'already exists' not in ns_result.stderr"
+      changed_when: ns_result.rc == 0
+
+    # -------------------------------------------------------------------------
+    # 6. AWX Operator via Kustomize
+    # -------------------------------------------------------------------------
+
+    - name: Cria o diretório de trabalho
+      ansible.builtin.file:
+        path: "{{ kustomization_dir }}"
+        state: directory
+        mode: "0755"
+
+    - name: Cria o arquivo kustomization.yaml com substituição da imagem kube-rbac-proxy
+      ansible.builtin.copy:
+        dest: "{{ kustomization_dir }}/kustomization.yaml"
+        content: |
+          apiVersion: kustomize.config.k8s.io/v1beta1
+          kind: Kustomization
+          resources:
+            - https://github.com/ansible/awx-operator/config/default?ref={{ awx_operator_version }}
+          namespace: {{ awx_namespace }}
+          images:
+            - name: gcr.io/kubebuilder/kube-rbac-proxy
+              newName: quay.io/brancz/kube-rbac-proxy
+              newTag: v0.18.0
+        mode: "0644"
+
+    - name: Aplica o AWX Operator
+      ansible.builtin.command: kubectl apply -k {{ kustomization_dir }}
+
+    - name: Aguarda o operator ficar disponível (pode levar alguns minutos)
+      ansible.builtin.command: >
+        kubectl rollout status deployment/awx-operator-controller-manager
+        -n {{ awx_namespace }} --timeout=300s
+      register: operator_status
+      retries: 3
+      delay: 10
+
+    # -------------------------------------------------------------------------
+    # 7. Instância AWX
+    # -------------------------------------------------------------------------
+
+    - name: Cria o manifesto da instância AWX
+      ansible.builtin.copy:
+        dest: "{{ kustomization_dir }}/awx-instance.yml"
+        content: |
+          ---
+          apiVersion: awx.ansible.com/v1beta1
+          kind: AWX
+          metadata:
+            name: {{ awx_instance_name }}
+            namespace: {{ awx_namespace }}
+          spec:
+            service_type: nodeport
+            nodeport_port: {{ awx_nodeport }}
+        mode: "0644"
+
+    - name: Aplica a instância AWX
+      ansible.builtin.command: kubectl apply -f {{ kustomization_dir }}/awx-instance.yml
+
+    # -------------------------------------------------------------------------
+    # 8. Aguardar pods ficarem prontos
+    # -------------------------------------------------------------------------
+
+    - name: Aguarda implantação do AWX ser criada
+      ansible.builtin.shell: |
+        kubectl get deployment -n {{ awx_namespace }} | grep {{ awx_instance_name }}
+      register: awx_deploy_check
+      retries: 60
+      delay: 10
+      until: awx_deploy_check.rc == 0
+      changed_when: false
+
+    - name: Aguarda a implantação web do AWX (pode levar até 15 minutos)
+      ansible.builtin.command: >
+        kubectl rollout status deployment/{{ awx_instance_name }}
+        -n {{ awx_namespace }} --timeout=900s
+      ignore_errors: true
+
+    # -------------------------------------------------------------------------
+    # 9. Exibir informações de acesso
+    # -------------------------------------------------------------------------
+
+    - name: Obtém o IP do Minikube (NodePort)
+      ansible.builtin.command: sg docker -c 'minikube ip'
+      register: awx_ip
+      changed_when: false
+
+    - name: Obtém a senha do admin
+      ansible.builtin.command: >
+        kubectl get secret {{ awx_instance_name }}-admin-password
+        -o jsonpath="{.data.password}"
+        -n {{ awx_namespace }}
+      register: admin_password_b64
+      changed_when: false
+
+    - name: Decodifica a senha
+      ansible.builtin.command: >
+        echo "{{ admin_password_b64.stdout }}" | base64 --decode
+      register: admin_password
+      changed_when: false
+
+    - name: Inicia port-forward para o serviço AWX (acesse http://localhost:8080)
+      ansible.builtin.shell: >
+        nohup kubectl port-forward --address 0.0.0.0 -n {{ awx_namespace }}
+        svc/{{ awx_instance_name }}-service 8080:80
+        >/tmp/awx-port-forward.log 2>&1 &
+      async: 0
+      poll: 0
+      changed_when: true
+
+    - name: Exibe as informações de acesso
+      ansible.builtin.debug:
+        msg:
+          - "========================================"
+          - " AWX instalado com sucesso!"
+          - "========================================"
+          - " URL (NodePort): http://{{ awx_ip.stdout }}:{{ awx_nodeport }}"
+          - " URL (port-forward): http://localhost:8080"
+          - " Usuário: admin"
+          - " Senha: {{ admin_password.stdout }}"
+          - "----------------------------------------"
+          - " Acesse a URL acima a partir da própria VM (vagrant ssh ansible)."
+          - "========================================"
