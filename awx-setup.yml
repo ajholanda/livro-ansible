@@ -266,7 +266,7 @@
           - " URL (NodePort): http://{{ awx_ip.stdout }}:{{ awx_nodeport }}"
           - " URL (port-forward): http://localhost:8080"
           - " Usuário: admin"
-          - " Senha: {{ admin_password.stdout }}"
+          - " Senha: echo {{ admin_password.stdout }} | xargs echo"
           - "----------------------------------------"
           - " Acesse a URL acima a partir da própria VM (vagrant ssh ansible)."
           - "========================================"
