@@ -268,5 +268,5 @@
           - " Usuário: admin"
           - " Senha: echo {{ admin_password.stdout }} | xargs echo"
           - "----------------------------------------"
-          - " Acesse a URL acima a partir da própria VM (vagrant ssh ansible)."
+          - " Acesse a URL que contém a porta 8080 pelo navegador."
           - "========================================"
