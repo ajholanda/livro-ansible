@@ -1,0 +1,6 @@
+ansible-navigator:
+  execution-environment:
+    image: my-ee:1.0
+    pull:
+      policy: missing
+  mode: stdout
