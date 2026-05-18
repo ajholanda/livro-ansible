@@ -37,9 +37,9 @@ ips = {
 vms = {
   'ansible'  => {
       # Altere para 8192 MB para instalar o AWX.
-      'memory' => '8192',
+      'memory' => '1024',
       # Altere para 4 CPUs para instalar o AWX.
-      'cpus' => 4,
+      'cpus' => 1,
       'ip' => "#{TYPE2IP['ansible']}",
       'box' => 'ubuntu/jammy64',
       'ssh_port' => 2220
