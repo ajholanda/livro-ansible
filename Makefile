@@ -1,19 +1,35 @@
 VENV_DIR = $(HOME)/ansible-venv
 BASHRC_FILE = $(HOME)/.bashrc
+PIPX := /usr/bin/pipx
 VENV_SOURCE_LINE = [ -d "$(VENV_DIR)" ] && source "$(VENV_DIR)/bin/activate"
 PIP := $(VENV_DIR)/bin/pip
-GALAXY := $(VENV_DIR)/bin/ansible-galaxy
-PLAYBOOK := $(VENV_DIR)/bin/ansible-playbook
-MOLECULE := $(VENV_DIR)/bin/molecule
+GALAXY := ansible-galaxy
+PLAYBOOK := ansible-playbook
+MOLECULE := molecule
 
 TRASH := *~
 
-all: ansible aws collections setup-bashrc molecule
+all: apps aws collections docker packages setup-bashrc
 
 $(VENV_DIR):
 	python3 -m venv $@
 
-ansible: $(VENV_DIR)
+# 1. O primeiro comando instala o ansible e cria o ambiente virtual.
+# 2 O segundo comando injeta as aplicações listadas no amsbiente
+# virtual ansible.
+# 3. O comand ensurepath configura o caminho das aplicações na
+# variável de ambiente PATH.
+apps:
+	$(PIPX) install --include-deps ansible
+	$(PIPX) inject ansible \
+			ansible-builder \
+			ansible-lint \
+			ansible-navigator \
+			molecule pylint \
+			yamllint
+	-$(PIPX) ensurepath
+
+packages: $(VENV_DIR)
 	$(PIP) install -r requirements.txt
 
 collections: ansible
