@@ -1,5 +1,5 @@
 # Define system packages and Python packages.
-apt_pkgs="make python3-pip python3-venv sshpass tree virtualenv"
+apt_pkgs="make pipx python3-pip python3-venv sshpass tree vim virtualenv"
 
 # ---
 # Section 1: Install system packages.
