@@ -38,9 +38,6 @@ collections: ansible
 docker:
 	$(PLAYBOOK) containers.yml --tags docker
 
-$(MOLECULE): docker
-	$(PIP) install -r requirements.txt
-
 /etc/ansible/inventory.py: inventory.py /etc/ansible
 	install $^
 TRASH += /etc/ansible/inventory.py
