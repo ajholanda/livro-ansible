@@ -1,0 +1,10 @@
+---
+- name: Playbook localhost
+  hosts: localhost
+  gather_facts: true
+  become: false
+
+  tasks:
+    - name: Exibe nome do host
+      ansible.builtin.debug:
+        var: inventory_hostname
