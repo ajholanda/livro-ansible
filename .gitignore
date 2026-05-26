@@ -13,6 +13,7 @@
 *.swp
 Ansible.txt
 ansible
+desktop.ini
 include_tasks-0.yml
 roles/ajholanda.*
 tmp
