@@ -81,5 +81,6 @@ TRASH += include_tasks-0.yml
 
 clean:
 	$(RM) $(TRASH)
+	-Get-ChildItem -Path . -Filter desktop.ini -Recurse -Force | Remove-Item -Force
 
 .PHONY: all apps aws awx collections docker lint packages setup-bashrc versions
