@@ -6,6 +6,6 @@ function c08() {
 	RUN "ansible-playbook plugin.yml"
 
 	ECHO_SUB "Módulos"
-	ECHO "Testa o módulo fstab."
-	RUN "ansible-playbook test_module.yml"
+	ECHO "Testa o módulo fstab"
+	RUN "ansible-playbook module.yml"
 }
