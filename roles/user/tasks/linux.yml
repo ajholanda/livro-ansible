@@ -21,8 +21,8 @@
 
 - name: Elimina a solicitação de senha pelo sudo
   ansible.builtin.copy:
-    dest: "/etc/sudoers.d/{{ item }}"
-    content: "{{ item }} ALL=(ALL) NOPASSWD:ALL"
+    dest: "/etc/sudoers.d/{{ item.name }}"
+    content: "{{ item.name }} ALL=(ALL) NOPASSWD:ALL"
     validate: 'visudo -cf %s'
     owner: root
     group: root
