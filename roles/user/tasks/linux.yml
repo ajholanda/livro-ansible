@@ -28,5 +28,7 @@
     group: root
     mode: "0440"
   loop: "{{ user_admins }}"
+  loop_control:
+    label: "{{ item.name }}"
   when: user_admins is defined
   tags: user
