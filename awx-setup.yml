@@ -201,6 +201,8 @@
           spec:
             service_type: nodeport
             nodeport_port: {{ awx_nodeport }}
+            projects_persistence: true
+            projects_storage_size: 8Gi
         mode: "0644"
 
     - name: Aplica a instância AWX
