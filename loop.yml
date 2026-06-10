@@ -38,3 +38,28 @@
         loop_var: u_item
         index_var: idx
       tags: index
+
+    - name: Simplificação do rótulo de cada item
+      ansible.builtin.debug:
+        msg: "Criando o usuário {{ u_item.name }}"
+      loop:
+        - { name: ajh, uid: 1001, group: livro }
+        - { name: dcs, uid: 1002, group: livro }
+        - { name: tbc, uid: 1003, group: livro }
+      loop_control:
+        loop_var: u_item
+        label: "{{ u_item.name }}"
+      tags: label
+
+    - name: Combina controle de variável, índice e rótulo
+      ansible.builtin.debug:
+        msg: "Usuário {{ idx }}: {{ u_item.name }} (uid {{ u_item.uid }})"
+      loop:
+        - { name: ajh, uid: 1001, group: livro }
+        - { name: dcs, uid: 1002, group: livro }
+        - { name: tbc, uid: 1003, group: livro }
+      loop_control:
+        loop_var: u_item
+        index_var: idx
+        label: "{{ u_item.name }}"
+      tags: combined
