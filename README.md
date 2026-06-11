@@ -37,18 +37,13 @@ vagrant ssh ansible
 cd livro/
 ```
 
-- Executar o *script* sem argumentos para mostrar as opções:
-
-```bash
-bash ./cmds.sh
-```
+Com o ambiente pronto, os comandos dos exemplos do livro estão reunidos,
+organizados por capítulo e com uma breve explicação, em
+[comandos/README.md](comandos/README.md). Consulte esse arquivo para localizar
+o comando correspondente a cada capítulo e execute-o no diretório do projeto.
 
 Se quiser testar também para *hosts* com sistema Windows, descomente a linha com as configurações da máquina virtual com o sistema Windows
-no arquivo [Vagrantfile](Vagrantfile) e execute:
-
-```
-bash ./cmds.sh c12       # capitulo 12
-```
+no arquivo [Vagrantfile](Vagrantfile) e recarregue o ambiente com `vagrant up`.
 
 ⚠️ **Avisos:**
 
