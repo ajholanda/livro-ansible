@@ -39,7 +39,7 @@ cd livro/
 
 Com o ambiente pronto, os comandos dos exemplos do livro estão reunidos,
 organizados por capítulo e com uma breve explicação, em
-[comandos/README.md](comandos/README.md). Consulte esse arquivo para localizar
+[comandos.md](comandos.md). Consulte esse arquivo para localizar
 o comando correspondente a cada capítulo e execute-o no diretório do projeto.
 
 Se quiser testar também para *hosts* com sistema Windows, descomente a linha com as configurações da máquina virtual com o sistema Windows
