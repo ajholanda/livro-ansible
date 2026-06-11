@@ -30,10 +30,27 @@ Os comandos foram extraídos do texto principal de cada capítulo (e, quando
 
 ## Capítulo 1 — Automação e Ansible
 
+> Para os impacientes: dentro do diretório do projeto, o comando `make` executa
+> toda a configuração do ambiente de uma só vez (ambiente virtual Python,
+> Ansible e aplicações auxiliares, coleções, AWS, Docker e ajuste do `.bashrc`).
+> Os comandos a seguir detalham, passo a passo, o que esse alvo automatiza.
+
 Instala o Ansible como pacote Python via `pip` (recomendado por trazer a versão mais recente):
 
 ```bash
 $ pip install ansible
+```
+
+Para isolar essa instalação dos pacotes do sistema (e contornar a PEP 668), crie um ambiente virtual Python antes de executar o `pip`:
+
+```bash
+$ python3 -m venv ~/ansible-venv
+```
+
+Ative o ambiente virtual; uma vez ativado, o `pip` passa a instalar os pacotes apenas dentro dele:
+
+```bash
+$ source ~/ansible-venv/bin/activate
 ```
 
 Instala o Ansible pelo gerenciador de pacotes da família Debian:
@@ -58,6 +75,17 @@ Instala o Ansible via `pipx` em ambiente isolado (contorna a PEP 668); `--includ
 
 ```bash
 $ pipx install --include-deps ansible
+```
+
+Injeta, no mesmo ambiente isolado do `ansible`, as aplicações auxiliares de desenvolvimento e teste, mantendo-as disponíveis no `PATH` sem criar ambientes separados:
+
+```bash
+$ pipx inject ansible \
+    ansible-builder \
+    ansible-lint \
+    ansible-navigator \
+    molecule pylint \
+    yamllint
 ```
 
 Instala o `pipx` previamente via `apt`:
