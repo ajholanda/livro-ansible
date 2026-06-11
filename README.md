@@ -16,7 +16,7 @@ Para criar o ambiente de execução devemos:
 vagrant up
 ```
 
-- Conectar no *host* controlador (senha=vagrant):
+- Conectar no host controlador (senha=vagrant):
 
 ```bash
 vagrant ssh ansible
@@ -38,21 +38,21 @@ cd livro/
 ```
 
 Com o ambiente pronto, os comandos dos exemplos do livro estão reunidos,
-organizados por capítulo e com uma breve explicação, em
+organizados por capítulo e acompanhados de uma breve explicação, em
 [comandos.md](comandos.md). Consulte esse arquivo para localizar
 o comando correspondente a cada capítulo e execute-o no diretório do projeto.
 
-Se quiser testar também para *hosts* com sistema Windows, descomente a linha com as configurações da máquina virtual com o sistema Windows
-no arquivo [Vagrantfile](Vagrantfile) e recarregue o ambiente com `vagrant up`.
+Se quiser testar também para hosts com sistema Windows, descomente a linha com as configurações da máquina virtual com o sistema Windows
+no arquivo [Vagrantfile](Vagrantfile), recarregue o ambiente com `vagrant up`.
 
 ⚠️ **Avisos:**
 
 - O arquivo com a máquina virtual do Windows é muito grande e seu
-*download* e alguns comandos do Vagrant podem demorar muito dependendo
+download e alguns comandos do Vagrant podem demorar muito dependendo
 da configuração de rede e do computador em que as máquinas virtuais estão sendo executadas.
 
 - Os ambientes do Vagrant foram testados. Porém, problemas
-com as máquinas virtuais durante o carregamento (`vagrant up`) ainda podem ocorrer. A maior parte dos problemas é bem relatada em páginas de
+com as máquinas virtuais durante o carregamento (`vagrant up`) ainda podem ocorrer. A maior parte dos problemas é bem relatada nas páginas de
 grupos de discussão. Em último caso, a reconstrução das máquinas
 virtuais pode solucionar a maior parte dos problemas:
 
@@ -62,11 +62,11 @@ vagrant destroy
 vagrant up
 ```
 
-- Para executar o caso de uso relacionado ao gerenciamento de contêineres na nuvem, é necessário possuir uma conta no provedor [AWS](https://aws.amazon.com/).
+- Para executar o caso de uso relacionado ao gerenciamento de contêineres na nuvem, é necessário ter uma conta no provedor [AWS](https://aws.amazon.com/).
 
 ### Fatos relacionados aos hosts
 
-A tabela a seguir apresenta um conjunto de fatos coletados pelo Ansible para os hosts do inventário [hosts.ini](hosts.ini). Os atributos `system`, `os_family` e `distribution`, armazenados na estrutura `ansible_facts`, descrevem o sistema operacional de cada host.
+A tabela a seguir apresenta um conjunto de fatos coletados pelo Ansible dos hosts do inventário [hosts.ini](hosts.ini). Os atributos `system`, `os_family` e `distribution`, armazenados na estrutura `ansible_facts`, descrevem o sistema operacional de cada host.
 
 
 | hostname     |  `system` |  `os_family` | `distribution` |
@@ -83,7 +83,7 @@ A tabela a seguir apresenta um conjunto de fatos coletados pelo Ansible para os 
 
 ## *Roles* provenientes do Ansible Galaxy
 
-Os *roles* provenientes do Ansible Galaxy citados no livro são listados a seguir:
+Os roles provenientes do Ansible Galaxy citados no livro são listados a seguir:
 
 - [ajholanda.googlechrome](https://galaxy.ansible.com/ui/standalone/roles/ajholanda/googlechrome/) [[Github](https://github.com/ajholanda/ansible_role_googlechrome)]
 - [ajholanda.vscode](https://galaxy.ansible.com/ui/standalone/roles/ajholanda/vscode/) [[Github](https://github.com/ajholanda/ansible_role_vscode)]
