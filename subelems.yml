@@ -1,0 +1,33 @@
+---
+- name: Configura usuários e suas chaves SSH
+  hosts: localhost
+  become: true
+
+  vars:
+    users:
+      - name: alice
+        keys:
+          - "ssh-ed25519 AAAA...alice-laptop"
+          - "ssh-ed25519 AAAA...alice-workstation"
+
+      - name: beto
+        keys:
+          - "ssh-ed25519 AAAA...beto-desktop"
+
+  tasks:
+    - name: Cria os usuários
+      ansible.builtin.user:
+        name: "{{ item.name }}"
+        state: present
+        create_home: true
+      loop: "{{ users }}"
+
+    - name: Adiciona as chaves SSH dos usuários
+      ansible.posix.authorized_key:
+        user: "{{ item.0.name }}"
+        key: "{{ item.1 }}"
+        state: present
+      loop: "{{ users | subelements('keys') }}"
+      loop_control:
+        label: "{{ item.0.name }}: {{ item.1[:30] }}"
+      
