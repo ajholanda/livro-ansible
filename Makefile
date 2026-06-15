@@ -33,10 +33,10 @@ apps:
 packages: $(VENV_DIR)
 	$(PIP) install -r requirements.txt
 
-collections: ansible
+collections: apps
 	$(GALAXY) collection install -r requirements.yml
 
-docker:
+docker: apps
 	$(PLAYBOOK) containers.yml --tags docker
 
 /etc/ansible/inventory.py: inventory.py /etc/ansible
@@ -46,7 +46,7 @@ TRASH += /etc/ansible/inventory.py
 /etc/ansible:
 	sudo mkdir -p $@ && sudo chown $(USER) $@
 
-aws:
+aws: $(VENV_DIR)
 	$(GALAXY) collection install amazon.aws
 	$(PIP) install awscli boto3 botocore
 
