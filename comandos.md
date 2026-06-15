@@ -746,7 +746,7 @@ ansible-galaxy collection install chocolatey.chocolatey
 
 ## Capítulo 14 — Ansible Automation Platform e AWX
 
-Implanta o AWX no controlador (laboratório com minikube) por meio do playbook do livro:
+Implanta o AWX no controlador (laboratório com minikube) por meio do playbook do livro. **Leia o conteúdo do topo do arquivo `awx-setup.yml` e faça as alterações na configuração do Vagrant (`Vagrantfile`)** antes de executar o comando a seguir.
 
 ```bash
 ansible-playbook awx-setup.yml
