@@ -69,16 +69,30 @@ lint:
 versions:
 	sh scripts/print_versions.sh
 
-# Gera o playbook do primeiro exemplo de webserver.yml.
-webserver-0.yml: webserver.yml
-	head -18 $< | grep -v "tags\|- webserver" > $@
-TRASH += webserver-0.yml
+# Imprime os valores resolvidos das variáveis para depuração.
+debug:
+	@echo "HOME             = $(HOME)"
+	@echo "USER             = $(USER)"
+	@echo "VENV_DIR         = $(VENV_DIR)"
+	@echo "BINDIR           = $(BINDIR)"
+	@echo "BASHRC_FILE      = $(BASHRC_FILE)"
+	@echo "PIP              = $(PIP)"
+	@echo "GALAXY           = $(GALAXY)"
+	@echo "PLAYBOOK         = $(PLAYBOOK)"
+	@echo "MOLECULE         = $(MOLECULE)"
+	@echo "VENV_SOURCE_LINE = $(VENV_SOURCE_LINE)"
+	@echo "TRASH            = $(TRASH)"
 
-include_tasks-0.yml: include_tasks.yml
+# Gera o playbook do primeiro exemplo de webserver.yml.
+webserver-3.yml: webserver.yml
+	head -18 $< | grep -v "tags\|- webserver" > $@
+TRASH += webserver-3.yml
+
+include_tasks-3.yml: include_tasks.yml
 	head -13 $< > $@
-TRASH += include_tasks-0.yml
+TRASH += include_tasks-3.yml
 
 clean:
 	$(RM) $(TRASH)
 
-.PHONY: all apps aws awx collections docker lint packages setup-bashrc versions
+.PHONY: all apps aws awx clean collections debug docker lint packages setup-bashrc versions

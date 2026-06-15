@@ -246,28 +246,29 @@ ansible-doc ansible.builtin.copy
 
 ## Capítulo 3 — Playbook
 
-Executa um playbook:
+Executa um playbook (`webserver-3.yml` é a versão inalterada de `webserver.yml` apresentado no Capítulo 3):
 
 ```bash
-ansible-playbook webserver.yml
+make webserver-3.yml  # Cria o arquivo webserver-3.yml
+ansible-playbook webserver-3.yml
 ```
 
 Lista as tarefas de um playbook sem executá-las:
 
 ```bash
-ansible-playbook webserver.yml --list-tasks
+ansible-playbook webserver-3.yml --list-tasks
 ```
 
 Lista os hosts afetados por um playbook:
 
 ```bash
-ansible-playbook webserver.yml --list-hosts
+ansible-playbook webserver-3.yml --list-hosts
 ```
 
 Inicia a execução a partir de uma tarefa específica, ignorando as anteriores:
 
 ```bash
-ansible-playbook webserver.yml --start-at-task "Habilita e inicia o apache"
+ansible-playbook webserver-3.yml --start-at-task "Habilita e inicia o apache"
 ```
 
 Lista as tarefas de um playbook com múltiplos *plays*:
@@ -279,9 +280,9 @@ ansible-playbook plays.yml --list-tasks
 Seleção de tarefas por *tags* (`--tags` seleciona, `--skip-tags` exclui):
 
 ```bash
-ansible-playbook webserver.yml --tags webserver_package
-ansible-playbook webserver.yml --skip-tags webserver_service
-ansible-playbook webserver.yml --tags "webserver_package,webserver_service"
+ansible-playbook webserver-3.yml --tags webserver_package
+ansible-playbook webserver-3.yml --skip-tags webserver_service
+ansible-playbook webserver-3.yml --tags "webserver_package,webserver_service"
 ```
 
 Comportamento das *tags* especiais `always`, `never`, `tagged` e `untagged`:
@@ -312,9 +313,10 @@ ansible-playbook listen.yml
 Limitações da inclusão dinâmica com `include_tasks` (tarefas/tags incluídas dinamicamente não aparecem e `--start-at-task` não as alcança):
 
 ```bash
-ansible-playbook include_tasks.yml --list-tasks
-ansible-playbook include_tasks.yml --list-tags
-ansible-playbook include_tasks.yml --start-at-task "Imprime o número da tarefa"
+make include_tasks-3.yml  # Cria a versão semelhante à apresentada no capítulo.
+ansible-playbook include_tasks-3.yml --list-tasks
+ansible-playbook include_tasks-3.yml --list-tags
+ansible-playbook include_tasks-3.yml --start-at-task "Imprime o número da tarefa"
 ```
 
 Executa um playbook com `pre_tasks`/`post_tasks` e `serial`:
@@ -326,15 +328,15 @@ ansible-playbook pre_tasks_post.yml
 Modos de verificação (*check*) e de diferenças (*diff*), que simulam a execução sem alterar os hosts:
 
 ```bash
-ansible-playbook webserver.yml --check
-ansible-playbook webserver.yml --diff
-ansible-playbook webserver.yml --check --diff
+ansible-playbook webserver-3.yml --check
+ansible-playbook webserver-3.yml --diff
+ansible-playbook webserver-3.yml --check --diff
 ```
 
 Força a execução dos manipuladores mesmo após falhas (citado nos exercícios):
 
 ```bash
-ansible-playbook webserver.yml --force-handlers
+ansible-playbook webserver-3.yml --force-handlers
 ```
 
 ---
