@@ -14,7 +14,7 @@
 Ansible.txt
 ansible
 desktop.ini
-include_tasks-0.yml
+include_tasks-*.yml
 roles/ajholanda.*
 tmp
 venv
