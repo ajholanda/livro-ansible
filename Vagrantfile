@@ -60,10 +60,11 @@ vms = {
   },
   'windows'   => {
       'memory' => '4096',
-      'cpus' => 1,
+      'cpus' => 2,
       'ip' => "#{TYPE2IP['windows']}",
-      'box' => 'gusztavvargadr/windows-11',
-      'ssh_port' => 2223
+      'box' => 'gusztavvargadr/windows-server',
+      # Porta de comunicação no host: WinRM (5985), não SSH.
+      'comm_port' => 2223
   }
 }
 
@@ -79,16 +80,28 @@ Vagrant.configure('2') do |config|
     config.vm.define "#{name}" do |k|
       k.vm.hostname = "#{name}" #.#{DOMAIN}", don't append the domain
       k.vm.network 'private_network', ip: "#{conf['ip']}"
-      k.vm.network 'forwarded_port', guest: 22, host: conf['ssh_port'], id: 'ssh'
       k.vm.box = conf['box']
+
+      if "#{name}" == "windows"
+        # Windows Server boxes se comunicam por WinRM, não por SSH.
+        k.vm.communicator = 'winrm'
+        k.winrm.username = 'vagrant'
+        k.winrm.password = 'vagrant'
+        k.winrm.transport = :negotiate
+        # Encaminha WinRM (5985) e RDP (3389) em vez de SSH.
+        k.vm.network 'forwarded_port', guest: 5985, host: conf['comm_port'], id: 'winrm', auto_correct: true
+        k.vm.network 'forwarded_port', guest: 3389, host: 33389, id: 'rdp', auto_correct: true
+      else
+        k.vm.network 'forwarded_port', guest: 22, host: conf['ssh_port'], id: 'ssh'
+      end
 
       k.vm.provider 'virtualbox' do |vb|
         vb.memory = conf['memory']
         vb.cpus = conf['cpus']
         vb.customize ["modifyvm", :id, "--cableconnected1", "on"]
         if "#{name}" == "windows"
-          # See what's happenning with Windows box.
-          vb.gui = true
+          # Economiza disco ao criar várias VMs a partir da mesma box.
+          vb.linked_clone = true
         end
       end
 
@@ -105,6 +118,12 @@ Vagrant.configure('2') do |config|
         ips.each_pair {|hostname, ip|
           k.vm.provision "shell", inline: "echo \"#{ip} #{hostname}.#{DOMAIN} #{hostname}\" >>/etc/hosts"
         }
+      end
+
+      # Bootstrap do OpenSSH no Windows para que o Ansible conecte por SSH
+      # (group_vars/windows.yml) sem alterar nenhum arquivo do inventario.
+      if "#{name}" == "windows"
+        k.vm.provision "shell", path: "provision/windows.ps1"
       end
 
       # Specific to Ansible host controller
