@@ -136,13 +136,13 @@ $ pipx install ansible-core
 Exibe, em formato JSON, a saída de um inventário (neste caso, dinâmico):
 
 ```bash
-$ ansible-inventory -i inventory.py --list
+$ ansible-inventory -i /etc/ansible/inventory.py --list
 ```
 
 Mostra a estrutura hierárquica (grupos e hosts) do inventário:
 
 ```bash
-$ ansible-inventory -i inventory.py --graph
+$ ansible-inventory -i /etc/ansible/inventory.py --graph
 ```
 
 Exibe as variáveis definidas para um host específico:
