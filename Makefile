@@ -1,11 +1,12 @@
 VENV_DIR = $(HOME)/ansible-venv
+BINDIR = ~/.local/bin
 BASHRC_FILE = $(HOME)/.bashrc
 PIPX := /usr/bin/pipx
 VENV_SOURCE_LINE = [ -d "$(VENV_DIR)" ] && source "$(VENV_DIR)/bin/activate"
 PIP := $(VENV_DIR)/bin/pip
-GALAXY := ansible-galaxy
-PLAYBOOK := ansible-playbook
-MOLECULE := molecule
+GALAXY := $(BINDIR)/ansible-galaxy
+PLAYBOOK := $(BINDIR)/ansible-playbook
+MOLECULE := $(BINDIR)/molecule
 
 TRASH := *~
 
