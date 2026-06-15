@@ -10,7 +10,7 @@ MOLECULE := $(BINDIR)/molecule
 
 TRASH := *~
 
-all: apps aws collections docker packages setup-bashrc
+all: apps aws collections docker packages setup-bashrc /etc/ansible/inventory.py
 
 $(VENV_DIR):
 	python3 -m venv $@
