@@ -822,23 +822,13 @@ Provisiona uma instância EC2 na AWS:
 ansible-playbook aws-ec2_provision.yml
 ```
 
-Valida o inventário dinâmico da AWS e aplica o role `webserver` à instância EC2:
+Valida o inventário dinâmico da AWS: 
 
 ```bash
 ansible-inventory -i aws-inventory.aws_ec2.yml --graph
+```
+
+Aplica o role `webserver` à instância EC2:
+```
 ansible-playbook cloud.yml -i aws-inventory.aws_ec2.yml --private-key ~/.aws/web-dev.pem
-```
-
-Verifica o resultado da implantação de contêineres diretamente no host (exercício):
-
-```bash
-docker ps
-docker network ls
-docker inspect
-```
-
-Adiciona a chave de um host ao `known_hosts` para corrigir falha de verificação de chave SSH (resolução de problemas):
-
-```bash
-ssh-keyscan host >> ~/.ssh/known_hosts
 ```
