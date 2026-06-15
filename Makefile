@@ -1,34 +1,32 @@
 VENV_DIR = $(HOME)/ansible-venv
-BINDIR = ~/.local/bin
+BINDIR := $(VENV_DIR)/bin
 BASHRC_FILE = $(HOME)/.bashrc
-PIPX := /usr/bin/pipx
 VENV_SOURCE_LINE = [ -d "$(VENV_DIR)" ] && source "$(VENV_DIR)/bin/activate"
-PIP := $(VENV_DIR)/bin/pip
+PIP := $(BINDIR)/pip
 GALAXY := $(BINDIR)/ansible-galaxy
 PLAYBOOK := $(BINDIR)/ansible-playbook
 MOLECULE := $(BINDIR)/molecule
 
 TRASH := *~
 
-all: apps aws collections docker packages setup-bashrc /etc/ansible/inventory.py
+all: apps aws collections docker packages setup-bashrc \
+	/etc/ansible/inventory.py \
+	webserver-3.yml include_tasks-3.yml
 
 $(VENV_DIR):
 	python3 -m venv $@
 
-# 1. O primeiro comando instala o ansible e cria o ambiente virtual.
-# 2 O segundo comando injeta as aplicações listadas no amsbiente
-# virtual ansible.
-# 3. O comand ensurepath configura o caminho das aplicações na
-# variável de ambiente PATH.
-apps:
-	$(PIPX) install --include-deps ansible
-	$(PIPX) inject ansible \
+# Instala o ansible e as ferramentas auxiliares dentro do
+# ambiente virtual (venv) criado pelo alvo $(VENV_DIR).
+apps: $(VENV_DIR)
+	$(PIP) install \
+			ansible \
 			ansible-builder \
 			ansible-lint \
 			ansible-navigator \
-			molecule pylint \
+			molecule \
+			pylint \
 			yamllint
-	-$(PIPX) ensurepath
 
 packages: $(VENV_DIR)
 	$(PIP) install -r requirements.txt
@@ -50,8 +48,8 @@ aws: $(VENV_DIR)
 	$(GALAXY) collection install amazon.aws
 	$(PIP) install awscli boto3 botocore
 
-awx:
-	ansible-playbook awx-setup.yml
+awx: apps
+	$(PLAYBOOK) awx-setup.yml
 
 # Alvo principal para configurar o virtualenv no .bashrc
 setup-bashrc:

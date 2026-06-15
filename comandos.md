@@ -44,32 +44,35 @@ Os comandos foram extraídos do texto principal de cada capítulo (e, quando
 
 > Após a execução dos comandos anteriores, o leitor  pode ir direto aos comandos que usam `ansible-inventory` neste capítulo.
 
-> **Filosofia de instalação.** O livro segue uma convenção para distinguir
-> *aplicativos* de *bibliotecas* Python:
+> **Filosofia de instalação.** O livro instala tanto os *aplicativos* quanto as
+> *bibliotecas* Python no mesmo **ambiente virtual `ansible-venv`**, usando o
+> `pip`:
 >
 > - **Aplicativos** (programas executados diretamente na linha de comando, como
->   `ansible`, `ansible-lint`, `molecule` ou `ansible-builder`) são instalados
->   com o **`pipx`**. Ele cria um ambiente isolado e dedicado para cada
->   aplicativo, expondo apenas os executáveis no `PATH` (`~/.local/bin`), sem
->   poluir o sistema nem entrar em conflito com outras instalações — e contornando a PEP
->   668.
-> - **Bibliotecas** (pacotes importados pelo Ansible em tempo de execução, como
->   `boto3`, `botocore` ou `passlib`) são instaladas com o **`pip` dentro do
->   ambiente virtual `ansible-venv`**. Como essas dependências precisam estar
->   visíveis ao interpretador Python que o Ansible utiliza, elas devem residir
->   no mesmo ambiente em que o Ansible roda, e não em ambientes isolados por
->   aplicativo.
+>   `ansible`, `ansible-lint`, `molecule` ou `ansible-builder`) e **bibliotecas**
+>   (pacotes importados pelo Ansible em tempo de execução, como `boto3`,
+>   `botocore` ou `passlib`) convivem no mesmo ambiente. Assim, as dependências
+>   ficam visíveis ao interpretador Python que o Ansible utiliza — elas precisam
+>   residir no mesmo ambiente em que o Ansible roda — e o ambiente virtual isola
+>   tudo dos pacotes do sistema, contornando a PEP 668. É essa a abordagem
+>   automatizada pelo alvo `make` (ver "Para os impacientes").
+> - O **`pipx`** é um **método alternativo**, voltado apenas a *aplicativos*: ele
+>   cria um ambiente isolado e dedicado para cada programa, expondo somente os
+>   executáveis no `PATH` (`~/.local/bin`). É útil para instalar uma ferramenta
+>   de linha de comando sem ativar o `ansible-venv`, mas as bibliotecas
+>   importadas pelo Ansible continuam exigindo o `pip` no ambiente virtual.
 >
-> Em resumo: `pipx` para o que se *executa*; `pip` (no `ansible-venv`) para o
-> que se *importa*.
+> Em resumo: o método preferido é o `pip` dentro do `ansible-venv`, para tudo
+> que se *executa* e tudo que se *importa*; o `pipx` fica como alternativa para
+> aplicativos avulsos.
 
-Instala o Ansible como pacote Python via `pip` (dar preferência à instalação via `pipx` ou dentro do ambiente virtual (`virtualenv`) Python):
+Instala o Ansible como pacote Python via `pip` (dar preferência à instalação dentro do ambiente virtual (`virtualenv`) Python — ver a seguir; o `pipx` é uma alternativa para aplicativos avulsos):
 
 ```bash
 pip install ansible
 ```
 
-Para isolar essa instalação dos pacotes do sistema (e contornar a PEP 668), crie um ambiente virtual Python antes de executar o `pip` (**método preferido para instalação de bibliotecas Python**):
+Para isolar essa instalação dos pacotes do sistema (e contornar a PEP 668), crie um ambiente virtual Python antes de executar o `pip` (**método preferido para instalação de aplicativos e bibliotecas Python**):
 
 ```bash
 python3 -m venv ~/ansible-venv
@@ -99,7 +102,7 @@ Verifica a versão instalada:
 ansible --version
 ```
 
-Instala o Ansible via `pipx` em ambiente isolado (contorna a PEP 668); `--include-deps` inclui programas auxiliares como `ansible-playbook`, `ansible-galaxy` e `ansible-lint`  (**método preferido para instalação de aplicativos Python**):
+Instala o Ansible via `pipx` em ambiente isolado (contorna a PEP 668); `--include-deps` inclui programas auxiliares como `ansible-playbook`, `ansible-galaxy` e `ansible-lint`  (**método alternativo para instalação de aplicativos Python**):
 
 ```bash
 pipx install --include-deps ansible
