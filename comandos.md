@@ -33,15 +33,42 @@ Os comandos foram extraídos do texto principal de cada capítulo (e, quando
 > Para os impacientes: dentro do diretório do projeto, o comando `make` executa
 > toda a configuração do ambiente de uma só vez (ambiente virtual Python,
 > Ansible e aplicações auxiliares, coleções, AWS, Docker e ajuste do `.bashrc`).
-> Os comandos a seguir detalham, passo a passo, o que esse alvo automatiza.
+   Segue a sequências de comandos se optar pela instalação usando o `make`:
+   ```
+   vagrant@ansible:~/livro$ make
+   vagrant@ansible:~/livro$ exit  # Sair da sessão.
+   > vagrant ssh ansible          # Entrar na VM para carregar o ambiente virtual.
+   vagrant@ansible:~/$ cd livro   # Entrar no diretório do livro.
+   ```
 
-Instala o Ansible como pacote Python via `pip` (recomendado por trazer a versão mais recente):
+> Após a execução dos comandos anteriores, o leitor  pode ir direto aos comandos que usam `ansible-inventory` neste capítulo.
+
+> **Filosofia de instalação.** O livro segue uma convenção para distinguir
+> *aplicativos* de *bibliotecas* Python:
+>
+> - **Aplicativos** (programas executados diretamente na linha de comando, como
+>   `ansible`, `ansible-lint`, `molecule` ou `ansible-builder`) são instalados
+>   com o **`pipx`**. Ele cria um ambiente isolado e dedicado para cada
+>   aplicativo, expondo apenas os executáveis no `PATH` (`~/.local/bin`), sem
+>   poluir o sistema nem entrar em conflito com outras instalações — e contornando a PEP
+>   668.
+> - **Bibliotecas** (pacotes importados pelo Ansible em tempo de execução, como
+>   `boto3`, `botocore` ou `passlib`) são instaladas com o **`pip` dentro do
+>   ambiente virtual `ansible-venv`**. Como essas dependências precisam estar
+>   visíveis ao interpretador Python que o Ansible utiliza, elas devem residir
+>   no mesmo ambiente em que o Ansible roda, e não em ambientes isolados por
+>   aplicativo.
+>
+> Em resumo: `pipx` para o que se *executa*; `pip` (no `ansible-venv`) para o
+> que se *importa*.
+
+Instala o Ansible como pacote Python via `pip` (dar preferência à instalação via `pipx` ou dentro do ambiente virtual (`virtualenv`) Python):
 
 ```bash
 $ pip install ansible
 ```
 
-Para isolar essa instalação dos pacotes do sistema (e contornar a PEP 668), crie um ambiente virtual Python antes de executar o `pip`:
+Para isolar essa instalação dos pacotes do sistema (e contornar a PEP 668), crie um ambiente virtual Python antes de executar o `pip` (**método preferido para instalação de bibliotecas Python**):
 
 ```bash
 $ python3 -m venv ~/ansible-venv
@@ -53,13 +80,13 @@ Ative o ambiente virtual; uma vez ativado, o `pip` passa a instalar os pacotes a
 $ source ~/ansible-venv/bin/activate
 ```
 
-Instala o Ansible pelo gerenciador de pacotes da família Debian:
+Instala o Ansible pelo gerenciador de pacotes da família Debian (se preferir instalar para todo o sistema):
 
 ```bash
 $ sudo apt install ansible
 ```
 
-Instala o Ansible pelo gerenciador de pacotes da família Red Hat:
+Instala o Ansible pelo gerenciador de pacotes da família Red Hat (se preferir instalar para todo o sistema):
 
 ```bash
 $ sudo dnf install ansible
@@ -71,7 +98,7 @@ Verifica a versão instalada:
 $ ansible --version
 ```
 
-Instala o Ansible via `pipx` em ambiente isolado (contorna a PEP 668); `--include-deps` inclui programas auxiliares como `ansible-playbook`, `ansible-galaxy` e `ansible-lint`:
+Instala o Ansible via `pipx` em ambiente isolado (contorna a PEP 668); `--include-deps` inclui programas auxiliares como `ansible-playbook`, `ansible-galaxy` e `ansible-lint`  (**método preferido para instalação de aplicativos Python**):
 
 ```bash
 $ pipx install --include-deps ansible
