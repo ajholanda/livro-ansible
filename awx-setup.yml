@@ -18,6 +18,13 @@
 # - Altere o arquivo Vagrantfile para ajustar os recursos da VM (memória e CPUs) conforme necessário
 #   antes de executar este playbook. Depois de ajustar, recarregue a VM com 'vagrant reload ansible'.
 #   As quantidades recomendadas já estão comentadas no Vagrantfile.
+# - Destrua e crie novamente a máquina virtual (VM) do ansible.
+#   > vagrant destroy ansible -f
+#   > vagrant up ansible
+# - Reinstale o Ansible na VM.
+#   > vagrant ssh ansible
+#   $ cd livro
+#   $ make
 # =============================================================================
 
 - name: Instalação do AWX
