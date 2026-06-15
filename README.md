@@ -16,34 +16,24 @@ Para criar o ambiente de execução devemos:
 vagrant up
 ```
 
-- Conectar no host controlador (senha=vagrant):
+- Conectar no host controlador (senha=`vagrant`, se for solicitada):
 
 ```bash
 vagrant ssh ansible
 ```
 
-- Entrar no diretório do projeto e executar o comando para instalação dos programas e criação do ambiente virtual Python:
+- Entrar no diretório do projeto:
 
 ```bash
 cd livro/
-make
 ```
 
-- Após a instalação dos programas e configuração do ambiente virtual Python, sair do ambiente e entrar novamente para carregar o ambiente virtual:
-
-```bash
-exit
-vagrant ssh ansible
-cd livro/
-```
+**Importante:** A máquina virtual Windows vem desabilitada por padrão devido ao seu tamanho. Para testar os hosts com sistema **Windows**, retire os comentários das linhas com as configurações da máquina virtual Windows no arquivo [Vagrantfile](Vagrantfile), recarregue o ambiente com `vagrant up`.
 
 Com o ambiente pronto, os comandos dos exemplos do livro estão reunidos,
 organizados por capítulo e acompanhados de uma breve explicação, em
 [comandos.md](comandos.md). Consulte esse arquivo para localizar
 o comando correspondente a cada capítulo e execute-o no diretório do projeto.
-
-Se quiser testar também para hosts com sistema Windows, descomente a linha com as configurações da máquina virtual com o sistema Windows
-no arquivo [Vagrantfile](Vagrantfile), recarregue o ambiente com `vagrant up`.
 
 ⚠️ **Avisos:**
 
@@ -69,17 +59,17 @@ vagrant up
 A tabela a seguir apresenta um conjunto de fatos coletados pelo Ansible dos hosts do inventário [hosts.ini](hosts.ini). Os atributos `system`, `os_family` e `distribution`, armazenados na estrutura `ansible_facts`, descrevem o sistema operacional de cada host.
 
 
-| hostname     |  `system` |  `os_family` | `distribution` |
-|--------------|-----------|--------------|----------------|
-| `cloud`      | Linux     | Debian       | Ubuntu         |
-| `db`         | Linux     | Debian       | Debian         |
-| `lab[01:03]` | Linux     | Debian       | Ubuntu         |
-| `nas`        | Linux     | Debian       | Debian         |
-| `off1`       | Win32NT   | Windows      | --             |
-| `simula`     | Linux     | Debian       | Ubuntu         |
-| `ti1`        | Linux     | Debian       | Ubuntu         |
-| `w3`         | Linux     | RedHat       | Almalinux      |
-| `web`        | Linux     | Debian       | Debian         |
+| hostname     | `system` | `os_family` | `distribution` |
+| ------------ | -------- | ----------- | -------------- |
+| `cloud`      | Linux    | Debian      | Ubuntu         |
+| `db`         | Linux    | Debian      | Debian         |
+| `lab[01:03]` | Linux    | Debian      | Ubuntu         |
+| `nas`        | Linux    | Debian      | Debian         |
+| `off1`       | Win32NT  | Windows     | --             |
+| `simula`     | Linux    | Debian      | Ubuntu         |
+| `ti1`        | Linux    | Debian      | Ubuntu         |
+| `w3`         | Linux    | RedHat      | Almalinux      |
+| `web`        | Linux    | Debian      | Debian         |
 
 ## *Roles* provenientes do Ansible Galaxy
 
