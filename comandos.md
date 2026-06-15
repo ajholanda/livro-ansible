@@ -151,6 +151,8 @@ Exibe as variáveis definidas para um host específico:
 $ ansible-inventory --host w3.example.net
 ```
 
+**Observação**: O arquivo /etc/ansible/inventory.py é uma cópia de inventory.py do diretório do livro. Esta alteração é necessária para contornar restrições do Vagrant para execução de arquivos em seus diretórios montados.
+
 ---
 
 ## Capítulo 2 — Comandos específicos (ad-hoc)
