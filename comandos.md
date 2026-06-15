@@ -246,7 +246,7 @@ ansible-doc ansible.builtin.copy
 
 ## Capítulo 3 — Playbook
 
-Executa um playbook (`webserver-3.yml` é a versão inalterada de `webserver.yml` apresentado no Capítulo 3):
+Executa um playbook (`webserver-3.yml` é a versão inalterada do playbook `webserver.yml` apresentado no início do Capítulo 3):
 
 ```bash
 make webserver-3.yml  # Cria o arquivo webserver-3.yml
@@ -280,9 +280,9 @@ ansible-playbook plays.yml --list-tasks
 Seleção de tarefas por *tags* (`--tags` seleciona, `--skip-tags` exclui):
 
 ```bash
-ansible-playbook webserver-3.yml --tags webserver_package
-ansible-playbook webserver-3.yml --skip-tags webserver_service
-ansible-playbook webserver-3.yml --tags "webserver_package,webserver_service"
+ansible-playbook webserver.yml --tags webserver_package
+ansible-playbook webserver.yml --skip-tags webserver_service
+ansible-playbook webserver.yml --tags "webserver_package,webserver_service"
 ```
 
 Comportamento das *tags* especiais `always`, `never`, `tagged` e `untagged`:
@@ -328,15 +328,15 @@ ansible-playbook pre_tasks_post.yml
 Modos de verificação (*check*) e de diferenças (*diff*), que simulam a execução sem alterar os hosts:
 
 ```bash
-ansible-playbook webserver-3.yml --check
-ansible-playbook webserver-3.yml --diff
-ansible-playbook webserver-3.yml --check --diff
+ansible-playbook webserver.yml --check
+ansible-playbook webserver.yml --diff
+ansible-playbook webserver.yml --check --diff
 ```
 
 Força a execução dos manipuladores mesmo após falhas (citado nos exercícios):
 
 ```bash
-ansible-playbook webserver-3.yml --force-handlers
+ansible-playbook webserver.yml --force-handlers
 ```
 
 ---
