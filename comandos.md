@@ -803,13 +803,17 @@ ansible-galaxy collection install amazon.aws
 pip install awscli boto3 botocore
 ```
 
-Configura o perfil de conexão com a AWS (interativo) ou por variáveis de ambiente:
+Configura o perfil de conexão com a AWS (interativo): 
 
 ```bash
 aws configure
-export AWS_ACCESS_KEY_ID=****************XMVQ
-export AWS_SECRET_ACCESS_KEY=****************OoiY
-export AWS_REGION=us-east-1
+```
+
+ou por variáveis de ambiente:
+```
+export AWS_ACCESS_KEY_ID=****************XMVQ      # Consultar o painel AWS
+export AWS_SECRET_ACCESS_KEY=****************OoiY  # para substituir por valores
+export AWS_REGION=us-east-1                        # válidos.
 ```
 
 Provisiona uma instância EC2 na AWS:
