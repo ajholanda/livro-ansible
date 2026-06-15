@@ -692,8 +692,8 @@ ansible-playbook molecule-setup.yml
 Cria a estrutura inicial de um cenário de teste do Molecule:
 
 ```bash
-molecule init scenario --driver-name docker
-molecule init scenario office                  # cenário com nome específico
+molecule init scenario                         # Cenário default.
+molecule init scenario office                  # Cenário com nome específico.
 tree molecule/
 ```
 
