@@ -224,12 +224,6 @@ ansible devs -m file -a "path=/tmp/texput.log state=absent"
 ansible servers -m command -a last
 ```
 
-Coleta e lista todos os *facts* de um host (módulo `setup`):
-
-```bash
-ansible web.example.net -m setup
-```
-
 Exibe a documentação completa de um módulo pelo nome qualificado (FQCN):
 
 ```bash
