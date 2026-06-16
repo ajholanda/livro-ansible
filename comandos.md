@@ -12,7 +12,7 @@ Os comandos foram extraídos do texto principal de cada capítulo (e, quando
 ## Sumário
 
 1. [Automação e Ansible](#capítulo-1--automação-e-ansible)
-2. [Comandos específicos (ad-hoc)](#capítulo-2--comandos-específicos-ad-hoc)
+2. [Comandos ad-hoc](#capítulo-2--comandos-ad-hoc)
 3. [Playbook](#capítulo-3--playbook)
 4. [Variáveis](#capítulo-4--variáveis)
 5. [Roles](#capítulo-5--roles)
@@ -153,7 +153,7 @@ ansible-inventory -i /etc/ansible/inventory.py --graph
 
 ---
 
-## Capítulo 2 — Comandos específicos (ad-hoc)
+## Capítulo 2 — Comandos ad hoc
 
 Verifica a conectividade com um host usando o módulo `ping` (`-i` indica o inventário, `-m` o módulo):
 
