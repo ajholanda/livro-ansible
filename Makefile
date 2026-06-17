@@ -9,32 +9,22 @@ MOLECULE := $(BINDIR)/molecule
 
 TRASH := *~
 
-all: apps aws collections docker packages setup-bashrc \
+all: aws collections docker packages setup-bashrc \
 	/etc/ansible/inventory.py \
 	webserver-3.yml include_tasks-3.yml
 
 $(VENV_DIR):
 	python3 -m venv $@
 
-# Instala o ansible e as ferramentas auxiliares dentro do
-# ambiente virtual (venv) criado pelo alvo $(VENV_DIR).
-apps: $(VENV_DIR)
-	$(PIP) install \
-			ansible \
-			ansible-builder \
-			ansible-lint \
-			ansible-navigator \
-			molecule \
-			pylint \
-			yamllint
-
+# Instala o ansible, as ferramentas auxiliares e as bibliotecas 
+# dentro do ambiente virtual (venv) criado pelo alvo $(VENV_DIR).
 packages: $(VENV_DIR)
 	$(PIP) install -r requirements.txt
 
-collections: apps
+collections: packages
 	$(GALAXY) collection install -r requirements.yml
 
-docker: apps
+docker: packages
 	$(PLAYBOOK) containers.yml --tags docker
 
 /etc/ansible/inventory.py: inventory.py /etc/ansible
@@ -48,7 +38,7 @@ aws: $(VENV_DIR)
 	$(GALAXY) collection install amazon.aws
 	$(PIP) install awscli boto3 botocore
 
-awx: apps
+awx: packages
 	$(PLAYBOOK) awx-setup.yml
 
 # Alvo principal para configurar o virtualenv no .bashrc
@@ -95,4 +85,4 @@ TRASH += include_tasks-3.yml
 clean:
 	$(RM) $(TRASH)
 
-.PHONY: all apps aws awx clean collections debug docker lint packages setup-bashrc versions
+.PHONY: all aws awx clean collections debug docker lint packages setup-bashrc versions
