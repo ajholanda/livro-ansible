@@ -1,4 +1,11 @@
+ansible
+ansible-builder
+ansible-lint
+ansible-navigator
+molecule
 molecule-plugins[docker]
 passlib
+pylint
 pytest-testinfra
 python-debian
+yamllint
