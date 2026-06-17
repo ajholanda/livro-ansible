@@ -84,6 +84,12 @@ Ative o ambiente virtual; uma vez ativado, o `pip` passa a instalar os pacotes a
 source ~/ansible-venv/bin/activate
 ```
 
+Com o ambiente virtual `ansible-venv` ativado, o comando a seguir instala o Ansible, as ferramentas auxiliares e as demais dependências Python listadas no arquivo `requirements.txt`:
+```
+pip install -r requirements.txt
+```
+O arquivo `requirements.txt` relaciona todos os pacotes Python necessários para o ambiente de execução do projeto, juntamente com suas versões (quando especificadas).
+
 Instala o Ansible pelo gerenciador de pacotes da família Debian (se preferir instalar para todo o sistema):
 
 ```bash
@@ -150,6 +156,20 @@ ansible-inventory -i /etc/ansible/inventory.py --graph
 ```
 
 **Observação**: O arquivo /etc/ansible/inventory.py é uma cópia de inventory.py do diretório do livro. Esta alteração é necessária para contornar restrições do Vagrant para execução de arquivos em seus diretórios montados.
+
+### Resumo
+
+Portanto, a abordagem recomendada consiste em criar e ativar um ambiente virtual e, em seguida, instalar todos os pacotes Python necessários ao projeto:
+
+```
+python3 -m venv ~/ansible-venv
+source ~/ansible-venv/bin/activate
+pip install -r requirements.txt
+```
+
+O primeiro comando cria o ambiente virtual `ansible-venv`, o segundo o ativa na sessão atual do terminal e o terceiro instala as dependências Python listadas no arquivo `requirements.txt`, incluindo o Ansible e as ferramentas auxiliares utilizadas ao longo do livro.
+
+Esse método também é recomendado para ambientes de produção, pois facilita a padronização das versões do Ansible e de suas dependências, tornando o ambiente de execução reproduzível e isolado da instalação Python gerenciada pelo sistema operacional.
 
 ---
 
