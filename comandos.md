@@ -244,7 +244,7 @@ ansible devs -m file -a "path=/tmp/texput.log state=absent"
 ansible servers -m command -a last
 ```
 
-Exibe a documentação completa de um módulo pelo nome qualificado (FQCN):
+Exibe a documentação completa de um módulo pelo nome completo (FQCN):
 
 ```bash
 ansible-doc ansible.builtin.copy
