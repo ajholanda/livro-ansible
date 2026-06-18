@@ -311,6 +311,7 @@ ansible-playbook tags.yml --list-tasks
 ansible-playbook tags.yml --list-tasks --tags debug,untagged
 ```
 
+### 3.2 Manipuladores (_handlers_)
 Executa um playbook que aciona manipuladores (*handlers*) via `listen`:
 
 ```bash
