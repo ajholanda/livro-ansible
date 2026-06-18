@@ -276,12 +276,20 @@ Lista as tarefas de um playbook com múltiplos *plays*:
 ansible-playbook plays.yml --list-tasks
 ```
 
+### 3.1 Tags
+
 Seleção de tarefas por *tags* (`--tags` seleciona, `--skip-tags` exclui):
 
 ```bash
-ansible-playbook webserver.yml --tags webserver_package
-ansible-playbook webserver.yml --skip-tags webserver_service
-ansible-playbook webserver.yml --tags "webserver_package,webserver_service"
+# Cria o arquivo webserver-3_1.yml, que contém o mesmo conteúdo do arquivo
+# websverver.yml apresentado na Seção 3.1.
+make webserver-3_1.yml
+# Seleciona a tag webserver_package.
+ansible-playbook webserver-3_1.yml --tags webserver_package
+# Exclui a tag webserver_service.
+ansible-playbook webserver-3_1.yml --skip-tags webserver_service
+# Seleciona múltiplas tags.
+ansible-playbook webserver-3_1.yml --tags "webserver_package,webserver_service"
 ```
 
 Comportamento das *tags* especiais `always`, `never`, `tagged` e `untagged`:
