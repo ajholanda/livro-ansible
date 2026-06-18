@@ -270,7 +270,7 @@ ansible-playbook webserver-3.yml --list-hosts
 ansible-playbook webserver-3.yml --start-at-task "Habilita e inicia o apache"
 ```
 
-Lista as tarefas de um playbook com múltiplos *plays*:
+Lista as tarefas de um playbook com múltiplos **plays**:
 
 ```bash
 ansible-playbook plays.yml --list-tasks
@@ -278,7 +278,7 @@ ansible-playbook plays.yml --list-tasks
 
 ### 3.1 Tags
 
-Seleção de tarefas por *tags* (`--tags` seleciona, `--skip-tags` exclui):
+Seleção de tarefas por **tags** (`--tags` seleciona, `--skip-tags` exclui):
 
 ```bash
 # Cria o arquivo webserver-3_1.yml, que contém o mesmo conteúdo do arquivo
