@@ -254,28 +254,19 @@ ansible-doc ansible.builtin.copy
 
 ## Capítulo 3 — Playbook
 
-Executa um playbook (`webserver-3.yml` é a versão inalterada do playbook `webserver.yml` apresentado no início do Capítulo 3):
+Executa um playbook, lista as tarefas, lista os hosts e inicia a execução a partir de uma tarefa:
 
 ```bash
-make webserver-3.yml  # Cria o arquivo webserver-3.yml
+# Cria o arquivo webserver-3.yml que possui o mesmo conteúdo do arquivo
+# webserver.yml apresentado no início do Capítulo 3.
+make webserver-3.yml
+# Executa o ansible-playbook.
 ansible-playbook webserver-3.yml
-```
-
-Lista as tarefas de um playbook sem executá-las:
-
-```bash
+# Lista as tarefas de um playbook sem executá-las.
 ansible-playbook webserver-3.yml --list-tasks
-```
-
-Lista os hosts afetados por um playbook:
-
-```bash
+# Lista os hosts afetados por um playbook.
 ansible-playbook webserver-3.yml --list-hosts
-```
-
-Inicia a execução a partir de uma tarefa específica, ignorando as anteriores:
-
-```bash
+# Inicia a execução a partir de uma tarefa específica, ignorando as anteriores.
 ansible-playbook webserver-3.yml --start-at-task "Habilita e inicia o apache"
 ```
 
