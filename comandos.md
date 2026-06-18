@@ -292,18 +292,18 @@ ansible-playbook webserver-3_1.yml --skip-tags webserver_service
 ansible-playbook webserver-3_1.yml --tags "webserver_package,webserver_service"
 ```
 
-Comportamento das *tags* especiais `always`, `never`, `tagged` e `untagged`:
+Comportamento das **tags** especiais `always`, `never`, `tagged` e `untagged`:
 
 ```bash
-ansible-playbook tags.yml                       # execução sem seleção
-ansible-playbook tags.yml --skip-tags always    # ignora a tag always
-ansible-playbook tags.yml --tags never          # força a tag never
-ansible-playbook tags.yml --tags debug          # seleciona via outra tag da tarefa never
-ansible-playbook tags.yml --tags tagged         # tarefas com pelo menos uma tag
-ansible-playbook tags.yml --tags untagged       # tarefas sem nenhuma tag
+ansible-playbook tags.yml                       # Execução sem seleção.
+ansible-playbook tags.yml --skip-tags always    # Ignora a tag always.
+ansible-playbook tags.yml --tags never          # Força a tag never.
+ansible-playbook tags.yml --tags debug          # Seleciona outra tag da tarefa marcada com never.
+ansible-playbook tags.yml --tags tagged         # Tarefas com pelo menos uma tag.
+ansible-playbook tags.yml --tags untagged       # Tarefas sem tag.
 ```
 
-Lista as *tags* e as tarefas de um playbook:
+Lista as **tags** e as tarefas de um playbook:
 
 ```bash
 ansible-playbook tags.yml --list-tags
