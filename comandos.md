@@ -421,12 +421,6 @@ ansible-playbook webserver.yml --diff
 ansible-playbook webserver.yml --check --diff
 ```
 
-Força a execução dos manipuladores mesmo após falhas (citado nos exercícios):
-
-```bash
-ansible-playbook webserver.yml --force-handlers
-```
-
 ---
 
 ## Capítulo 4 — Variáveis
