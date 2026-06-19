@@ -312,11 +312,87 @@ ansible-playbook tags.yml --list-tasks --tags debug,untagged
 ```
 
 ### 3.2 Manipuladores (_handlers_)
+
+Executa playbook que aciona o manipulador `Restart apache` se houver modificação do arquivo de configuração do Apache copiado:
+
+```
+ansible-playbook webserver.yml
+```
+
 Executa um playbook que aciona manipuladores (*handlers*) via `listen`:
 
 ```bash
 ansible-playbook listen.yml
 ```
+
+### 3.3 Erros
+
+Força ocorrência de erro:
+
+```bash
+ansible-playbook err.yml --tags err0
+```
+
+Tenta listar arquivo que não existe:
+
+```bash
+ansible-playbook err.yml --tags err1
+```
+
+  Ignora o erro:
+
+```bash
+ansible-playbook err.yml --tags err2
+```
+
+  Não interpreta false como erro:
+
+```bash
+ansible-playbook err.yml --tags err3
+```
+
+Arquivo não deve existir para o playbook ser bem-sucedido
+
+```bash
+ansible-playbook err.yml --tags err4
+```
+
+Ativa `any_errors_fatal` para o playbook:
+
+```bash
+ansible-playbook err.yml --tags err5
+```
+
+Verifica o comportamento de `any_errors_fatal`:
+
+```bash
+ansible-playbook err.yml --tags err6
+```
+
+   Verifica o comportamento de `max_fail_percentage`:
+
+```bash
+ansible-playbook err.yml --tags err7
+```
+
+Verifica o comportamento de `force_handlers`:
+
+```bash
+ansible-playbook err.yml --tags err8
+```
+
+### 3.4 Bloco
+
+Executa exemplo de uso da estrutura `block` - `rescue` - `always`:
+
+```bash
+# Instala o servidor MariaDB, que é um requisito para
+# a execução do playbook block.yml.
+ansible-playbook server.yml --tags mariadbserver
+ansible-playbook block.yml
+```
+
+### 3.5 Carregamento de arquivos de tarefas
 
 Limitações da inclusão dinâmica com `include_tasks` (tarefas/tags incluídas dinamicamente não aparecem e `--start-at-task` não as alcança):
 
