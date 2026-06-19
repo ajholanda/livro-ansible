@@ -403,11 +403,15 @@ ansible-playbook include_tasks-3.yml --list-tags
 ansible-playbook include_tasks-3.yml --start-at-task "Imprime o número da tarefa"
 ```
 
+### 3.6 Controle do fluxo de execução com pre_tasks e post_tasks
+
 Executa um playbook com `pre_tasks`/`post_tasks` e `serial`:
 
 ```bash
 ansible-playbook pre_tasks_post.yml
 ```
+
+### 3.7 Idempotência e modos de verificação
 
 Modos de verificação (*check*) e de diferenças (*diff*), que simulam a execução sem alterar os hosts:
 
