@@ -12,7 +12,9 @@
     - name: Tag never
       ansible.builtin.debug:
         msg: "Executa (quase) nunca"
-      tags: never, debug
+      tags:
+        - never
+        - debug
 
     - name: Sem tag
       ansible.builtin.debug:

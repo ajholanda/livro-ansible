@@ -26,8 +26,10 @@
         mode: '0644'
       notify:
         - Restart apache2
-      when: ansible_facts['os_family'] | lower == "debian"
-      tags: webserver, webserver_copy
+      when: ansible_facts['os_family'] == "Debian"
+      tags:
+        - webserver
+        - webserver_copy
 
   handlers:
     - name: Restart apache2
