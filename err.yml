@@ -110,7 +110,6 @@
             owner: root
             group: root
             mode: '0755'
-            validate: '/usr/sbin/apache2ctl -t'
           notify:
             - Restart apache2
 
