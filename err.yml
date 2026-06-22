@@ -14,8 +14,8 @@
     # - name: Tarefa
     # debug: msg="Texto ok"
 
-    # - name: Tentando dar um ping
-    #   pong:
+    # - name: Testa a conectividade
+    #   ansible.builtin.pong:
 
     # - name: Copia o arquivo de inventário
     #   copy:
@@ -49,7 +49,7 @@
         - '"No such" not in status.stderr'
       tags: err4
 
-    - name: Checa conectividade
+    - name: Testa a conectividade
       ansible.builtin.command: ping -c 1 web.example.net
       register: status
       failed_when: >
