@@ -345,7 +345,7 @@ ansible-playbook err.yml --tags err1
 ansible-playbook err.yml --tags err2
 ```
 
-  Não interpreta false como erro:
+  Não interpreta `false` como erro:
 
 ```bash
 ansible-playbook err.yml --tags err3
