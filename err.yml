@@ -99,9 +99,9 @@
       when: ansible_facts['os_family'] | lower == "debian"
       block:
         - name: Habilita o módulo userdir
-          ansible.builtin.command: a2enmod -q userdir
-          register: status
-          changed_when: '"Enabling" in status.stdout'
+          community.general.apache2_module:
+            state: present
+            name: userdir
 
         - name: Copia a configuração do módulo userdir
           ansible.builtin.copy:
