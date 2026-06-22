@@ -357,7 +357,7 @@ Arquivo não deve existir para o playbook ser bem-sucedido
 ansible-playbook err.yml --tags err4
 ```
 
-Ativa `any_errors_fatal` para o playbook:
+Como expressar uma disjunção lógica (operador `or`) em `failed_when`:
 
 ```bash
 ansible-playbook err.yml --tags err5
