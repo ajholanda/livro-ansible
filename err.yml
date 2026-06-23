@@ -127,3 +127,15 @@
       ansible.builtin.service:
         name: apache2
         state: restarted
+
+- name: Espera com wait_for
+  hosts: localhost
+  tasks:
+    - name: Aguarda porta SSH estar disponível
+      ansible.builtin.wait_for:
+        host: "{{ inventory_hostname }}"
+        port: 80
+        delay: 5
+        timeout: 120
+        state: started
+      tags: err9
