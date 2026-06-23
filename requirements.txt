@@ -6,6 +6,7 @@ molecule
 molecule-plugins[docker]
 passlib
 pylint
+pymysql
 pytest-testinfra
 python-debian
 yamllint
