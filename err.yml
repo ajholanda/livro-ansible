@@ -41,12 +41,18 @@
       failed_when: status.rc != 1
       tags: err3
 
-    - name: Arquivo não deve existir
-      ansible.builtin.command: ls /tmp/passwd
+    - name: Testa se conteúdo de arquivo está acessível
+      ansible.builtin.command: cat /etc/ansible/hosts
+      # Retire os comentários a seguir para gerar o erro.
+      # become: true
+      # become_user: vagrant
       register: status
       failed_when:
         - status.rc != 0
-        - '"No such" not in status.stderr'
+        - "'No such file or directory' not in status.stderr"
+      environment:
+        LANG: C
+        LC_ALL: C
       tags: err4
 
     - name: Testa a conectividade
