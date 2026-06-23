@@ -351,9 +351,11 @@ ansible-playbook err.yml --tags err2
 ansible-playbook err.yml --tags err3
 ```
 
-Arquivo não deve existir para o playbook ser bem-sucedido
+Arquivo deve existir e conteúdo deve estar acessível para o playbook ser bem-sucedido:
 
 ```bash
+# Gera o arquivo usado no teste de acesso ao conteúdo.
+make /etc/ansible/hosts.ini
 ansible-playbook err.yml --tags err4
 ```
 
