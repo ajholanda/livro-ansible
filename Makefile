@@ -87,7 +87,12 @@ include_tasks-3.yml: include_tasks.yml
 	head -13 $< > $@
 TRASH += include_tasks-3.yml
 
+# Gera o arquivo /etc/ansible/hosts usado na seção 3.3
+/etc/ansible/hosts: hosts.ini
+	sudo install -m 0600 $< $@
+
 clean:
 	$(RM) $(TRASH)
+	sudo $(RM) /etc/ansible/hosts
 
 .PHONY: all aws awx clean collections debug docker lint packages setup-bashrc versions
