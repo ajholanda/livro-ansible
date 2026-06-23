@@ -398,7 +398,7 @@ Executa exemplo de uso da estrutura `block` - `rescue` - `always`:
 ```bash
 # Instala o servidor MariaDB, que é um requisito para
 # a execução do playbook block.yml.
-ansible-playbook server.yml --tags mariadbserver
+ansible-playbook servers.yml --tags mariadbserver
 ansible-playbook block.yml
 ```
 
