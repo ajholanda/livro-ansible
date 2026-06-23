@@ -383,6 +383,14 @@ Verifica o comportamento de `force_handlers`:
 ansible-playbook err.yml --tags err8
 ```
 
+Aguarda até que a porta TCP 80 do host esteja acessível antes de prosseguir:
+
+```bash
+# Provoca um atraso de 20 segundos para o servidor HTTP entrar no ar.
+sudo true && (sleep 20 && sudo python3 -m http.server 80) \
+	& ansible-playbook err.yml --tags err9
+```
+
 ### 3.4 Bloco
 
 Executa exemplo de uso da estrutura `block` - `rescue` - `always`:
