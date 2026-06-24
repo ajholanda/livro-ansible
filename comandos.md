@@ -410,7 +410,7 @@ Limitações da inclusão dinâmica com `include_tasks` (tarefas/tags incluídas
 make include_tasks-3.yml  # Cria a versão semelhante à apresentada no capítulo.
 ansible-playbook include_tasks-3.yml --list-tasks
 ansible-playbook include_tasks-3.yml --list-tags
-ansible-playbook include_tasks-3.yml --start-at-task "Imprime o número da tarefa"
+ansible-playbook include_tasks-3.yml --start-at-task "Imprime número da tarefa"
 ```
 
 ### 3.6 Controle do fluxo de execução com pre_tasks e post_tasks
