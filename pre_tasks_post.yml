@@ -6,7 +6,7 @@
   ignore_unreachable: true
 
   pre_tasks:
-    - name: Atualiza o sistema (família Debian)
+    - name: Atualiza os pacotes do sistema (família Debian)
       ansible.builtin.apt:
         update_cache: true
         upgrade: dist
