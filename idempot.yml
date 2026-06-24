@@ -1,0 +1,10 @@
+---
+- name: Demonstra idempotência
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Garante o conteúdo do arquivo de configuração
+      ansible.builtin.copy:
+        dest: /tmp/config.ini
+        content: "porta = 80\n"
+        mode: "0644"
