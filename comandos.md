@@ -426,9 +426,14 @@ ansible-playbook pre_tasks_post.yml
 Modos de verificação (*check*) e de diferenças (*diff*), que simulam a execução sem alterar os hosts:
 
 ```bash
-ansible-playbook webserver.yml --check
-ansible-playbook webserver.yml --diff
-ansible-playbook webserver.yml --check --diff
+ansible-playbook idempot.yml    # <---- changed
+ansible-playbook idempot.yml    # <---- ok
+# Apaga o arquivo de configuração para voltar novamente ao estado inicial.
+rm /tmp/config.ini
+ansible-playbook idempot.yml --check
+ansible-playbook idempot.yml --diff
+rm /tmp/config.ini
+ansible-playbook idempot.yml --check --diff
 ```
 
 ---
