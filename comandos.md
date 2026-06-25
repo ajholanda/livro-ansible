@@ -478,7 +478,7 @@ export ANSIBLE_CACHE_PLUGIN=jsonfile
 Define uma variável global na linha de comando com `--extra-vars`:
 
 ```bash
-ansible-playbook --extra-vars "groupname=webdev" webserver-vars.yml
+ansible-playbook --extra-vars "groupname=webdev" vars.yml
 ```
 
 Define o caminho do inventário por variável de ambiente:
