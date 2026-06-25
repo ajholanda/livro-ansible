@@ -440,7 +440,8 @@ ansible-playbook idempot.yml --check --diff
 
 ## Capítulo 4 — Variáveis
 
-Lista os *plugins* de conexão disponíveis:
+### 4.1 Variáveis especiais
+Lista os plugins de conexão disponíveis:
 
 ```bash
 ansible-doc -t connection -l
