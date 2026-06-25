@@ -1,4 +1,4 @@
-# webserver-vars.yml
+---
 - name: Administra servidores web
   hosts: webservers
   vars:
