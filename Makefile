@@ -9,7 +9,8 @@ MOLECULE := $(BINDIR)/molecule
 
 TRASH := *~
 
-all: aws collections docker packages setup-bashrc \
+all: packages setup-bashrc collections \
+	docker aws \
 	/etc/ansible/inventory.py \
 	webserver-3.yml include_tasks-3.yml
 
