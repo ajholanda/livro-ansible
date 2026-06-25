@@ -447,6 +447,12 @@ Lista os plugins de conexão disponíveis:
 ansible-doc -t connection -l
 ```
 
+Coleta os fatos (_facts_) de um host (módulo `setup`):
+
+```bash
+ansible -m setup web.example.net
+```
+
 Executa playbooks com tarefas condicionadas à família do sistema operacional (variável `ansible_facts['os_family']`):
 
 ```bash
@@ -454,23 +460,20 @@ ansible-playbook webserver-Debian.yml
 ansible-playbook webserver-distro.yml
 ```
 
-Coleta os *facts* de um host (módulo `setup`):
 
-```bash
-ansible -m setup web.example.net
-```
-
-Lista os *plugins* de cache de *facts* disponíveis:
+Lista os plugins de cache de fatos disponíveis:
 
 ```bash
 ansible-doc -t cache -l
 ```
 
-Define, por variável de ambiente, o *plugin* de cache de *facts* a ser usado:
+Define, por variável de ambiente, o plugin de cache de fatos a ser usado:
 
 ```bash
 export ANSIBLE_CACHE_PLUGIN=jsonfile
 ```
+
+### Variáveis definidas pelo usuário
 
 Define uma variável global na linha de comando com `--extra-vars`:
 
