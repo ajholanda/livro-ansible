@@ -481,10 +481,20 @@ Define uma variável global na linha de comando com `--extra-vars`:
 ansible-playbook --extra-vars "groupname=webdev" vars.yml
 ```
 
+### 4.3 Variáveis de ambiente
+
 Define o caminho do inventário por variável de ambiente:
 
 ```bash
+# O comando a seguir copia o arquivo hosts.ini do projeto do livro para
+# /srv/ansible/hosts
+make /srv/ansible/hosts
+# Tome cuidado se for alterar o arquivo hosts.ini do projeto do livro.
+# Lembre-se a variável de ambiente tem precedência sobre a definição de
+# inventory em ansible.cfg
 export ANSIBLE_INVENTORY=/srv/ansible/hosts
+# Para desfazer a atribuição à variável de ambiente:
+unset ANSIBLE_INVENTORY
 ```
 
 Lista as variáveis de configuração/ambiente reconhecidas pelo Ansible:
