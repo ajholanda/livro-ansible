@@ -9,6 +9,6 @@
         webservers_install_php is defined
         and webservers_install_php
 
-    - name: Exibe o conteúdo de hostvars['w3.example.net']['webserver_port']
+    - name: Exibe o conteúdo de hostvars['w3.example.net']['ansible_facts']['default_ipv4']['address']
       ansible.builtin.debug:
-        msg: "{{ hostvars['w3.example.net']['webserver_port'] }}"
+        var: hostvars['w3.example.net']['ansible_facts']['default_ipv4']['address']
