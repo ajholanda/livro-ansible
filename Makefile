@@ -12,7 +12,7 @@ TRASH := *~
 all: packages setup-bashrc collections \
 	docker aws \
 	/etc/ansible/inventory.py \
-	webserver-3.yml include_tasks-3.yml
+	webservers-3.yml include_tasks-3.yml
 
 $(VENV_DIR):
 	python3 -m venv $@
@@ -75,14 +75,14 @@ debug:
 	@echo "TRASH            = $(TRASH)"
 
 # Gera o playbook do primeiro exemplo de webserver.yml.
-webserver-3.yml: webserver.yml
+webservers-3.yml: webserver.yml
 	head -18 $< | grep -v "tags\|- webserver" > $@
-TRASH += webserver-3.yml
+TRASH += webservers-3.yml
 
 # Gera o playbook webserver.yml da Seção 3.1.
-webserver-3_1.yml: webserver.yml
+webservers-3_1.yml: webserver.yml
 	head -18 $< > $@
-TRASH += webserver-3_1.yml
+TRASH += webservers-3_1.yml
 
 include_tasks-3.yml: include_tasks.yml
 	head -13 $< > $@

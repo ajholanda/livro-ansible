@@ -4,4 +4,4 @@
 
   tasks:
     - name: Inclui as tarefas a família {{ ansible_facts['os_family'] }}
-      ansible.builtin.include_tasks: "tasks/webserver-{{ ansible_facts['os_family'] }}.yml"
+      ansible.builtin.include_tasks: "tasks/webservers-{{ ansible_facts['os_family'] }}.yml"

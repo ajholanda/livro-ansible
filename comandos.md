@@ -257,17 +257,17 @@ ansible-doc ansible.builtin.copy
 Executa um playbook, lista as tarefas, lista os hosts e inicia a execução a partir de uma tarefa:
 
 ```bash
-# Cria o arquivo webserver-3.yml que possui o mesmo conteúdo do arquivo
-# webserver.yml apresentado no início do Capítulo 3.
-make webserver-3.yml
+# Cria o arquivo webservers-3.yml que possui o mesmo conteúdo do arquivo
+# webservers.yml apresentado no início do Capítulo 3.
+make webservers-3.yml
 # Executa o ansible-playbook.
-ansible-playbook webserver-3.yml
+ansible-playbook webservers-3.yml
 # Lista as tarefas de um playbook sem executá-las.
-ansible-playbook webserver-3.yml --list-tasks
+ansible-playbook webservers-3.yml --list-tasks
 # Lista os hosts afetados por um playbook.
-ansible-playbook webserver-3.yml --list-hosts
+ansible-playbook webservers-3.yml --list-hosts
 # Inicia a execução a partir de uma tarefa específica, ignorando as anteriores.
-ansible-playbook webserver-3.yml --start-at-task "Habilita e inicia o apache"
+ansible-playbook webservers-3.yml --start-at-task "Habilita e inicia o apache"
 ```
 
 Lista as tarefas de um playbook com múltiplos **plays**:
@@ -281,15 +281,15 @@ ansible-playbook plays.yml --list-tasks
 Seleção de tarefas por **tags** (`--tags` seleciona, `--skip-tags` exclui):
 
 ```bash
-# Cria o arquivo webserver-3_1.yml, que contém o mesmo conteúdo do arquivo
+# Cria o arquivo webservers-3_1.yml, que contém o mesmo conteúdo do arquivo
 # websverver.yml apresentado na Seção 3.1.
-make webserver-3_1.yml
+make webservers-3_1.yml
 # Seleciona a tag webserver_package.
-ansible-playbook webserver-3_1.yml --tags webserver_package
+ansible-playbook webservers-3_1.yml --tags webserver_package
 # Exclui a tag webserver_service.
-ansible-playbook webserver-3_1.yml --skip-tags webserver_service
+ansible-playbook webservers-3_1.yml --skip-tags webserver_service
 # Seleciona múltiplas tags.
-ansible-playbook webserver-3_1.yml --tags "webserver_package,webserver_service"
+ansible-playbook webservers-3_1.yml --tags "webserver_package,webserver_service"
 ```
 
 Comportamento das **tags** especiais `always`, `never`, `tagged` e `untagged`:
@@ -316,7 +316,7 @@ ansible-playbook tags.yml --list-tasks --tags debug,untagged
 Executa playbook que aciona o manipulador `Restart apache` se houver modificação do arquivo de configuração do Apache copiado:
 
 ```
-ansible-playbook webserver.yml
+ansible-playbook webservers.yml
 ```
 
 Executa um playbook que aciona manipuladores (*handlers*) via `listen`:
@@ -456,8 +456,8 @@ ansible -m setup web.example.net
 Executa playbooks com tarefas condicionadas à família do sistema operacional (variável `ansible_facts['os_family']`):
 
 ```bash
-ansible-playbook webserver-Debian.yml
-ansible-playbook webserver-distro.yml
+ansible-playbook webservers-Debian.yml
+ansible-playbook webservers-distro.yml
 ```
 
 
@@ -506,7 +506,7 @@ ansible-config list
 Demonstra variáveis de host (`host_vars`) e de grupo (`group_vars`):
 
 ```bash
-ansible-playbook webserver-host_vars.yml
+ansible-playbook webservers-host_vars.yml
 ansible-playbook all-group_vars.yml
 ```
 
@@ -773,7 +773,7 @@ ansible-lint --list-rules
 Habilita o depurador de tarefas por variável de ambiente:
 
 ```bash
-ANSIBLE_ENABLE_TASK_DEBUGGER=true ansible-playbook webserver.yml
+ANSIBLE_ENABLE_TASK_DEBUGGER=true ansible-playbook webservers.yml
 ```
 
 Executa um playbook que, ao falhar, aciona o depurador interativo:
