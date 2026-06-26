@@ -488,6 +488,18 @@ ansible-playbook webservers-host_vars.yml
 ansible-playbook all-group_vars.yml
 ```
 
+Demonstra a utilização de `register` para armazenar o resultado de uma execução:
+
+```bash
+ansible-playbook register.yml
+```
+
+Demonstra o módulo `set_fact`:
+
+```bash
+ansible-playbook set_fact.yml
+```
+
 ### 4.3 Variáveis de ambiente
 
 Define o caminho do inventário por variável de ambiente:
