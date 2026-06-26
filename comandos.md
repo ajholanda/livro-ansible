@@ -481,6 +481,13 @@ Define uma variável global na linha de comando com `--extra-vars`:
 ansible-playbook --extra-vars "groupname=webdev" vars.yml
 ```
 
+Demonstra variáveis de host (`host_vars`) e de grupo (`group_vars`):
+
+```bash
+ansible-playbook webservers-host_vars.yml
+ansible-playbook all-group_vars.yml
+```
+
 ### 4.3 Variáveis de ambiente
 
 Define o caminho do inventário por variável de ambiente:
@@ -501,13 +508,6 @@ Lista as variáveis de configuração/ambiente reconhecidas pelo Ansible:
 
 ```bash
 ansible-config list
-```
-
-Demonstra variáveis de host (`host_vars`) e de grupo (`group_vars`):
-
-```bash
-ansible-playbook webservers-host_vars.yml
-ansible-playbook all-group_vars.yml
 ```
 
 Demonstra o uso de `loop` e `loop_control` (cada *tag* carrega um exemplo distinto):
