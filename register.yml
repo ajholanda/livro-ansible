@@ -11,11 +11,3 @@
     - name: Imprime o conteúdo do registro
       ansible.builtin.debug:
         var: stat_register
-
-    - name: Gera uma variável booleana sobre a existência do arquivo
-      ansible.builtin.set_fact:
-        file_exists: "{{ stat_register.stat.exists | bool }}"
-
-    - name: Imprime o conteúdo da variável file_exists
-      ansible.builtin.debug:
-        var: file_exists
