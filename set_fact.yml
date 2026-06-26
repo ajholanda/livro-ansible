@@ -1,0 +1,12 @@
+---
+- name: Demonstra o módulo set_fact
+  hosts: all
+
+  tasks:
+    - name: Define o diretório de backup do host
+      ansible.builtin.set_fact:
+        backup_dir: "/backup/{{ inventory_hostname }}"
+
+    - name: Exibe o valor definido
+      ansible.builtin.debug:
+        var: backup_dir
