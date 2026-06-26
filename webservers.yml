@@ -6,7 +6,7 @@
     - name: Instala o apache
       ansible.builtin.package:
         name: apache2
-      tags: webserver, webserver_package
+      tags: webservers, webservers_package
 
     - name: Habilita e inicia o apache
       ansible.builtin.service:
@@ -14,8 +14,8 @@
         enabled: true
         state: started
       tags:
-        - webserver
-        - webserver_service
+        - webservers
+        - webservers_service
 
     - name: Copia o arquivo de configuração
       ansible.builtin.copy:
@@ -28,8 +28,8 @@
         - Restart apache2
       when: ansible_facts['os_family'] == "Debian"
       tags:
-        - webserver
-        - webserver_copy
+        - webservers
+        - webservers_copy
 
   handlers:
     - name: Restart apache2
