@@ -473,7 +473,7 @@ Define, por variável de ambiente, o plugin de cache de fatos a ser usado:
 export ANSIBLE_CACHE_PLUGIN=jsonfile
 ```
 
-### Variáveis definidas pelo usuário
+### 4.2 Variáveis definidas pelo usuário
 
 Define uma variável global na linha de comando com `--extra-vars`:
 
