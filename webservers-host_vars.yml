@@ -6,8 +6,8 @@
       ansible.builtin.package:
         name: php
       when: >
-        webserver_install_php is defined
-        and webserver_install_php
+        webservers_install_php is defined
+        and webservers_install_php
 
     - name: Exibe o conteúdo de hostvars['w3.example.net']['webserver_port']
       ansible.builtin.debug:
