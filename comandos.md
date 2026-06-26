@@ -282,14 +282,14 @@ Seleção de tarefas por **tags** (`--tags` seleciona, `--skip-tags` exclui):
 
 ```bash
 # Cria o arquivo webservers-3_1.yml, que contém o mesmo conteúdo do arquivo
-# websverver.yml apresentado na Seção 3.1.
+# webservers.yml apresentado na Seção 3.1.
 make webservers-3_1.yml
-# Seleciona a tag webserver_package.
-ansible-playbook webservers-3_1.yml --tags webserver_package
-# Exclui a tag webserver_service.
-ansible-playbook webservers-3_1.yml --skip-tags webserver_service
+# Seleciona a tag webservers_package.
+ansible-playbook webservers-3_1.yml --tags webservers_package
+# Exclui a tag webservers_service.
+ansible-playbook webservers-3_1.yml --skip-tags webservers_service
 # Seleciona múltiplas tags.
-ansible-playbook webservers-3_1.yml --tags "webserver_package,webserver_service"
+ansible-playbook webservers-3_1.yml --tags "webservers_package,webservers_service"
 ```
 
 Comportamento das **tags** especiais `always`, `never`, `tagged` e `untagged`:
