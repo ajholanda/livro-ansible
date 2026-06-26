@@ -8,6 +8,6 @@
         hour: "{{ cron.shutdown.hour }}"
         weekday: "{{ cron.shutdown.weekday }}"
         job: "shutdown -h now"
-      when: >
-        cron is defined
-        and cron.shutdown is defined
+      when:
+        - cron is defined
+        - cron.shutdown is defined
