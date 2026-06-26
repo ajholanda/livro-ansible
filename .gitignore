@@ -15,6 +15,7 @@ ansible
 desktop.ini
 include_tasks-*.yml
 roles/ajholanda.*
+test.yml
 tmp
 venv
 webserver-3.yml
