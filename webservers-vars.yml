@@ -2,8 +2,10 @@
 - name: Administra servidores web
   hosts: webservers
   vars:
+    # Nota. Quando as variáveis são definidas usando --extra-vars, elas
+    # sobrescrevem variáveis deste escopo.
+    groupname: webdev
     system_username: www-data
-#    groupname: webdev # Set using --extra-vars
     usernames:
       - dcs
       - mtm
