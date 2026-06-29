@@ -549,11 +549,7 @@ ansible-playbook loop.yml --tags index       # índice do item com index_var
 ansible-playbook loop.yml --tags label       # rótulo simplificado com label
 ```
 
-Passa uma variável na linha de comando pela forma abreviada `-e`:
 
-```bash
-ansible-playbook user.yml -e "username=devops"
-```
 
 ---
 
