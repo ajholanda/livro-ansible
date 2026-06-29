@@ -23,17 +23,20 @@
       ansible.builtin.user:
         name: "{{ system_username }}"
       when: system_username is defined
+      tags: user
 
     - name: Garante a existência do grupo {{ groupname }}
       ansible.builtin.group:
         name: "{{ groupname }}"
         state: present
+      tags: group
 
     - name: Cria usuários a partir de uma lista
       ansible.builtin.user:
         name: "{{ item }}"
         state: present
       loop: "{{ usernames }}"
+      tags: users_list
 
     - name: Adiciona usuários aos grupos usando um dicionário
       ansible.builtin.user:
@@ -41,6 +44,7 @@
         groups: "{{ item.groups }}"
         append: true
       loop: "{{ user2groups }}"
+      tags: users_dict
 
     # Variáveis
     - name: Cria o diretório de sites ativos na família Debian
@@ -53,3 +57,4 @@
       when: >
         apache_confdir is defined
         and ansible_facts['os_family'] == "Debian"
+      tags: confdir
