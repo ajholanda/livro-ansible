@@ -199,17 +199,42 @@ Exibe a documentação de um módulo:
 ansible-doc package
 ```
 
+### 2.1 Configuração do Ansible
+
 Versão simplificada do comando quando o `ansible.cfg` já define inventário e elevação de privilégios:
 
 ```bash
 ansible web.example.net -m package -a "name=apache2"
 ```
 
-Lista as seções e parâmetros do arquivo de configuração do Ansible:
+Define o caminho do inventário por variável de ambiente:
+
+```bash
+# O comando a seguir copia o arquivo hosts.ini do projeto do livro para
+# /srv/ansible/hosts
+make /srv/ansible/hosts
+# Tome cuidado se for alterar o arquivo hosts.ini do projeto do livro.
+# Lembre-se a variável de ambiente tem precedência sobre a definição de
+# inventory em ansible.cfg
+export ANSIBLE_INVENTORY=/srv/ansible/hosts
+# Para desfazer a atribuição à variável de ambiente:
+unset ANSIBLE_INVENTORY
+```
+
+Lista as variáveis de configuração/ambiente reconhecidas pelo Ansible:
 
 ```bash
 ansible-config list
 ```
+
+Inspeciona os valores de configuração efetivamente utilizados:
+
+```
+ansible-config dump
+```
+
+
+## Mais comandos _ad hoc_
 
 Demais comandos *ad hoc* frequentes na rotina do administrador:
 
@@ -500,26 +525,18 @@ Demonstra o módulo `set_fact`:
 ansible-playbook set_fact.yml
 ```
 
-### 4.3 Variáveis de ambiente
+### 4.4 Estruturas de dados e de repetição
 
-Define o caminho do inventário por variável de ambiente:
+
 
 ```bash
-# O comando a seguir copia o arquivo hosts.ini do projeto do livro para
-# /srv/ansible/hosts
-make /srv/ansible/hosts
-# Tome cuidado se for alterar o arquivo hosts.ini do projeto do livro.
-# Lembre-se a variável de ambiente tem precedência sobre a definição de
-# inventory em ansible.cfg
-export ANSIBLE_INVENTORY=/srv/ansible/hosts
-# Para desfazer a atribuição à variável de ambiente:
-unset ANSIBLE_INVENTORY
+ansible-playbook webservers-vars.yml --tags users_list
 ```
 
-Lista as variáveis de configuração/ambiente reconhecidas pelo Ansible:
+
 
 ```bash
-ansible-config list
+ansible-playbook webservers-vars.yml --tags users_dict
 ```
 
 Demonstra o uso de `loop` e `loop_control` (cada *tag* carrega um exemplo distinto):
