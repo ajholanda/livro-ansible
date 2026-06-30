@@ -566,12 +566,10 @@ Demonstra o uso de `loop_control.{loop_var, index, label}` e a combinação dos 
 ansible-playbook loop.yml --tags users       # laço sobre lista de dicionários
 ansible-playbook loop.yml --tags index       # índice do item com index_var
 ansible-playbook loop.yml --tags label       # rótulo simplificado com label
+ansible-playbook loop.yml --tags combined    # combinação dos parâmetros
 ```
 
-
-
 ---
-
 ## Capítulo 5 — Roles
 
 Lista recursivamente a estrutura de diretórios de um role:
