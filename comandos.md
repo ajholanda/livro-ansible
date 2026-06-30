@@ -558,6 +558,11 @@ Mostra o conflito com o laço de repetição externo e sua resolução por meio 
 ```bash
 ansible-playbook loop.yml --tags conflito    # conflito da variável item
 ansible-playbook loop.yml --tags controle    # resolução com loop_var
+```
+
+Demonstra o uso de `loop_control.{loop_var, index, label}` e a combinação dos três parâmetros:
+
+```bash
 ansible-playbook loop.yml --tags users       # laço sobre lista de dicionários
 ansible-playbook loop.yml --tags index       # índice do item com index_var
 ansible-playbook loop.yml --tags label       # rótulo simplificado com label
