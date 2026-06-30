@@ -528,6 +528,7 @@ ansible-playbook set_fact.yml
 ### 4.4 Estruturas de dados e de repetição
 
 
+Como percorrer uma lista simples:
 
 ```bash
 ansible-playbook webservers-vars.yml --tags users_list
