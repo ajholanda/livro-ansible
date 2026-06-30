@@ -535,6 +535,7 @@ ansible-playbook webservers-vars.yml --tags users_list
 ```
 
 
+Como percorrer uma lista de dicionários:
 
 ```bash
 ansible-playbook webservers-vars.yml --tags users_dict
