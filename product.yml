@@ -1,0 +1,20 @@
+---
+- name: Produto cartesiano - filtro product
+  hosts: webservers
+
+  tasks:
+    - name: Cria a árvore de diretórios de cada serviço
+      ansible.builtin.file:
+        path: "/srv/{{ item.0 }}/{{ item.1 }}"
+        state: directory
+        mode: '0755'
+      loop: "{{ services | product(subdirs) }}"
+      vars:
+        services:
+          - web
+          - api
+        subdirs:
+          - conf
+          - logs
+          - data
+  tags: product
