@@ -541,7 +541,19 @@ Como percorrer uma lista de dicionários:
 ansible-playbook webservers-vars.yml --tags users_dict
 ```
 
-Demonstra o uso de `loop` e `loop_control` (cada *tag* carrega um exemplo distinto):
+O filtro `subelements` é utilizado para transformar uma estrutura hierárquica em uma sequência de pares.
+
+```
+ansible-playbook subelems.yml
+```
+
+O filtro `product` é utilizado para criar os subdiretórios `conf`, `logs` e `data` para cada um dos serviços `web` e `api`:
+
+```bash
+ansible-playbook product.yml
+```
+
+Mostra o conflito com o laço de repetição externo e sua resolução por meio do `loop_control.loop_var`:
 
 ```bash
 ansible-playbook loop.yml --tags conflito    # conflito da variável item
