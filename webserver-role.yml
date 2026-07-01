@@ -1,6 +1,7 @@
 ---
 - name: Administra servidores web (Debian)
   hosts: web.example.net
+
   roles:
     - webserver_debian
   tags:
@@ -9,5 +10,6 @@
 
 - name: Administra servidores web
   hosts: webservers
+
   roles:
     - webserver
