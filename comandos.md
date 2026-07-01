@@ -591,24 +591,17 @@ Executa o role `webserver` em todos os hosts do grupo `webservers`:
 ansible-playbook webserver-role.yml
 ```
 
-Aplica um role a grupos distintos, selecionado por *tag* (exemplo do role `chrony`):
+Demonstra o comportamento de `include_role`, `import_role` e `meta`:
 
 ```bash
-ansible-playbook servers.yml --tags chrony
-ansible-playbook workstations.yml --tags chrony
-```
-
-Instala roles e coleções declarados no arquivo `requirements.yml`:
-
-```bash
-ansible-galaxy install -r requirements.yml
-```
-
-Identifica a ordem de execução de roles e suas dependências:
-
-```bash
-ansible-playbook servers.yml --tags webserver --list-tasks
-ansible-playbook servers.yml --tags webserver
+# Lista as tags associadas ao role php.
+ansible-playbook php.yml --list-tags --tags import
+# Realiza a inclusão (include_role) do role webserver.
+ansible-playbook php.yml --tags include_webserver
+# Realiza a importação (import_role) do role webserver.
+ansible-playbook php.yml --tags import_webserver
+# Carrega o role webserver como dependência.
+ansible-playbook php.yml --tags meta
 ```
 
 ---
