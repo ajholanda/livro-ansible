@@ -1,4 +1,7 @@
 ---
 dependencies:
   - role: webserver
-    tags: php
+    tags:
+      - meta
+      - never
+      - php

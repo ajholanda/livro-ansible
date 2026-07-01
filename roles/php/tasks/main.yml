@@ -1,22 +1,31 @@
 ---
-- name: Carrega o role webserver estaticamente
+- name: Importa o role webserver (estaticamente)
   ansible.builtin.import_role:
     name: webserver
   tags:
+    - import_webserver
+    - never
     - php
-    - import_role
 
-- name: Carrega o role webserver dinamicamente
+- name: Inclui o role webserver (dinamicamente)
   ansible.builtin.include_role:
     name: webserver
+    # Devido à inclusão dinâmica, a palavra-chave apply
+    # deve ser aplicada para garantir herança das tags
+    # para o role webserver.
+    apply:
+      tags:
+        - include_webserver
+        - php
   tags:
+    - include_webserver
+    - never
     - php
-    - include_role
 
 - name: Instala o php
   ansible.builtin.package:
     name: php
   tags:
+    - import_webserver
+    - include_webserver
     - php
-    - import_role
-    - include_role
