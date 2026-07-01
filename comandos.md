@@ -576,6 +576,7 @@ Lista recursivamente a estrutura de diretórios de um role:
 
 ```bash
 tree roles/webserver_debian/
+tree roles/webserver/
 ```
 
 Executa um role aplicado a um host específico, selecionado por *tag*:
