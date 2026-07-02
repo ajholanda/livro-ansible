@@ -608,6 +608,21 @@ ansible-playbook php.yml --tags meta
 
 ## Capítulo 6 — Gabarito (template)
 
+### 6.1.1 Filtros
+
+Aplicação dos filtros, `mandatory`, `int`, `default` e `join`:
+
+```bash
+# Exemplo do uso do filtro mandatory.
+ansible-playbook filters.yml --tags filter_mandatory
+# Adição do filtro int.
+ansible-playbook filters.yml --tags filter_int
+# Adição do filtro default.
+ansible-playbook filters.yml --tags filter_default
+# Exemplo de uso do filtro join.
+ansible-playbook filters.yml --tags filter_join
+```
+
 Aplica o role `sshserver`, cujo gabarito Jinja2 gera o `sshd_config`:
 
 ```bash
