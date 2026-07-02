@@ -14,7 +14,6 @@
       - video
 
   tasks:
-    # mandatory
     - name: Cria uma entrada na crontab para desligar o computador
       ansible.builtin.cron:
         name: "shutdown at"
@@ -23,8 +22,8 @@
         minute: "{{ power_off_minute | mandatory }}"
         user: root
         job: "/sbin/shutdown -h now"
+      tags: filter_mandatory
 
-    # int (data type)
     - name: Cria uma entrada na crontab para desligar o computador
       ansible.builtin.cron:
         name: "shutdown at"
@@ -33,8 +32,8 @@
         minute: "{{ power_off_minute | mandatory | int }}"
         user: root
         job: "/sbin/shutdown -h now"
+      tags: filter_int
 
-    # default
     - name: Cria uma entrada na crontab para desligar o computador
       ansible.builtin.cron:
         name: "shutdown at"
@@ -43,14 +42,16 @@
         minute: "{{ power_off_minute | mandatory | int }}"
         user: root
         job: "/sbin/shutdown -h now"
+      tags: filter_default
 
-    # lower
     - name: Instala o apache
       ansible.builtin.package:
         name: apache2
-      when: ansible_facts['distribution'] | lower == "debian"
+      when: ansible_facts['os_family'] | lower == "debian"
+      tags:
+        - filter_lower
+        - never
 
-    # join
     - name: Cria usuário e adiciona em alguns grupos do sistema
       ansible.builtin.user:
         name: ajh
@@ -60,3 +61,4 @@
         home: /home/ajh
         groups: "{{ system_groups | join(',') }}"
         append: true
+      tags: filter_join
