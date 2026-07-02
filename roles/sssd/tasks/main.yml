@@ -2,6 +2,8 @@
 - name: Instala o SSSD
   ansible.builtin.package:
     name: sssd
+  when: ansible_facts['system'] | lower == 'linux'
+  tags: sssd
 
 - name: Copia o arquivo de configuração
   ansible.builtin.template:
@@ -10,9 +12,14 @@
     owner: root
     group: root
     mode: "0600"
+  notify: Restart sssd
+  when: ansible_facts['system'] | lower == 'linux'
+  tags: sssd
 
-- name: Habilita e reinicia o serviço
+- name: Habilita e inicia o serviço
   ansible.builtin.service:
     name: sssd
     enabled: true
-    state: restarted
+    state: started
+  when: ansible_facts['system'] | lower == 'linux'
+  tags: sssd
