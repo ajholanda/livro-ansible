@@ -623,22 +623,24 @@ ansible-playbook filters.yml --tags filter_default
 ansible-playbook filters.yml --tags filter_join
 ```
 
-Aplica o role `sshserver`, cujo gabarito Jinja2 gera o `sshd_config`:
+### 6.2 Controle de fluxo
+
+Executa somente o role `sssd` para ilustrar a diretiva `if`:
+
+```bash
+ansible-playbook desktops.yml --tags sssd
+# Conecta no host lab01.
+ssh lab01
+# Verifica o conteúdo do arquivo de configuração do SSSD após o processamento do gabarito e cópia do conteúdo.
+sudo cat /etc/sssd/sssd.conf    # lab01
+# Desconecta do lab01.
+exit    # lab01
+```
+
+Executa as tarefas do role `sshserver` no grupo `workstations` para configurar a diretiva `AllowGroups`:
 
 ```bash
 ansible-playbook workstations.yml --tags sshserver
-```
-
-Verifica o conteúdo gerado por um gabarito diretamente no host (exercício):
-
-```bash
-ansible -m command -a "grep override_homedir /etc/sssd/sssd.conf" <grupo>
-```
-
-Executa um role em modo de verificação para validar variáveis obrigatórias do gabarito (exercício):
-
-```bash
-ansible-playbook webserver-role.yml --check
 ```
 
 ---
