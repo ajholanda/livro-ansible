@@ -608,7 +608,7 @@ ansible-playbook php.yml --tags meta
 
 ## Capítulo 6 — Gabarito (template)
 
-### 6.1.1 Filtros
+### 6.1 Filtros
 
 Aplicação dos filtros, `mandatory`, `int`, `default` e `join`:
 
