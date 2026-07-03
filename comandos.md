@@ -705,11 +705,21 @@ Gera, no terminal, um valor criptografado para uma única variável:
 ansible-vault encrypt_string ' senhadodba ' --name 'mariadb_password'
 ```
 
+### 7.3 Uso de múltiplas senhas
+
 Criptografa um arquivo usando um *vault ID* (`prod`), com a senha solicitada via `prompt` ou lida de um arquivo:
 
 ```bash
-ansible-vault encrypt --vault-id prod@prompt sssd/templates/sssd.conf.j2 --encrypt-vault-id prod
-ansible-vault encrypt --vault-id prod@vault-prod.txt sssd/templates/sssd.conf.j2 --encrypt-vault-id prod
+# Solicita a senha.
+ansible-vault encrypt \
+	--vault-id prod@prompt \
+	--encrypt-vault-id prod \
+	roles/sssd/templates/sssd.conf.j2
+# Lê a senha a partir de um arquivo.
+$ ansible-vault encrypt \
+	--vault-id prod@vault-prod.txt \
+	--encrypt-vault-id prod \
+	roles/sssd/templates/sssd.conf.j2
 ```
 
 ---
