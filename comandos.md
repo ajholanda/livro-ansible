@@ -659,6 +659,8 @@ O programa `ansible-vault` recebe a operação a ser executada. As principais op
 | `rekey` | Substitui a senha de um arquivo criptografado. |
 | `encrypt_string` | Criptografa uma única variável (*string*). |
 
+### 7.1 Criptografia de arquivos
+
 Cria um arquivo criptografado (solicita a senha do cofre e abre o editor):
 
 ```bash
@@ -682,6 +684,8 @@ Com `vault_password_file` configurado no `ansible.cfg`, a opção pode ser omiti
 ```bash
 ansible-playbook servers.yml --limit rsyncservers --tags rsyncserver
 ```
+
+### 7.2 Criptografia de variáveis
 
 Cria um arquivo de variáveis criptografadas para um grupo:
 
