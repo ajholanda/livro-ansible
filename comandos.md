@@ -727,11 +727,15 @@ $ ansible-vault encrypt \
 
 ## Capítulo 8 — Desenvolvimento de plugins e módulos
 
-Executa um playbook que testa um *plugin* de filtro personalizado:
+### 8.1 Filtros
+
+Executa um playbook que testa um plugin de filtro personalizado:
 
 ```bash
 ansible-playbook plugin.yml
 ```
+
+### 8.2 Módulos
 
 Mostra os caminhos de busca de módulos configurados:
 
