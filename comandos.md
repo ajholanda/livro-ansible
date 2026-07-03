@@ -676,7 +676,8 @@ ansible-playbook servers.yml --ask-vault-pass --limit rsyncservers --tags rsyncs
 Executa fornecendo a senha do cofre por um arquivo, evitando a interação:
 
 ```bash
-ansible-playbook servers.yml --vault-id vault.txt --limit rsyncservers --tags rsyncserver
+ansible-playbook servers.yml --vault-password-file vault.txt \
+	--limit rsyncservers --tags rsyncserver
 ```
 
 Com `vault_password_file` configurado no `ansible.cfg`, a opção pode ser omitida:
