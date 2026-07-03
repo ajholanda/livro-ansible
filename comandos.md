@@ -670,7 +670,7 @@ ansible-vault create rsyncserver/files/rsyncd.secrets
 Executa um playbook que usa arquivos criptografados, solicitando a senha do cofre interativamente:
 
 ```bash
-ansible-playbook rsyncservers.yml --ask-vault-pass --limit rsyncservers --tags rsyncserver
+ansible-playbook servers.yml --ask-vault-pass --limit rsyncservers --tags rsyncserver
 ```
 
 Executa fornecendo a senha do cofre por um arquivo, evitando a interação:
