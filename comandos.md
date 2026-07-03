@@ -423,7 +423,7 @@ Executa exemplo de uso da estrutura `block` - `rescue` - `always`:
 ```bash
 # Instala o servidor MariaDB, que é um requisito para
 # a execução do playbook block.yml.
-ansible-playbook servers.yml --tags mariadbserver
+ansible-playbook servers.yml --tags mariadb
 ansible-playbook block.yml
 ```
 
@@ -692,7 +692,7 @@ ansible-vault create group_vars/dbservers/vault.yml
 Aplica o role que usa as variáveis criptografadas:
 
 ```bash
-ansible-playbook servers.yml --limit dbservers --tags mariadbserver
+ansible-playbook servers.yml --limit dbservers --tags mariadb
 ```
 
 Gera, no terminal, um valor criptografado para uma única variável:

@@ -1,5 +1,5 @@
 ---
-# Execute `ansible-playbook server.yml --tags mariadbserver` first.
+# Execute `ansible-playbook server.yml --tags mariadb` first.
 - name: Backup dos bancos de dados
   hosts: dbservers
   become: true

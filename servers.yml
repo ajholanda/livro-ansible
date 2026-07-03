@@ -10,7 +10,12 @@
 - name: Administra servidores de banco de dados
   hosts: dbservers
   roles:
-    - mariadbserver
+    - mariadb
+
+- name: Administra servidores rsync
+  hosts: rsyncservers
+  roles:
+    - rsyncserver
 
 - name: Administra servidores web
   hosts: webservers
