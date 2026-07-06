@@ -127,14 +127,8 @@ def run_module():
     path = module.params['path']
     type = module.params['type']
     opts = module.params['options']
-    if opts is None:
-        opts = 'defaults'
     dump = module.params['dump']
-    if dump is None:
-        dump = 0
     passno = module.params['passno']
-    if passno is None:
-        passno = 0
 
     fname = '/etc/fstab'
     if not os.path.exists(fname):
