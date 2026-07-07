@@ -768,6 +768,8 @@ ansible-playbook module.yml
 
 ## Capítulo 9 — Ansible Galaxy
 
+### 9.1 Roles
+
 Pesquisa roles no Ansible Galaxy pelo terminal:
 
 ```bash
@@ -792,6 +794,8 @@ Exibe a estrutura de diretórios de um role:
 ```bash
 tree roles/ajholanda.x2goclient
 ```
+
+### 9.2 Coleções do Ansible
 
 Instala coleções de módulos (exemplos para Windows):
 
