@@ -810,19 +810,39 @@ Instala todos os roles e coleções declarados em `requirements.yml`:
 ansible-galaxy install -r requirements.yml
 ```
 
+### 9.3 Execution Environments e ansible-navigator
+
 Constrói um *Execution Environment* (EE) com o `ansible-builder`:
 
 ```bash
 pipx install ansible-builder
-ansible-builder build -t my-ee:1.0
+# Como o Docker é executado dentro da VM do Vagrant e o diretório do
+# projeto é uma pasta sincronizada, montada a partir do sistema de
+# arquivos do host, esse sistema de arquivos apenas emula as permissões
+# Unix — e comandos como chmod/chown não funcionam nele, o que provoca
+# erros de permissão durante a geração da imagem. Para contornar isso,
+# a opção -c /tmp/context gera o contexto de build em /tmp,
+# um diretório interno da VM, fora da pasta sincronizada. As demais
+# opções têm outros papéis: --no-cache constrói a imagem do zero e
+# --prune-images remove as imagens órfãs ao final.
+ansible-builder build -t my-ee:1.0 \
+	-c /tmp/context \
+	--container-runtime docker \
+	--prune --no-cache
 ```
 
 Executa um playbook dentro de um EE com o `ansible-navigator`:
 
 ```bash
 pipx install ansible-navigator
-ansible-navigator run site.yml --eei my-ee:1.0
-ansible-navigator run site.yml          # usa a imagem definida em ansible-navigator.yml
+# Usa o mesmo contexto já criado no comando ansible-builder.
+ansible-navigator run site.yml --eei my-ee:1.0 \
+	-c /tmp/context \
+	--container-engine docker
+# Carrega a imagem definida em ansible-navigator.yml.
+ansible-navigator run site.yml \
+	-c /tmp/context \
+	--container-engine docker
 ```
 
 ---
