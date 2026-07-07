@@ -142,8 +142,8 @@ def run_module():
         spec_exists = False
         # 2. Read each line of the file.
         for line in file:
-            # 3. Ignore comments.
-            if line[0] == '#':
+            # 3. Ignore empty lines and comments.
+            if not line.strip() or line.startswith('#'):
                 continue
             # 4. Split line into fields.
             fields = line.split()
