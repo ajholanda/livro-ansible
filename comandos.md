@@ -758,6 +758,9 @@ ANSIBLE_LIBRARY=./library ansible-doc -t module fstab
 Executa o playbook que utiliza o módulo personalizado:
 
 ```bash
+# Somente um host terá o estado alterado para changed, pois os 
+# 3 hosts do grupo lab resolvem o nome para a mesma VM Vagrant.
+# Esses redirecionamentos visam "economizar" RAM.
 ansible-playbook module.yml
 ```
 
