@@ -885,6 +885,8 @@ ansible-playbook debugger.yml
 
 ## Capítulo 11 — Testes
 
+### 11.1 Asserções
+
 Executa asserções (`ansible.builtin.assert`) com diferentes verificações, selecionadas por *tag*:
 
 ```bash
@@ -895,6 +897,8 @@ ansible-playbook assert.yml --tags blender
 # Múltiplos requisitos do sistema.
 ansible-playbook assert.yml --tags reqts
 ```
+
+### 11.2 Testes usando o Ansible Molecule
 
 Instala o Ansible Molecule (e o driver Docker e o Testinfra) no controlador:
 
