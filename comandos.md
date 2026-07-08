@@ -888,9 +888,12 @@ ansible-playbook debugger.yml
 Executa asserções (`ansible.builtin.assert`) com diferentes verificações, selecionadas por *tag*:
 
 ```bash
-ansible-playbook assert.yml --tags crypto      # senha deve estar criptografada
-ansible-playbook assert.yml --tags blender     # memória mínima antes de instalar
-ansible-playbook assert.yml --tags reqts       # múltiplos requisitos do sistema
+# A senha deve estar criptografada.
+ansible-playbook assert.yml --tags crypto
+# Memória mínima antes de instalar o Blender.
+ansible-playbook assert.yml --tags blender
+# Múltiplos requisitos do sistema.
+ansible-playbook assert.yml --tags reqts
 ```
 
 Instala o Ansible Molecule (e o driver Docker e o Testinfra) no controlador:
@@ -902,20 +905,29 @@ ansible-playbook molecule-setup.yml
 Cria a estrutura inicial de um cenário de teste do Molecule:
 
 ```bash
-molecule init scenario                         # Cenário default.
-molecule init scenario office                  # Cenário com nome específico.
+# Cenário padrão (default).
+molecule init scenario
+# Cenário com nome específico.
+molecule init scenario office
+# Exibe a árvore de diretórios.
 tree molecule/
 ```
 
 Ciclo de execução do Molecule por fase:
 
 ```bash
-molecule create      # cria o ambiente (contêiner) do cenário
-molecule login       # abre um terminal no ambiente criado
-molecule prepare     # executa o prepare.yml
-molecule converge    # aplica o role no contêiner
-molecule verify      # executa os testes Testinfra
-molecule destroy     # remove o ambiente de testes
+# Cria o ambiente (contêiner) do cenário.
+molecule create
+# Abre um terminal no ambiente criado.
+molecule login
+# Executa o prepare.yml.
+molecule prepare
+# Aplica o role no contêiner.
+molecule converge
+# Executa os testes Testinfra.
+molecule verify
+# Remove o ambiente de testes.
+molecule destroy
 ```
 
 Executa todas as fases do ciclo de vida de uma vez:
