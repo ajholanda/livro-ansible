@@ -54,9 +54,9 @@
               - ansible_userspace_bits == "64"
               - ansible_facts['memtotal_mb'] >= 4096
               - ansible_processor_vcpus >= 4
-            msg: >
-              O computador não atende a um ou mais requisitos:
-              1) A distribuição deve ser Ubuntu.
-              2) Arquitetura de 64 bits.
-              3) Ter pelo menos 4 GB de memória RAM.
-              4) Ter pelo menos 4 CPUs virtuais (threads).
+            msg:
+              - "O computador não atende a um ou mais requisitos:"
+              - "1) A distribuição deve ser Ubuntu."
+              - "2) Arquitetura de 64 bits."
+              - "3) Ter pelo menos 4 GB de memória RAM."
+              - "4) Ter pelo menos 4 CPUs virtuais (threads)."
