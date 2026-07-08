@@ -923,7 +923,10 @@ Ciclo de execução do Molecule por fase:
 # Cria o ambiente (contêiner) do cenário.
 molecule create
 # Abre um terminal no ambiente criado.
-molecule login
+# Seleciona a instância com o Debian.
+molecule login  --host instance-debian
+# Sai da instância.
+root@instance-debian:/$ exit
 # Executa o prepare.yml.
 molecule prepare
 # Aplica o role no contêiner.
