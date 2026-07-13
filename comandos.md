@@ -874,6 +874,8 @@ Lista todas as regras usadas na validação:
 ansible-lint --list-rules
 ```
 
+### 10.2 Depuração de tarefas
+
 Habilita o depurador de tarefas por variável de ambiente:
 
 ```bash
