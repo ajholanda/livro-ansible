@@ -78,12 +78,12 @@ debug:
 	@echo "TRASH            = $(TRASH)"
 
 # Gera o playbook do primeiro exemplo de webserver.yml.
-webservers-3.yml: webserver.yml
-	head -18 $< | grep -v "tags\|- webserver" > $@
+webservers-3.yml: webservers.yml
+	head -18 $< | grep -v "tags\|- webservers" > $@
 TRASH += webservers-3.yml
 
 # Gera o playbook webserver.yml da Seção 3.1.
-webservers-3_1.yml: webserver.yml
+webservers-3_1.yml: webservers.yml
 	head -18 $< > $@
 TRASH += webservers-3_1.yml
 
