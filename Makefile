@@ -9,7 +9,7 @@ MOLECULE := $(BINDIR)/molecule
 
 TRASH := *~
 
-all: packages setup-bashrc collections \
+all: packages setup-bashrc collections roles \
 	docker aws \
 	/etc/ansible/inventory.py \
 	webservers-3.yml include_tasks-3.yml
@@ -17,13 +17,16 @@ all: packages setup-bashrc collections \
 $(VENV_DIR):
 	python3 -m venv $@
 
-# Instala o ansible, as ferramentas auxiliares e as bibliotecas 
+# Instala o ansible, as ferramentas auxiliares e as bibliotecas
 # dentro do ambiente virtual (venv) criado pelo alvo $(VENV_DIR).
 packages: $(VENV_DIR)
 	$(PIP) install -r requirements.txt
 
 collections: packages
 	$(GALAXY) collection install -r requirements.yml
+
+roles: packages
+	$(GALAXY) role install -r requirements.yml
 
 docker: packages
 	$(PLAYBOOK) containers.yml --tags docker
