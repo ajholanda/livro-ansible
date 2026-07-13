@@ -1,3 +1,0 @@
----
-package_state: present  # TODO - Revisar o nome da variável
-libreoffice_state: "{{ package_state }}"
