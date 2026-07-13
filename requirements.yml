@@ -12,3 +12,5 @@ collections:
 roles:
   - name: ajholanda.x2goclient
     # version: "1.3.0"
+  - name: ajholanda.googlechrome
+  - name: ajholanda.vscode
