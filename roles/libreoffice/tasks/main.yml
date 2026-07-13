@@ -4,6 +4,6 @@
     file: "{{ item }}"
   with_first_found:
     - files:
-      - "{{ ansible_facts['system'] | lower }}.yml"
+        - "{{ ansible_facts['system'] | lower }}.yml"
       skip: true
   tags: libreoffice
