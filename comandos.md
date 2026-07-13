@@ -849,18 +849,23 @@ ansible-navigator run site.yml \
 
 ## Capítulo 10 — Depuração
 
+### 10.1 Análise sintática
+
 Instala o `ansible-lint`, que verifica boas práticas e estilo (não faz parte do conjunto padrão):
 
 ```bash
-pip install ansible-lint
+pipx install ansible-lint
 ```
 
 Analisa playbooks com o `ansible-lint`:
 
 ```bash
-ansible-lint lint_v0.yml                       # detecta erro de aninhamento de parâmetros
-ansible-lint lint_v1.yml                       # exibe violações de boas práticas
-ansible-lint -c lint-config.yml lint_v1.yml    # usa um arquivo de configuração de regras
+# Detecta erro de aninhamento de parâmetros.
+ansible-lint lint_v0.yml
+# Exibe violações de boas práticas.
+ansible-lint lint_v1.yml
+# Usa um arquivo de configuração de regras.
+ansible-lint -c lint-config.yml lint_v1.yml
 ```
 
 Lista todas as regras usadas na validação:
