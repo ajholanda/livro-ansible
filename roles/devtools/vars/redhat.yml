@@ -1,21 +1,21 @@
 ---
 devtools_packages_map:
   build_tools:
-  - cmake
-  - make
-  - ninja-build
+    - cmake
+    - make
+    - ninja-build
   c_compiler:
     - clang
     - gcc
   cpp_compiler:
     - gcc-c++
   go_lang:
-  - golang
+    - golang
   java_sdk:
     - java
   python_tools:
     - python3-pip
-  - virtualenv
+    - virtualenv
   r_lang:
     - R-core
   rust_lang:
