@@ -1,7 +1,7 @@
 ---
 - name: Habilita RDP no Registro (Desativar fDenyTSConnections)
   ansible.windows.win_regedit:
-    path: "HKLM:\System\CurrentControlSet\Control\Terminal Server"
+    path: 'HKLM:\System\CurrentControlSet\Control\Terminal Server'
     name: fDenyTSConnections
     data: 0
     type: dword
@@ -25,7 +25,7 @@
 
 - name: Exige autenticação no nível da rede (NLA)
   ansible.windows.win_regedit:
-    path: "HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp"
+    path: 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp'
     name: UserAuthentication
     data: 1
     type: dword
