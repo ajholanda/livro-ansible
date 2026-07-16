@@ -994,7 +994,7 @@ ansible-playbook  desktops.yml --tags user --limit windows
 
 ## Capítulo 14 — Ansible Automation Platform e AWX
 
-Implanta o AWX no controlador (laboratório com minikube) por meio do playbook do livro. **Leia o conteúdo do topo do arquivo `awx-setup.yml` e faça as alterações na configuração do Vagrant (`Vagrantfile`)** antes de executar o comando a seguir.
+Implanta o AWX no controlador (laboratório com minikube) por meio do playbook do livro. **Leia o conteúdo do cabeçalho do arquivo `awx-setup.yml` e faça as alterações na configuração do Vagrant (`Vagrantfile`)** antes de executar o comando a seguir.
 
 ```bash
 ansible-playbook awx-setup.yml
@@ -1051,7 +1051,7 @@ ansible-galaxy collection install amazon.aws
 pip install awscli boto3 botocore
 ```
 
-Configura o perfil de conexão com a AWS (interativo): 
+Configura o perfil de conexão com a AWS (interativo):
 
 ```bash
 aws configure
@@ -1070,7 +1070,7 @@ Provisiona uma instância EC2 na AWS:
 ansible-playbook aws-ec2_provision.yml
 ```
 
-Valida o inventário dinâmico da AWS: 
+Valida o inventário dinâmico da AWS:
 
 ```bash
 ansible-inventory -i aws-inventory.aws_ec2.yml --graph
