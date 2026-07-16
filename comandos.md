@@ -758,7 +758,7 @@ ANSIBLE_LIBRARY=./library ansible-doc -t module fstab
 Executa o playbook que utiliza o módulo personalizado:
 
 ```bash
-# Somente um host terá o estado alterado para changed, pois os 
+# Somente um host terá o estado alterado para changed, pois os
 # 3 hosts do grupo lab resolvem o nome para a mesma VM Vagrant.
 # Esses redirecionamentos visam "economizar" RAM.
 ansible-playbook module.yml
@@ -976,6 +976,18 @@ Instala as coleções necessárias para gerenciar hosts Windows:
 ```bash
 ansible-galaxy collection install ansible.windows
 ansible-galaxy collection install chocolatey.chocolatey
+```
+
+Instala o LibreOffice nos hosts do grupo `windows`, que contém as máquinas com o sistema operacional Windows:
+
+```bash
+ansible-playbook desktops.yml --tags libreoffice --limit windows
+```
+
+Gerencia usuários no Windows:
+
+```bash
+ansible-playbook  desktops.yml --tags user --limit windows
 ```
 
 ---
