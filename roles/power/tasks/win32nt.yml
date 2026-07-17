@@ -1,5 +1,5 @@
 ---
-- name: Agenda desligamento automático
+- name: Agenda desligamento automático diário
   community.windows.win_scheduled_task:
     name: "LabShutdown"
     description: "Desligamento automático"
@@ -17,11 +17,14 @@
 - name: Ativar plano equilibrado
   ansible.windows.win_command: >
     powercfg /setactive SCHEME_BALANCED
+  tags: power
 
-- name: Ativar suspensão do sistema
+- name: Configura o tempo limite de suspensão no Windows
   ansible.windows.win_command: >
-    powercfg /change standby-timeout-ac {{ power_suspend_timeout // 60 }}
+    powercfg /change standby-timeout-ac {{ ( power_suspend_timeout | int ) // 60 }}
+  tags: power
 
 - name: Desativar hibernação
   ansible.windows.win_command: >
     powercfg /hibernate off
+  tags: power
