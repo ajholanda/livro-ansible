@@ -990,6 +990,27 @@ Gerencia usuários no Windows:
 ansible-playbook  desktops.yml --tags user --limit windows
 ```
 
+### Configuração do host gerenciado com sistema Windows
+
+Para instalar o cliente e o servidor OpenSSH, execute os comandos a seguir em uma janela do PowerShell iniciada com privilégios administrativos:
+
+```powershell
+Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
+Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
+```
+
+Execute os comandos abaixo para iniciar o serviço sshd, configurá-lo para inicialização automática e criar uma regra de firewall permitindo conexões pela porta TCP 22:
+
+```powershell
+Start-Service sshd
+Set-Service -Name sshd -StartupType 'Automatic'
+New-NetFirewallRule `
+      -Name 'OpenSSH-Server-In-TCP' `
+      -DisplayName 'OpenSSH Server (sshd)' `
+      -Enabled True -Direction Inbound -Protocol TCP `
+      -Action Allow -LocalPort 22
+```
+
 ---
 
 ## Capítulo 14 — Ansible Automation Platform e AWX
