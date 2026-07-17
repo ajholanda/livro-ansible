@@ -6,6 +6,7 @@
     groups:
       - Administrators
       - Users
+    groups_action: add
   tags: user
 
 - name: Habilita o usuário Administrador
