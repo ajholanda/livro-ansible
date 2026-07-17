@@ -1000,6 +1000,12 @@ New-NetFirewallRule `
       -Action Allow -LocalPort 22
 ```
 
+Agenda a verificação da regra de firewall SSH na inicialização:
+
+```bash
+$ ansible-playbook desktops.yml --limit windows  --tags sshserver
+```
+
 ### 13.2 Instalação de programas
 
 Instala a coleção que contém o módulo `win_chocolatey`, responsável por instalar os programas no Windows:
