@@ -977,15 +977,11 @@ Instala as coleções necessárias para gerenciar hosts Windows:
 ansible-galaxy collection install ansible.windows
 ```
 
-Gerencia usuários no Windows:
+### 13.1 Método de conexão
 
-```bash
-ansible-playbook  desktops.yml --tags user --limit windows
-```
+**Os comandos desta seção devem ser executados nos hosts gerenciados com o sistema operacional Windows**
 
-### Configuração do host gerenciado com sistema Windows
-
-Para instalar o cliente e o servidor OpenSSH, execute os comandos a seguir em uma janela do PowerShell iniciada com privilégios administrativos:
+Para instalar o cliente e o servidor OpenSSH no Windows, execute os comandos a seguir em uma janela do PowerShell iniciada com privilégios administrativos:
 
 ```powershell
 Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
@@ -1002,6 +998,26 @@ New-NetFirewallRule `
       -DisplayName 'OpenSSH Server (sshd)' `
       -Enabled True -Direction Inbound -Protocol TCP `
       -Action Allow -LocalPort 22
+```
+
+### 13.2 Instalação de programas
+
+Instala a coleção que contém o módulo `win_chocolatey`, responsável por instalar os programas no Windows:
+
+```bash
+ansible-galaxy collection install chocolatey.chocolatey
+```
+
+Instala o LibreOffice nos hosts do grupo `windows`, que contém as máquinas com o sistema operacional Windows:
+
+```bash
+ansible-playbook desktops.yml --tags libreoffice --limit windows
+```
+
+Aplica o role para gerenciamento de usuários (`user`) apenas no grupo `windows`:
+
+```bash
+ansible-playbook  desktops.yml --tags user --limit windows
 ```
 
 ---
