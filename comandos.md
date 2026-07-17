@@ -975,13 +975,6 @@ Instala as coleções necessárias para gerenciar hosts Windows:
 
 ```bash
 ansible-galaxy collection install ansible.windows
-ansible-galaxy collection install chocolatey.chocolatey
-```
-
-Instala o LibreOffice nos hosts do grupo `windows`, que contém as máquinas com o sistema operacional Windows:
-
-```bash
-ansible-playbook desktops.yml --tags libreoffice --limit windows
 ```
 
 Gerencia usuários no Windows:
