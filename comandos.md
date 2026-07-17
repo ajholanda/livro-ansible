@@ -1017,14 +1017,42 @@ ansible-galaxy collection install chocolatey.chocolatey
 Instala o LibreOffice nos hosts do grupo `windows`, que contém as máquinas com o sistema operacional Windows:
 
 ```bash
-ansible-playbook desktops.yml --tags libreoffice --limit windows
+ansible-playbook desktops.yml --limit windows --tags libreoffice
 ```
+
+### 13.3 Execução de scripts
+
+Obtém as informações do Windows:
+
+```bash
+ansible-playbook wininfo.yml
+```
+
+### 13.4 Manipulação do Registro do Windows
+
+Desabilita NetBIOS sobre TCP/IP em todas as interfaces:
+
+```bash
+ansible-playbook desktops.yml --limit windows --tags netbios
+```
+
+### 13.5 Gerenciamento de usuários
 
 Aplica o role para gerenciamento de usuários (`user`) apenas no grupo `windows`:
 
 ```bash
-ansible-playbook  desktops.yml --tags user --limit windows
+ansible-playbook  desktops.yml --limit windows --tags user
 ```
+
+### 13.6 Agendamento de tarefas
+
+Agenda o desligamento automático diário:
+
+```bash
+# IMPORTANTE: adicione o host off1.example.net no grupo lab do arquivo
+# de inventário hosts.ini, antes de executar o comando a seguir.
+ ansible-playbook desktops.yml --limit windows --tags power
+ ```
 
 ---
 
