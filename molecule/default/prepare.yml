@@ -1,9 +1,18 @@
 ---
-- name: Prepara o sistema para o teste
+- name: Prepare
   hosts: all
-
+  gather_facts: false # Desativa a coleta de fatos antes de ter o sudo/python prontos
+  become: false       # Roda diretamente como root do contêiner
   tasks:
-    - name: Instala os pacotes necessários para o teste
-      ansible.builtin.package:
-        update_cache: true
-        name: curl
+    - name: Garantir que o sudo esteja instalado no Debian/Ubuntu
+      ansible.builtin.raw: apt-get update && apt-get install -y sudo python3 curl
+      changed_when: false
+
+# - name: Prepara o sistema para o teste
+#   hosts: all
+
+#   tasks:
+#     - name: Instala os pacotes necessários para o teste
+#       ansible.builtin.package:
+#         update_cache: true
+#         name: curl
