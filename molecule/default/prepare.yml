@@ -1,7 +1,6 @@
 ---
 - name: Prepara o sistema para o teste
   hosts: all
-  gather_facts: false
 
   tasks:
     - name: Instala os pacotes necessários para o teste
