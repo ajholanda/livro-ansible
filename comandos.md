@@ -1068,16 +1068,18 @@ ansible-playbook awx-setup.yml
 
 ## Capítulo 15 — Casos de uso
 
-Gera o *hash* SHA-512 de uma senha com o filtro `password_hash` (comando *ad hoc*):
-
-```bash
-ansible localhost -m debug -a "msg={{ 'senha' | password_hash('sha512') }}"
-```
+### 15.1 Configurações comuns
 
 Instala o pacote Python `passlib`, exigido pelo filtro `password_hash`:
 
 ```bash
 pip install passlib
+```
+
+Gera o *hash* SHA-512 de uma senha com o filtro `password_hash` (comando *ad hoc*):
+
+```bash
+ansible localhost -m debug -a "msg={{ 'senha' | password_hash('sha512') }}"
 ```
 
 Instala roles do Galaxy, forçando a reinstalação com `--force`:
