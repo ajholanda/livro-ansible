@@ -1,0 +1,33 @@
+---
+- name: Demonstração de execução do win_powershell
+  hosts: windows
+
+  tasks:
+    - name: Exibe uma mensagem de boas-vindas
+      ansible.builtin.debug:
+        msg: "Bem-vindo ao Ansible no Windows!"
+
+    - name: Verifica a versão do PowerShell
+      ansible.windows.win_powershell:
+        script: |
+          $psVersion = $PSVersionTable.PSVersion
+          Write-Output "Versão do PowerShell: $($psVersion.Major).$($psVersion.Minor).$($psVersion.Build)"
+      register: ps_version
+
+    - name: Exibe a versão do PowerShell
+      ansible.builtin.debug:
+        var: ps_version.output
+
+    - name: Obtém informações obtidas do sistema operacional
+      ansible.windows.win_powershell:
+        script: |
+          Get-ComputerInfo |
+          Select-Object WindowsProductName,
+                        WindowsVersion,
+                        CsName,
+                        CsTotalPhysicalMemory
+      register: computer_info
+
+    - name: Exibe as informações do sistema operacional
+      ansible.builtin.debug:
+        var: computer_info.output[0]
