@@ -34,4 +34,4 @@ jobs:
           MOLECULE_DEBUG: 'true'
 
       - name: Executa os testes com o Molecule
-        run: molecule test
+        run: molecule --debug test
