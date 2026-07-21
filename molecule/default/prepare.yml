@@ -1,13 +1,31 @@
 ---
-- name: Prepare
+# O playbook original foi adaptado para execução na VM do GitHub Actions.
+#
+# A opção gather_facts: false impede que o Molecule tente coletar fatos
+# antes da instalação do Python 3, requisito para o funcionamento do Ansible
+# nos hosts gerenciados.
+#
+# Como a VM é provisionada sem o sudo, o playbook é executado como root e
+# instala os pacotes python3, sudo e curl antes da execução dos testes.
+- name: Prepara o sistema para o teste
   hosts: all
-  gather_facts: false # Desativa a coleta de fatos antes de ter o sudo/python prontos
-  become: false       # Roda diretamente como root do contêiner
+  gather_facts: false # Desativa a coleta de fatos antes de ter o sudo/python prontos.
+  become: false       # Executa diretamente como root do contêiner.
   tasks:
-    - name: Garantir que o sudo esteja instalado no Debian/Ubuntu
+    - name: Garante que o sudo esteja instalado no Debian/Ubuntu
       ansible.builtin.raw: apt-get update && apt-get install -y curl iproute2 python3 sudo
       changed_when: false
 
+## livro-ansible: prepare.yml
+#
+# Playbook executado pelo Molecule antes da fase de preparação dos testes.
+#
+# Nas imagens Docker adotadas pelo livro, não é necessária a instalação do Python
+# e do sudo.
+#
+# O exemplo abaixo ilustra como instalar o pacote curl durante a fase de preparação,
+# requisito para a execução do teste da cópia da página web inicial com o Testinfra.
+#
 # - name: Prepara o sistema para o teste
 #   hosts: all
 
