@@ -27,7 +27,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install "ansible-core>=2.16,<=2.18" "molecule>=24" molecule-plugins[docker] ansible-lint pytest-testinfra
-          Para depuração, retire os comentários.
+        # Para depuração, retire os comentários.
         env:
           ANSIBLE_FORCE_COLOR: '1'
           ANSIBLE_VERBOSITY: '3'
