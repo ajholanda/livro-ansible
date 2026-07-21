@@ -5,7 +5,7 @@
   become: false       # Roda diretamente como root do contêiner
   tasks:
     - name: Garantir que o sudo esteja instalado no Debian/Ubuntu
-      ansible.builtin.raw: apt-get update && apt-get install -y sudo python3 curl
+      ansible.builtin.raw: apt-get update && apt-get install -y curl iproute2 sudo
       changed_when: false
 
 # - name: Prepara o sistema para o teste
