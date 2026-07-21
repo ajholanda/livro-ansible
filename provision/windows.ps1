@@ -15,8 +15,19 @@ if ($cap -and $cap.State -ne 'Installed') {
 }
 
 # 2. Inicia o sshd e o configura para subir junto com o sistema.
-Set-Service -Name sshd -StartupType Automatic
+#    AutomaticDelayedStart garante que o adaptador host-only do VirtualBox
+#    (192.168.56.x) já esteja ativo antes de o sshd tentar se vincular à porta 22.
+#    Com StartupType Automatic há uma corrida entre o sshd e o VBoxService: se o
+#    sshd vencer o VBoxService na segunda inicialização, ele fica ouvindo apenas
+#    nas interfaces disponíveis naquele momento (loopback + NAT) e nunca passa a
+#    aceitar conexões no endereço host-only -- quebrando a conectividade SSH do Ansible.
+sc.exe config sshd start= delayed-auto | Out-Null
 Start-Service sshd
+# Recuperação automática: reinicia o sshd 3× caso ele falhe durante a inicialização
+# (5 s → 10 s → 30 s); reseta o contador de falhas após 60 s de serviço estável.
+sc.exe failure sshd reset= 60 actions= restart/5000/restart/10000/restart/30000 | Out-Null
+# Aplica a recuperação também em paradas não-limpas (exit code ≠ 0).
+sc.exe failureflag sshd 1 | Out-Null
 
 # 3. Firewall: libera a porta 22/TCP de entrada.
 if (-not (Get-NetFirewallRule -Name 'sshd' -ErrorAction SilentlyContinue)) {
