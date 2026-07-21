@@ -1,9 +1,22 @@
 ---
 - name: Prepara o sistema para o teste
   hosts: all
+  gather_facts: false
 
   tasks:
+    - name: Instala Python
+      ansible.builtin.raw: |
+        if command -v apt-get >/dev/null 2>&1; then
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y python3
+        fi
+      changed_when: false
+
+    - name: Coleta fatos
+      ansible.builtin.setup:
+
     - name: Instala os pacotes necessários para o teste
       ansible.builtin.package:
-        update_cache: true
         name: curl
+        state: present
+        update_cache: true
