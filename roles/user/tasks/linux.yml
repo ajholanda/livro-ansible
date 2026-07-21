@@ -14,7 +14,7 @@
   ansible.posix.authorized_key:
     user: "{{ item.name }}"
     state: present
-    key: "{{ lookup('file', 'files/{{ item.name }}.pub') }}"
+    key: "{{ lookup('file', 'files/%s.pub' | format(item.name)) }}"
   loop: "{{ user_admins }}"
   when: user_admins is defined
   tags: user
