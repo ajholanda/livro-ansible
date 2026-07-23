@@ -42,7 +42,7 @@ vms = {
       'cpus' => 1,
       'ip' => "#{TYPE2IP['ansible']}",
       'box' => 'ubuntu/jammy64',
-      'ssh_port' => 2220
+      'ssh_port' => 2230
   },
   'almalinux'     => {
       'memory' => '1560',
