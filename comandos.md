@@ -1114,24 +1114,28 @@ ansible-galaxy role install --force --roles-path ./roles ajholanda.googlechrome 
 Aplica roles a desktops, combinando seleção por *tag* e restrição por host/grupo:
 
 ```bash
+# Instala o Google Chrome em todos os desktops.
 ansible-playbook desktops.yml --tags googlechrome
+# Instala o VS Code apenas nos desktops de treinamento.
 ansible-playbook desktops.yml --limit lab --tags vscode
+# Instala o VS Code somente no host ti1.example.net.
 ansible-playbook desktops.yml --limit ti1.example.net --tags vscode
 ```
 
-Aplica o conjunto de roles às estações de trabalho:
-
-```bash
-ansible-playbook workstations.yml
-```
+### 15.5 Implantação de contêineres
 
 Provisiona contêineres Docker com o playbook `containers.yml`:
 
 ```bash
-ansible-playbook containers.yml --tags docker            # instala o Docker
-ansible-playbook containers.yml --tags docker_php_apache # contêiner PHP + Apache
-ansible-playbook containers.yml --tags docker_postgres   # contêiner PostgreSQL
+# Instala o Docker.
+ansible-playbook containers.yml --tags docker
+# Implanta o contêiner com PHP + Apache.
+ansible-playbook containers.yml --tags docker_php_apache
+# Implanta o contêiner com o banco de dados PostgreSQL.
+ansible-playbook containers.yml --tags docker_postgres
 ```
+
+### 15.6 Gerenciamento de recursos em nuvem
 
 Instala a coleção e os pacotes Python para integração com a AWS:
 
