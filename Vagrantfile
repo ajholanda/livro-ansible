@@ -92,7 +92,7 @@ Vagrant.configure('2') do |config|
         k.vm.network 'forwarded_port', guest: 5985, host: conf['comm_port'], id: 'winrm', auto_correct: true
         k.vm.network 'forwarded_port', guest: 3389, host: 33389, id: 'rdp', auto_correct: true
       else
-        k.vm.network 'forwarded_port', guest: 22, host: conf['ssh_port'], id: 'ssh'
+        k.vm.network 'forwarded_port', guest: 22, host: conf['ssh_port'], id: 'ssh', auto_correct: true
       end
 
       k.vm.provider 'virtualbox' do |vb|
@@ -129,7 +129,7 @@ Vagrant.configure('2') do |config|
       # Specific to Ansible host controller
       if "#{name}" == "ansible"
         # Expose AWX (kubectl port-forward) ao host
-        k.vm.network 'forwarded_port', guest: 8080, host: 8080, id: 'awx'
+        k.vm.network 'forwarded_port', guest: 8080, host: 8081, id: 'awx', auto_correct: true
         # Install additional programs
         k.vm.provision "shell", path: "provision/ansible.sh"
         # Share Ansible examples folder
