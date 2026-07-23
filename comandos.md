@@ -1082,6 +1082,29 @@ Gera o *hash* SHA-512 de uma senha com o filtro `password_hash` (comando *ad hoc
 ansible localhost -m debug -a "msg={{ 'senha' | password_hash('sha512') }}"
 ```
 
+### 15.2 Gerenciamento de servidores
+
+Administração recursos comuns e específicos de servidores:
+
+```bash
+# Implanta somente o servidor de rsync. (escopo: serviço)
+ansible-playbook servers.yml --tags rsyncserver
+# Administra somente os servidores do grupo dbservers. (escopo: hosts)
+ansible-playbook servers.yml --limit dbservers
+# Administra todos os servidores.
+ansible-playbook servers.yml
+```
+
+### 15.3 Gerenciamento de estações de trabalho
+
+Aplica o conjunto de roles às estações de trabalho:
+
+```bash
+ansible-playbook workstations.yml
+```
+
+### 15.4 Gerenciamento de desktops e notebooks
+
 Instala roles do Galaxy, forçando a reinstalação com `--force`:
 
 ```bash
