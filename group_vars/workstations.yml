@@ -5,3 +5,5 @@ sshserver_allow_groups:
   - sudo
   # Added due vagrant user
   - vagrant
+
+update_send_notifications: true
