@@ -1095,15 +1095,7 @@ ansible-playbook servers.yml --limit dbservers
 ansible-playbook servers.yml
 ```
 
-### 15.3 Gerenciamento de estações de trabalho
-
-Aplica o conjunto de roles às estações de trabalho:
-
-```bash
-ansible-playbook workstations.yml
-```
-
-### 15.4 Gerenciamento de desktops e notebooks
+### 15.3 Gerenciamento de desktops e notebooks
 
 Instala roles do Galaxy, forçando a reinstalação com `--force`:
 
@@ -1120,6 +1112,14 @@ ansible-playbook desktops.yml --tags googlechrome
 ansible-playbook desktops.yml --limit lab --tags vscode
 # Instala o VS Code somente no host ti1.example.net.
 ansible-playbook desktops.yml --limit ti1.example.net --tags vscode
+```
+
+### 15.4 Gerenciamento de estações de trabalho
+
+Aplica o conjunto de roles às estações de trabalho:
+
+```bash
+ansible-playbook workstations.yml
 ```
 
 ### 15.5 Implantação de contêineres
