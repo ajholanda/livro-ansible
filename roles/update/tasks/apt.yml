@@ -19,6 +19,6 @@
     backup: true
   notify: Restart unattended-upgrades
   when: >
-    inventory_hostname in groups['servers']
-    or inventory_hostname in groups['workstations']
+    update_send_notifications is defined
+    and update_send_notifications
   tags: update
