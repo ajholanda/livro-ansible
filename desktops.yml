@@ -17,6 +17,7 @@
   roles:
     - role: ajholanda.vscode
       tags: vscode
+    - devtools
 
 - name: Desktops da TI
   hosts: ti
