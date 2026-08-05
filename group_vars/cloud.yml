@@ -1,0 +1,6 @@
+---
+docker_users:
+  - vagrant
+  - ajh
+docker_php_version: '8.4'
+docker_postgres_version: '17'
