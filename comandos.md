@@ -1133,6 +1133,8 @@ ansible-playbook containers.yml --tags docker
 ansible-playbook containers.yml --tags docker_php_apache
 # Implanta o contêiner com o banco de dados PostgreSQL.
 ansible-playbook containers.yml --tags docker_postgres
+# Visualiza as informações sobre os contêineres.
+docker ps -a
 ```
 
 ### 15.6 Gerenciamento de recursos em nuvem
