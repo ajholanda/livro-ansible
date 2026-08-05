@@ -1,7 +1,7 @@
 ---
 - name: Garante que a imagem Docker com o PostgreSQL esteja presente
   community.docker.docker_image:
-    name: "postgres:latest"
+    name: "postgres:{{ docker_postgres_version }}"
     source: pull
   tags: docker_postgres
 
