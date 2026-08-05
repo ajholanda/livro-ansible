@@ -1,5 +1,5 @@
 ---
-- name: Implanta o Docker e configura contêineres para PHP/Apache e PostgreSQL
+- name: Instala o Docker e implanta contêineres
   hosts: cloud
 
   roles:
