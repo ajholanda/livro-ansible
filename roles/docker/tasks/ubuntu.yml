@@ -48,11 +48,15 @@
     name: docker
   tags: docker
 
-- name: Adiciona o usuário atual no grupo docker
+- name: Adiciona usuários no grupo docker
   ansible.builtin.user:
-    name: "{{ lookup('ansible.builtin.env', 'USER') }}"
+    name: "{{ d_user }}"
     groups: docker
     append: true
+  loop: "{{ docker_users }}"
+  loop_control:
+    loop_var: d_user
+  when: docker_users is defined
   tags: docker
 
 - name: Habilita e inicia o serviço docker
