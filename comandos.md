@@ -1143,7 +1143,9 @@ Instala a coleção e os pacotes Python para integração com a AWS:
 
 ```bash
 ansible-galaxy collection install amazon.aws
-pip install awscli boto3 botocore
+pip install boto3 botocore
+# Vamos usar a versão 1 da AWS CLI para obter uma instalação simplificada.
+pip install awscli
 ```
 
 Configura o perfil de conexão com a AWS (interativo):
