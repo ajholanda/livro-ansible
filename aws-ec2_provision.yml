@@ -8,7 +8,8 @@
   vars:
     region: us-east-1
     instance_type: t3.micro
-    ami_id: ami-0b6c6ebed2801a5cb  # Id para o Ubuntu 24.04 em us-east-1.
+    # Id para o Ubuntu 24.04 em us-east-1; confirme o ID antes da execução.
+    ami_id: ami-0b6c6ebed2801a5cb
     key_name: web-dev
     aws_security_group: web-sg
     vpc_name: web-vpc
