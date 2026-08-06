@@ -96,7 +96,7 @@
             cidr_ip: 0.0.0.0/0
             rule_desc: allow all on port 22
 
-    - name: Cria uma nova instância EC2
+    - name: Cria uma instância EC2
       amazon.aws.ec2_instance:
         profile: default
         name: "{{ key_name }}-instance"
