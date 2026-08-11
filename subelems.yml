@@ -7,12 +7,12 @@
     users:
       - name: alice
         keys:
-          - "ssh-ed25519 AAAA...alice-laptop"
-          - "ssh-ed25519 AAAA...alice-workstation"
+          - "ssh-ed25519 AAAA...alice@laptop"
+          - "ssh-ed25519 AAAA...alice@workstation"
 
       - name: beto
         keys:
-          - "ssh-ed25519 AAAA...beto-desktop"
+          - "ssh-ed25519 AAAA...beto@desktop"
 
   tasks:
     - name: Cria os usuários
