@@ -4,7 +4,7 @@
 
   tasks:
     - name: Instala o Redis
-      package:
+      ansible.builtin.package:
         name: redis
 
     - name: Reinicia os serviços da aplicação web
@@ -13,13 +13,13 @@
 
   handlers:
     - name: Restart redis
-      service:
+      ansible.builtin.service:
         name: redis
         state: restarted
       listen: "restart webapp services"
 
     - name: Restart apache2
-      service:
+      ansible.builtin.service:
         name: apache2
         state: restarted
       listen: "restart webapp services"      
