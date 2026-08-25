@@ -3,12 +3,12 @@
   hosts: webservers
 
   tasks:
-    - name: Instala o apache
+    - name: Instala o Apache
       ansible.builtin.package:
         name: apache2
       when: ansible_facts['os_family'] == "Debian"
 
-    - name: Habilita e inicia o apache
+    - name: Habilita e inicia o Apache
       ansible.builtin.service:
         name: apache2
         enabled: true

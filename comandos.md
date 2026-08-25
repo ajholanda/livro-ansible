@@ -204,7 +204,7 @@ ansible-doc package
 Versão simplificada do comando quando o `ansible.cfg` já define inventário e elevação de privilégios:
 
 ```bash
-ansible web.example.net -m package -a "name=apache2"
+ansible web.example.net -m package -a "name=apache2 state=present"
 ```
 
 Define o caminho do inventário por variável de ambiente:
