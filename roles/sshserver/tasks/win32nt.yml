@@ -12,6 +12,7 @@
           Write-Output 'SSH firewall rule is already present.'
       }
   tags: sshserver
+
 - name: Agenda a verificação da regra de firewall SSH na inicialização
   community.windows.win_scheduled_task:
     name: EnsureSSHFirewallRule
