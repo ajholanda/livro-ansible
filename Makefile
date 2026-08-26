@@ -84,7 +84,7 @@ TRASH += webservers-3.yml
 
 # Gera o playbook webserver.yml da Seção 3.1.
 webservers-3_1.yml: webservers.yml
-	head -18 $< > $@
+	head -19 $< > $@
 TRASH += webservers-3_1.yml
 
 include_tasks-3.yml: include_tasks.yml
