@@ -1,7 +1,6 @@
 ---
 - name: Exemplo de uso de tags no Ansible
   hosts: localhost
-  connection: local
 
   tasks:
     - name: Tag always
