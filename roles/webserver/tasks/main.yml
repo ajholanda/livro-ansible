@@ -8,6 +8,7 @@
   ansible.builtin.package:
     update_cache: true
     name: "{{ webserver_package }}"
+    state: present
   tags: webserver
 
 - name: Habilita e inicia o Apache

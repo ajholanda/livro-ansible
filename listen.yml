@@ -6,6 +6,7 @@
     - name: Instala o Redis
       ansible.builtin.package:
         name: redis
+        state: present
 
     - name: Reinicia os serviços da aplicação web
       ansible.builtin.command: echo "Reiniciando os serviços da aplicação web"

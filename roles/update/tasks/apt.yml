@@ -2,6 +2,7 @@
 - name: Instala o pacote unattended-upgrades
   ansible.builtin.package:
     name: unattended-upgrades
+    state: present
   tags: update
 
 - name: Habilita e inicia o serviço unattended-upgrades

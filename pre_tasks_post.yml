@@ -30,6 +30,7 @@
           - tmux
           - wget
           - whois
+        state: present
 
   post_tasks:
     - name: Exclui cache de pacotes e dependências que não são mais necessárias (família Debian)

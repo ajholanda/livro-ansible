@@ -5,6 +5,7 @@
 - name: Incluir o role package
   ansible.builtin.include_role:
     name: package
+    state: present
   tags: fail2ban
 
 - name: Instala o Fail2Ban

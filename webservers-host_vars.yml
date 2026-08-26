@@ -5,6 +5,7 @@
     - name: Instala o php
       ansible.builtin.package:
         name: php
+        state: present
       when: >
         webservers_install_php is defined
         and webservers_install_php

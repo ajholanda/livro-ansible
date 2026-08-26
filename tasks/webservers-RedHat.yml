@@ -2,6 +2,7 @@
 - name: Instala o httpd
   ansible.builtin.package:
     name: httpd
+    state: present
 
 - name: Habilita e inicia o httpd
   ansible.builtin.service:

@@ -15,6 +15,7 @@
     - name: Instala o pacote de gerenciamento de drivers
       ansible.builtin.package:
         name: ubuntu-drivers-common
+        state: present
 
     - name: Verifica se o driver NVIDIA já está instalado
       ansible.builtin.command: nvidia-smi
@@ -32,3 +33,4 @@
           - nvidia-cuda-toolkit
           - nvidia-settings
           - nvtop
+        state: present

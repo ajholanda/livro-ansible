@@ -7,4 +7,5 @@
 - name: Instala os pacotes de desenvolvimento
   ansible.builtin.package:
     name: "{{ devtools_packages | map('extract', devtools_packages_map) | flatten | list }}"
+    state: present
   tags: devtools

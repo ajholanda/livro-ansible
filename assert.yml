@@ -43,6 +43,7 @@
         - name: Instala o Blender
           ansible.builtin.package:
             name: blender
+            state: present
 
     - name: Testa vários requisitos
       tags: reqts
