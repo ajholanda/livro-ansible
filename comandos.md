@@ -475,7 +475,7 @@ ansible-doc -t connection -l
 Coleta os fatos (_facts_) de um host (módulo `setup`):
 
 ```bash
-ansible -m setup web.example.net
+ansible web.example.net -m setup
 ```
 
 Executa playbooks com tarefas condicionadas à família do sistema operacional (variável `ansible_facts['os_family']`):
