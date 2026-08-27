@@ -22,14 +22,16 @@
     - name: Implanta o Docker com Apache e PHP
       ansible.builtin.include_tasks: tasks/docker/deploy_php_apache.yml
       vars:
+        docker_php_version: 8.4
         docker_php_apache_port: 8080
-        docker_php_apache_volume: /home/docker/php_apache
+        docker_php_apache_volume: /srv/docker/php_apache
       tags: docker_php_apache
 
     - name: Implanta o Docker com PostgreSQL
       ansible.builtin.include_tasks: tasks/docker/deploy_postgres.yml
       vars:
+        docker_postgres_version: 18
         docker_postgres_port: 54321
-        docker_postgres_volume: /home/docker/postgres
+        docker_postgres_volume: /srv/docker/postgres
         docker_postgres_password: secret
       tags: docker_postgres
