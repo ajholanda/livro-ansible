@@ -1124,7 +1124,7 @@ ansible-playbook workstations.yml
 
 ### 15.5 Implantação de contêineres
 
-Provisiona contêineres Docker com o playbook `containers.yml`:
+Implanta contêineres Docker com o playbook `containers.yml`:
 
 ```bash
 # Instala o Docker.
