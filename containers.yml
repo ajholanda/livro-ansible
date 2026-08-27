@@ -1,6 +1,19 @@
 ---
 - name: Instala o Docker e implanta contêineres
-  hosts: cloud
+  hosts: docker_hosts
+
+  pre_tasks:
+    - name: Garante que o diretório base do Docker exista
+      ansible.builtin.file:
+        path: /srv/docker
+        state: directory
+        owner: root
+        group: docker
+        mode: '0755'
+      tags:
+        - docker
+        - docker_php_apache
+        - docker_postgres
 
   roles:
     - docker
