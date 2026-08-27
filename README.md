@@ -59,17 +59,17 @@ vagrant up
 A tabela a seguir apresenta um conjunto de fatos coletados pelo Ansible dos hosts do inventário [hosts.ini](hosts.ini). Os atributos `system`, `os_family` e `distribution`, armazenados na estrutura `ansible_facts`, descrevem o sistema operacional de cada host.
 
 
-| hostname     | `system` | `os_family` | `distribution` |
-| ------------ | -------- | ----------- | -------------- |
-| `cloud`      | Linux    | Debian      | Ubuntu         |
-| `db`         | Linux    | Debian      | Debian         |
-| `lab[01:03]` | Linux    | Debian      | Ubuntu         |
-| `nas`        | Linux    | Debian      | Debian         |
-| `off1`       | Win32NT  | Windows     | --             |
-| `simula`     | Linux    | Debian      | Ubuntu         |
-| `ti1`        | Linux    | Debian      | Ubuntu         |
-| `w3`         | Linux    | RedHat      | Almalinux      |
-| `web`        | Linux    | Debian      | Debian         |
+| hostname      | `system` | `os_family` | `distribution` |
+| ------------- | -------- | ----------- | -------------- |
+| `db`          | Linux    | Debian      | Debian         |
+| `docker_hosts`| Linux    | Debian      | Ubuntu         |
+| `lab[01:03]`  | Linux    | Debian      | Ubuntu         |
+| `nas`         | Linux    | Debian      | Debian         |
+| `off1`        | Win32NT  | Windows     | --             |
+| `simula`      | Linux    | Debian      | Ubuntu         |
+| `ti1`         | Linux    | Debian      | Ubuntu         |
+| `w3`          | Linux    | RedHat      | Almalinux      |
+| `web`         | Linux    | Debian      | Debian         |
 
 ## *Roles* provenientes do Ansible Galaxy
 

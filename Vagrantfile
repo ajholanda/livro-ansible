@@ -9,11 +9,10 @@ TYPE2IP = {
   'windows' => "#{PREFIP}.128"
 }
 # We reuse boxes to not exhaust RAM.
-# TODO. Sync with hosts.ini
 ips = {
   'ansible' => "#{TYPE2IP['ansible']}",
-  # [cloud] -> used to install Docker
-  'cloud' => "#{TYPE2IP['ansible']}",
+  # [docker_hosts] -> used to install Docker
+  'docker' => "#{TYPE2IP['ansible']}",
   # [dbservers]
   'db' => "#{TYPE2IP['debian']}",
   # [lab]
