@@ -8,8 +8,13 @@
         name: redis
         state: present
 
-    - name: Reinicia os serviços da aplicação web
-      ansible.builtin.command: echo "Reiniciando os serviços da aplicação web"
+    - name: Atualiza a configuração da aplicação web
+      ansible.builtin.template:
+        src: files/webapp.conf
+        dest: /etc/webapp.conf
+        owner: root
+        group: root
+        mode: "0644"
       notify: "restart webapp services"
 
   handlers:
