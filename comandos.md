@@ -457,7 +457,8 @@ ansible-playbook idempot.yml    # <---- ok
 rm /tmp/config.ini
 ansible-playbook idempot.yml --check
 ansible-playbook idempot.yml --diff
-rm /tmp/config.ini
+# Altera o conteúdo de config.ini para ver o efeito de --diff.
+cat port=8080 > /tmp/config.ini
 ansible-playbook idempot.yml --check --diff
 ```
 
