@@ -504,7 +504,7 @@ export ANSIBLE_CACHE_PLUGIN=jsonfile
 Define uma variável global na linha de comando com `--extra-vars`:
 
 ```bash
-ansible-playbook --extra-vars "groupname=webdev" webservers-vars.yml --tags group
+ansible-playbook webservers-vars.yml --extra-vars "groupname=webdev" --tags group
 ```
 
 Demonstra variáveis de host (`host_vars`) e de grupo (`group_vars`):
