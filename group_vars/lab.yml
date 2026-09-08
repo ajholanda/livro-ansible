@@ -1,10 +1,10 @@
-# group_vars/lab.yml
+# minute e hour são strings porque podem receber o valor "*".
 cron:
   shutdown:
     minute: "30"
     hour: "22"
     weekday: "*"
 
-power_shutdown_hour: '22'
-power_shutdown_minute: '30'
-power_suspend_timeout: '1800'
+power_shutdown_hour: 22
+power_shutdown_minute: 30
+power_suspend_timeout: 1800
