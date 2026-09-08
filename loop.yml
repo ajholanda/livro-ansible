@@ -1,7 +1,6 @@
 ---
 - name: Demonstração do uso de loop_control
   hosts: localhost
-  connection: local
   gather_facts: false
 
   tasks:
