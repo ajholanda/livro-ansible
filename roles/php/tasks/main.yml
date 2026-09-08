@@ -22,7 +22,7 @@
     - never
     - php
 
-- name: Instala o php
+- name: Instala o PHP
   ansible.builtin.package:
     name: php
     state: present
