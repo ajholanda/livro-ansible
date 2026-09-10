@@ -6,12 +6,6 @@
     power_off_minute: 30
     power_off_hour: 22
     power_off_weekday: '*'
-    system_groups:
-      - audio
-      - plugdev
-      - netdev
-      - users
-      - video
 
   tasks:
     - name: Cria uma entrada na crontab para desligar o computador
@@ -53,13 +47,20 @@
         - filter_lower
         - never
 
-    - name: Cria usuário e adiciona em alguns grupos do sistema
-      ansible.builtin.user:
-        name: ajh
-        comment: "Adriano J. Holanda"
-        shell: /bin/bash
-        createhome: true
-        home: /home/ajh
-        groups: "{{ system_groups | join(',') }}"
-        append: true
-      tags: filter_join
+- name: Exemplo do filtro join
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    dnsservers:
+      - 1.1.1.1
+      - 8.8.8.8
+      - 9.9.9.9
+
+  tasks:
+    - name: Converte a lista em uma string separada por vírgulas
+      ansible.builtin.debug:
+        msg: "Os servidores DNS configurados são: {{ dnsservers | join(',') }}"
+      tags:
+       - filter_join
+       - never
