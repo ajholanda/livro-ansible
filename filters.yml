@@ -16,7 +16,9 @@
         minute: "{{ power_off_minute | mandatory }}"
         user: root
         job: "/sbin/shutdown -h now"
-      tags: filter_mandatory
+      tags:
+       - filter_mandatory
+       - never
 
     - name: Cria uma entrada na crontab para desligar o computador
       ansible.builtin.cron:
@@ -26,7 +28,9 @@
         minute: "{{ power_off_minute | mandatory | int }}"
         user: root
         job: "/sbin/shutdown -h now"
-      tags: filter_int
+      tags:
+       - filter_int
+       - never
 
     - name: Cria uma entrada na crontab para desligar o computador
       ansible.builtin.cron:
@@ -36,8 +40,15 @@
         minute: "{{ power_off_minute | mandatory | int }}"
         user: root
         job: "/sbin/shutdown -h now"
-      tags: filter_default
+      tags:
+       - filter_default
+       - never
 
+- name: Exemplo do filtro lower
+  hosts: webservers
+  gather_facts: true
+
+  tasks:
     - name: Instala o Apache
       ansible.builtin.package:
         name: apache2
