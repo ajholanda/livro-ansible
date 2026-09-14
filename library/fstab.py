@@ -155,7 +155,7 @@ def run_module():
         # 6. If spec does not exist, add the entry.
         if not spec_exists:
             result['changed'] = True
-            # Only change if the execution is not in check mode.
+            # Write only if the execution is not in check mode.
             if not module.check_mode:
                 entry = f'{spec} {path} {type} {opts} {dump} {passno}\n'
                 file.write(entry)
