@@ -14,7 +14,9 @@
 
   tasks:
     - name: Teste de criptografia das senhas
-      tags: crypto
+      tags:
+        - crypto
+        - never
       block:
         - name: Verifica se a senha está criptografada
           ansible.builtin.assert:
@@ -33,7 +35,9 @@
             msg: "Interrompida a execução! Não chega aqui"
 
     - name: Testa os requisitos do Blender
-      tags: blender
+      tags:
+        - blender
+        - never
       block:
         - name: Verifica se a quantidade de memória é suficiente
           ansible.builtin.assert:
@@ -46,7 +50,9 @@
             state: present
 
     - name: Testa vários requisitos
-      tags: reqts
+      tags:
+        - never
+        - reqts
       block:
         - name: Verifica se o computador atende aos requisitos
           ansible.builtin.assert:
