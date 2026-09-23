@@ -8,7 +8,7 @@
         path: /srv/docker
         state: directory
         owner: root
-        group: docker
+        group: root
         mode: '0755'
       tags:
         - docker
