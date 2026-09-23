@@ -1,4 +1,14 @@
 ---
+- name: Cria um lspci que simula a existência de GPU
+  ansible.builtin.copy:
+    dest: /usr/local/bin/lspci
+    mode: "0755"
+    content: |
+      #!/bin/sh
+      echo "01:00.0 VGA compatible controller: NVIDIA Corporation GA106 [GeForce RTX 3060]"
+  when: ansible_facts['distribution'] == "Ubuntu"
+  tags: nvidia
+
 - name: Verifica a existência da placa NVIDIA
   ansible.builtin.command: lspci
   register: nvidia_lspci
