@@ -3,14 +3,15 @@
   hosts: workstations
 
   roles:
-    - fail2ban
     - devtools
+    - fail2ban
     - role: ajholanda.googlechrome
       tags: googlechrome
     - libreoffice
     - nvidia
     - remotedesktop
     - sshserver
+    - sssd
     - update
     - user
     - role: ajholanda.vscode
