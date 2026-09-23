@@ -7,7 +7,7 @@
 
 - name: Habilita e inicia o x2goserver
   ansible.builtin.service:
-    name: x2goserver
+    name: "{{ 'x2gocleansessions' if ansible_os_family == 'RedHat' else 'x2goserver' }}"
     enabled: true
     state: started
   tags: remotedesktop
