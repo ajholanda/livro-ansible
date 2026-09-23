@@ -2,10 +2,9 @@
 # Precisamos do role package para adicionar o
 # repositório de pacotes extras EPEL para
 # as distribuições derivadas da Red Hat.
-- name: Incluir o role package
+- name: Inclui o role package
   ansible.builtin.include_role:
     name: package
-    state: present
   tags: fail2ban
 
 - name: Instala o Fail2Ban
