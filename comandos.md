@@ -263,7 +263,7 @@ ansible web.example.net -m file -a "src=/etc/apache2/sites-available/site.conf d
 ansible lab -m file -a "path=/etc/shadow owner=root group=shadow mode=0640"
 
 # Remove um arquivo, diretório ou link
-ansible devs -m file -a "path=/tmp/texput.log state=absent"
+ansible lab -m file -a "path=/tmp/texput.log state=absent"
 
 # Executa um comando no shell remoto (módulo command)
 ansible servers -m command -a last
