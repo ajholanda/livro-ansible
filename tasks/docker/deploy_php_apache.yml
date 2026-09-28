@@ -1,7 +1,7 @@
 ---
 - name: Garante que a imagem com o PHP e Apache esteja presente
   community.docker.docker_image:
-    name: "php:apache"
+    name: "php:{{ docker_php_version }}-apache"
     source: pull
   tags: docker_php_apache
 
