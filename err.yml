@@ -131,7 +131,7 @@
 - name: Espera com wait_for
   hosts: localhost
   tasks:
-    - name: Aguarda porta SSH estar disponível
+    - name: Aguarda porta HTTP estar disponível
       ansible.builtin.wait_for:
         host: "{{ inventory_hostname }}"
         port: 80
