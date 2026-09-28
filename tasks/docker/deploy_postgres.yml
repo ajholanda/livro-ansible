@@ -19,6 +19,7 @@
     name: "postgres"
     image: "postgres:{{ docker_postgres_version }}"
     state: started
+    restart_policy: unless-stopped
     ports:
       - "{{ docker_postgres_port | default(5432) }}:5432"
     volumes:
