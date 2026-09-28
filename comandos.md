@@ -240,7 +240,7 @@ Demais comandos *ad hoc* frequentes na rotina do administrador:
 
 ```bash
 # Instala o Git nos hosts do grupo lab
-ansible lab -m package -a "name=git"
+ansible lab -m package -a "name=git state=present"
 
 # Copia um arquivo do controlador para os hosts (módulo copy)
 ansible lab -m copy -a "src=/etc/resolv.conf dest=/etc/"
