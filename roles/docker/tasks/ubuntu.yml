@@ -1,7 +1,7 @@
 ---
 - name: Desinstala os pacotes não oficiais
   ansible.builtin.apt:
-    pkg:
+    name:
       - docker.io
       - docker-compose
       - docker-doc
@@ -11,7 +11,7 @@
 
 - name: Instala dependências
   ansible.builtin.apt:
-    pkg:
+    name:
       - apt-transport-https
       - ca-certificates
       - curl
@@ -35,7 +35,7 @@
 - name: Instala os pacotes oficiais
   ansible.builtin.apt:
     update_cache: true
-    pkg:
+    name:
       - docker-ce
       - docker-ce-cli
       - containerd.io
