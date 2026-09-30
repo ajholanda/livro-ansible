@@ -100,7 +100,7 @@
       tags: err7
 
 - name: Executa manipuladores
-  hosts: webservers
+  hosts: web.example.net
   force_handlers: true
   tasks:
     - name: Força execução dos manipuladores
