@@ -6,12 +6,14 @@
   become_user: root
   vars:
     backup_user: vagrant
+
   tasks:
     - name: Realiza o backup dos bancos de dados
       tags: backup
       block:
         - name: Gera o arquivo de backup
-          ansible.builtin.command: sh -c 'mariadb-dump --all-databases > /tmp/datadump.sql'
+          ansible.builtin.shell: |
+            mariadb-dump --all-databases > /tmp/datadump.sql
 
         - name: Garante que o diretório de backup exista no servidor de armazenamento (NAS)
           ansible.builtin.file:
@@ -22,7 +24,8 @@
           delegate_to: nas.example.net
 
         - name: Copia o backup para o NAS
-          ansible.builtin.command: scp /tmp/datadump.sql nas.example.net:/backup/
+          ansible.builtin.command: |
+            scp /tmp/datadump.sql nas.example.net:/backup/
           become: true
           become_user: "{{ backup_user }}"
 
