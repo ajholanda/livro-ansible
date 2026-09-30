@@ -31,8 +31,8 @@
   ansible.builtin.template:
     src: site.conf.j2
     dest: "{{ webserver_confdir | mandatory }}/site.conf"
-    owner: "{{ webserver_user }}"
-    group: "{{ webserver_group }}"
+    owner: root
+    group: root
     mode: "0644"
   notify: Restart apache
   tags: webserver

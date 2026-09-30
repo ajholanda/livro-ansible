@@ -23,8 +23,8 @@
   ansible.builtin.template:
     src: site.conf.j2
     dest: /etc/apache2/sites-available/site.conf
-    owner: www-data
-    group: www-data
+    owner: root
+    group: root
     mode: "0644"
   notify: Restart apache2
 
