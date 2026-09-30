@@ -6,13 +6,16 @@
 
   tasks:
     # - name: Tarefa
-    #   debug: msg="Texto em aberto'
+    #   ansible.builtin.debug:
+    #     msg: "Texto em aberto'
 
     # - name: Tarefa
-    #   debug: msg="{{ myvar }"
+    #   ansible.builtin.debug:
+    #   msg: "{{ myvar }"
 
     # - name: Tarefa
-    # debug: msg="Texto ok"
+    # ansible.builtin.debug:
+    #   msg: "Texto ok"
 
     # - name: Testa a conectividade
     #   ansible.builtin.pong:
