@@ -8,6 +8,12 @@
         name: redis
         state: present
 
+    - name: Habilita e inicia o Redis
+      ansible.builtin.service:
+        name: redis
+        enabled: true
+        state: started
+
     - name: Atualiza a configuração da aplicação web
       ansible.builtin.template:
         src: files/webapp.conf
