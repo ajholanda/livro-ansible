@@ -2,11 +2,13 @@
 - name: Carrega variáveis da família do sistema operacional
   ansible.builtin.include_vars:
     file: "{{ role_path }}/vars/{{ ansible_facts['os_family'] | lower }}.yml"
+      # O atribuição a seguir funciona com o ansible-playbook, mas gera problemas
+      # com o CI/CD do Github.
+      # file: "{{ ansible_facts['os_family'] | lower }}.yml"
   tags: webserver
 
 - name: Instala o Apache
   ansible.builtin.package:
-    update_cache: true
     name: "{{ webserver_package }}"
     state: present
   tags: webserver
