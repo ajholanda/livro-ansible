@@ -3,6 +3,8 @@
 Este repositório contém recursos de aprendizagem relacionados ao [Ansible](https://www.ansible.com/).
 O [Vagrant](https://www.vagrantup.com/) é usado para criar ambientes do controlador e dos hosts gerenciados.
 
+Os trechos delimitados pelos comentários `BEGIN REPO-ONLY` e `END REPO-ONLY` fazem parte da versão completa dos exemplos disponível no repositório, mas são omitidos no livro por não serem essenciais à apresentação do conceito.
+
 ## Ambiente de execução
 
 Para criar o ambiente de execução devemos:
