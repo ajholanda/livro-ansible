@@ -7,3 +7,6 @@ webserver_logdir: "{{ _webserver_logdir_default }}"
 webserver_package: "{{ _webserver_package_default }}"
 webserver_service: "{{ _webserver_service_default }}"
 webserver_user: "{{ _webserver_user_default }}"
+# BEGIN REPO-ONLY
+webserver_ports_conf: "{{ _webserver_ports_conf_default }}"
+# END REPO-ONLY

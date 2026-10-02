@@ -5,3 +5,6 @@ _webserver_logdir_default: /var/log/httpd
 _webserver_package_default: httpd
 _webserver_service_default: httpd
 _webserver_user_default: apache
+# BEGIN REPO-ONLY
+_webserver_ports_conf_default: "/etc/httpd/conf/httpd.conf"
+# END REPO-ONLY

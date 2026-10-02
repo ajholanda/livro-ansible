@@ -5,3 +5,6 @@ _webserver_logdir_default: /var/log/apache2
 _webserver_package_default: apache2
 _webserver_service_default: apache2
 _webserver_user_default: www-data
+# BEGIN REPO-ONLY
+_webserver_ports_conf_default: "/etc/apache2/ports.conf"
+# END REPO-ONLY
