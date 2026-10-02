@@ -34,7 +34,7 @@ ldap_id_use_start_tls = true
 cache_credentials = true
 enumerate = false
 
-{% if inventory_hostname in groups['desktops'] %}
+{% if inventory_hostname in groups.get('desktops', []) %}
 override_homedir = /home/nfs/%u
 {% else %}
 override_homedir = /home/%u
