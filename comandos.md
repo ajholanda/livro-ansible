@@ -586,6 +586,12 @@ tree roles/webserver_debian/
 tree roles/webserver/
 ```
 
+Consulta o valor de `roles_path`:
+
+```bash
+ansible-config dump | grep DEFAULT_ROLES_PATH
+```
+
 Executa um role aplicado a um host específico, selecionado por *tag*:
 
 ```bash
