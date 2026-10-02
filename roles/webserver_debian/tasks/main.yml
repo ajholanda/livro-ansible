@@ -14,10 +14,10 @@
 - name: Copia a página teste
   ansible.builtin.copy:
     src: index.html
+    dest: /var/www/html/
     owner: www-data
     group: www-data
     mode: "0644"
-    dest: /var/www/html/
 
 - name: Copia o arquivo de configuração
   ansible.builtin.template:
