@@ -1,7 +1,7 @@
 ---
-webserver_confdir: /etc/apache2/sites-available
-webserver_group: www-data
-webserver_logdir: /var/log/apache2
-webserver_package: apache2
-webserver_service: apache2
-webserver_user: www-data
+_webserver_confdir_default: /etc/apache2/sites-available
+_webserver_group_default: www-data
+_webserver_logdir_default: /var/log/apache2
+_webserver_package_default: apache2
+_webserver_service_default: apache2
+_webserver_user_default: www-data

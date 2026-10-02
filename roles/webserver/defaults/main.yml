@@ -1,3 +1,9 @@
 ---
 webserver_document_root: /var/www/html
 webserver_http_port: 80
+webserver_confdir: "{{ _webserver_confdir_default }}"
+webserver_group: "{{ _webserver_group_default }}"
+webserver_logdir: "{{ _webserver_logdir_default }}"
+webserver_package: "{{ _webserver_package_default }}"
+webserver_service: "{{ _webserver_service_default }}"
+webserver_user: "{{ _webserver_user_default }}"
