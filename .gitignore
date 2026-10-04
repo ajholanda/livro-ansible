@@ -12,7 +12,7 @@
 *.pyc
 *.swp
 ansible
-Ansible.md
+ansible.md
 desktop.ini
 include_tasks-*.yml
 roles/ajholanda.*
