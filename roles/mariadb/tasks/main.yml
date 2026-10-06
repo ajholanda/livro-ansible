@@ -1,11 +1,11 @@
 ---
-- name: Instala o banco de dados MariaDB
+- name: Instala o banco de dados MariaDB e o driver Python PyMySQL  # REPO-ONLY
   ansible.builtin.package:
     pkg:
       - mariadb-client
       - mariadb-common
       - mariadb-server
-      - python3-mysqldb
+      - python3-pymysql
   tags: mariadb
 
 - name: Adiciona usuário com privilégios administrativos
