@@ -9,5 +9,8 @@
     src: rsyncd.secrets
     dest: /etc/
     owner: root
+    group: root
     mode: "0600"
+  no_log: true
+  diff: false
   tags: rsyncserver
