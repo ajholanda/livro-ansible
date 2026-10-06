@@ -1,7 +1,7 @@
 ---
 # Dados não confidenciais
 mariadb_port: 3306
-mariadb_user: dba
+mariadb_user: dbadmin
 
 # Dado confidencial
 mariadb_password: "{{ vault_mariadb_password }}"
