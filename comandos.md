@@ -677,7 +677,7 @@ O programa `ansible-vault` recebe a operação a ser executada. As principais op
 Cria um arquivo criptografado (solicita a senha do cofre e abre o editor):
 
 ```bash
-ansible-vault create rsyncserver/files/rsyncd.secrets
+ansible-vault create roles/rsyncserver/files/rsyncd.secrets
 ```
 
 Executa um playbook que usa arquivos criptografados, solicitando a senha do cofre interativamente:
