@@ -18,6 +18,11 @@ include_tasks-*.yml
 roles/ajholanda.*
 test.yml
 tmp
+##
+# Em um ambiente de produção, o arquivo com a senha do cofre
+# deve fazer parte da lista de arquivos ignorados pelo Git.
+##
+# vault.txt
 venv
 webservers-3.yml
 webservers-3_1.yml
