@@ -13,4 +13,7 @@
     name: "{{ mariadb_user }}"
     password: "{{ mariadb_password }}"
     priv: '*.*:ALL'
+    state: present
+    login_unix_socket: /run/mysqld/mysqld.sock
+    column_case_sensitive: true
   tags: mariadb
