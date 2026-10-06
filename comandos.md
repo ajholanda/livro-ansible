@@ -710,13 +710,15 @@ ansible-vault create group_vars/dbservers/vault.yml
 Aplica o role que usa as variáveis criptografadas:
 
 ```bash
+# O driver do MySQL para o Python deve estar instalado.
+pip install PyMySQL
 ansible-playbook servers.yml --limit dbservers --tags mariadb
 ```
 
 Gera, no terminal, um valor criptografado para uma única variável:
 
 ```bash
-ansible-vault encrypt_string ' senhadodba ' --name 'mariadb_password'
+ansible-vault encrypt_string --prompt
 ```
 
 ### 7.3 Uso de múltiplas senhas
