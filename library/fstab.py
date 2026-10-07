@@ -129,6 +129,16 @@ def run_module():
     dump = module.params['dump']
     passno = module.params['passno']
 
+    # Build the desired entry.
+    desired_fields = [
+        str(spec),
+        str(path),
+        str(type),
+        str(opts),
+        str(dump),
+        str(passno),
+    ]
+
     fname = '/etc/fstab'
     if not os.path.exists(fname):
         module.fail_json(msg="%s not found" % (fname))
