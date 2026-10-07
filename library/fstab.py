@@ -147,23 +147,33 @@ def run_module():
 
     # 1. Open /etc/fstab file.
     with open(fname, "r+") as file:
-        # Mount specification exists?
-        spec_exists = False
+        path_exists = False
+
         # 2. Read each line of the file.
         for line in file:
             # 3. Ignore empty lines and comments.
             if not line.strip() or line.startswith('#'):
                 continue
+
             # 4. Split line into fields.
             fields = line.split()
-            # 5. Check if spec already exists in /etc/fstab.
-            if fields[0] == spec:
-                spec_exists = True
-                break
 
-        # 6. If spec does not exist, add the entry.
-        if not spec_exists:
+            # 5. Check whether the mount point already exists.
+            if fields[1] == path:
+                path_exists = True
+
+                # The desired entry already exists.
+                if fields[:6] == desired_fields:
+                    break
+
+                module.fail_json(
+                    msg=f"conflicting entry for mount point {path}"
+                )
+
+        # 6. If the mount point does not exist, add the entry.
+        if not path_exists:
             result['changed'] = True
+
             # Write only if the execution is not in check mode.
             if not module.check_mode:
                 entry = f'{spec} {path} {type} {opts} {dump} {passno}\n'
