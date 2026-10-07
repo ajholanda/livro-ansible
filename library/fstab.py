@@ -81,7 +81,7 @@ msg:
     description: Provide a descriptive message using some parameters.
     type: str
     returned: always
-    sample: '/dev/sda1 on / type ext4 (rw,relatime,discard,errors=remount-ro)'
+    sample: '/dev/sda1 on / type ext4 (defaults)'
 '''
 
 import os
