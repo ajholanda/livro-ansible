@@ -13,4 +13,8 @@ class FilterModule:
         """Return the first part of the
         fully qualified domain name (fqdn).
         """
+        if not isinstance(fqdn, str) or not fqdn or "." not in fqdn:
+            raise ValueError(
+                "fqdn must be a non-empty string containing '.'"
+            )
         return fqdn.split('.')[0]
