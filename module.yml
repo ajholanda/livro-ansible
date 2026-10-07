@@ -11,6 +11,9 @@
         group: root
         mode: '0755'
 
+    # Como há um reaproveitamento de hosts Vagrant,
+    # somente o primeiro host do grupo lab reportará
+    # changed.
     - name: Adiciona entrada em /etc/fstab
       fstab:
         spec: '192.168.64.16:/home'
