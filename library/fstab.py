@@ -8,7 +8,7 @@ module: fstab
 
 short_description: Add a fstab entry.
 
-version_added: "2.16"
+version_added: "1.0"
 
 description: The M(fstab) module writes an entry to /etc/fstab file.
 
