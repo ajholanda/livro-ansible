@@ -11,6 +11,7 @@
 *.pem
 *.pyc
 *.swp
+Ansible.md
 ansible
 ansible.md
 desktop.ini
