@@ -851,10 +851,10 @@ Executa um playbook dentro de um EE com o `ansible-navigator`:
 ```bash
 pipx install ansible-navigator
 # Usa o mesmo contexto já criado no comando ansible-builder.
-ansible-navigator run site.yml --eei my-ee:1.0 \
+ansible-navigator run site.yml --ee true --eei my-ee:1.0 \
 	-c /tmp/context \
 	--container-engine docker
-# Carrega a imagem definida em ansible-navigator.yml.
+# Após a definição de `ansible-navigator.yml`.
 ansible-navigator run site.yml \
 	-c /tmp/context \
 	--container-engine docker
