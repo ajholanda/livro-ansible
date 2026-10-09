@@ -881,6 +881,8 @@ ansible-lint lint_v0.yml
 ansible-lint lint_v1.yml
 # Usa um arquivo de configuração de regras.
 ansible-lint -c lint-config.yml lint_v1.yml
+# Versão final após as correções.
+ansible-lint lint_v2.yml
 ```
 
 Lista todas as regras usadas na validação:
