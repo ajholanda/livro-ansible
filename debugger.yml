@@ -1,6 +1,7 @@
 ---
 - name: Playbook para demonstrar o uso do depurador
   hosts: localhost
+  connection: local
   gather_facts: false
   vars:
     file_path: "/tm/debugger.log"  # Caminho do arquivo incorreto.
