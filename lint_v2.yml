@@ -1,17 +1,19 @@
 ---
-# lint_v1.yml
+# lint_v2.yml
 
-- name: Informações dos discos e criação de diretórios.
+- name: Informações dos discos e criação de diretórios
   hosts: localhost
+  connection: local
+  become: true
   gather_facts: false
 
   tasks:
-    - name: Retorna a informação de uso dos discos.
+    - name: Retorna a informação de uso dos discos
       ansible.builtin.command: df -h
       register: disk_usage
       changed_when: false
 
-    - name: Imprime as informações de uso dos discos.
+    - name: Imprime as informações de uso dos discos
       ansible.builtin.debug:
         var: disk_usage.stdout
 
