@@ -1,5 +1,9 @@
 ---
+# lint_v0.yml
+
 - hosts: localhost
+  connection: local
+  become: false
   gather_facts: no
 
   tasks:
