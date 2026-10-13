@@ -11,9 +11,10 @@ def test_apache_running_and_enabled(host):
     assert service.is_enabled
 
 def test_apache_listening(host):
-    """Verifica se o apache escuta na porta 80"""
-    socket = host.socket("tcp://0.0.0.0:80")
-    assert socket.is_listening
+    """Verifica se o Apache escuta na porta 80 (IPv4 ou IPv6)."""
+    ipv4 = host.socket("tcp://0.0.0.0:80").is_listening
+    ipv6 = host.socket("tcp://:::80").is_listening
+    assert ipv4 or ipv6
 
 def test_index_page(host):
     """Assegura que o index.html tenha sido copiado"""
