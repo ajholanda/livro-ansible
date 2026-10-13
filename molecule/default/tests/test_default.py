@@ -1,5 +1,3 @@
-import testinfra
-
 def test_apache_installed(host):
     """Verifica se o apache está instalado"""
     apache = host.package("apache2")
