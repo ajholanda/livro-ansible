@@ -1,7 +1,8 @@
 ---
-- name: Playbook para demonstrar o uso de asserções
+- name: Playbook crypto para demonstrar o uso de asserções
   hosts: localhost
-  gather_facts: true
+  connection: local
+
   vars:
     txt_pass: "segredo"
     ok_pass: !vault |
@@ -18,13 +19,13 @@
         - crypto
         - never
       block:
-        - name: Verifica se a senha está criptografada
+        - name: Verifica se a variável ok_pass está criptografada
           ansible.builtin.assert:
             that: ok_pass is vault_encrypted
             fail_msg: "A senha deve estar criptografada!"
             success_msg: "Senha ok!"
 
-        - name: Verifica se a senha está em texto puro
+        - name: Verifica se a variável txt_pass está criptografada
           ansible.builtin.assert:
             that: txt_pass is vault_encrypted
             fail_msg: "A senha deve estar criptografada!"
