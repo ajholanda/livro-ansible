@@ -35,6 +35,11 @@
           ansible.builtin.debug:
             msg: "Interrompida a execução! Não chega aqui"
 
+- name: Valida requisitos de memória antes da instalação do Blender
+  hosts: lab
+  gather_facts: true
+
+  tasks:
     - name: Testa os requisitos do Blender
       tags:
         - blender
@@ -50,6 +55,11 @@
             name: blender
             state: present
 
+- name: Valida vários requisitos dos computadores do laboratório
+  hosts: lab
+  gather_facts: true
+
+  tasks:
     - name: Testa vários requisitos
       tags:
         - never
