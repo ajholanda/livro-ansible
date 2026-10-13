@@ -25,8 +25,8 @@ provisioner:
   name: ansible
   log: true
   env:
-    ANSIBLE_CONFIG: "../../ansible.cfg"
-    ANSIBLE_ROLES_PATH: "../../roles"
+    ANSIBLE_CONFIG: "${MOLECULE_PROJECT_DIRECTORY}/ansible.cfg"
+    ANSIBLE_ROLES_PATH: "${MOLECULE_PROJECT_DIRECTORY}/roles"
 
 verifier:
   name: testinfra
