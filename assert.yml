@@ -47,8 +47,8 @@
       block:
         - name: Verifica se a quantidade de memória é suficiente
           ansible.builtin.assert:
-            that: ansible_facts['memtotal_mb'] >= 4096
-            fail_msg: "A quantidade de memória não atende aos requisitos mínimos!"
+            that: ansible_facts['memtotal_mb'] >= 8192
+            fail_msg: "A memória total detectada é inferior a 8192 MB!"
 
         - name: Instala o Blender
           ansible.builtin.package:
@@ -69,12 +69,12 @@
           ansible.builtin.assert:
             that:
               - ansible_facts['distribution'] == "Ubuntu"
-              - ansible_userspace_bits == "64"
-              - ansible_facts['memtotal_mb'] >= 4096
-              - ansible_processor_vcpus >= 4
-            msg:
-              - "O computador não atende a um ou mais requisitos:"
-              - "1) A distribuição deve ser Ubuntu."
-              - "2) Arquitetura de 64 bits."
-              - "3) Ter pelo menos 4 GB de memória RAM."
-              - "4) Ter pelo menos 4 CPUs virtuais (threads)."
+              - ansible_facts['userspace_bits'] == "64"
+              - ansible_facts['memtotal_mb'] >= 8192
+              - ansible_facts['processor_vcpus'] >= 4
+            msg: |
+              O computador não atende a um ou mais requisitos:
+              1) A distribuição deve ser Ubuntu.
+              2) O espaço de usuário deve ser de 64 bits.
+              3) A memória total detectada deve atingir o limite definido.
+              4) Devem estar disponíveis pelo menos quatro CPUs lógicas.
