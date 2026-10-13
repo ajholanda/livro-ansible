@@ -9,30 +9,36 @@
   tasks:
     - name: Instala as dependências para a família Debian
       ansible.builtin.apt:
-        pkg:
+        name:
           - python3-pip
           - libssl-dev
       when: ansible_facts['os_family'] == 'Debian'
 
-    - name: Instala as dependências para a família RedHat
-      ansible.builtin.dnf:
-        name:
-          - gcc
-          - python3-pip
-          - python3-devel
-          - openssl-devel
-          - python3-libselinux
-      when: ansible_facts['os_family'] == 'RedHat'
+    - name: Instala o pacote virtualenv
+      ansible.builtin.package:
+        name: virtualenv
+        state: present
 
-    - name: Instala o Ansible Molecule, o plugin Docker e o Testinfra
+    - name: Instala as ferramentas de teste em um ambiente virtual
+      become: false
       ansible.builtin.pip:
+        virtualenv: ~/ansible-venv
         name:
-          - molecule
-          - molecule-plugins[docker]
-          - pytest-testinfra
+          - "ansible-core=={{ ansible_core_version }}"
+          - "molecule=={{ molecule_version }}"
+          - "molecule-plugins[docker]=={{ molecule_plugins_version }}"
+          - "pytest-testinfra=={{ testinfra_version }}"
       notify: Logout warning
 
   handlers:
-    - name: Logout warning
+    - name: Logout warning  # REPO-ONLY
       ansible.builtin.debug:
         msg: "Talvez você tenha que fazer logout e login para usar o Molecule"
+
+##
+# A estrutura dos arquivos gerados por molecule init scenario pode variar
+# conforme as versões do Molecule e dos plugins instalados.
+# Para facilitar a reprodução dos exemplos do Capítulo 11,
+# registramos as versões utilizadas do molecule, do molecule-plugins,
+# do ansible-core e do pytest-testinfra.
+##
