@@ -8,6 +8,9 @@ on:
       - '.github/workflows/**'
       - 'molecule/**'
       - 'roles/**'
+      - 'ansible.cfg'
+      - '**/requirements*.txt'
+      - '**/requirements*.yml'
   pull_request:
 
 jobs:
