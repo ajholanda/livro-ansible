@@ -2,7 +2,7 @@ import testinfra
 
 def test_apache_installed(host):
     """Verifica se o apache está instalado"""
-    apache= host.package("apache2")
+    apache = host.package("apache2")
     assert apache.is_installed
     assert apache.version.startswith("2.")
 
