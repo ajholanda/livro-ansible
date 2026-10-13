@@ -19,4 +19,5 @@ def test_apache_listening(host):
 def test_index_page(host):
     """Assegura que o index.html tenha sido copiado"""
     cmd = host.run("curl -s http://localhost")
+    assert cmd.rc == 0
     assert "Home" in cmd.stdout
