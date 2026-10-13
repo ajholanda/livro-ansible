@@ -12,3 +12,10 @@ user_admins:
     passwd: '$5$mpYswnxDTM8rOc6s$icf0s8a3gYduYhNGX2i...'
   - name: 'ewd'
     passwd: '$5$sYjJPQBbVwmc1o2i$c.8zqBNBzJjk5/4eovB...'
+
+# BEGIN REPO-ONLY
+ansible_core_version: '2.16.19'
+molecule_version: '26.6.0'
+molecule_plugins_version: '26.7.15'
+testinfra_version: '10.2.2'
+# END REPO-ONLY
