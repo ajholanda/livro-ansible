@@ -21,6 +21,7 @@
     - name: Obtém informações obtidas do sistema operacional
       ansible.windows.win_powershell:
         script: |
+          $Ansible.Changed = $false
           Get-ComputerInfo |
           Select-Object WindowsProductName,
                         WindowsVersion,
