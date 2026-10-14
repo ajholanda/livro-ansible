@@ -2,17 +2,25 @@
 - name: Garante a existência do usuário alice
   ansible.windows.win_user:
     name: alice
-    password: senh@@l1c#
+    password: "{{ alice_password }}"   # defina via Ansible Vault
+    update_password: on_create
     state: present
     groups:
-      - Administrators
-      - Users
+      - S-1-5-32-544  # Administradores
+      - S-1-5-32-545  # Usuários
     groups_action: add
   tags: user
 
-- name: Habilita o usuário Administrador
+- name: Descobre o nome da conta administrativa interna (RID 500)
+  ansible.windows.win_shell: >
+    (Get-LocalUser |
+    Where-Object { $_.SID.Value -like 'S-1-5-*-500' }).Name
+  register: admin_lookup
+  changed_when: false
+  tags: user
+
+- name: Habilita a conta administrativa interna
   ansible.windows.win_user:
-    name: Administrador
-    password: senh@@dm1n
+    name: "{{ admin_lookup.stdout | trim }}"
     account_disabled: false
   tags: user
