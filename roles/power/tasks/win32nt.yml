@@ -8,8 +8,8 @@
         arguments: "/s /f /t 60"
     triggers:
       - type: daily
-        start_boundary: |
-          2026-01-28T{{ power_shutdown_hour | int }}:{{ power_shutdown_minute | int }}:00
+        start_boundary: >-
+          2026-01-28T{{ '%02d' | format(power_shutdown_hour | int) }}:{{ '%02d' | format(power_shutdown_minute | int) }}:00
     username: SYSTEM
     run_level: highest
   tags: power
