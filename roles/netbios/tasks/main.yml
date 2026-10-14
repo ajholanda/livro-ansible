@@ -9,7 +9,7 @@
 
 - name: Desabilita NetBIOS sobre TCP/IP em todas as interfaces
   ansible.windows.win_regedit:
-    path: 'HKLM:\SYSTEM\\CurrentControlSet\Services\NetBT\Parameters\Interfaces\{{ item }}'
+    path: 'HKLM:\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces\{{ item }}'
     name: NetbiosOptions
     data: 2
     type: dword
