@@ -992,6 +992,8 @@ Instala as coleções necessárias para gerenciar hosts Windows:
 
 ```bash
 ansible-galaxy collection install ansible.windows
+ansible-galaxy collection install community.windows
+ansible-galaxy collection install chocolatey.chocolatey
 ```
 
 ### 13.1 Método de conexão
@@ -1024,12 +1026,6 @@ $ ansible-playbook desktops.yml --limit windows  --tags sshserver
 ```
 
 ### 13.2 Instalação de programas
-
-Instala a coleção que contém o módulo `win_chocolatey`, responsável por instalar os programas no Windows:
-
-```bash
-ansible-galaxy collection install chocolatey.chocolatey
-```
 
 Instala o LibreOffice nos hosts do grupo `windows`, que contém as máquinas com o sistema operacional Windows:
 
