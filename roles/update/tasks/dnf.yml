@@ -5,9 +5,9 @@
     state: present
   tags: update
 
-- name: Habilita e inicia o serviço dnf-automatic
+- name: Habilita o timer de instalação automática
   ansible.builtin.service:
-    name: dnf-automatic
+    name: dnf-automatic-install.timer
     enabled: true
     state: started
   tags: update
