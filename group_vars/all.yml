@@ -5,13 +5,13 @@
 # - O prefixo "nome-do-role_" ajuda a indicar o escopo de uso.
 # - A convenção para nomes de variáveis pode ser encontrada em:
 # https://ansible.readthedocs.io/projects/lint/rules/var-naming/#settings
-user_admins:
-  - name: 'ajh'
-    passwd: '$5$do1BCDR49g3wADS6$pb.XDsdLZ.wd8pRNxus...'
-  - name: 'dmr'
-    passwd: '$5$mpYswnxDTM8rOc6s$icf0s8a3gYduYhNGX2i...'
-  - name: 'ewd'
-    passwd: '$5$sYjJPQBbVwmc1o2i$c.8zqBNBzJjk5/4eovB...'
+#user_admins:
+#  - name: 'ajh'
+#    passwd: '$6$rounds=656000$hZxigvN3hhbcivjX$pst4/N/Rgwep39QRwcho5ackzg8cm5r9dUr0KKBRslcTrUgxYtcZar5RdpFttdYN3F8ZpOYQ96PzDzfRVB/7p/'
+#  - name: 'dmr'
+#    passwd: '$6$rounds=656000$5qGsMbN4EAQMsW5r$0tcnyB.W0OJ90rqGOc42w155Esaz98ykhSRaLeNvk2zlFPGUDG3aqslWJjSyX6foV7DY.7fjE32DP9J97z3pH1'
+#  - name: 'ewd'
+#    passwd: '$6$rounds=656000$xM9MOfGPNKK7rGnT$8IJubigBNAeIDH1I1AqTcVIJgQaQ7OVai1rQMsZZem4KGWXIaLzQL3TXcOFRn4VLLTVIvsg3.gxCD3aIq8YyC0'
 
 # BEGIN REPO-ONLY
 ansible_core_version: '2.16.19'
