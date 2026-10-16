@@ -23,6 +23,20 @@
     label: "{{ u_item.name }}"
   tags: user
 
+- name: Instala o sudo  # REPO-ONLY
+  ansible.builtin.package:
+    name: sudo
+  tags: user
+
+- name: Garante a existência do diretório /etc/sudoers.d  # REPO-ONLY
+  ansible.builtin.file:
+    path: /etc/sudoers.d
+    owner: root
+    group: root
+    mode: '0750'
+  tags: user
+
+
 - name: Elimina a solicitação de senha pelo sudo
   ansible.builtin.copy:
     dest: "/etc/sudoers.d/{{ u_item.name }}"
