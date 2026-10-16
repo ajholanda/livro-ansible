@@ -1,0 +1,4 @@
+---
+user_admin_group:
+  Debian: sudo
+  RedHat: wheel
