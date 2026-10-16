@@ -12,6 +12,28 @@
     state: started
   tags: update
 
+- name: Ativa as atualizações automáticas diárias  # REPO-ONLY
+  ansible.builtin.copy:
+    dest: /etc/apt/apt.conf.d/20auto-upgrades
+    content: |
+      APT::Periodic::Update-Package-Lists "1";
+      APT::Periodic::Unattended-Upgrade "1";
+    owner: root
+    group: root
+    mode: '0644'
+  tags: update
+
+- name: Personaliza as regras de atualização  # REPO-ONLY
+  ansible.builtin.blockinfile:
+    path: /etc/apt/apt.conf.d/50unattended-upgrades
+    insertafter: EOF
+    marker: "// {mark} ANSIBLE MANAGED BLOCK update.apt.custom_rules"
+    block: |
+      Unattended-Upgrade::Remove-Unused-Dependencies "true";
+      Unattended-Upgrade::Automatic-Reboot "true";
+      Unattended-Upgrade::Automatic-Reboot-Time "02:00";
+  tags: update
+
 - name: Configura notificações por email
   ansible.builtin.lineinfile:
     path: /etc/apt/apt.conf.d/50unattended-upgrades
