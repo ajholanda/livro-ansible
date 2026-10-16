@@ -45,7 +45,7 @@
     owner: root
     group: root
     mode: "0440"
-  loop: "{{ user_admins }}"
+  loop: "{{ user_admins | default([]) }}"
   loop_control:
     loop_var: u_item
     label: "{{ u_item.name }}"
