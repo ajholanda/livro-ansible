@@ -40,8 +40,25 @@
     regexp: '^(//\s*)?Unattended-Upgrade::Mail\s+.*;'
     line: 'Unattended-Upgrade::Mail "ajh@example.net";'
     backup: true
-  notify: Restart unattended-upgrades
-  when: >
-    update_send_notifications is defined
-    and update_send_notifications
+  when: update_send_notifications
+  tags: update
+
+- name: Desabilita notificações por email  # REPO-ONLY
+  ansible.builtin.lineinfile:
+    path: /etc/apt/apt.conf.d/50unattended-upgrades
+    regexp: '^Unattended-Upgrade::Mail\s+.*;'
+    state: absent
+    backup: true
+  when: not update_send_notifications
+  tags: update
+
+- name: Testa a configuração com um dry-run  # REPO-ONLY
+  ansible.builtin.command: unattended-upgrade --dry-run --debug
+  register: dry_run_output
+  changed_when: false
+  tags: update
+
+- name: Exibe o resultado do teste  # REPO-ONLY
+  ansible.builtin.debug:
+    var: dry_run_output.stdout_lines
   tags: update
