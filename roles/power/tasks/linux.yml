@@ -1,7 +1,7 @@
 ---
 - name: Copia o arquivo de serviço do desligamento (systemd)
   ansible.builtin.copy:
-    dest: /etc/systemd/system/shutdown.service
+    dest: /etc/systemd/system/lab-shutdown.service
     content: |
       [Unit]
       Description=Desligamento automático
@@ -16,11 +16,14 @@
 
 - name: Copia o arquivo de temporização do desligamento (systemd)
   ansible.builtin.template:
-    src: shutdown.timer.j2
-    dest: /etc/systemd/system/shutdown.timer
+    src: lab-shutdown.timer.j2
+    dest: /etc/systemd/system/lab-shutdown.timer
     owner: root
     group: root
     mode: '0640'
+  # BEGIN REPO-ONLY
+  notify: Restart lab-shutdown timer
+  # END REPO-ONLY
   tags: power
 
 - name: Configura logind-systemd para suspensão do sistema
