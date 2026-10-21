@@ -1140,6 +1140,8 @@ ansible-playbook workstations.yml
 Implanta contêineres Docker com o playbook `containers.yml`:
 
 ```bash
+# Instala a coleção com os módulos para manipulação dos recursos do Docker.
+ansible-galaxy collection install community.docker
 # Instala o Docker.
 ansible-playbook containers.yml --tags docker
 # Implanta o contêiner com PHP + Apache.
