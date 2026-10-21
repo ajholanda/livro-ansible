@@ -12,6 +12,8 @@
     state: started
   tags: update
 
+# O sistema passa a aplicar automaticamente as atualizações de segurança.
+# As demais atualizações e os pacotes retidos continuam exigindo apt upgrade manual.
 - name: Ativa as atualizações automáticas diárias  # REPO-ONLY
   ansible.builtin.copy:
     dest: /etc/apt/apt.conf.d/20auto-upgrades
