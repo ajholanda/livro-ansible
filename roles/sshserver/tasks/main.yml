@@ -10,7 +10,7 @@
 
 - name: Inclui tarefas do arquivo server.yml
   ansible.builtin.include_tasks: server.yml
-  when: inventory_hostname in groups['servers']
+  when: inventory_hostname in groups.get('servers', '')
   tags: sshserver
 
 - name: Inclui tarefas do arquivo workstation.yml
