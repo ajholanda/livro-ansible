@@ -25,7 +25,7 @@
     mode: '0644'
   tags: update
 
-- name: Personaliza as regras de atualização  # REPO-ONLY
+- name: Personaliza as regras de atualização
   ansible.builtin.blockinfile:
     path: /etc/apt/apt.conf.d/50unattended-upgrades
     insertafter: EOF
