@@ -60,7 +60,7 @@
           "association.main": "true"
       register: main_rt_info
 
-    - name: Adiciona uma rota para o gateway de internet na tabela de roteamento
+    - name: Configura a tabela de roteamento da sub-rede pública
       amazon.aws.ec2_vpc_route_table:
         profile: default
         vpc_id: "{{ vpc.vpc.id }}"
