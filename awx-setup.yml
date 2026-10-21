@@ -49,17 +49,17 @@
     - name: Verifica vCPUs e memória disponíveis
       ansible.builtin.assert:
         that:
-          - ansible_processor_vcpus | int >= minikube_cpus | int
-          - ansible_memtotal_mb | int >= minikube_memory | int
+          - ansible_facts['processor_vcpus'] | int >= minikube_cpus | int
+          - ansible_facts['memtotal_mb'] | int >= minikube_memory | int
         fail_msg: >-
           Recursos insuficientes para o Minikube:
-          vCPUs disponíveis = {{ ansible_processor_vcpus }} (necessário {{ minikube_cpus }}),
-          memória disponível = {{ ansible_memtotal_mb }} MB (necessário {{ minikube_memory }} MB).
+          vCPUs disponíveis = {{ ansible_facts['processor_vcpus'] }} (necessário {{ minikube_cpus }}),
+          memória disponível = {{ ansible_facts['memtotal_mb'] }} MB (necessário {{ minikube_memory }} MB).
           Aumente os recursos da VM (Vagrantfile) ou ajuste
           'minikube_cpus' e 'minikube_memory' no playbook.
           Destrua e recrie a VM com 'vagrant destroy ansible -f' e 'vagrant up ansible'.
         success_msg: >-
-          Recursos OK: {{ ansible_processor_vcpus }} vCPUs, {{ ansible_memtotal_mb }} MB de RAM.
+          Recursos OK: {{ ansible_facts['processor_vcpus'] }} vCPUs, {{ ansible_facts['memtotal_mb'] }} MB de RAM.
 
     # -------------------------------------------------------------------------
     # 1. Dependências do sistema
