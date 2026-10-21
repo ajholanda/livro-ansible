@@ -3,3 +3,10 @@
   ansible.builtin.service:
     name: systemd-logind
     state: restarted
+
+- name: Recarrega o systemd e reinicia o timer de desligamento  # REPO-ONLY
+  ansible.builtin.systemd_service:
+    name: lab-shutdown.timer
+    daemon_reload: true
+    state: restarted
+  listen: Restart lab-shutdown timer
