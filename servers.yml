@@ -3,9 +3,9 @@
   hosts: servers
   roles:
     - fail2ban
-    - sshserver
     - update
     - user
+    - sshserver
 
 - name: Administra servidores de banco de dados
   hosts: dbservers
