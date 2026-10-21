@@ -19,20 +19,18 @@
     state: started
   tags: fail2ban
 
-- name: Personaliza a configuração do jail sshd
-  ansible.builtin.blockinfile:
-    path: /etc/fail2ban/jail.local
-    backup: true
-    create: true
+- name: Configura o jail sshd
+  ansible.builtin.copy:
+    dest: /etc/fail2ban/jail.d/sshd.local
     owner: root
     group: root
     mode: "0644"
-    block: |
+    backup: true
+    content: |
       [sshd]
       enabled = true
-      maxretry=6
+      maxretry = 6
       findtime = 350
       bantime = 600
-    marker: "# {mark} ANSIBLE MANAGED BLOCK fail2ban.sshd"
   notify: Restart fail2ban
   tags: fail2ban
