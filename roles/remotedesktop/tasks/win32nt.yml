@@ -8,10 +8,16 @@
     state: present
   tags: remotedesktop
 
-- name: Habilita regra de Firewall para RDP
-  ansible.windows.win_firewall_rule:
-    name: "Remote Desktop"
-    group: "Remote Desktop"
+- name: Permite conexões RDP no Firewall do Windows
+  community.windows.win_firewall_rule:
+    name: "Ansible - RDP"
+    localport: 3389
+    action: allow
+    direction: in
+    protocol: tcp
+    profiles:
+      - domain
+      - private
     enabled: true
     state: present
   tags: remotedesktop
