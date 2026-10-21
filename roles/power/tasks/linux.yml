@@ -12,6 +12,9 @@
     owner: root
     group: root
     mode: '0640'
+  # BEGIN REPO-ONLY
+  notify: Restart lab-shutdown timer
+  # END REPO-ONLY
   tags: power
 
 - name: Copia o arquivo de temporização do desligamento (systemd)
