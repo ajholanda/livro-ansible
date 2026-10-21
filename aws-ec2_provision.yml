@@ -72,6 +72,8 @@
         routes:
           - dest: "0.0.0.0/0"
             gateway_id: "{{ igw.gateway_id }}"
+        purge_routes: false
+        purge_subnets: false
         state: present
 
     - name: Cria um novo grupo de segurança com regras para SSH e HTTP
