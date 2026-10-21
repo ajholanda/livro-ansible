@@ -29,15 +29,35 @@
   # END REPO-ONLY
   tags: power
 
-- name: Configura logind-systemd para suspensão do sistema
-  ansible.builtin.lineinfile:
-    path: /etc/systemd/logind.conf
-    regexp: "{{ lnx_item.re }}"
-    line: "{{ lnx_item.ln }}"
-  loop:
-    - { re: '^IdleAction=', ln: 'IdleAction=suspend' }
-    - { re: '^IdleActionSec=', ln: 'IdleActionSec={{ power_suspend_timeout }}' }
-  loop_control:
-    loop_var: lnx_item
+- name: Habilita e inicia o timer de desligamento
+  ansible.builtin.systemd_service:
+    name: lab-shutdown.timer
+    daemon_reload: true
+    enabled: true
+    state: started
+  tags: power
+
+#
+# Suspensão automática
+#
+- name: Garante a existência do diretório /etc/systemd/logind.conf.d/  # REPO-ONLY
+  ansible.builtin.file:
+    path: /etc/systemd/logind.conf.d/
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  tags: power
+
+- name: Configura suspensão automática pelo systemd-logind
+  ansible.builtin.copy:
+    dest: /etc/systemd/logind.conf.d/10-power.conf
+    content: |
+      [Login]
+      IdleAction=suspend
+      IdleActionSec={{ power_suspend_timeout }}
+    owner: root
+    group: root
+    mode: "0644"
   notify: Restart systemd-logind
   tags: power
