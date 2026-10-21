@@ -10,7 +10,7 @@
     path: "{{ docker_postgres_volume | mandatory }}"
     state: directory
     owner: root
-    group: docker
+    group: root
     mode: '0775'
   tags: docker_postgres
 
