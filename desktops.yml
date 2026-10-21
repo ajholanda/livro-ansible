@@ -25,6 +25,10 @@
     - role: ajholanda.x2goclient
       tags: x2goclient
 
+# Obs.: As tarefas executadas no grupo lab provocarão
+# alterações de estado (changed) somente no lab01.example.net.
+# Para não criar muitas máquinas virtuais, todos os hosts
+# do grupo lab apontam para a mesma máquina virtual.
 - name: Laboratório de informática
   hosts: lab
   roles:
