@@ -65,6 +65,7 @@
         profile: default
         vpc_id: "{{ vpc.vpc.id }}"
         route_table_id: "{{ main_rt_info.route_tables[0].id }}"
+        lookup: id
         region: "{{ region }}"
         subnets:
           - "{{ subnet.subnet.id }}"
