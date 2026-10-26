@@ -98,6 +98,21 @@
               - 22
             cidr_ip: 0.0.0.0/0
             rule_desc: allow all on port 22
+      register: sg_info
+
+    - name: Busca a AMI mais recente do Ubuntu 24.04
+      amazon.aws.ec2_ami_info:
+        profile: default
+        region: "{{ region }}"
+        owners: "099720109477"  # Canonical
+        filters:
+          name: "ubuntu/images/hvm-ssd*/ubuntu-noble-24.04-amd64-server-*"
+          state: available
+      register: ubuntu_amis
+
+    - name: Seleciona a AMI mais recente
+      ansible.builtin.set_fact:
+        ami_id: "{{ (ubuntu_amis.images | sort(attribute='creation_date') | last).image_id }}"
 
     - name: Cria uma instância EC2
       amazon.aws.ec2_instance:
