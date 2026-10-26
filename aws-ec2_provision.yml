@@ -132,6 +132,7 @@
           Name: "{{ key_name }}-instance"
           Environment: development
           Project: web
+          AnsibleManaged: "true"
       register: ec2_info
 
     - name: Exibe as informações da instância EC2
