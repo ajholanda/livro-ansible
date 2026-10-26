@@ -127,7 +127,7 @@
         network_interfaces:
           - assign_public_ip: true
             groups:
-              - "{{ aws_security_group }}"
+              - "{{ sg_info.group_id }}"
         tags:
           Name: "{{ key_name }}-instance"
           Environment: development
