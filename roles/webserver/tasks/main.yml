@@ -56,6 +56,10 @@
   notify: Restart apache
   tags: webserver
 
+- name: Coleta os fatos dos serviços  # REPO-ONLY
+  ansible.builtin.service_facts:
+  tags: webserver
+
 - name: Libera a porta HTTP no firewalld (família RedHat)  # REPO-ONLY
   ansible.posix.firewalld:
     port: "{{ webserver_http_port }}/tcp"
