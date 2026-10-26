@@ -1190,5 +1190,6 @@ ansible-inventory -i aws-inventory.aws_ec2.yml --graph
 
 Aplica o role `webserver` à instância EC2:
 ```
-ansible-playbook cloud.yml -i aws-inventory.aws_ec2.yml --private-key ~/.aws/web-dev.pem
+ansible-playbook cloud.yml -i aws-inventory.aws_ec2.yml \
+  --private-key ~/.aws/web-dev.pem
 ```

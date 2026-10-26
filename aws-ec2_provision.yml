@@ -8,11 +8,11 @@
   vars:
     region: us-east-1
     instance_type: t3.micro
-    # Id para o Ubuntu 24.04 em us-east-1; confirme o ID antes da execução.
-    ami_id: ami-0b6c6ebed2801a5cb
     key_name: web-dev
     aws_security_group: web-sg
     vpc_name: web-vpc
+    # Faixa administrativa autorizada a acessar SSH; ajuste para a sua rede.
+    admin_cidr: "0.0.0.0/0"
     vpc_cidr_block: "10.0.0.0/16"
     subnet_cidr_block: "10.0.1.0/24"
     subnet_az: "{{ region }}a"
@@ -86,7 +86,7 @@
         tags:
           Name: "{{ aws_security_group }}"
           Environment: development
-          AnsibleManaged: true
+          AnsibleManaged: "true"
         rules:
           - proto: tcp
             ports:
@@ -98,6 +98,21 @@
               - 22
             cidr_ip: 0.0.0.0/0
             rule_desc: allow all on port 22
+      register: sg_info
+
+    - name: Busca a AMI mais recente do Ubuntu 24.04
+      amazon.aws.ec2_ami_info:
+        profile: default
+        region: "{{ region }}"
+        owners: "099720109477"  # Canonical
+        filters:
+          name: "ubuntu/images/hvm-ssd*/ubuntu-noble-24.04-amd64-server-*"
+          state: available
+      register: ubuntu_amis
+
+    - name: Seleciona a AMI mais recente
+      ansible.builtin.set_fact:
+        ami_id: "{{ (ubuntu_amis.images | sort(attribute='creation_date') | last).image_id }}"
 
     - name: Cria uma instância EC2
       amazon.aws.ec2_instance:
@@ -112,11 +127,12 @@
         network_interfaces:
           - assign_public_ip: true
             groups:
-              - "{{ aws_security_group }}"
+              - "{{ sg_info.group_id }}"
         tags:
           Name: "{{ key_name }}-instance"
           Environment: development
           Project: web
+          AnsibleManaged: "true"
       register: ec2_info
 
     - name: Exibe as informações da instância EC2
