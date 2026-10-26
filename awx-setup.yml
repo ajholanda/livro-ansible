@@ -253,12 +253,6 @@
       register: admin_password_b64
       changed_when: false
 
-    - name: Decodifica a senha
-      ansible.builtin.command: >
-        echo "{{ admin_password_b64.stdout }}" | base64 --decode
-      register: admin_password
-      changed_when: false
-
     - name: Inicia port-forward para o serviço AWX (acesse http://localhost:8080)
       ansible.builtin.shell: >
         nohup kubectl port-forward --address 0.0.0.0 -n {{ awx_namespace }}
