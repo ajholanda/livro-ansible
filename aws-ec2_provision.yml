@@ -86,7 +86,7 @@
         tags:
           Name: "{{ aws_security_group }}"
           Environment: development
-          AnsibleManaged: true
+          AnsibleManaged: "true"
         rules:
           - proto: tcp
             ports:
