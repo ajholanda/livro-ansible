@@ -172,7 +172,7 @@
           apiVersion: kustomize.config.k8s.io/v1beta1
           kind: Kustomization
           resources:
-            - https://github.com/ansible/awx-operator/config/default?ref={{ awx_operator_version }}
+            - "https://github.com/ansible/awx-operator/config/default?ref={{ awx_operator_version }}&timeout=300s"
           namespace: {{ awx_namespace }}
           images:
             - name: gcr.io/kubebuilder/kube-rbac-proxy
@@ -185,8 +185,7 @@
 
     - name: Aguarda o operator ficar disponível (pode levar alguns minutos)
       ansible.builtin.command: >
-        kubectl rollout status deployment/awx-operator-controller-manager
-        -n {{ awx_namespace }} --timeout=300s
+        kubectl rollout status deployment/awx-operator-controller-manager -n {{ awx_namespace }} --timeout=900s
       register: operator_status
       retries: 3
       delay: 10
@@ -228,11 +227,14 @@
       until: awx_deploy_check.rc == 0
       changed_when: false
 
-    - name: Aguarda a implantação web do AWX (pode levar até 15 minutos)
+    - name: Aguarda as implantações web e task do AWX (pode levar até 15 minutos)
       ansible.builtin.command: >
-        kubectl rollout status deployment/{{ awx_instance_name }}
-        -n {{ awx_namespace }} --timeout=900s
-      ignore_errors: true
+        kubectl rollout status deployment/{{ awx_instance_name }}-{{ item }}
+        -n {{ awx_namespace }} --timeout=1400s
+      loop:
+        - web
+        - task
+      changed_when: false
 
     # -------------------------------------------------------------------------
     # 9. Exibir informações de acesso
