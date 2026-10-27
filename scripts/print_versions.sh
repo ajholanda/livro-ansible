@@ -24,7 +24,7 @@ banner AWS
 pipver awscli boto3 botocore
 colver amazon.aws
 
-banner EEs
+banner EE
 pipver ansible-builder ansible-navigator
 
 banner DOCKER
