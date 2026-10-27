@@ -106,7 +106,7 @@ As versões dos principais programas, pacotes Python e coleções usados nos exe
 | `botocore`              | 1.43.116 |
 | `amazon.aws`            | 11.4.0   |
 
-- *Execution Environments*:
+- *Execution Environment*:
 
 | nome                          | versão   |
 | ----------------------------- | -------- |
