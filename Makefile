@@ -6,6 +6,7 @@ PIP := $(BINDIR)/pip
 GALAXY := $(BINDIR)/ansible-galaxy
 PLAYBOOK := $(BINDIR)/ansible-playbook
 MOLECULE := $(BINDIR)/molecule
+REQTS_YML := requirements.yml
 
 TRASH := *~
 
@@ -23,10 +24,10 @@ packages: $(VENV_DIR)
 	$(PIP) install -r requirements.txt
 
 collections: packages
-	$(GALAXY) collection install -r requirements.yml
+	$(GALAXY) collection install -r $(REQTS_YML)
 
 roles: packages
-	$(GALAXY) role install -r requirements.yml
+	$(GALAXY) role install -r $(REQTS_YML)
 
 docker: packages
 	$(PLAYBOOK) containers.yml --tags docker
@@ -37,10 +38,6 @@ TRASH += /etc/ansible/inventory.py
 
 /etc/ansible:
 	sudo mkdir -p $@ && sudo chown $(USER) $@
-
-aws: $(VENV_DIR)
-	$(GALAXY) collection install amazon.aws
-	$(PIP) install awscli boto3 botocore
 
 awx: packages
 	$(PLAYBOOK) awx-setup.yml
