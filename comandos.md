@@ -9,6 +9,19 @@ Os comandos foram extraídos do texto principal de cada capítulo (e, quando
 > terminal, para que possam ser copiados e colados diretamente. As quebras de
 > linha longas seguem o estilo do livro.
 
+Como as máquinas virtuais do Vagrant podem ser reutilizadas, diferentes hosts podem acabar associados ao mesmo endereço IP. Nessa situação, a saída do Ansible referente ao estado das tarefas pode variar.
+
+Por exemplo, como `lab0[1-3].example.net` estão associados ao mesmo endereço IP, uma tarefa que alteraria o estado dos três hosts produz a seguinte saída:
+
+```
+changed: [lab01.example.net]
+ok: [lab02.example.net]
+ok: [lab03.example.net]
+```
+
+Somente o primeiro host aparece com o estado `changed`, pois a alteração já foi aplicada à máquina correspondente àquele endereço IP. Quando a mesma tarefa é executada para os demais hosts, o estado desejado já foi alcançado e, por isso, o Ansible retorna `ok`.
+
+
 ## Sumário
 
 1. [Automação e Ansible](#capítulo-1--automação-e-ansible)
@@ -44,7 +57,7 @@ Os comandos foram extraídos do texto principal de cada capítulo (e, quando
 
 > Após a execução dos comandos anteriores, o leitor  pode ir direto aos comandos que usam `ansible-inventory` neste capítulo.
 
-> **Filosofia de instalação.** O livro instala tanto os *aplicativos* quanto as
+> **Filosofia de instalação.** O `make` instala tanto os *aplicativos* quanto as
 > *bibliotecas* Python no mesmo **ambiente virtual `ansible-venv`**, usando o
 > `pip`:
 >
