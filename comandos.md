@@ -1193,3 +1193,6 @@ Aplica o role `webserver` à instância EC2:
 ansible-playbook cloud.yml -i aws-inventory.aws_ec2.yml \
   --private-key ~/.aws/web-dev.pem
 ```
+
+Importante: Não esqueça de remover a instância criada se não
+for utilizá-la.
