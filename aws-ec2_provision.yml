@@ -19,6 +19,11 @@
     subnet_az: "{{ region }}a"
     subnet_name: web-public
 
+  module_defaults:
+    group/amazon.aws.aws:
+      profile: "{{ aws_profile }}"
+      region: "{{ region }}"
+
   tasks:
     - name: Cria uma VPC (Virtual Private Cloud)
       amazon.aws.ec2_vpc_net:
