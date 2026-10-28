@@ -62,17 +62,17 @@ A tabela a seguir apresenta um conjunto de fatos coletados pelo Ansible dos host
 A última coluna lista o nome da máquina virtual associada ao *hostname*.
 
 
-| hostname      | `system` | `os_family` | `distribution` |
-| ------------- | -------- | ----------- | -------------- |
-| `db`          | Linux    | Debian      | Debian         |
-| `docker_hosts`| Linux    | Debian      | Ubuntu         |
-| `lab[01:03]`  | Linux    | Debian      | Ubuntu         |
-| `nas`         | Linux    | Debian      | Debian         |
-| `off1`        | Win32NT  | Windows     | --             |
-| `simula`      | Linux    | Debian      | Ubuntu         |
-| `ti1`         | Linux    | Debian      | Ubuntu         |
-| `w3`          | Linux    | RedHat      | Almalinux      |
-| `web`         | Linux    | Debian      | Debian         |
+| *hostname*      | `system` | `os_family` | `distribution` | nome da VM  |
+| --------------- | -------- | ----------- | -------------- | ---------   |
+| `db`            | Linux    | Debian      | Debian         | `debian`    |
+| `docker`        | Linux    | Debian      | Ubuntu         | `ansible`   |
+| `lab[01:03]`    | Linux    | Debian      | Ubuntu         | `ansible`   |
+| `nas`           | Linux    | Debian      | Debian         | `debian`    |
+| `off1`          | Win32NT  | Windows     | --             | `windows`   |
+| `simula`        | Linux    | Debian      | Ubuntu         | `ansible`   |
+| `ti1`           | Linux    | Debian      | Ubuntu         | `ansible`   |
+| `w3`            | Linux    | RedHat      | Almalinux      | `almalinux` |
+| `web`           | Linux    | Debian      | Debian         | `debian`    |
 
 ## *Roles* provenientes do Ansible Galaxy
 
