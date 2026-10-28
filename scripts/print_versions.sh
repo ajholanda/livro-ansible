@@ -24,12 +24,12 @@ banner AWS
 pipver awscli boto3 botocore
 colver amazon.aws
 
-banner EE
-pipver ansible-builder ansible-navigator
-
 banner DOCKER
 docker --version | sed 's/,//' | awk '{print $1" "$3}'
 colver community.docker
+
+banner EE
+pipver ansible-builder ansible-navigator
 
 banner MOLECULE
 pipver molecule molecule-plugins pytest-testinfra
