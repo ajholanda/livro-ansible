@@ -28,17 +28,13 @@
     - name: Cria uma VPC (Virtual Private Cloud)
       amazon.aws.ec2_vpc_net:
         name: "{{ vpc_name }}"
-        profile: default
         cidr_block: "{{ vpc_cidr_block }}"
-        region: "{{ region }}"
         state: present
       register: vpc
 
     - name: Cria um gateway de internet e anexa à VPC
       amazon.aws.ec2_vpc_igw:
-        profile: default
         vpc_id: "{{ vpc.vpc.id }}"
-        region: "{{ region }}"
         state: present
         tags:
           Name: "web-igw"
@@ -47,10 +43,8 @@
     - name: Cria uma sub-rede pública na VPC
       amazon.aws.ec2_vpc_subnet:
         vpc_id: "{{ vpc.vpc.id }}"
-        profile: default
         cidr: "{{ subnet_cidr_block }}"
         az: "{{ subnet_az }}"
-        region: "{{ region }}"
         map_public: true
         state: present
         tags:
@@ -68,11 +62,9 @@
 
     - name: Configura a tabela de roteamento da sub-rede pública
       amazon.aws.ec2_vpc_route_table:
-        profile: default
         vpc_id: "{{ vpc.vpc.id }}"
         route_table_id: "{{ main_rt_info.route_tables[0].id }}"
         lookup: id
-        region: "{{ region }}"
         subnets:
           - "{{ subnet.subnet.id }}"
         routes:
@@ -85,10 +77,8 @@
     - name: Cria um novo grupo de segurança com regras para SSH e HTTP
       amazon.aws.ec2_security_group:
         name: "{{ aws_security_group }}"
-        profile: default
         description: 'Security Group with SSH and HTTP rules'
         vpc_id: "{{ vpc.vpc.id }}"
-        region: "{{ region }}"
         tags:
           Name: "{{ aws_security_group }}"
           Environment: development
@@ -108,8 +98,6 @@
 
     - name: Busca a AMI mais recente do Ubuntu 24.04
       amazon.aws.ec2_ami_info:
-        profile: default
-        region: "{{ region }}"
         owners: "099720109477"  # Canonical
         filters:
           name: "ubuntu/images/hvm-ssd*/ubuntu-noble-24.04-amd64-server-*"
@@ -122,11 +110,9 @@
 
     - name: Cria uma instância EC2
       amazon.aws.ec2_instance:
-        profile: default
         name: "{{ key_name }}-instance"
         instance_type: "{{ instance_type }}"
         image_id: "{{ ami_id }}"
-        region: "{{ region }}"
         key_name: "{{ key_name }}"
         vpc_subnet_id: "{{ subnet.subnet.id }}"
         state: present
