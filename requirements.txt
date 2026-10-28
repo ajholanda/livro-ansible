@@ -1,24 +1,24 @@
 # Ansible
 ansible-core==2.16.19
-ansible-lint==26.10.1
-yamllint==1.38.0
-python-debian==1.1.1
-passlib==1.7.4
+ansible-lint
+yamllint
+python-debian
+passlib
 
 # AWS
-awscli==1.46.1
-boto3==1.43.116
-botocore==1.43.116
+awscli
+boto3
+botocore
 
 # Execution Environment
-ansible-builder==3.1.1
-ansible-navigator==26.10.0
+ansible-builder
+ansible-navigator
 
 # Molecule
-molecule==26.6.0
-molecule-plugins==26.10.12
+molecule
+molecule-plugins
 molecule-plugins[docker]
-pytest-testinfra==10.2.2
+pytest-testinfra
 
 # Module/filter development
-pylint==4.1.2
+pylint
