@@ -1,23 +1,26 @@
 collections:
+  # Ansible
   - name: ansible.posix
-    version: "1.6.2"
-  - name: ansible.windows
-    version: "3.8.0"
-  - name: chocolatey.chocolatey
-    version: "1.5.3"
+    version: "2.2.2"
   - name: community.general
-    version: "9.5.2"
-  - name: community.windows
-    version: "3.3.0"
-  - name: community.docker
-    version: "5.4.0"
+    version: "13.5.0"
   - name: community.mysql
     version: "5.0.2"
+  # AWS
   - name: amazon.aws
-    version: "11.4.0"
+    version: "12.0.0"
+  # Docker
+  - name: community.docker
+    version: "5.4.0"
+  # Windows
+  - name: ansible.windows
+    version: "3.9.2"
+  - name: chocolatey.chocolatey
+    version: "1.6.0"
+  - name: community.windows
+    version: "3.3.0"
 
 roles:
   - name: ajholanda.x2goclient
-    # version: "1.3.0"
   - name: ajholanda.googlechrome
   - name: ajholanda.vscode
