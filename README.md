@@ -58,7 +58,8 @@ vagrant up
 
 ### Fatos relacionados aos hosts
 
-A tabela a seguir apresenta um conjunto de fatos coletados pelo Ansible dos hosts do inventário [hosts.ini](hosts.ini). Os atributos `system`, `os_family` e `distribution`, armazenados na estrutura `ansible_facts`, descrevem o sistema operacional de cada host.
+A tabela a seguir apresenta um conjunto de fatos coletados pelo Ansible dos hosts do inventário [hosts.ini](hosts.ini). Os atributos `system`, `os_family` e `distribution`, armazenados na estrutura `ansible_facts`, descrevem o sistema operacional de cada host. As máquinas virtuais do Vagrant são reutilizadas para economizar memória.
+A última coluna lista o nome da máquina virtual associada ao *hostname*.
 
 
 | hostname      | `system` | `os_family` | `distribution` |
