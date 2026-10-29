@@ -136,6 +136,12 @@ As versões dos principais programas, pacotes Python e coleções usados nos exe
 | `chocolatey.chocolatey` | 1.5.3    |
 | `community.windows`     | 3.3.0    |
 
+Para exibir as versões dos programas, pacotes e coleções, execute o comando
+a seguir na máquina virtual `ansible`:
+
+```
+(ansible-venv) vagrant@ansible:~/livro$ make versions
+```
 
 ## Informações complementares
 
