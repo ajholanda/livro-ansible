@@ -109,7 +109,7 @@ Instala o Ansible pelo gerenciador de pacotes da família Debian (se preferir in
 sudo apt install ansible
 ```
 
-Instala o Ansible pelo gerenciador de pacotes da família Red Hat (se preferir instalar para todo o sistema):
+Instala o Ansible pelo gerenciador de pacotes da família Red Hat Enterprise Linux (se preferir instalar para todo o sistema):
 
 ```bash
 sudo dnf install ansible
