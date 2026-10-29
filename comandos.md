@@ -66,7 +66,7 @@ Somente o primeiro host aparece com o estado `changed`, pois a alteração já f
 >   (pacotes importados pelo Ansible em tempo de execução, como `boto3`,
 >   `botocore` ou `passlib`) convivem no mesmo ambiente. Assim, as dependências
 >   ficam visíveis ao interpretador Python que o Ansible utiliza — elas precisam
->   residir no mesmo ambiente em que o Ansible roda — e o ambiente virtual isola
+>   residir no mesmo ambiente em que o Ansible é executado — e o ambiente virtual isola
 >   tudo dos pacotes do sistema, contornando a PEP 668. É essa a abordagem
 >   automatizada pelo alvo `make` (ver "Para os impacientes").
 > - O **`pipx`** é um **método alternativo**, voltado apenas a *aplicativos*: ele
