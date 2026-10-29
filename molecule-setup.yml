@@ -26,7 +26,8 @@
         name:
           - "ansible-core=={{ ansible_core_version }}"
           - "molecule=={{ molecule_version }}"
-          - "molecule-plugins[docker]=={{ molecule_plugins_version }}"
+          - "molecule-plugins=={{ molecule_plugins_version }}"
+          - "molecule-plugins[docker]"
           - "pytest-testinfra=={{ testinfra_version }}"
       notify: Logout warning
 
