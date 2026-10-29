@@ -18,7 +18,7 @@
       ansible.builtin.debug:
         var: ps_version.output
 
-    - name: Obtém informações obtidas do sistema operacional
+    - name: Obtém informações do sistema operacional
       ansible.windows.win_powershell:
         script: |
           $Ansible.Changed = $false
