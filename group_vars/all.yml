@@ -15,7 +15,7 @@
 
 # BEGIN REPO-ONLY
 ansible_core_version: '2.16.19'
-molecule_version: '26.6.0'
+molecule_version: '26.10.0'
 molecule_plugins_version: '26.10.2'
 testinfra_version: '10.2.2'
 # END REPO-ONLY
