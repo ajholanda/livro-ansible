@@ -13,12 +13,10 @@ pipver() {
 
 banner ANSIBLE
 python --version
-ansible --version | head -1 | sed 's/\[\|\]//g'
-ansible-lint --version | awk '{print $1" "$2}'
-yamllint --version
+pipver ansible-core ansible-lint
 colver ansible.posix
 colver community.general
-colver community.mysql
+colver ansible.mariadb
 
 banner AWS
 pipver awscli boto3 botocore
