@@ -93,19 +93,25 @@ As versões dos principais programas, pacotes Python e coleções usados nos exe
 | Python                  | 3.10.12  |
 | `ansible-core`          | 2.16.19  |
 | `ansible-lint`          | 26.10.1  |
-| `yamllint`              | 1.38.0   |
-| `ansible.posix`         | 1.6.2    |
-| `community.general`     | 9.5.2    |
-| `community.mysql`       | 5.0.2    |
+| `ansible.posix`         | 2.2.2    |
+| `community.general`     | 11.4.9   |
+| `ansible.mariadb`       | 6.0.2    |
 
 - AWS:
 
 | nome                    | versão   |
 | ----------------------- | -------- |
-| `awscli`                | 1.46.1   |
-| `boto3`                 | 1.43.116 |
-| `botocore`              | 1.43.116 |
-| `amazon.aws`            | 11.4.0   |
+| `awscli`                | 1.46.2   |
+| `boto3`                 | 1.43.120 |
+| `botocore`              | 1.43.120 |
+| `amazon.aws`            | 10.3.2   |
+
+- Docker:
+
+| nome                          | versão   |
+| ----------------------------- | -------- |
+| Docker                        | 29.9.2   |
+| `community.docker`            | 4.8.9    |
 
 - *Execution Environment*:
 
@@ -114,26 +120,19 @@ As versões dos principais programas, pacotes Python e coleções usados nos exe
 | `ansible-builder`             | 3.1.1    |
 | `ansible-navigator`           | 26.10.0  |
 
-- Docker:
-
-| nome                          | versão   |
-| ----------------------------- | -------- |
-| Docker                        | 29.9.2   |
-| `community.docker`            | 5.4.0    |
-
 - Molecule:
 
 | nome                          | versão   |
 | ----------------------------- | -------- |
-| `molecule`                    | 26.6.0   |
-| `molecule-plugins`            | 26.10.12  |
+| `molecule`                    | 26.10.0  |
+| `molecule-plugins`            | 26.10.12 |
 | `pytest-testinfra`            | 10.2.2   |
 
 - Windows:
 
 | nome                    | versão   |
 | ----------------------- | -------- |
-| `ansible.windows`       | 3.8.0    |
+| `ansible.windows`       | 3.9.2    |
 | `chocolatey.chocolatey` | 1.5.3    |
 | `community.windows`     | 3.3.0    |
 
