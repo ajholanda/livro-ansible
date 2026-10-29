@@ -3,7 +3,6 @@ ansible-core==2.16.19
 ansible-lint==26.10.1
 yamllint
 python-debian
-passlib
 
 # AWS
 awscli==1.46.2
