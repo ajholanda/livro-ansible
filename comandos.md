@@ -360,6 +360,10 @@ ansible-playbook tags.yml --list-tasks --tags debug,untagged
 Executa playbook que aciona o manipulador `Restart apache` se houver modificação do arquivo de configuração do Apache copiado:
 
 ```
+# Remove o apache e o arquivo de configuração primeiro.
+ansible web.example.net -m package -a "name=apache2 state=absent"
+ansible web.example.net -m file -a "path=/etc/apache2/sites-enabled/site.conf state=absent"
+ansible web.example.net -m file -a "path=/etc/apache2/sites-available/site.conf state=absent"
 ansible-playbook webservers.yml
 ```
 
