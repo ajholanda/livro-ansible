@@ -86,7 +86,7 @@
             msg: "Nunca é executada"
 
 - name: Atualiza o SO aceitando falhas
-  hosts: webservers
+  hosts: lab
   max_fail_percentage: 40
   tasks:
     - name: Atualiza o SO (apt full-upgrade)
@@ -96,7 +96,7 @@
 
     - name: Aviso
       ansible.builtin.debug:
-        msg: "Pelo menos 60% dos hosts foram atualizados"
+        msg: "Pelo menos 60% dos hosts do laboratório foram atualizados"
       tags: err7
 
 - name: Executa manipuladores
