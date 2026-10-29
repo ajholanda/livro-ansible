@@ -1096,16 +1096,10 @@ ansible-playbook awx-setup.yml
 
 ### 15.1 Configurações comuns
 
-Instala o pacote Python `passlib`, exigido pelo filtro `password_hash`:
+Gera o *hash* SHA-512 de uma senha:
 
 ```bash
-pip install passlib
-```
-
-Gera o *hash* SHA-512 de uma senha com o filtro `password_hash` (comando *ad hoc*):
-
-```bash
-ansible localhost -m debug -a "msg={{ 'senha' | password_hash('sha512') }}"
+mkpasswd -m sha-512
 ```
 
 ### 15.2 Gerenciamento de servidores
