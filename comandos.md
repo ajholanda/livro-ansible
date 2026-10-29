@@ -82,7 +82,7 @@ Somente o primeiro host aparece com o estado `changed`, pois a alteração já f
 Instala o Ansible como pacote Python via `pip` (dar preferência à instalação dentro do ambiente virtual (`virtualenv`) Python — ver a seguir; o `pipx` é uma alternativa para aplicativos avulsos):
 
 ```bash
-pip install ansible
+pip install 'ansible==9.13.0' 'ansible-core==2.16.19'
 ```
 
 Para isolar essa instalação dos pacotes do sistema (e contornar a PEP 668), crie um ambiente virtual Python antes de executar o `pip` (**método preferido para instalação de aplicativos e bibliotecas Python**):
