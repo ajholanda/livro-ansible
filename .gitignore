@@ -18,6 +18,7 @@ context
 desktop.ini
 include_tasks-*.yml
 roles/ajholanda.*
+site-artifact*
 test.yml
 tmp
 ##
