@@ -727,8 +727,6 @@ ansible-vault create group_vars/dbservers/vault.yml
 Aplica o role que usa as variáveis criptografadas:
 
 ```bash
-# O driver do MySQL para o Python deve estar instalado.
-pip install PyMySQL
 ansible-playbook servers.yml --limit dbservers --tags mariadb
 ```
 
