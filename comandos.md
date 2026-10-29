@@ -212,7 +212,7 @@ Remove o pacote `apache2` de todos os hosts do grupo `webservers`:
 ansible webservers -i hosts.ini -m package -a "name=apache2 state=absent" --become
 ```
 
-Exibe a documentação de um módulo:
+Exibe a documentação do módulo `package`:
 
 ```bash
 ansible-doc package
