@@ -138,7 +138,7 @@ pipx inject ansible \
     yamllint
 ```
 
-Instala o `pipx` previamente via `apt`:
+Instala o `pipx` via `apt`:
 
 ```bash
 sudo apt install pipx
