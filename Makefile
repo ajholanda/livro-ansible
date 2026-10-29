@@ -39,6 +39,10 @@ TRASH += /etc/ansible/inventory.py
 /etc/ansible:
 	sudo mkdir -p $@ && sudo chown $(USER) $@
 
+/etc/ansible/hosts.ini: hosts.ini /etc/ansible
+	sudo install $< $@
+TRASH += /etc/ansible/hosts.ini
+
 awx: packages
 	$(PLAYBOOK) awx-setup.yml
 
