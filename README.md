@@ -106,6 +106,8 @@ As versões dos principais programas, pacotes Python e coleções usados nos exe
 | `botocore`              | 1.43.120 |
 | `amazon.aws`            | 10.3.2   |
 
+- AWX: 24.6.1
+
 - Docker:
 
 | nome                          | versão   |
@@ -168,6 +170,10 @@ Os *links* dos guias de instalação dos programas usados no livro são listados
 ### Autenticação
 
 - Guia de manipulação de chaves públicas para autenticação SSH sem senha. [[English](https://help.ubuntu.com/community/SSH/OpenSSH/Keys)]
+
+### Inventário dinâmico
+
+- [Gists com os comandos para gerenciamento de *tokens* do usuário Ansible no Proxmox e inventário dinâmico de consulta](https://gist.github.com/ajholanda/3d7294b6f339165f00a0e66aca14ef01).
 
 ### Boas práticas
 
