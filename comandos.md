@@ -996,7 +996,8 @@ molecule test -s office
 Ajusta o paralelismo (número de processos simultâneos) com `--forks` (ou `-f`):
 
 ```bash
-ansible-playbook --forks 20 webserver-role.yml
+# Comando inserido apenas para ilustração do uso de --forks.
+# ansible-playbook --forks 20 desktops.yml
 ```
 
 ---
