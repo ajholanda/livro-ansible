@@ -1,0 +1,5 @@
+---
+- name: Garante que a rede da aplicação exista
+  community.docker.docker_network:
+    name: app_network
+    state: present
