@@ -31,10 +31,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install \
             "ansible-core==2.16.19" \
-            "molecule==26.10.0" \
+            "molecule==26.6.0" \
+            "molecule-plugins"
             molecule-plugins[docker] \
-            "ansible-lint==26.10.12" \
-            "pytest-testinfra==10.2.2"
+            "ansible-lint" \
+            "pytest-testinfra"
         # Para depuração no GitHub Actions, retire os comentários.
         env:
           ANSIBLE_FORCE_COLOR: '1'
