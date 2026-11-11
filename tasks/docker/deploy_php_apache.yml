@@ -27,3 +27,22 @@
     volumes:
       - "{{ docker_php_apache_volume | mandatory }}:/var/www/html"
   tags: docker_php_apache
+
+- name: Cria uma página inicial para teste  # REPO-ONLY
+  ansible.builtin.copy:
+    content: |
+      <?php
+      phpinfo();
+    dest: "{{ docker_php_apache_volume }}/index.php"
+    mode: '0644'
+  tags: docker_php_apache
+
+- name: Aguarda o servidor web responder
+  ansible.builtin.uri:
+    url: "http://127.0.0.1:{{ docker_php_apache_port }}/"
+    status_code: 200
+  register: php_http
+  until: php_http.status == 200
+  retries: 10
+  delay: 3
+  tags: docker_php_apache
