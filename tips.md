@@ -8,8 +8,8 @@
   vars:
     params:
       files:
-        - "{{ ansible_distribution }}.yml"
-        - "{{ ansible_os_family }}.yml"
+        - "{{ ansible_facts['distribution'] }}.yml"
+        - "{{ ansible_facts['os_family'] }}.yml"
         - "default.yml"
       paths:
         - vars
@@ -20,7 +20,7 @@
   ansible.builtin.include_vars:
   with_first_found:
     - files:
-      - "{{ ansible_os_family }}.yml"
+      - "{{ ansible_facts['os_family'] }}.yml"
       skip: true
 ```
 
@@ -30,5 +30,5 @@ executed properly in GitHub:
 ```
 - name: Load OS specific vars
   ansible.builtin.include_vars:
-    file: "{{ role_path }}/vars/{{ ansible_os_family | lower }}.yml"
+    file: "{{ role_path }}/vars/{{ ansible_facts['os_family'] | lower }}.yml"
 ```
