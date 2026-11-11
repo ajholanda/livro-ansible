@@ -1,5 +1,0 @@
----
-- name: Restart dnf-automatic
-  ansible.builtin.service:
-    name: dnf-automatic
-    state: restarted
