@@ -36,11 +36,6 @@ jobs:
             molecule-plugins[docker] \
             "ansible-lint" \
             "pytest-testinfra"
-        # Para depuração no GitHub Actions, retire os comentários.
-        env:
-          ANSIBLE_FORCE_COLOR: '1'
-          ANSIBLE_VERBOSITY: '3'
-          MOLECULE_DEBUG: 'true'
 
       # To debug, change the run command to `molecule --debug test`.
       - name: Executa os testes com o Molecule
