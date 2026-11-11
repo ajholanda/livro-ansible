@@ -28,7 +28,7 @@
       - "{{ docker_php_apache_volume | mandatory }}:/var/www/html"
   tags: docker_php_apache
 
-- name: Cria uma página inicial para teste  # REPO-ONLY
+- name: Cria uma página inicial para teste
   ansible.builtin.copy:
     content: |
       <?php
