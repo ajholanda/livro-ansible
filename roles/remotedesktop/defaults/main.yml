@@ -1,0 +1,4 @@
+---
+remotedesktop_service:
+  Debian: 'x2goserver'
+  RedHat: 'x2gocleansessions'
