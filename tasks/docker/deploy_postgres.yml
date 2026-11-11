@@ -32,3 +32,17 @@
       POSTGRES_DB: "{{ docker_postgres_db | default('postgres') }}"
       POSTGRES_INITDB_ARGS: "{{ docker_postgres_initdb_args | default('') }}"
   tags: docker_postgres
+
+- name: Aguarda o PostgreSQL ficar disponível
+  community.docker.docker_container_exec:
+    container: postgres
+    command: >
+      pg_isready
+      -U {{ docker_postgres_user | default('postgres') }}
+      -d {{ docker_postgres_db | default('postgres') }}
+  register: postgres_ready
+  until: postgres_ready.rc == 0
+  retries: 10
+  delay: 3
+  changed_when: false
+  tags: docker_postgres
