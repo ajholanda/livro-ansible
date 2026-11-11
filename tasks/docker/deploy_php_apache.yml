@@ -20,6 +20,8 @@
     image: "php:{{ docker_php_version }}-apache"
     state: started
     restart_policy: unless-stopped
+    networks:
+      - name: app_network
     ports:
       - "{{ docker_php_apache_port | mandatory }}:80"
     volumes:
