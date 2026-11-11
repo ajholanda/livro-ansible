@@ -19,6 +19,15 @@
     - docker
 
   tasks:
+    - name: Configura a rede Docker da aplicação
+      ansible.builtin.include_tasks:
+        file: tasks/docker/network.yml
+        apply:
+          tags:
+            - always
+      tags:
+        - always
+
     - name: Implanta o Docker com Apache e PHP
       ansible.builtin.include_tasks: tasks/docker/deploy_php_apache.yml
       vars:
