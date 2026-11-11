@@ -2,5 +2,5 @@ FROM {{ item.image }}
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-       curl iproute2 python3 sudo \
+       ca-certificates iproute2 python3 sudo \
     && rm -rf /var/lib/apt/lists/*
