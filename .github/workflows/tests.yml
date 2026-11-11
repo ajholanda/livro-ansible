@@ -43,4 +43,4 @@ jobs:
 
       # To debug, change the run command to `molecule --debug test`.
       - name: Executa os testes com o Molecule
-        run: molecule test
+        run: molecule --debug test
