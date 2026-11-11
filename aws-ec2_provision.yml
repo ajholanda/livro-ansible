@@ -58,6 +58,15 @@
           "association.main": "true"
       register: main_rt_info
 
+    - name: Verifica se a tabela de roteamento principal foi encontrada
+      ansible.builtin.assert:
+        that:
+          - main_rt_info.route_tables | length > 0
+        fail_msg: >-
+          Nenhuma tabela de roteamento principal encontrada para a VPC
+          {{ vpc.vpc.id }}. Verifique se a VPC foi criada corretamente.
+        success_msg: Tabela de roteamento principal localizada.
+
     - name: Configura a tabela de roteamento da sub-rede pública
       amazon.aws.ec2_vpc_route_table:
         vpc_id: "{{ vpc.vpc.id }}"
