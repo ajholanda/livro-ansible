@@ -14,9 +14,9 @@
     run_level: highest
   tags: power
 
-- name: Ativar plano equilibrado
-  ansible.windows.win_command: >
-    powercfg /setactive SCHEME_BALANCED
+- name: Define o plano de energia como equilibrado
+  community.windows.win_power_plan:
+    name: Balanced
   tags: power
 
 - name: Configura o tempo limite de suspensão no Windows
