@@ -74,6 +74,8 @@ A última coluna lista o nome da máquina virtual associada ao *hostname*.
 | `w3`            | Linux    | RedHat      | Almalinux      | `almalinux` |
 | `web`           | Linux    | Debian      | Debian         | `debian`    |
 
+> **Apenas no repositório:** o grupo `lab` inclui o host `winlab` (Windows), para permitir testes com hosts Windows em ambiente de laboratório; e o grupo `ti` inclui o host `ti2` (AlmaLinux), para permitir testes com a distribuição AlmaLinux. Esses hosts são delimitados pelos comentários `BEGIN REPO-ONLY` e `END REPO-ONLY` no arquivo [hosts.ini](hosts.ini) e não constam nos exemplos do livro.
+
 ## ⭐ *Roles* provenientes do Ansible Galaxy
 
 Os roles provenientes do Ansible Galaxy citados no livro são listados a seguir:
