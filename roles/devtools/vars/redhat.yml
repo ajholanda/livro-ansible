@@ -12,7 +12,7 @@ devtools_packages_map:
   go_lang:
     - golang
   java_sdk:
-    - java
+    - java-17-openjdk-devel
   python_tools:
     - python3-pip
     - virtualenv
