@@ -1,11 +1,11 @@
-# Ansible - exemplos para automação de TI
+# 📘Automação de Sistemas com Ansible
 
 Este repositório contém recursos de aprendizagem relacionados ao [Ansible](https://www.ansible.com/).
 O [Vagrant](https://www.vagrantup.com/) é usado para criar ambientes do controlador e dos hosts gerenciados.
 
 Os trechos delimitados pelos comentários `BEGIN REPO-ONLY` e `END REPO-ONLY` fazem parte da versão completa dos exemplos disponível no repositório, mas são omitidos no livro por não serem essenciais à apresentação do conceito.
 
-## Ambiente de execução
+## 🚀 Ambiente de execução
 
 Para criar o ambiente de execução devemos:
 
@@ -56,7 +56,7 @@ vagrant up
 
 - Para executar o caso de uso relacionado ao gerenciamento de contêineres na nuvem, é necessário ter uma conta no provedor [AWS](https://aws.amazon.com/).
 
-### Fatos relacionados aos hosts
+### ⚙️ Fatos relacionados aos hosts
 
 A tabela a seguir apresenta um conjunto de fatos coletados pelo Ansible dos hosts do inventário [hosts.ini](hosts.ini). Os atributos `system`, `os_family` e `distribution`, armazenados na estrutura `ansible_facts`, descrevem o sistema operacional de cada host. As máquinas virtuais do Vagrant são reutilizadas para economizar memória.
 A última coluna lista o nome da máquina virtual associada ao *hostname*.
@@ -74,7 +74,7 @@ A última coluna lista o nome da máquina virtual associada ao *hostname*.
 | `w3`            | Linux    | RedHat      | Almalinux      | `almalinux` |
 | `web`           | Linux    | Debian      | Debian         | `debian`    |
 
-## *Roles* provenientes do Ansible Galaxy
+## ⭐ *Roles* provenientes do Ansible Galaxy
 
 Os roles provenientes do Ansible Galaxy citados no livro são listados a seguir:
 
@@ -82,7 +82,7 @@ Os roles provenientes do Ansible Galaxy citados no livro são listados a seguir:
 - [ajholanda.vscode](https://galaxy.ansible.com/ui/standalone/roles/ajholanda/vscode/) [[Github](https://github.com/ajholanda/ansible_role_vscode)]
 - [ajholanda.x2goclient](https://galaxy.ansible.com/ui/standalone/roles/ajholanda/x2goclient/) [[Github](https://github.com/ajholanda/ansible_role_x2goclient)]
 
-## Versões dos programas, pacotes Python e coleções
+## ☑️ Versões dos programas, pacotes Python e coleções
 
 As versões dos principais programas, pacotes Python e coleções usados nos exemplos são apresentadas a seguir, separadas por ambiente:
 
@@ -145,7 +145,7 @@ a seguir na máquina virtual `ansible`:
 (ansible-venv) vagrant@ansible:~/livro$ make versions
 ```
 
-## Informações complementares
+## ℹ️ Informações complementares
 
 As informações complementares ampliam o conteúdo apresentado no livro,
 mas não foram incluídas diretamente em seu texto, por serem
@@ -153,7 +153,7 @@ facilmente encontradas por meio de sistemas de busca ou
 apresentarem grande variabilidade conforme o sistema operacional
 ou a distribuição Linux utilizada.
 
-### Instalação
+### ⚙️ Instalação
 
 Os *links* dos guias de instalação dos programas usados no livro são listados a seguir:
 
@@ -167,15 +167,15 @@ Os *links* dos guias de instalação dos programas usados no livro são listados
 
 - [yamllint](https://yamllint.readthedocs.io/en/stable/quickstart.html#installing-yamllint).
 
-### Autenticação
+### 💁 Autenticação
 
 - Guia de manipulação de chaves públicas para autenticação SSH sem senha. [[English](https://help.ubuntu.com/community/SSH/OpenSSH/Keys)]
 
-### Inventário dinâmico
+### ☑️ Inventário dinâmico
 
 - [Gists com os comandos para gerenciamento de *tokens* do usuário Ansible no Proxmox e inventário dinâmico de consulta](https://gist.github.com/ajholanda/3d7294b6f339165f00a0e66aca14ef01).
 
-### Boas práticas
+### 👍 Boas práticas
 
 - Recomendações de boas práticas para o Ansible.[[English](https://redhat-cop.github.io/automation-good-practices/)]
 
