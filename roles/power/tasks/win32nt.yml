@@ -28,3 +28,17 @@
   ansible.windows.win_command: >
     powercfg /hibernate off
   tags: power
+
+- name: Obtém informações sobre a tarefa de desligamento  # REPO-ONLY
+  community.windows.win_scheduled_task_stat:
+    name: LabShutdown
+  register: lab_shutdown_task
+  tags: power
+
+- name: Verifica se a tarefa de desligamento foi criada  # REPO-ONLY
+  ansible.builtin.assert:
+    that:
+      - lab_shutdown_task.task_exists
+    fail_msg: A tarefa agendada LabShutdown não foi criada.
+    success_msg: A tarefa agendada LabShutdown foi criada com sucesso.
+  tags: power
