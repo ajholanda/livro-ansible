@@ -6,6 +6,6 @@ cron:
     hour: "22"
     weekday: "*"
 
-power_shutdown_hour: 22
-power_shutdown_minute: 30
+power_off_hour: 22
+power_off_minute: 30
 power_suspend_timeout: 1800
