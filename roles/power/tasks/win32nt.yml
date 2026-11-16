@@ -9,7 +9,7 @@
     triggers:
       - type: daily
         start_boundary: >-
-          2026-01-28T{{ '%02d' | format(power_shutdown_hour | int) }}:{{ '%02d' | format(power_shutdown_minute | int) }}:00
+          2026-01-28T{{ '%02d' | format(power_off_hour | int) }}:{{ '%02d' | format(power_off_minute | int) }}:00
     username: SYSTEM
     run_level: highest
   tags: power
