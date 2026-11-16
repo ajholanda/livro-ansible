@@ -3,7 +3,7 @@
 Description=Desligamento diário
 
 [Timer]
-OnCalendar=*-*-* {{ '%02d:%02d' % (power_shutdown_hour | int, power_shutdown_minute | int) }}
+OnCalendar=*-*-* {{ '%02d:%02d' % (power_off_hour | int, power_off_minute | int) }}
 
 [Install]
 WantedBy=timers.target
