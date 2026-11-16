@@ -15,8 +15,8 @@
   tags: power
 
 - name: Define o plano de energia como equilibrado
-  community.windows.win_power_plan:
-    name: Balanced
+  ansible.windows.win_command: >
+    powercfg /setactive 381b4222-f694-41f0-9685-ff5bb260df2e
   tags: power
 
 - name: Configura o tempo limite de suspensão no Windows
