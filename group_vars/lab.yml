@@ -1,3 +1,4 @@
+---
 # minute e hour são strings porque podem receber o valor "*".
 cron:
   shutdown:
