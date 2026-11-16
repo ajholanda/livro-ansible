@@ -13,6 +13,6 @@
     name: NetbiosOptions
     data: 2
     type: dword
-  loop: "{{ netbios_interfaces.stdout_lines }}"
+  loop: "{{ netbios_interfaces.stdout_lines | default([]) }}"
   when: ansible_facts['os_family'] == 'Windows'
   tags: netbios
