@@ -8,4 +8,5 @@
   ansible.builtin.package:
     name: "{{ devtools_packages | map('extract', devtools_packages_map) | flatten | list }}"
     state: present
+  when: ansible_facts['system'] == 'Linux'  # REPO-ONLY
   tags: devtools
