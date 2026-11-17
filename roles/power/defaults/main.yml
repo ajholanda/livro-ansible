@@ -1,0 +1,6 @@
+---
+power_off_hour: 22
+power_off_minute: 30
+# BEGIN REPO-ONLY
+power_suspend_timeout: 900
+# END REPO-ONLY
