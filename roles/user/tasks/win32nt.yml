@@ -19,6 +19,14 @@
   changed_when: false
   tags: user
 
+- name: Valida a conta administrativa interna
+  ansible.builtin.assert:
+    that:
+      - admin_lookup.stdout_lines | length == 1
+      - admin_lookup.stdout | trim | length > 0
+    fail_msg: Não foi possível identificar de forma única a conta administrativa interna de RID 500.
+  tags: user
+
 - name: Habilita a conta administrativa interna
   ansible.windows.win_user:
     name: "{{ admin_lookup.stdout | trim }}"
