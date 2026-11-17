@@ -14,3 +14,12 @@
     or ansible_facts['os_family'] == 'RedHat'
   # END REPO-ONLY
   tags: devtools
+
+# BEGIN REPO-ONLY
+- name: Instala os pacotes de desenvolvimento (Windows)
+  chocolatey.chocolatey.win_chocolatey:
+    name: "{{ devtools_packages | map('extract', devtools_packages_map) | flatten | list }}"
+    state: present
+  when: ansible_facts['os_family'] == 'Windows'
+  tags: devtools
+# END REPO-ONLY
