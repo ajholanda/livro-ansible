@@ -1078,8 +1078,8 @@ ansible-playbook  desktops.yml --limit windows --tags user
 Agenda o desligamento automático diário:
 
 ```bash
-# IMPORTANTE: adicione o host off1.example.net no grupo lab do arquivo
-# de inventário hosts.ini, antes de executar o comando a seguir.
+# Observação: há um host `REPO-ONLY` chamado `winlab.example.net`
+# com sistema Windows nos grupos `lab` e `windows`.
  ansible-playbook desktops.yml --limit windows --tags power
  ```
 
