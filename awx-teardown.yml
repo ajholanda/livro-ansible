@@ -1,0 +1,149 @@
+---
+# =============================================================================
+# Playbook: Desinstalação do AWX (Minikube + AWX Operator)
+# Uso: ansible-playbook awx-teardown.yml
+#
+# Por padrão, remove a instância AWX, o operador, o namespace e o cluster
+# Minikube, mas preserva os binários kubectl e minikube.
+# Para remover também os binários, use:
+#   ansible-playbook awx-teardown.yml -e remove_binaries=true
+# =============================================================================
+
+- name: Desinstalação do AWX
+  hosts: localhost
+  connection: local
+  become: false
+  vars:
+    awx_namespace: awx
+    awx_instance_name: awx-instance
+    kustomization_dir: "/tmp/awx-install"
+    remove_binaries: false
+
+  tasks:
+
+    # -------------------------------------------------------------------------
+    # 1. Encerra o port-forward
+    # -------------------------------------------------------------------------
+
+    - name: Encerra o processo de port-forward do AWX
+      ansible.builtin.shell: |
+        pkill -f "kubectl port-forward.*{{ awx_instance_name }}-service" || true
+      changed_when: false
+
+    # -------------------------------------------------------------------------
+    # 2. Remove a instância AWX
+    # -------------------------------------------------------------------------
+
+    - name: Verifica se o namespace {{ awx_namespace }} existe
+      ansible.builtin.command: kubectl get namespace {{ awx_namespace }}
+      register: ns_check
+      ignore_errors: true
+      changed_when: false
+
+    - name: Remove a instância AWX
+      ansible.builtin.command: >
+        kubectl delete awx {{ awx_instance_name }} -n {{ awx_namespace }} --ignore-not-found=true
+      when: ns_check.rc == 0
+
+    - name: Aguarda a remoção dos pods da instância AWX
+      ansible.builtin.shell: |
+        kubectl get pods -n {{ awx_namespace }} \
+          --no-headers 2>/dev/null | grep -v "operator" | wc -l
+      register: awx_pods
+      retries: 30
+      delay: 10
+      until: awx_pods.stdout | trim == "0"
+      changed_when: false
+      when: ns_check.rc == 0
+
+    # -------------------------------------------------------------------------
+    # 3. Remove o AWX Operator
+    # -------------------------------------------------------------------------
+
+    - name: Remove o AWX Operator via Kustomize
+      ansible.builtin.command: kubectl delete -k {{ kustomization_dir }} --ignore-not-found=true
+      when:
+        - ns_check.rc == 0
+        - kustomization_dir is directory
+      failed_when: false
+
+    # -------------------------------------------------------------------------
+    # 4. Remove o namespace
+    # -------------------------------------------------------------------------
+
+    - name: Remove o namespace {{ awx_namespace }}
+      ansible.builtin.command: >
+        kubectl delete namespace {{ awx_namespace }} --ignore-not-found=true
+      when: ns_check.rc == 0
+
+    - name: Aguarda a remoção completa do namespace
+      ansible.builtin.command: kubectl get namespace {{ awx_namespace }}
+      register: ns_gone
+      retries: 30
+      delay: 10
+      until: ns_gone.rc != 0
+      ignore_errors: true
+      changed_when: false
+      when: ns_check.rc == 0
+
+    # -------------------------------------------------------------------------
+    # 5. Para e remove o cluster Minikube
+    # -------------------------------------------------------------------------
+
+    - name: Verifica se o Minikube está em execução
+      ansible.builtin.command: sg docker -c 'minikube status'
+      register: minikube_status
+      ignore_errors: true
+      changed_when: false
+
+    - name: Para o Minikube
+      ansible.builtin.command: sg docker -c 'minikube stop'
+      when: "'Running' in minikube_status.stdout"
+
+    - name: Remove o cluster Minikube
+      ansible.builtin.command: sg docker -c 'minikube delete --all'
+      when: minikube_status.rc == 0
+
+    # -------------------------------------------------------------------------
+    # 6. Limpa arquivos temporários
+    # -------------------------------------------------------------------------
+
+    - name: Remove o diretório de trabalho
+      ansible.builtin.file:
+        path: "{{ kustomization_dir }}"
+        state: absent
+
+    - name: Remove o log do port-forward
+      ansible.builtin.file:
+        path: /tmp/awx-port-forward.log
+        state: absent
+
+    # -------------------------------------------------------------------------
+    # 7. Remove binários (opcional)
+    # -------------------------------------------------------------------------
+
+    - name: Remove os binários kubectl e minikube
+      become: true
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - /usr/local/bin/kubectl
+        - /usr/local/bin/minikube
+      when: remove_binaries | bool
+
+    # -------------------------------------------------------------------------
+    # 8. Confirmação
+    # -------------------------------------------------------------------------
+
+    - name: Exibe confirmação
+      ansible.builtin.debug:
+        msg:
+          - "========================================"
+          - " AWX desinstalado com sucesso!"
+          - "========================================"
+          - " Removidos: instância AWX, operador, namespace {{ awx_namespace }},"
+          - "            cluster Minikube e arquivos temporários."
+          - "{% if remove_binaries | bool %} Removidos também: kubectl, minikube.{% endif %}"
+          - " Docker permanece instalado."
+          - "========================================"
