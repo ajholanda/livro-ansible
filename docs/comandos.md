@@ -815,8 +815,8 @@ ansible-galaxy role install --roles-path ./roles ajholanda.x2goclient
 Instala e remove o cliente X2Go por meio do playbook, restringindo aos hosts do grupo `ti`:
 
 ```bash
-ansible-playbook desktops.yml --tags x2goclient --limit ti
-ansible-playbook desktops.yml --tags x2goclient --limit ti --extra-vars "x2goclient_state=absent"
+ansible-playbook desktops.yml --tags x2goclient
+ansible-playbook desktops.yml --tags x2goclient --extra-vars "x2goclient_state=absent"
 ```
 
 Exibe a estrutura de diretórios de um role:
