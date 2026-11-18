@@ -34,7 +34,7 @@ cd livro/
 
 Com o ambiente pronto, os comandos dos exemplos do livro estão reunidos,
 organizados por capítulo e acompanhados de uma breve explicação, em
-[comandos.md](comandos.md). Consulte esse arquivo para localizar
+[comandos.md](docs/comandos.md). Consulte esse arquivo para localizar
 o comando correspondente a cada capítulo e execute-o no diretório do projeto.
 
 ⚠️ **Avisos:**
@@ -108,7 +108,7 @@ As versões dos principais programas, pacotes Python e coleções usados nos exe
 | `botocore`              | 1.43.120 |
 | `amazon.aws`            | 10.3.2   |
 
-- AWX: 24.6.1
+- AWX: 24.6.1 — consulte [awx.md](docs/awx.md) para instruções de gerenciamento.
 
 - Docker:
 
