@@ -1,30 +1,9 @@
 ---
 # =============================================================================
 # Playbook: Instalação do AWX com Minikube e AWX Operator
-# Testado em: Ubuntu 22.04 / 24.04
-# Requisitos: 2+ CPUs, 4+ GB RAM, acesso sudo
-# Acesso: HTTP via NodePort do Minikube (http://<minikube-ip>:<nodeport>)
-#         a partir do próprio host (vagrant box).
 # Uso: ansible-playbook awx-setup.yml
-#
-# IMPORTANTE: O AWX é um sistema complexo que pode consumir muitos recursos,
-# especialmente durante a instalação e inicialização.
-# O minikube é o componente que consome mais recurso.
-# - A quantidade de memória ideal para a VM é 8 GB.
-# - O número de CPUs recomendado para a VM é 4.
-# - Se os recursos forem insuficientes, a instalação pode falhar ou o AWX pode não iniciar corretamente.
-# - A memória do sistema host deve ser suficiente para suportar a VM com os recursos alocados.
-#   Quantidade mínima recomendada para o host é 16 GB.
-# - Altere o arquivo Vagrantfile para ajustar os recursos da VM (memória e CPUs) conforme necessário
-#   antes de executar este playbook. Depois de ajustar, recarregue a VM com 'vagrant reload ansible'.
-#   As quantidades recomendadas já estão comentadas no Vagrantfile.
-# - Destrua e crie novamente a máquina virtual (VM) do ansible.
-#   > vagrant destroy ansible -f
-#   > vagrant up ansible
-# - Reinstale o Ansible na VM.
-#   > vagrant ssh ansible
-#   $ cd livro
-#   $ make
+# Documentação: docs/awx.md
+# Testado em: Ubuntu 22.04 / 24.04
 # =============================================================================
 
 - name: Instalação do AWX
@@ -34,6 +13,7 @@
   vars:
     awx_namespace: awx
     awx_operator_version: "2.19.1"
+    awx_version: "24.6.1"
     awx_instance_name: awx-instance
     awx_nodeport: 30395
     minikube_cpus: 4
@@ -205,6 +185,7 @@
             name: {{ awx_instance_name }}
             namespace: {{ awx_namespace }}
           spec:
+            image_version: {{ awx_version }}
             service_type: nodeport
             nodeport_port: {{ awx_nodeport }}
             projects_persistence: true
