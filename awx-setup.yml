@@ -34,6 +34,7 @@
   vars:
     awx_namespace: awx
     awx_operator_version: "2.19.1"
+    awx_version: "24.6.1"
     awx_instance_name: awx-instance
     awx_nodeport: 30395
     minikube_cpus: 4
@@ -205,6 +206,7 @@
             name: {{ awx_instance_name }}
             namespace: {{ awx_namespace }}
           spec:
+            image_version: {{ awx_version }}
             service_type: nodeport
             nodeport_port: {{ awx_nodeport }}
             projects_persistence: true
