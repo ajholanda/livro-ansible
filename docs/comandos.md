@@ -868,11 +868,10 @@ pipx install ansible-navigator
 # Usa o mesmo contexto já criado no comando ansible-builder.
 ansible-navigator run site.yml --ee true --eei my-ee:1.0 \
 	-c /tmp/context \
-	--container-engine docker
+	--container-engine docker \
+    --pull-policy missing
 # Após a definição de `ansible-navigator.yml`.
-ansible-navigator run site.yml \
-	-c /tmp/context \
-	--container-engine docker
+ansible-navigator run site.yml	-c /tmp/context
 ```
 
 ---
