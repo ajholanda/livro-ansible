@@ -1,7 +1,8 @@
 ansible-navigator:
   execution-environment:
+    enabled: true
+    container-engine: docker
     image: my-ee:1.0
     pull:
       policy: missing
-    enabled: true
   mode: stdout
