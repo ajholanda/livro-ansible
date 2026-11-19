@@ -1,5 +1,5 @@
 # Define system packages and Python packages.
-apt_pkgs="jq make pipx python3-pip python3-venv sshpass tree vim virtualenv whois"
+apt_pkgs="jq make pipx podman python3-pip python3-venv sshpass tree vim virtualenv whois"
 
 # ---
 # Section 1: Install system packages.
