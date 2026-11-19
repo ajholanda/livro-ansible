@@ -126,3 +126,32 @@ ansible-playbook awx-teardown.yml -e remove_binaries=true
 ```
 
 > O Docker **não** é removido, pois pode estar em uso por outros serviços.
+
+---
+
+## Teste da API REST
+
+O script `scripts/awx-api.sh` dispara job templates via API REST e consulta o status de execução. Requer `curl` e `jq`.
+
+### Variáveis de ambiente obrigatórias
+
+```bash
+export AWX_PASS='<senha-admin>'
+export AWX_TOKEN='<token-de-acesso>'
+```
+
+O token de acesso pode ser gerado na interface do AWX em **Users → admin → Tokens**.
+
+### Execução
+
+```bash
+bash scripts/awx-api.sh [id-job-webserver] [id-job-php]
+```
+
+Os IDs dos job templates são opcionais; os valores padrão são `10` (webserver) e `11` (php). Para usar IDs diferentes:
+
+```bash
+bash scripts/awx-api.sh 5 6
+```
+
+O script dispara cada job template em sequência e exibe o `id`, `status` e `failed` retornados pela API.

@@ -1,7 +1,8 @@
 ---
 - name: Playbook localhost
   hosts: localhost
-  gather_facts: true
+  connection: local
+  gather_facts: false
   become: false
 
   tasks:

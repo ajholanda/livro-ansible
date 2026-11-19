@@ -38,8 +38,10 @@ ips = {
 vms = {
   'ansible'  => {
       # Altere para 8192 MB para instalar o AWX.
+      #'memory' => '8192',
       'memory' => '1024',
       # Altere para 4 CPUs para instalar o AWX.
+      # 'cpus' => 4,
       'cpus' => 1,
       'ip' => "#{TYPE2IP['ansible']}",
       'box' => 'ubuntu/jammy64',
@@ -59,14 +61,15 @@ vms = {
       'box' => 'debian/bookworm64',
       'ssh_port' => 2222
   },
-  'windows'   => {
-      'memory' => '4096',
-      'cpus' => 2,
-      'ip' => "#{TYPE2IP['windows']}",
-      'box' => 'gusztavvargadr/windows-server',
-      # Porta de comunicação no host: WinRM (5985), não SSH.
-      'comm_port' => 2223
-  }
+## Retire os comentários para iniciar a VM com Windows.
+#  'windows'   => {
+#      'memory' => '4096',
+#      'cpus' => 2,
+#      'ip' => "#{TYPE2IP['windows']}",
+#      'box' => 'gusztavvargadr/windows-server',
+#      # Porta de comunicação no host: WinRM (5985), não SSH.
+#      'comm_port' => 2223
+#  }
 }
 
 Vagrant.configure('2') do |config|
