@@ -1,11 +1,14 @@
 ---
-- name: Playbook localhost
+- name: Identifica o ambiente de execução do Ansible
   hosts: localhost
   connection: local
-  gather_facts: false
+  gather_facts: true
   become: false
 
   tasks:
-    - name: Exibe nome do host
+    - name: Exibe o nome do sistema e a distribuição Linux
       ansible.builtin.debug:
-        var: inventory_hostname
+        msg: >-
+          Sistema: {{ ansible_facts['hostname'] }};
+          distribuição: {{ ansible_facts['distribution'] }}
+          {{ ansible_facts['distribution_version'] }}.
