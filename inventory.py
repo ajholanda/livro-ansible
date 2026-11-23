@@ -6,7 +6,7 @@ import sys
 # Variáveis específicas de cada host
 HOSTVARS = {
     "w3.example.net": {
-        "webserver_port": 80
+        "webserver_port": 8080
     }
 }
 
