@@ -156,6 +156,14 @@ Instala apenas o núcleo de execução (`ansible-core`), sem as coleções da co
 pipx install ansible-core
 ```
 
+O arquivo inventory.py deve ser copiado para `/etc/ansible/inventory.py`
+para que seja possível alterar suas propriedades.
+
+```bash
+sudo cp ./inventory.py /etc/ansible/inventory.py
+sudo chmod +x /etc/ansible/inventory.py
+```
+
 Exibe, em formato JSON, a saída de um inventário (neste caso, dinâmico):
 
 ```bash
