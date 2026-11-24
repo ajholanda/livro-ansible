@@ -170,6 +170,13 @@ Exibe, em formato JSON, a saída de um inventário (neste caso, dinâmico):
 ansible-inventory -i /etc/ansible/inventory.py --list
 ```
 
+
+Exibe as variáveis associadas ao host `w3.example.net`:
+
+```bash
+$ ansible-inventory -i /etc/ansible/inventory.py --host w3.example.net
+```
+
 Mostra a estrutura hierárquica (grupos e hosts) do inventário:
 
 ```bash
