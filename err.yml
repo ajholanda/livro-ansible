@@ -85,18 +85,21 @@
           ansible.builtin.debug:
             msg: "Nunca é executada"
 
-- name: Atualiza o SO aceitando falhas
+- name: Demonstra o limite de falhas
   hosts: lab
+  gather_facts: false
   max_fail_percentage: 40
   tags: err7
-  tasks:
-    - name: Atualiza o SO (apt full-upgrade)
-      ansible.builtin.apt:
-        upgrade: full
 
-    - name: Aviso
+  tasks:
+    - name: Simula uma falha nos hosts selecionados
+      ansible.builtin.fail:
+        msg: "Falha simulada para demonstrar o limite de 40%."
+      when: inventory_hostname in groups.get('lab_falha_simulada', [])
+
+    - name: Confirma que o play prosseguiu neste host
       ansible.builtin.debug:
-        msg: "Pelo menos 60% dos hosts do laboratório foram atualizados"
+        msg: "O limite de falhas não foi ultrapassado."
 
 - name: Executa manipuladores
   hosts: web.example.net
