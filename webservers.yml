@@ -25,12 +25,22 @@
         owner: root
         group: root
         mode: '0644'
-      notify:
-        - Restart apache2
+      notify: Restart apache2
       when: ansible_facts['os_family'] == "Debian"
       tags:
         - webservers
         - webservers_copy
+
+    - name: Ativa site no Apache2 via link simbólico
+      ansible.builtin.file:
+        src: /etc/apache2/sites-available/site.conf
+        dest: /etc/apache2/sites-enabled/site.conf
+        state: link
+      notify: Restart apache2
+      when: ansible_facts['os_family'] == "Debian"
+      tags:
+        - webservers
+        - webservers_enable
 
   handlers:
     - name: Restart apache2
