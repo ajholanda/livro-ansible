@@ -69,9 +69,9 @@
 - name: Ativa any_errors_fatal
   hosts: lab
   any_errors_fatal: true
+  tags: err6
   tasks:
     - name: Usa any_errors_fatal
-      tags: err6
       block:
         - name: Primeira tarefa
           ansible.builtin.debug:
@@ -88,23 +88,22 @@
 - name: Atualiza o SO aceitando falhas
   hosts: lab
   max_fail_percentage: 40
+  tags: err7
   tasks:
     - name: Atualiza o SO (apt full-upgrade)
       ansible.builtin.apt:
         upgrade: full
-      tags: err7
 
     - name: Aviso
       ansible.builtin.debug:
         msg: "Pelo menos 60% dos hosts do laboratório foram atualizados"
-      tags: err7
 
 - name: Executa manipuladores
   hosts: web.example.net
   force_handlers: true
+  tags: err8
   tasks:
     - name: Força execução dos manipuladores
-      tags: err8
       when: ansible_facts['os_family'] | lower == "debian"
       block:
         - name: Habilita o módulo userdir
@@ -133,6 +132,7 @@
 
 - name: Espera com wait_for
   hosts: localhost
+  tags: err9
   tasks:
     - name: Aguarda porta HTTP estar disponível
       ansible.builtin.wait_for:
@@ -141,4 +141,3 @@
         delay: 5
         timeout: 120
         state: started
-      tags: err9
