@@ -136,7 +136,7 @@
   tasks:
     - name: Aguarda porta HTTP estar disponível
       ansible.builtin.wait_for:
-        host: "{{ inventory_hostname }}"
+        host: "127.0.0.1"
         port: 80
         delay: 5
         timeout: 120
