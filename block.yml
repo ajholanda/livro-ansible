@@ -24,8 +24,9 @@
           delegate_to: nas.example.net
 
         - name: Copia o backup para o NAS
-          ansible.builtin.command: |
-            scp /tmp/datadump.sql nas.example.net:/backup/
+          ansible.builtin.command: >-
+            scp /tmp/datadump.sql
+            nas.example.net:/backup/{{ inventory_hostname }}-datadump.sql
           become: true
           become_user: "{{ backup_user }}"
 
