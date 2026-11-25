@@ -11,23 +11,41 @@
     - name: Realiza o backup dos bancos de dados
       tags: backup
       block:
-        - name: Gera o arquivo de backup
-          ansible.builtin.shell: |
-            mariadb-dump --all-databases > /tmp/datadump.sql
+        - name: Cria um arquivo temporário para o backup
+          ansible.builtin.tempfile:
+            state: file
+            path: /tmp
+            prefix: mariadb-
+            suffix: .sql
+          register: backup_tmp
 
-        - name: Garante que o diretório de backup exista no servidor de armazenamento (NAS)
+        - name: Gera o arquivo de backup
+          ansible.builtin.shell: >-
+            mariadb-dump --all-databases
+            > {{ backup_tmp.path | quote }}
+
+        - name: Concede acesso de leitura à conta de transferência
+          ansible.builtin.file:
+            path: "{{ backup_tmp.path }}"
+            owner: "{{ backup_user }}"
+            mode: '0600'
+
+        - name: Garante que o diretório de backup exista no NAS
           ansible.builtin.file:
             path: /backup
             state: directory
             owner: "{{ backup_user }}"
-            mode: '0755'
+            mode: '0700'
           delegate_to: nas.example.net
 
         - name: Copia o backup para o NAS
-          ansible.builtin.command: >-
-            scp /tmp/datadump.sql
-            nas.example.net:/backup/{{ inventory_hostname }}-datadump.sql
-          become: true
+          ansible.builtin.command:
+            argv:
+              - scp
+              - -B
+              - "{{ backup_tmp.path }}"
+              - >-
+                {{ backup_user }}@nas.example.net:/backup/{{ inventory_hostname }}-datadump.sql
           become_user: "{{ backup_user }}"
 
       rescue:
@@ -36,7 +54,8 @@
             msg: "Falha no backup"
 
       always:
-        - name: Apaga o arquivo de backup
+        - name: Remove o arquivo temporário de backup
           ansible.builtin.file:
-            path: /tmp/datadump.sql
+            path: "{{ backup_tmp.path }}"
             state: absent
+          when: backup_tmp.path is defined
