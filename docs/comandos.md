@@ -434,9 +434,12 @@ Verifica o comportamento de `any_errors_fatal`:
 ansible-playbook err.yml --tags err6
 ```
 
-   Verifica o comportamento de `max_fail_percentage`:
+Verifica o comportamento de `max_fail_percentage`:
 
 ```bash
+ansible-playbook err.yml --tags err7
+# Retire o comentário de `lab01-example.net` no arquivo `hosts.ini`
+# para o grupo `lab_falha_simulada` e execute:
 ansible-playbook err.yml --tags err7
 ```
 
