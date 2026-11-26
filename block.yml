@@ -24,7 +24,7 @@
             mariadb-dump --all-databases
             > {{ backup_tmp.path | quote }}
 
-        - name: Concede acesso de leitura à conta de transferência
+        - name: Concede acesso de leitura/escrita à conta de transferência
           ansible.builtin.file:
             path: "{{ backup_tmp.path }}"
             owner: "{{ backup_user }}"
