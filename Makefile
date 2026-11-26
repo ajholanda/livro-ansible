@@ -10,10 +10,16 @@ REQTS_YML := requirements.yml
 
 TRASH := *~
 
-all: packages setup-bashrc collections roles \
-	docker aws \
+all: packages \
+	setup-bashrc \
+	collections \
+	roles \
+	docker \
+	aws \
 	/etc/ansible/inventory.py \
-	webservers-3.yml include_tasks-3.yml
+	webservers-3.yml \
+	webservers-3_4.yml \
+	include_tasks-3.yml
 
 $(VENV_DIR):
 	python3 -m venv $@
@@ -84,9 +90,9 @@ webservers-3.yml: webservers.yml
 TRASH += webservers-3.yml
 
 # Gera o playbook webserver.yml da Seção 3.1.
-webservers-3_1.yml: webservers.yml
+webservers-3_4.yml: webservers.yml
 	head -19 $< > $@
-TRASH += webservers-3_1.yml
+TRASH += webservers-3_4.yml
 
 include_tasks-3.yml: include_tasks.yml
 	head -13 $< > $@
