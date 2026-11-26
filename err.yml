@@ -38,73 +38,10 @@
       ignore_errors: true
       tags: err2
 
-    - name: Não interpreta false como erro
-      ansible.builtin.command: /bin/false
-      register: status
-      failed_when: status.rc != 1
-      tags: err3
-
-    - name: Testa se conteúdo de arquivo está acessível
-      ansible.builtin.command: cat /etc/ansible/hosts
-      # Retire os comentários a seguir para gerar o erro.
-      # become: true
-      # become_user: vagrant
-      register: status
-      failed_when:
-        - status.rc != 0
-        - "'No such file or directory' not in status.stderr"
-      environment:
-        LANG: C
-        LC_ALL: C
-      tags: err4
-
-    - name: Testa a conectividade
-      ansible.builtin.command: ping -c 1 web.example.net
-      register: status
-      failed_when: >
-        status.rc != 0
-        or "100% packet loss" in status.stdout
-      tags: err5
-
-- name: Ativa any_errors_fatal
-  hosts: lab
-  any_errors_fatal: true
-  tags: err6
-  tasks:
-    - name: Usa any_errors_fatal
-      block:
-        - name: Primeira tarefa
-          ansible.builtin.debug:
-            msg: "Executa em todos os hosts"
-
-        - name: Segunda tarefa falha somente em lab01
-          ansible.builtin.command: /bin/false
-          when: inventory_hostname == "lab01.example.net"
-
-        - name: Terceira tarefa
-          ansible.builtin.debug:
-            msg: "Nunca é executada"
-
-- name: Demonstra o limite de falhas
-  hosts: lab
-  gather_facts: false
-  max_fail_percentage: 40
-  tags: err7
-
-  tasks:
-    - name: Simula uma falha nos hosts selecionados
-      ansible.builtin.fail:
-        msg: "Falha simulada para demonstrar o limite de 40%."
-      when: inventory_hostname in groups.get('lab_falha_simulada', [])
-
-    - name: Confirma que o play prosseguiu neste host
-      ansible.builtin.debug:
-        msg: "O limite de falhas não foi ultrapassado."
-
 - name: Executa manipuladores
   hosts: web.example.net
   force_handlers: true
-  tags: err8
+  tags: err3
   tasks:
     - name: Força execução dos manipuladores
       when: ansible_facts['os_family'] | lower == "debian"
@@ -132,6 +69,73 @@
       ansible.builtin.service:
         name: apache2
         state: restarted
+
+- name: Erros
+  hosts: localhost
+
+  tasks:
+     - name: Não interpreta false como erro
+      ansible.builtin.command: /bin/false
+      register: status
+      failed_when: status.rc != 1
+      tags: err4
+
+    - name: Testa se conteúdo de arquivo está acessível
+      ansible.builtin.command: cat /etc/ansible/hosts
+      # Retire os comentários a seguir para gerar o erro.
+      # become: true
+      # become_user: vagrant
+      register: status
+      failed_when:
+        - status.rc != 0
+        - "'No such file or directory' not in status.stderr"
+      environment:
+        LANG: C
+        LC_ALL: C
+      tags: err5
+
+    - name: Testa a conectividade
+      ansible.builtin.command: ping -c 1 web.example.net
+      register: status
+      failed_when: >
+        status.rc != 0
+        or "100% packet loss" in status.stdout
+      tags: err6
+
+- name: Ativa any_errors_fatal
+  hosts: lab
+  any_errors_fatal: true
+  tags: err7
+  tasks:
+    - name: Usa any_errors_fatal
+      block:
+        - name: Primeira tarefa
+          ansible.builtin.debug:
+            msg: "Executa em todos os hosts"
+
+        - name: Segunda tarefa falha somente em lab01
+          ansible.builtin.command: /bin/false
+          when: inventory_hostname == "lab01.example.net"
+
+        - name: Terceira tarefa
+          ansible.builtin.debug:
+            msg: "Nunca é executada"
+
+- name: Demonstra o limite de falhas
+  hosts: lab
+  gather_facts: false
+  max_fail_percentage: 40
+  tags: err8
+
+  tasks:
+    - name: Simula uma falha nos hosts selecionados
+      ansible.builtin.fail:
+        msg: "Falha simulada para demonstrar o limite de 40%."
+      when: inventory_hostname in groups.get('lab_falha_simulada', [])
+
+    - name: Confirma que o play prosseguiu neste host
+      ansible.builtin.debug:
+        msg: "O limite de falhas não foi ultrapassado."
 
 - name: Espera com wait_for
   hosts: localhost
