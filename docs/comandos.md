@@ -325,13 +325,9 @@ Executa um playbook, lista as tarefas, lista os hosts e inicia a execução a pa
 make webservers-3.yml
 # Executa o ansible-playbook.
 ansible-playbook webservers-3.yml
-# Lista as tarefas de um playbook sem executá-las.
-ansible-playbook webservers-3.yml --list-tasks
-# Lista os hosts afetados por um playbook.
-ansible-playbook webservers-3.yml --list-hosts
-# Inicia a execução a partir de uma tarefa específica, ignorando as anteriores.
-ansible-playbook webservers-3.yml --start-at-task "Habilita e inicia o apache"
 ```
+
+### A estrutura de um play
 
 Lista as tarefas de um playbook com múltiplos **plays**:
 
@@ -339,20 +335,40 @@ Lista as tarefas de um playbook com múltiplos **plays**:
 ansible-playbook plays.yml --list-tasks
 ```
 
-### 3.1 Tags
+### Inspeção e controle de execução
+
+Lista as tarefas de um playbook sem executá-las.
+
+```bash
+ansible-playbook webservers-3.yml --list-tasks
+```
+
+Lista os hosts afetados por um playbook.
+
+```bash
+ansible-playbook webservers-3.yml --list-hosts
+```
+
+Inicia a execução a partir de uma tarefa específica, ignorando as anteriores.
+
+```bash
+ansible-playbook webservers-3.yml --start-at-task "Habilita e inicia o apache"
+```
+
+### Tags
 
 Seleção de tarefas por **tags** (`--tags` seleciona, `--skip-tags` exclui):
 
 ```bash
-# Cria o arquivo webservers-3_1.yml, que contém o mesmo conteúdo do arquivo
-# webservers.yml apresentado na Seção 3.1.
-make webservers-3_1.yml
+# Cria o arquivo webservers-3_4.yml, que contém o mesmo conteúdo do arquivo
+# webservers.yml apresentado na Seção 3.4.
+make webservers-3_4.yml
 # Seleciona a tag webservers_package.
-ansible-playbook webservers-3_1.yml --tags webservers_package
+ansible-playbook webservers-3_4.yml --tags webservers_package
 # Exclui a tag webservers_service.
-ansible-playbook webservers-3_1.yml --skip-tags webservers_service
+ansible-playbook webservers-3_4.yml --skip-tags webservers_service
 # Seleciona múltiplas tags.
-ansible-playbook webservers-3_1.yml --tags "webservers_package,webservers_service"
+ansible-playbook webservers-3_4.yml --tags "webservers_package,webservers_service"
 ```
 
 Comportamento das **tags** especiais `always`, `never`, `tagged` e `untagged`:
