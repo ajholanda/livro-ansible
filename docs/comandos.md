@@ -79,6 +79,8 @@ Somente o primeiro host aparece com o estado `changed`, pois a alteração já f
 > que se *executa* e tudo que se *importa*; o `pipx` fica como alternativa para
 > aplicativos avulsos.
 
+### Instalação
+
 Instala o Ansible como pacote Python via `pip` (dar preferência à instalação dentro do ambiente virtual (`virtualenv`) Python — ver a seguir; o `pipx` é uma alternativa para aplicativos avulsos):
 
 ```bash
@@ -155,6 +157,8 @@ Instala apenas o núcleo de execução (`ansible-core`), sem as coleções da co
 ```bash
 pipx install ansible-core
 ```
+
+### Listagem de hosts e grupos
 
 O arquivo inventory.py deve ser copiado para `/etc/ansible/inventory.py`
 para que seja possível alterar suas propriedades.
@@ -233,7 +237,7 @@ Exibe a documentação do módulo `package`:
 ansible-doc package
 ```
 
-### 2.1 Configuração do Ansible
+### Configuração do Ansible
 
 Versão simplificada do comando quando o `ansible.cfg` já define inventário e elevação de privilégios:
 
@@ -268,7 +272,7 @@ ansible-config dump
 ```
 
 
-## Mais comandos _ad hoc_
+### Mais comandos _ad hoc_
 
 Demais comandos *ad hoc* frequentes na rotina do administrador:
 
@@ -303,10 +307,10 @@ ansible lab -m file -a "path=/tmp/texput.log state=absent"
 ansible servers -m command -a last
 ```
 
-Exibe a documentação completa de um módulo pelo nome completo (FQCN):
+Exibe a documentação completa de um módulo:
 
 ```bash
-ansible-doc ansible.builtin.copy
+ansible-doc copy
 ```
 
 ---
@@ -367,10 +371,9 @@ Lista as **tags** e as tarefas de um playbook:
 ```bash
 ansible-playbook tags.yml --list-tags
 ansible-playbook tags.yml --list-tasks
-ansible-playbook tags.yml --list-tasks --tags debug,untagged
 ```
 
-### 3.2 Manipuladores (_handlers_)
+### Manipuladores (*handlers*)
 
 Executa playbook que aciona o manipulador `Restart apache` se houver modificação do arquivo de configuração do Apache copiado:
 
@@ -382,13 +385,17 @@ ansible web.example.net -m file -a "path=/etc/apache2/sites-available/site.conf 
 ansible-playbook webservers.yml
 ```
 
-Executa um playbook que aciona manipuladores (*handlers*) via `listen`:
+#### Agrupamento de manipuladores com listen
+
+Executa um playbook que aciona manipuladores via `listen`:
 
 ```bash
 ansible-playbook listen.yml
 ```
 
-### 3.3 Erros
+### Erros
+
+#### Erros nos hosts gerenciados
 
 Força ocorrência de erro:
 
@@ -408,10 +415,20 @@ ansible-playbook err.yml --tags err1
 ansible-playbook err.yml --tags err2
 ```
 
-  Não interpreta `false` como erro:
+##### Erro e manipuladores
+
+Verifica o comportamento de `force_handlers`:
 
 ```bash
 ansible-playbook err.yml --tags err3
+```
+
+##### Definição de falha em uma tarefa
+
+Não interpreta `false` como erro:
+
+```bash
+ansible-playbook err.yml --tags err4
 ```
 
 Arquivo deve existir e conteúdo deve estar acessível para o playbook ser bem-sucedido:
@@ -419,35 +436,33 @@ Arquivo deve existir e conteúdo deve estar acessível para o playbook ser bem-s
 ```bash
 # Gera o arquivo usado no teste de acesso ao conteúdo.
 make /etc/ansible/hosts.ini
-ansible-playbook err.yml --tags err4
+ansible-playbook err.yml --tags err5
 ```
 
 Como expressar uma disjunção lógica (operador `or`) em `failed_when`:
 
 ```bash
-ansible-playbook err.yml --tags err5
+ansible-playbook err.yml --tags err6
 ```
+
+##### Ajuste da tolerância aos erros
 
 Verifica o comportamento de `any_errors_fatal`:
 
 ```bash
-ansible-playbook err.yml --tags err6
+ansible-playbook err.yml --tags err7
 ```
 
 Verifica o comportamento de `max_fail_percentage`:
 
 ```bash
-ansible-playbook err.yml --tags err7
+ansible-playbook err.yml --tags err8
 # Retire o comentário de `lab01-example.net` no arquivo `hosts.ini`
 # para o grupo `lab_falha_simulada` e execute:
-ansible-playbook err.yml --tags err7
-```
-
-Verifica o comportamento de `force_handlers`:
-
-```bash
 ansible-playbook err.yml --tags err8
 ```
+
+##### Espera com wait_for
 
 Aguarda até que a porta TCP 80 do host esteja acessível antes de prosseguir:
 
@@ -457,7 +472,7 @@ sudo true && (sleep 20 && sudo python3 -m http.server 80) \
 	& ansible-playbook err.yml --tags err9
 ```
 
-### 3.4 Bloco
+### Bloco
 
 Executa exemplo de uso da estrutura `block` - `rescue` - `always`:
 
@@ -468,18 +483,27 @@ ansible-playbook servers.yml --tags mariadb
 ansible-playbook block.yml
 ```
 
-### 3.5 Inclusão de arquivos de tarefas
+### Inclusão de arquivos de tarefas
 
 Limitações da inclusão dinâmica com `include_tasks` (tarefas/tags incluídas dinamicamente não aparecem e `--start-at-task` não as alcança):
 
+#### Inclusão de tarefas com include_tasks
+
 ```bash
-make include_tasks-3.yml  # Cria a versão semelhante à apresentada no capítulo.
+# Cria a versão semelhante à apresentada no início da seção.
+make include_tasks-3.yml
 ansible-playbook include_tasks-3.yml --list-tasks
 ansible-playbook include_tasks-3.yml --list-tags
 ansible-playbook include_tasks-3.yml --start-at-task "Imprime número da tarefa"
 ```
 
-### 3.6 Controle do fluxo de execução com pre_tasks e post_tasks
+Carrega o manipulador dinamicamente.
+
+```bash
+ansible-playbook include_tasks.yml --tags include_tasks_handler
+```
+
+### Controle do fluxo de execução com pre_tasks e post_tasks
 
 Executa um playbook com `pre_tasks`/`post_tasks` e `serial`:
 
@@ -487,7 +511,7 @@ Executa um playbook com `pre_tasks`/`post_tasks` e `serial`:
 ansible-playbook pre_tasks_post.yml
 ```
 
-### 3.7 Idempotência e modos de verificação
+### Idempotência e modos de verificação
 
 Modos de verificação (*check*) e de diferenças (*diff*), que simulam a execução sem alterar os hosts:
 
@@ -495,8 +519,18 @@ Modos de verificação (*check*) e de diferenças (*diff*), que simulam a execu�
 ansible-playbook idempot.yml    # <---- changed
 ansible-playbook idempot.yml    # <---- ok
 # Apaga o arquivo de configuração para voltar novamente ao estado inicial.
+```
+
+#### Modo de verificação
+
+```bash
 rm /tmp/config.ini
 ansible-playbook idempot.yml --check
+```
+
+#### Modo de diferenças
+
+```bash
 ansible-playbook idempot.yml --diff
 # Altera o conteúdo de config.ini para ver o efeito de --diff.
 cat port=8080 > /tmp/config.ini
@@ -507,7 +541,7 @@ ansible-playbook idempot.yml --check --diff
 
 ## Capítulo 4 — Variáveis
 
-### 4.1 Variáveis especiais
+### Variáveis especiais
 Lista os plugins de conexão disponíveis:
 
 ```bash
@@ -540,7 +574,7 @@ Define, por variável de ambiente, o plugin de cache de fatos a ser usado:
 export ANSIBLE_CACHE_PLUGIN=jsonfile
 ```
 
-### 4.2 Variáveis definidas pelo usuário
+### Variáveis definidas pelo usuário
 
 Define uma variável global na linha de comando com `--extra-vars`:
 
@@ -567,8 +601,7 @@ Demonstra o módulo `set_fact`:
 ansible-playbook set_fact.yml
 ```
 
-### 4.4 Estruturas de dados e de repetição
-
+### Estruturas de dados e de repetição
 
 Como percorrer uma lista simples:
 
