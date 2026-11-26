@@ -58,7 +58,7 @@
             dest: /etc/apache2/mods-available/userdir.conf
             owner: root
             group: root
-            mode: '0755'
+            mode: '0644'
           notify:
             - Restart apache2
 
