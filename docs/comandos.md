@@ -595,13 +595,13 @@ export ANSIBLE_CACHE_PLUGIN=jsonfile
 Define uma variável global na linha de comando com `--extra-vars`:
 
 ```bash
-ansible-playbook webservers-vars.yml --extra-vars "groupname=webdev" --tags group
+ansible-playbook vars.yml --extra-vars "groupname=webdev" --tags group
 ```
 
 Demonstra variáveis de host (`host_vars`) e de grupo (`group_vars`):
 
 ```bash
-ansible-playbook webservers-host_vars.yml
+ansible-playbook host_vars.yml
 ansible-playbook all-group_vars.yml
 ```
 
@@ -622,14 +622,14 @@ ansible-playbook set_fact.yml
 Como percorrer uma lista simples:
 
 ```bash
-ansible-playbook webservers-vars.yml --tags users_list
+ansible-playbook vars.yml --tags users_list
 ```
 
 
 Como percorrer uma lista de dicionários:
 
 ```bash
-ansible-playbook webservers-vars.yml --tags users_dict
+ansible-playbook vars.yml --tags users_dict
 ```
 
 O filtro `subelements` é utilizado para transformar uma estrutura hierárquica em uma sequência de pares.
