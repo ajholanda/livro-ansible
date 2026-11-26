@@ -42,6 +42,7 @@
   hosts: web.example.net
   force_handlers: true
   tags: err3
+
   tasks:
     - name: Força execução dos manipuladores
       when: ansible_facts['os_family'] | lower == "debian"
@@ -106,6 +107,7 @@
   hosts: lab
   any_errors_fatal: true
   tags: err7
+
   tasks:
     - name: Usa any_errors_fatal
       block:
@@ -140,6 +142,7 @@
 - name: Espera com wait_for
   hosts: localhost
   tags: err9
+
   tasks:
     - name: Aguarda porta HTTP estar disponível
       ansible.builtin.wait_for:
