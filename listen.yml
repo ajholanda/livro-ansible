@@ -15,7 +15,7 @@
         state: started
 
     - name: Atualiza a configuração da aplicação web
-      ansible.builtin.template:
+      ansible.builtin.copy:
         src: files/webapp.conf
         dest: /etc/webapp.conf
         owner: root
